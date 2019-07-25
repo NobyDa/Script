@@ -132,6 +132,7 @@ hostname = mjappaz.yefu365.com,
 
 ^http:\/\/115\.com\/lx.*$  url script-response-body https://raw.githubusercontent.com/ikanam/Surge-Scripts/master/115lx.js
 ^http:\/\/115\.com\/\?ct=sign url 302 http://115.com/lx?taskdg=1
+
 hostname = *.115.com
 
 来源作者: [ikanam](https://github.com/ikanam)
