@@ -9,7 +9,7 @@
 -------
  
 **去微博应用内与启动页广告** 
-注: 国际版使用会有不显示头像的问题
+;注: 国际版使用会有不显示头像的问题
 
 ^https?:\/\/(api|mapi)\.weibo\.(cn|com)\/2(\/groups\/timeline|\/statuses\/unread|\/statuses\/extend|\/comments\/build_comments|\/photo\/recommend_list|\/stories\/video_stream|\/statuses\/positives\/get|\/stories\/home_list|\/profile\/statuses|\/statuses\/friends\/timeline|\/service\/picfeed) url script-response-body https://raw.githubusercontent.com/yichahucha/surge/master/wb_ad.js
 
@@ -114,6 +114,27 @@ hostname = ios.xiaoxiaoapps.com,
 
 来源作者: [Meeta](https://github.com/MeetaGit)
 
+--------
+
+**爱美剧Vip**（官网：app.meiju2018.com）
+
+^https?://mjappaz.yefu365.com/index.php/app/ios/ url script-response-body https://meetagit.github.io/MeetaRules/Surge/Scripting/aimeiju.js
+
+hostname = mjappaz.yefu365.com,
+
+来源作者: [Meeta](https://github.com/MeetaGit)
+
+--------
+
+**115离线下载** 
+
+;该脚本无破解离线功能,使用方法:115首页的签到按钮跳转到离线下载页面
+
+^http:\/\/115\.com\/lx.*$  url script-response-body https://raw.githubusercontent.com/ikanam/Surge-Scripts/master/115lx.js
+^http:\/\/115\.com\/\?ct=sign url 302 http://115.com/lx?taskdg=1
+hostname = *.115.com
+
+来源作者: [ikanam](https://github.com/ikanam)
 
 
 ## 注:所有脚本均已注明来源 如有问题联系[@nubida](https://t.me/nubida)
