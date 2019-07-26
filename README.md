@@ -1,8 +1,8 @@
-# Script简介
+# 简介
 
 ## 整合脚本搬运工一枚,欢迎关注TG频道[@NobyDa](https://t.me/NobyDa)
  
-**QuantumultX的可用脚本比较少,手动修改了surge脚本格式,对接部分兼容QuantumultX的脚本 已实测全部可用**
+**QuantumultX的可用脚本比较少,手动修改了surge脚本格式,对接部分兼容QuantumultX的脚本
 
 **订阅所有QuanX脚本**: [点此查看订阅链接](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js.conf)
  
@@ -76,7 +76,7 @@ hostname = aweme*.snssdk.com,
 -----------
 
 
-**南瓜电影Vip**
+**南瓜电影**
 
 ^https?:\/\/p\.doras\.api\.vcinema\.cn\/v5.0\/user/ url script-response-body https://meetagit.github.io/MeetaRules/Surge/Scripting/cushawmovie.js
 
@@ -86,7 +86,7 @@ hostname = *.api.vcinema.cn,
 
 -------------
 
-**西瓜视频Vip**
+**西瓜视频**
 
 ^https?:\/\/api2\.gkaorlz\.com\:8080\/api\/user\/ url script-response-body https://meetagit.github.io/MeetaRules/Surge/Scripting/watermelonvideo.js
 
@@ -96,9 +96,11 @@ hostname = api2.gkaorlz.com,
 
 --------------
 
-**酷我音乐SVIP**
+**酷我音乐**
 
-^https?:\/\/.*\.kuwo\.cn url script-response-body https://meetagit.github.io/MeetaRules/Surge/Scripting/kuwovip.js
+^https?:\/\/.*\.kuwo\.cn/vip/v2/user/vip url script-response-body https://raw.githubusercontent.com/yxiaocai/quanx/master/js/kuwovip.js
+^https?://vip1\.kuwo\.cn/vip/spi/mservice url script-response-body https://raw.githubusercontent.com/yxiaocai/quanx/master/js/kuwovip2.js
+^https?:\/\/musicpay\.kuwo\.cn/ url response-body "vip" response-body "song"
 
 hostname = *.kuwo.cn,
 
@@ -106,7 +108,7 @@ hostname = *.kuwo.cn,
 
 -------------
 
-**小小影视Vip**官网(http://tinyurl.com/y4thsp99)
+**小小影视**
 
 ;^https?:\/\/ios\.xiaoxiaoapps\.com\/ url script-response-body https://meetagit.github.io/MeetaRules/Surge/Scripting/smallvideo.js
 
@@ -116,7 +118,7 @@ hostname = ios.xiaoxiaoapps.com,
 
 --------
 
-**爱美剧Vip**（官网：app.meiju2018.com）
+**爱美剧**（官网：app.meiju2018.com）
 
 ^https?://mjappaz.yefu365.com/index.php/app/ios/ url script-response-body https://meetagit.github.io/MeetaRules/Surge/Scripting/aimeiju.js
 
@@ -137,5 +139,15 @@ hostname = *.115.com
 
 来源作者: [ikanam](https://github.com/ikanam)
 
+--------
 
-## 注:所有脚本均已注明来源 如有问题联系[@nubida](https://t.me/nubida)
+**网易蜗牛读书**
+
+^https?://p\.du\.163\.com/readtime/info.json url reject
+^https://p\.du\.163\.com/gain/readtime/info.json url response-body "tradeEndTime":\d{10} response-body "tradeEndTime":1679685290
+
+来源作者: [yxiaocai](https://github.com/yxiaocai)
+
+--------
+
+## END
