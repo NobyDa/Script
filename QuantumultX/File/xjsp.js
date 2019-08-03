@@ -8,7 +8,6 @@ if (url.indexOf(path1) != -1){
   let obj = JSON.parse(body);
   obj.data.uinfo.down_daily_remainders = "998";
   obj.data.uinfo.play_daily_remainders = "998";
-  obj.data.uinfo.curr_group["gicon"] = "V5";
   obj.data.uinfo.curr_group["gid"] = "5";
   obj.data.uinfo.curr_group["minup"] = "1000000";
   obj.data.uinfo.curr_group["gname"] = "尊贵VIP";
