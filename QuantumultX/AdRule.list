@@ -1,3 +1,4 @@
+# Update > 2019.8.3
 DOMAIN-SUFFIX,amdc.m.taobao.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
@@ -978,7 +979,6 @@ DOMAIN-SUFFIX,adclient.uimserv.net,REJECT
 DOMAIN-SUFFIX,adclock.zdworks.com,REJECT
 DOMAIN-SUFFIX,adcloud.jp,REJECT
 DOMAIN-SUFFIX,ad-cloud.jp,REJECT
-DOMAIN-SUFFIX,adcolony.com,REJECT
 DOMAIN-SUFFIX,adcome.cn,REJECT
 DOMAIN-SUFFIX,adcore.lenovomm.com,REJECT
 DOMAIN-SUFFIX,adcount.yoka.com,REJECT
@@ -1032,7 +1032,6 @@ DOMAIN-SUFFIX,adinf.cp11.ott.cibntv.net,REJECT
 DOMAIN-SUFFIX,adinf.voole.com,REJECT
 DOMAIN-SUFFIX,adinfo.aol.com,REJECT
 DOMAIN-SUFFIX,adinfo.ra1.xlmc.sec.miui.com,REJECT
-DOMAIN-SUFFIX,adinfuse.com,REJECT
 DOMAIN-SUFFIX,adingo.jp.eimg.jp,REJECT
 DOMAIN-SUFFIX,adirects.com,REJECT
 DOMAIN-SUFFIX,adjb.5nd.com,REJECT
@@ -1076,7 +1075,6 @@ DOMAIN-SUFFIX,admin.cooguo.com,REJECT
 DOMAIN-SUFFIX,admin.louxia.org,REJECT
 DOMAIN-SUFFIX,admin.ninebox.cn,REJECT
 DOMAIN-SUFFIX,admin6.com,REJECT
-DOMAIN-SUFFIX,admob.com,REJECT
 DOMAIN-SUFFIX,admon.cn,REJECT
 DOMAIN-SUFFIX,admtpmp124.com,REJECT
 DOMAIN-SUFFIX,admx.baixing.com,REJECT
@@ -1203,7 +1201,6 @@ DOMAIN-SUFFIX,advombat.ru,REJECT
 DOMAIN-SUFFIX,adwasu.wasu.tv,REJECT
 DOMAIN-SUFFIX,adweb.test.ximalaya.com,REJECT
 DOMAIN-SUFFIX,adweb.ximalaya.com,REJECT
-DOMAIN-SUFFIX,adwhirl.com,REJECT
 DOMAIN-SUFFIX,adwo.com,REJECT
 DOMAIN-SUFFIX,adx.adxglobal.com,REJECT
 DOMAIN-SUFFIX,adx.chip.de,REJECT
@@ -1450,7 +1447,6 @@ DOMAIN-SUFFIX,app.xizi.com,REJECT
 DOMAIN-SUFFIX,app.xyjqy.com,REJECT
 DOMAIN-SUFFIX,app01.nodes.gslb.mi-idc.com,REJECT
 DOMAIN-SUFFIX,app02.nodes.gslb.mi-idc.com,REJECT
-DOMAIN-SUFFIX,appads.com,REJECT
 DOMAIN-SUFFIX,appboy.com,REJECT
 DOMAIN-SUFFIX,appc.baidu.com,REJECT
 DOMAIN-SUFFIX,appcdn.wapx.cn,REJECT
@@ -4554,7 +4550,6 @@ DOMAIN-SUFFIX,le4le.com,REJECT
 DOMAIN-SUFFIX,leadbolt.net,REJECT
 DOMAIN-SUFFIX,leadboltads.net,REJECT
 DOMAIN-SUFFIX,leadboltapps.net,REJECT
-DOMAIN-SUFFIX,leadboltmobile.net,REJECT
 DOMAIN-SUFFIX,ledou.dl.uu.cc,REJECT
 DOMAIN-SUFFIX,leeyuoxs.com,REJECT
 DOMAIN-SUFFIX,legozu.com,REJECT
@@ -4623,7 +4618,6 @@ DOMAIN-SUFFIX,loading.baofeng5.baofeng.net,REJECT
 DOMAIN-SUFFIX,loadm.exelator.com,REJECT
 DOMAIN-SUFFIX,loandatec.com,REJECT
 DOMAIN-SUFFIX,localnetwork.uop,REJECT
-DOMAIN-SUFFIX,localytics.com,REJECT
 DOMAIN-SUFFIX,location.ximalaya.com,REJECT
 DOMAIN-SUFFIX,locdrop.query.yahoo.com,REJECT
 DOMAIN-SUFFIX,log1.17173.com,REJECT
@@ -5235,7 +5229,6 @@ DOMAIN-SUFFIX,moatads.com,REJECT
 DOMAIN-SUFFIX,mob.huimee.net,REJECT
 DOMAIN-SUFFIX,mobad.ijinshan.com,REJECT
 DOMAIN-SUFFIX,mobadme.jp,REJECT
-DOMAIN-SUFFIX,mobclix.com,REJECT
 DOMAIN-SUFFIX,mobfox.com,REJECT
 DOMAIN-SUFFIX,mobgi.com,REJECT
 DOMAIN-SUFFIX,mobileads.google.com,REJECT
@@ -6952,7 +6945,6 @@ DOMAIN-SUFFIX,tradeadexchange.com,REJECT
 DOMAIN-SUFFIX,tradeccl.com,REJECT
 DOMAIN-SUFFIX,trafficfactory.biz,REJECT
 DOMAIN-SUFFIX,trafficjam.cn,REJECT
-DOMAIN-SUFFIX,trafficjunky.net,REJECT
 DOMAIN-SUFFIX,trafficmp.com,REJECT
 DOMAIN-SUFFIX,tralog.ganji.com,REJECT
 DOMAIN-SUFFIX,tran.news.so.com,REJECT
