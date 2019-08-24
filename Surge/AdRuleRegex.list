@@ -457,7 +457,6 @@ URL-REGEX,^https?:\/\/www\.cntv\.cn\/nettv\/adp\/
 URL-REGEX,^https?:\/\/v\.cctv\.com\/.+850
 URL-REGEX,^https?:\/\/(api|atrace)\.chelaile\.net\.cn\/adpub\/
 URL-REGEX,^https?:\/\/cap\.caocaokeji\.cn\/advert-bss\/
-URL-REGEX,^https?:\/\/api\.intsig\.net\/user\/cs\/operating\/app\/get_startpic\/ -reject header
 URL-REGEX,^https?:\/\/erebor\.douban\.com\/count\/\?ad=
 URL-REGEX,^https?:\/\/img\d{1}\.doubanio\.com\/view\/dale-online\/dale_ad/
 URL-REGEX,^https?:\/\/frodo\.douban\.com\/api\/v2\/movie\/ad
