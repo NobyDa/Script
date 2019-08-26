@@ -709,13 +709,8 @@ URL-REGEX,^https?:\/\/sax\w?\.sina\.com\.cn
 URL-REGEX,^https?:\/\/server-\w+\.imrworldwide\.com
 URL-REGEX,^https?:\/\/t\d{2}\.baidu\.com
 URL-REGEX,^https?:\/\/www\.bldimg\.com\/(background|splash)\/.+\.png$
-URL-REGEX,^https?:\/\/.+\/variety.tc.qq.com\/
 URL-REGEX,^https?:\/\/.+\/vlive.qqvideo.tc.qq.com\/
-URL-REGEX,^https?:\/\/.+\/hls.cache.p4p\/
-URL-REGEX,^https?:\/\/.+\/omts.tc.qq.com\/
 URL-REGEX,^https?:\/\/ups\.youku\.com\/(\.*)needad=1& 
-URL-REGEX,^https?:\/\/.+\/videos\/other\/
-URL-REGEX,^https?:\/\/s\.go\.sohu\.com\/adgtr\/\?gbcode=(ps|sv|offnavi|newvector|ulog\.imap|newloc)(\.map)?\.(baidu|n\.shifen)\.com
 URL-REGEX,^http?:\/\/www\.tsytv\.com\.cn\/api\/app\/ios\/ads
 URL-REGEX,^https?:\/\/qidian\.qpic\.cn\/qidian_common
 URL-REGEX,^http?:\/\/123\.59\.30\.10\/adv\/advInfos
