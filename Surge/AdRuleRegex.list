@@ -673,7 +673,6 @@ URL-REGEX,^https?:\/\/t\d{2}.baidu.com
 URL-REGEX,^https?:\/\/.+/videos/other/.+
 URL-REGEX,^https?:\/\/paopao\w?.qiyipic.com
 URL-REGEX,^https?:\/\/www.bldimg.com/(background|splash)/.+.png$
-URL-REGEX,^https?:\/\/api.zhihu.com/(fringe|zst|real_time|ad-style-service|banners|topstory/hot-lists|market/popover|mqtt|me|.*launch|.*featured-comment-ad|search/(top|tabs|preset))
 URL-REGEX,^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/player\/ad_
 URL-REGEX,^https?://.+ccode=0902
 URL-REGEX,^https?:\/\/ulogs\.umeng\.com
@@ -733,5 +732,6 @@ AND,((USER-AGENT,%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90*), (NOT,((DOMAIN-
 //zhihu
 AND,((USER-AGENT,osee2*), (NOT,((DOMAIN,api.zhihu.com))), (NOT,((DOMAIN,link.zhihu.com))), (NOT,((DOMAIN,lens.zhihu.com))), (NOT,((DOMAIN,www.zhihu.com))), (NOT,((DOMAIN-SUFFIX,zhimg.com))))
 AND,((USER-AGENT,ZhihuHybrid*), (NOT,((DOMAIN-SUFFIX,zhihu.com))), (NOT,((DOMAIN-SUFFIX,zhimg.com))))
+URL-REGEX,https://(api|www).zhihu.com/(fringe|zst|commercial|real_time|ad-style-service|banners|market/popover|mqtt|.*(launch|featured-comment-ad|recommendations|community-ad)|search/(top|tab|preset)|ab)
 //BiliBili
 URL-REGEX,https://app.bilibili.com/(pgc/season/rank/cn|x/v2/(rank.*rid=(168|5)|search/(defaultword|hot|recommend|resource)))
