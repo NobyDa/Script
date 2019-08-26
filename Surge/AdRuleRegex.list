@@ -39,7 +39,6 @@ URL-REGEX,^https?:\/\/.+\/music\/common\/upload\/t_splash_info
 URL-REGEX,^https?:\/\/.+\/omts.tc.qq.com\/
 URL-REGEX,^https?:\/\/.+\/tips\/fcgi-bin\/fcg_get_advert
 URL-REGEX,^https?:\/\/.+\/variety.tc.qq.com\/
-URL-REGEX,^https?:\/\/.+\/vlive.qqvideo.tc.qq.com\/
 URL-REGEX,^https?:\/\/bla\.gtimg\.com\/qqlive\/\d{6}.+\.png
 URL-REGEX,^https?:\/\/imgcache\.qq\.com\/qqlive\/
 URL-REGEX,^https?:\/\/lives\.l\.qq\.com\/livemsg\?sdtfrom=
