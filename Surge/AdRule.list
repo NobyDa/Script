@@ -1,4 +1,4 @@
-# Update > 2019.8.27  Go advertising rule Integration lhie1 and shenji
+# Update > 2019.8.30  Go advertising rule Integration lhie1 and shenji
 DOMAIN-SUFFIX,amdc.m.taobao.com
 DOMAIN-SUFFIX,apoll.m.taobao.com
 DOMAIN-SUFFIX,comet.yahoo.com
@@ -8400,7 +8400,6 @@ DOMAIN-KEYWORD,inmobi
 DOMAIN,app.adjust.com
 DOMAIN-KEYWORD,adsystem
 DOMAIN-KEYWORD,appsflyer
-DOMAIN,graph.facebook.com
 DOMAIN-SUFFIX,app-measurement.com
 DOMAIN-KEYWORD,fenxi
 DOMAIN-KEYWORD,uploadMobileData
