@@ -1,4 +1,4 @@
-# Update > 2019.8.30  Go advertising rule Integration lhie1 and shenji
+# Update > 2019.8.31 Go advertising rule Integration lhie1 and shenji
 DOMAIN-SUFFIX,amdc.m.taobao.com
 DOMAIN-SUFFIX,apoll.m.taobao.com
 DOMAIN-SUFFIX,comet.yahoo.com
@@ -8442,6 +8442,18 @@ DOMAIN,adashbc.m.taobao.com
 DOMAIN,adashx.m.taobao.com
 USER-AGENT,TencentConnect*
 USER-AGENT,com.apple.AppStore.ProductPageExtension*
+DOMAIN-SUFFIX,applovin.com
+DOMAIN-SUFFIX,applvn.com
+DOMAIN-SUFFIX,inner-active.mobi
+DOMAIN-SUFFIX,mdfull.com
+DOMAIN-SUFFIX,openx.net
+DOMAIN-SUFFIX,vidoomy.com
+DOMAIN-SUFFIX,flash.cn
+DOMAIN,gs.getui.com
+DOMAIN,log.b612kaji.com
+DOMAIN-SUFFIX,beacon.qq.com
+DOMAIN,pgdt.gtimg.com
+DOMAIN,adpai.thepaper.cn
 IP-CIDR,101.227.97.240/32,no-resolve
 IP-CIDR,101.227.200.11/32,no-resolve
 IP-CIDR,101.227.200.28/32,no-resolve
