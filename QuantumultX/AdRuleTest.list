@@ -1289,4 +1289,4 @@ DOMAIN-SUFFIX,x.jd.com,REJECT
 DOMAIN,log.tu.baixing.com,REJECT
 DOMAIN-SUFFIX,sf3-ttcdn-tos.pstatp.com,REJECT
 DOMAIN-SUFFIX,ads.api.vungle.com,REJECT
-DOMAIN-SUFFIX,ads.wakamoment.tk
+DOMAIN-SUFFIX,ads.wakamoment.tk,REJECT
