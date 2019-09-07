@@ -8441,7 +8441,6 @@ DOMAIN,m-adash.m.taobao.com
 DOMAIN,adashbc.m.taobao.com
 DOMAIN,adashx.m.taobao.com
 USER-AGENT,TencentConnect*
-USER-AGENT,com.apple.AppStore.ProductPageExtension*
 DOMAIN-SUFFIX,applovin.com
 DOMAIN-SUFFIX,applvn.com
 DOMAIN-SUFFIX,inner-active.mobi
