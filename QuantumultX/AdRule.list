@@ -1624,7 +1624,6 @@ DOMAIN-SUFFIX,baigm.com,REJECT
 DOMAIN-SUFFIX,bam.nr-data.net,REJECT
 DOMAIN-SUFFIX,banlv.baidu.com,REJECT
 DOMAIN-SUFFIX,banmamedia.com,REJECT
-DOMAIN-SUFFIX,bannedbook.org,REJECT
 DOMAIN-SUFFIX,banner.101xp.com,REJECT
 DOMAIN-SUFFIX,banner.3ddownloads.com,REJECT
 DOMAIN-SUFFIX,banner.automotiveworld.com,REJECT

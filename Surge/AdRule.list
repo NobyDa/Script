@@ -1623,7 +1623,6 @@ DOMAIN-SUFFIX,baigm.com
 DOMAIN-SUFFIX,bam.nr-data.net
 DOMAIN-SUFFIX,banlv.baidu.com
 DOMAIN-SUFFIX,banmamedia.com
-DOMAIN-SUFFIX,bannedbook.org
 DOMAIN-SUFFIX,banner.101xp.com
 DOMAIN-SUFFIX,banner.3ddownloads.com
 DOMAIN-SUFFIX,banner.automotiveworld.com
@@ -8157,7 +8156,6 @@ DOMAIN,log.v2.hunantv.com
 DOMAIN,v2.log.hunantv.com
 DOMAIN,ifacelog.iqiyi.com
 DOMAIN,msg.71.am
-DOMAIN,msg.qy.net
 DOMAIN,t7z.cupid.iqiyi.com
 DOMAIN-SUFFIX,deliver.ifeng.com
 DOMAIN,api.newad.ifeng.com
@@ -8392,7 +8390,6 @@ DOMAIN-SUFFIX,zzd6.com
 DOMAIN-SUFFIX,mackeeper.com
 DOMAIN,geo2.adobe.com
 DOMAIN-KEYWORD,inmobi
-DOMAIN,app.adjust.com
 DOMAIN-KEYWORD,adsystem
 DOMAIN-KEYWORD,appsflyer
 DOMAIN-SUFFIX,app-measurement.com
@@ -8437,7 +8434,6 @@ DOMAIN,textlink.simba.taobao.com
 DOMAIN,m-adash.m.taobao.com
 DOMAIN,adashbc.m.taobao.com
 DOMAIN,adashx.m.taobao.com
-USER-AGENT,TencentConnect*
 DOMAIN-SUFFIX,applovin.com
 DOMAIN-SUFFIX,applvn.com
 DOMAIN-SUFFIX,inner-active.mobi
@@ -8508,6 +8504,9 @@ DOMAIN,ad.hpplay.cn
 DOMAIN,adeng.hpplay.cn
 DOMAIN,rp.hpplay.cn
 DOMAIN,adbs.ximalaya.com
+DOMAIN-SUFFIX,appcpi.net
+DOMAIN-SUFFIX,bulldogcpi.com
+DOMAIN-SUFFIX,mmstat.com
 IP-CIDR,101.227.97.240/32,no-resolve
 IP-CIDR,101.227.200.11/32,no-resolve
 IP-CIDR,101.227.200.28/32,no-resolve

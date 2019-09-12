@@ -1125,7 +1125,6 @@ DOMAIN,offnavi.map.baidu.com,REJECT
 DOMAIN,newvector.map.baidu.com,REJECT
 DOMAIN,ulog.imap.baidu.com,REJECT
 DOMAIN,newloc.map.n.shifen.com,REJECT
-DOMAIN,dataflow.biliapi.com,REJECT
 DOMAIN,data.bilibili.com,REJECT
 DOMAIN,thirdparty.biliapi.com,REJECT
 DOMAIN,cm.bilibili.com,REJECT
