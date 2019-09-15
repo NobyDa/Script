@@ -1,4 +1,4 @@
-#Update 2019.9.8 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2019.9.15 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,0z5jn.cn,REJECT
 DOMAIN-SUFFIX,114so.cn,REJECT
 DOMAIN-SUFFIX,1632j6.cn,REJECT
@@ -1288,3 +1288,21 @@ DOMAIN,log.tu.baixing.com,REJECT
 DOMAIN-SUFFIX,sf3-ttcdn-tos.pstatp.com,REJECT
 DOMAIN-SUFFIX,ads.api.vungle.com,REJECT
 DOMAIN-SUFFIX,ads.wakamoment.tk,REJECT
+DOMAIN,wa.gtimg.com,REJECT
+DOMAIN,dsp.edm.weibo.cn,REJECT
+DOMAIN,e.crashlytics.com,REJECT
+DOMAIN,unidesk.alicdn.com,REJECT
+DOMAIN,mobile-api.adguard.com,REJECT
+DOMAIN,cdn-adphone.wenhua.com.cn,REJECT
+DOMAIN,api.e.qq.com,REJECT
+DOMAIN,mi.gdt.qq.com,REJECT
+DOMAIN,net.rayjump.com,REJECT
+DOMAIN,report.adview.cn,REJECT
+DOMAIN-SUFFIX,g.doubleclick.net,REJECT
+DOMAIN,gorgon.youdao.com,REJECT
+DOMAIN,video.c-ctrip.com,REJECT
+DOMAIN,video.c-ctrip.com,REJECT
+DOMAIN,livew.l.qq.com,REJECT
+DOMAIN,agn.aty.sohu.com,REJECT
+DOMAIN,map-mobile-opnimg.cdn.bcebos.com,REJECT
+DOMAIN,mf.atm.youku.com,REJECT
