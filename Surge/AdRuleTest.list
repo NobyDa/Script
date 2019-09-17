@@ -1,4 +1,4 @@
-#Update 2019.9.15 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2019.9.17 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,0z5jn.cn
 DOMAIN-SUFFIX,114so.cn
 DOMAIN-SUFFIX,1632j6.cn
@@ -1115,7 +1115,6 @@ DOMAIN,offnavi.map.baidu.com
 DOMAIN,newvector.map.baidu.com
 DOMAIN,ulog.imap.baidu.com
 DOMAIN,newloc.map.n.shifen.com
-DOMAIN,data.bilibili.com
 DOMAIN,thirdparty.biliapi.com
 DOMAIN,cm.bilibili.com
 DOMAIN,mbdlog.iqiyi.com
@@ -1187,7 +1186,6 @@ DOMAIN-KEYWORD,allyes
 DOMAIN-KEYWORD,analysys
 DOMAIN-KEYWORD,applovin
 DOMAIN-KEYWORD,appsflyer
-DOMAIN-KEYWORD,dataflow
 DOMAIN-KEYWORD,dnserror
 DOMAIN-KEYWORD,domob
 DOMAIN-KEYWORD,duomeng

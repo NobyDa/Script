@@ -1,4 +1,7 @@
-# Update > 2019.9.8 Go advertising rule Integration lhie1 and shenji
+# Update > 2019.9.17 Go advertising rule Integration lhie1 and shenji
+DOMAIN-SUFFIX,idealads.net
+DOMAIN-SUFFIX,ironsrc.com
+DOMAIN-SUFFIX,tapjoy.com
 DOMAIN-SUFFIX,amdc.m.taobao.com
 DOMAIN-SUFFIX,apoll.m.taobao.com
 DOMAIN-SUFFIX,comet.yahoo.com
@@ -2545,7 +2548,6 @@ DOMAIN-SUFFIX,dashet.com
 DOMAIN-SUFFIX,data.3975.com
 DOMAIN-SUFFIX,data.ad-score.com
 DOMAIN-SUFFIX,data.apn.co.nz
-DOMAIN-SUFFIX,data.bilibili.com
 DOMAIN-SUFFIX,data.danmu.baofeng.com
 DOMAIN-SUFFIX,data.doodlemobile.com
 DOMAIN-SUFFIX,data.gosquared.com
