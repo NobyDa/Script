@@ -1,5 +1,6 @@
 # Update-2019.9.17 Self-use rule, Remove versus shenji duplicates and optimizations
 # This rule does not include shenji
+DOMAIN-SUFFIX,is.snssdk.com,REJECT  #电视家广告
 DOMAIN-SUFFIX,amdc.m.taobao.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
