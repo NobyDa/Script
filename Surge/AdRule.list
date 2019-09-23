@@ -1,7 +1,6 @@
-# Update > 2019.9.17 Go advertising rule Integration lhie1 and shenji
+# Update > 2019.9.24 Go advertising rule Integration lhie1 and shenji
 DOMAIN-SUFFIX,idealads.net
 DOMAIN-SUFFIX,ironsrc.com
-DOMAIN-SUFFIX,tapjoy.com
 DOMAIN-SUFFIX,amdc.m.taobao.com
 DOMAIN-SUFFIX,apoll.m.taobao.com
 DOMAIN-SUFFIX,comet.yahoo.com
@@ -900,7 +899,6 @@ DOMAIN-SUFFIX,ad.sina.com.cn
 DOMAIN-SUFFIX,ad.sinovision.net
 DOMAIN-SUFFIX,ad.slutload.com
 DOMAIN-SUFFIX,ad.smartclip.net
-DOMAIN-SUFFIX,ad.sohu.com
 DOMAIN-SUFFIX,ad.spielothek.so
 DOMAIN-SUFFIX,ad.spreaker.com
 DOMAIN-SUFFIX,ad.stsywl.com
@@ -6993,7 +6991,6 @@ DOMAIN-SUFFIX,tukexiu.com
 DOMAIN-SUFFIX,tukj.net
 DOMAIN-SUFFIX,tumblrprobes.cedexis.com
 DOMAIN-SUFFIX,tumblrreports.cedexis.com
-DOMAIN-SUFFIX,turn.com
 DOMAIN-SUFFIX,tv.code.jjyx.com
 DOMAIN-SUFFIX,tw.adon.vpon.com
 DOMAIN-SUFFIX,tw.adx.nextmedia.com
@@ -7983,6 +7980,7 @@ DOMAIN-SUFFIX,zzy1.quyaoya.com
 DOMAIN-SUFFIX,zzz7.52896368.com
 DOMAIN-SUFFIX,zzzzz4.52896368.com
 DOMAIN-SUFFIX,analytics.query.yahoo.com
+DOMAIN-SUFFIX,is.snssdk.com
 DOMAIN-KEYWORD,adservice
 DOMAIN-KEYWORD,analytics
 DOMAIN-KEYWORD,analysis
@@ -8106,7 +8104,6 @@ DOMAIN,acs4baichuan.m.taobao.com
 DOMAIN,adash.m.taobao.com
 DOMAIN,adash.man.aliyuncs.com
 DOMAIN,adashbc.ut.taobao.com
-DOMAIN,adashx.m.taobao.com
 DOMAIN,adash-c.ut.taobao.com
 DOMAIN,adashxgc.ut.taobao.com
 DOMAIN,adashx4yt.m.taobao.com
@@ -8218,7 +8215,6 @@ DOMAIN,regist.fotoable.com
 DOMAIN,cdn.adapi.fotoable.com
 DOMAIN,adnew.wifi8.com
 DOMAIN,adfile.wifi8.com
-DOMAIN-SUFFIX,beacon.sina.com.cn
 DOMAIN,adimg.vue.weibo.com
 DOMAIN,u1.img.mobile.sina.cn
 DOMAIN,sax.sina.com.cn
@@ -8498,7 +8494,6 @@ DOMAIN-SUFFIX,yihuifu.cn
 DOMAIN-SUFFIX,yuanchengxiezuo.com
 DOMAIN-SUFFIX,zbrushcn.com
 DOMAIN-SUFFIX,zhzzx.com
-DOMAIN-SUFFIX,bayimob.com
 DOMAIN-SUFFIX,clotfun.mobi
 DOMAIN-SUFFIX,clotfun.online
 DOMAIN,ad.360in.com
@@ -8508,7 +8503,6 @@ DOMAIN,rp.hpplay.cn
 DOMAIN,adbs.ximalaya.com
 DOMAIN-SUFFIX,appcpi.net
 DOMAIN-SUFFIX,bulldogcpi.com
-DOMAIN-SUFFIX,mmstat.com
 IP-CIDR,101.227.97.240/32,no-resolve
 IP-CIDR,101.227.200.11/32,no-resolve
 IP-CIDR,101.227.200.28/32,no-resolve
