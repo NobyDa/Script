@@ -1,2 +1,0 @@
-var body = response.body
-obj.tradeEndTime = 1999999999000
