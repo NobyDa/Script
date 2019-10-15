@@ -1,4 +1,4 @@
-# Update > 2019.9.24 Go advertising rule Integration lhie1 and shenji
+# Update > 2019.10.15 Go advertising rule Integration lhie1 and shenji
 DOMAIN-SUFFIX,idealads.net
 DOMAIN-SUFFIX,ironsrc.com
 DOMAIN-SUFFIX,amdc.m.taobao.com
@@ -8502,6 +8502,9 @@ DOMAIN,rp.hpplay.cn
 DOMAIN,adbs.ximalaya.com
 DOMAIN-SUFFIX,appcpi.net
 DOMAIN-SUFFIX,bulldogcpi.com
+DOMAIN-SUFFIX,insurads.com
+DOMAIN-SUFFIX,juicyads.com
+DOMAIN-SUFFIX,wshtgame.com
 IP-CIDR,101.227.97.240/32,no-resolve
 IP-CIDR,101.227.200.11/32,no-resolve
 IP-CIDR,101.227.200.28/32,no-resolve
