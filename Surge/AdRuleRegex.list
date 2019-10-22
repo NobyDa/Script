@@ -777,6 +777,6 @@ AND,((USER-AGENT,NeteaseMusic*), (NOT,((URL-REGEX,https?://interface3?.music.163
 AND,((USER-AGENT,pixiv*), (NOT,((DOMAIN-KEYWORD,pixiv))))
 URL-REGEX,^https?:\/\/capis-slb\.didapinche\.com\/ad\/
 URL-REGEX,^https://weibointl.api.weibo.cn/portal.php\?a=get_coopen_ads
-URL-REGEX,^https\:\/\/yxyapi2\.drcuiyutao\.com\/yxy-api-gateway\/api\/json\/advert\/getsAd
-URL-REGEX,^http:\/\/capis-clb\.didapinche\.com\/ad\/
-URL-REGEX,^https:\/\/api\.vistopia\.com\.cn\/api\/v1\/home\/advertisement\/
+URL-REGEX,^https?:\/\/yxyapi2\.drcuiyutao\.com\/yxy-api-gateway\/api\/json\/advert\/getsAd
+URL-REGEX,^https?:\/\/capis-clb\.didapinche\.com\/ad\/
+URL-REGEX,^https?:\/\/api\.vistopia\.com\.cn\/api\/v1\/home\/advertisement\/
