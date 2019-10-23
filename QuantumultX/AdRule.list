@@ -1,6 +1,5 @@
-# Update-2019.9.24 Self-use rule, Remove versus shenji duplicates and optimizations
+# Update-2019.10.23 Self-use rule, Remove versus shenji duplicates and optimizations
 # This rule does not include shenji
-DOMAIN-SUFFIX,amdc.m.taobao.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
 DOMAIN-SUFFIX,gemini.yahoo.com,REJECT
@@ -1971,7 +1970,6 @@ DOMAIN-SUFFIX,cachenotice.cp11.ott.cibntv.net,REJECT
 DOMAIN-SUFFIX,cachesit.com,REJECT
 DOMAIN-SUFFIX,cache-ssl.celtra.com,REJECT
 DOMAIN-SUFFIX,cad.chosun.com,REJECT
-DOMAIN-SUFFIX,c-adash.m.taobao.com,REJECT
 DOMAIN-SUFFIX,cadvv.heraldm.com,REJECT
 DOMAIN-SUFFIX,cadvv.koreaherald.com,REJECT
 DOMAIN-SUFFIX,caiyifz.com,REJECT
@@ -5047,7 +5045,6 @@ DOMAIN-SUFFIX,mackeeperapp.mackeeper.com,REJECT
 DOMAIN-SUFFIX,macplatform.wondershare.com,REJECT
 DOMAIN-SUFFIX,mad.kuuad.com,REJECT
 DOMAIN-SUFFIX,mad.m.maxthon.cn,REJECT
-DOMAIN-SUFFIX,m-adash.m.taobao.com,REJECT
 DOMAIN-SUFFIX,madhouse.cn,REJECT
 DOMAIN-SUFFIX,madmini.com,REJECT
 DOMAIN-SUFFIX,mads.amazon.com,REJECT

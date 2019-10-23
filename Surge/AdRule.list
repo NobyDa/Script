@@ -1,7 +1,6 @@
-# Update > 2019.10.15 Go advertising rule Integration lhie1 and shenji
+# Update > 2019.10.23 Go advertising rule Integration lhie1 and shenji
 DOMAIN-SUFFIX,idealads.net
 DOMAIN-SUFFIX,ironsrc.com
-DOMAIN-SUFFIX,amdc.m.taobao.com
 DOMAIN-SUFFIX,apoll.m.taobao.com
 DOMAIN-SUFFIX,comet.yahoo.com
 DOMAIN-SUFFIX,gemini.yahoo.com
@@ -1971,7 +1970,6 @@ DOMAIN-SUFFIX,cachenotice.cp11.ott.cibntv.net
 DOMAIN-SUFFIX,cachesit.com
 DOMAIN-SUFFIX,cache-ssl.celtra.com
 DOMAIN-SUFFIX,cad.chosun.com
-DOMAIN-SUFFIX,c-adash.m.taobao.com
 DOMAIN-SUFFIX,cadvv.heraldm.com
 DOMAIN-SUFFIX,cadvv.koreaherald.com
 DOMAIN-SUFFIX,caiyifz.com
@@ -5047,7 +5045,6 @@ DOMAIN-SUFFIX,mackeeperapp.mackeeper.com
 DOMAIN-SUFFIX,macplatform.wondershare.com
 DOMAIN-SUFFIX,mad.kuuad.com
 DOMAIN-SUFFIX,mad.m.maxthon.cn
-DOMAIN-SUFFIX,m-adash.m.taobao.com
 DOMAIN-SUFFIX,madhouse.cn
 DOMAIN-SUFFIX,madmini.com
 DOMAIN-SUFFIX,mads.amazon.com
@@ -8101,7 +8098,6 @@ DOMAIN-SUFFIX,ads.internal.unity3d.com
 DOMAIN-SUFFIX,ads.prd.ie.internal.unity3d.com
 DOMAIN-SUFFIX,unityads.unity3d.com
 DOMAIN,acs4baichuan.m.taobao.com
-DOMAIN,adash.m.taobao.com
 DOMAIN,adash.man.aliyuncs.com
 DOMAIN,adashbc.ut.taobao.com
 DOMAIN,adash-c.ut.taobao.com
@@ -8430,7 +8426,6 @@ DOMAIN,stat.simba.taobao.com
 DOMAIN,textlink.simba.taobao.com
 DOMAIN,m-adash.m.taobao.com
 DOMAIN,adashbc.m.taobao.com
-DOMAIN,adashx.m.taobao.com
 DOMAIN-SUFFIX,applovin.com
 DOMAIN-SUFFIX,applvn.com
 DOMAIN-SUFFIX,inner-active.mobi

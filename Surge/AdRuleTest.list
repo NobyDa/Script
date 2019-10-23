@@ -257,7 +257,6 @@ DOMAIN-SUFFIX,wbapp.uve.weibo.com
 DOMAIN-SUFFIX,widget.weibo.com
 DOMAIN-SUFFIX,zc.biz.weibo.com
 DOMAIN-SUFFIX,adash-c.ut.taobao.com
-DOMAIN-SUFFIX,adash.m.taobao.com
 DOMAIN-SUFFIX,adashbc.m.taobao.com
 DOMAIN-SUFFIX,adashbc.ut.taobao.com
 DOMAIN-SUFFIX,adashx.m.taobao.com
@@ -1106,7 +1105,6 @@ DOMAIN-SUFFIX,webspectator.com
 DOMAIN-SUFFIX,xadchina.cn
 DOMAIN-SUFFIX,yldbt.com
 DOMAIN-SUFFIX,ymtracking.com
-DOMAIN,amdc.m.taobao.com
 DOMAIN,apoll.m.taobao.com
 DOMAIN,wn.pos.baidu.com
 DOMAIN,ps.map.baidu.com
