@@ -5,7 +5,7 @@ const path1 = '/pgc/player/api/playurl';
 
 if (url.indexOf(path1) != -1) {
     let obj = JSON.parse(body);
-	obj["quality"] = 112;
+	obj["quality"] = obj["accept_quality"][0];
 	body = JSON.stringify(obj);  
  }
 

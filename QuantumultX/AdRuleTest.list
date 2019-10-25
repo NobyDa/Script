@@ -1,4 +1,4 @@
-#Update 2019.9.24 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2019.10.23 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,0z5jn.cn,REJECT
 DOMAIN-SUFFIX,114so.cn,REJECT
 DOMAIN-SUFFIX,1632j6.cn,REJECT
@@ -257,7 +257,6 @@ DOMAIN-SUFFIX,wbapp.uve.weibo.com,REJECT
 DOMAIN-SUFFIX,widget.weibo.com,REJECT
 DOMAIN-SUFFIX,zc.biz.weibo.com,REJECT
 DOMAIN-SUFFIX,adash-c.ut.taobao.com,REJECT
-DOMAIN-SUFFIX,adash.m.taobao.com,REJECT
 DOMAIN-SUFFIX,adashbc.m.taobao.com,REJECT
 DOMAIN-SUFFIX,adashbc.ut.taobao.com,REJECT
 DOMAIN-SUFFIX,adashx.m.taobao.com,REJECT
@@ -1115,7 +1114,6 @@ DOMAIN-SUFFIX,webspectator.com,REJECT
 DOMAIN-SUFFIX,xadchina.cn,REJECT
 DOMAIN-SUFFIX,yldbt.com,REJECT
 DOMAIN-SUFFIX,ymtracking.com,REJECT
-DOMAIN,amdc.m.taobao.com,REJECT
 DOMAIN,apoll.m.taobao.com,REJECT
 DOMAIN,wn.pos.baidu.com,REJECT
 DOMAIN,ps.map.baidu.com,REJECT
@@ -1201,7 +1199,6 @@ DOMAIN-KEYWORD,googleads,REJECT
 DOMAIN-KEYWORD,guanggao,REJECT
 DOMAIN-KEYWORD,inmobi,REJECT
 DOMAIN-KEYWORD,lianmeng,REJECT
-DOMAIN-KEYWORD,logger,REJECT
 DOMAIN-KEYWORD,mobaders,REJECT
 DOMAIN-KEYWORD,omgmta,REJECT
 DOMAIN-KEYWORD,omniture,REJECT
