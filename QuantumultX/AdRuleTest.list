@@ -1284,7 +1284,6 @@ DOMAIN,wa.gtimg.com,REJECT
 DOMAIN,dsp.edm.weibo.cn,REJECT
 DOMAIN,e.crashlytics.com,REJECT
 DOMAIN,unidesk.alicdn.com,REJECT
-DOMAIN,mobile-api.adguard.com,REJECT
 DOMAIN,cdn-adphone.wenhua.com.cn,REJECT
 DOMAIN,api.e.qq.com,REJECT
 DOMAIN,net.rayjump.com,REJECT

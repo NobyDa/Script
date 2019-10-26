@@ -8069,6 +8069,7 @@ DOMAIN,adsdk.dmzj.com
 DOMAIN,adserver.pandora.com
 DOMAIN,adui.tg.meitu.com
 DOMAIN,adv.bandi.so
+DOMAIN,ad-goblin.hupu.com
 DOMAIN,adx.hupu.com
 DOMAIN,adx-api.hupu.com
 DOMAIN,adxserver.ad.cmvideo.cn
@@ -8108,6 +8109,7 @@ DOMAIN,nbsdk-baichuan.alicdn.com
 DOMAIN,tunion-api.m.taobao.com
 DOMAIN,adproxy.autohome.com.cn
 DOMAIN,rd.autohome.com.cn
+DOMAIN,ad.k.21cn.com
 DOMAIN,al.autohome.com.cn
 DOMAIN,applogapi.autohome.com.cn
 DOMAIN-SUFFIX,baidustatic.com
@@ -8402,7 +8404,6 @@ DOMAIN-SUFFIX,4paradigm.com
 DOMAIN-KEYWORD,talkingdata
 DOMAIN-SUFFIX,catch.gift
 DOMAIN-SUFFIX,pubnative.net
-DOMAIN,mtalk.google.com
 DOMAIN,suggestqueries.google.com
 DOMAIN,www.googleadservices.com
 DOMAIN,www.google-analytics.com
