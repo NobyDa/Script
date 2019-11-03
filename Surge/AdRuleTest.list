@@ -1278,7 +1278,7 @@ DOMAIN,api.e.qq.com
 DOMAIN,mi.gdt.qq.com
 DOMAIN,net.rayjump.com
 DOMAIN,report.adview.cn
-DOMAIN-SUFFIX,g.doubleclick.net
+DOMAIN-SUFFIX,doubleclick.net
 DOMAIN,gorgon.youdao.com
 DOMAIN,video.c-ctrip.com
 DOMAIN,livew.l.qq.com

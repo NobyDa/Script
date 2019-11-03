@@ -1288,7 +1288,7 @@ DOMAIN,cdn-adphone.wenhua.com.cn,REJECT
 DOMAIN,api.e.qq.com,REJECT
 DOMAIN,net.rayjump.com,REJECT
 DOMAIN,report.adview.cn,REJECT
-DOMAIN-SUFFIX,g.doubleclick.net,REJECT
+DOMAIN-SUFFIX,doubleclick.net,REJECT
 DOMAIN,gorgon.youdao.com,REJECT
 DOMAIN,video.c-ctrip.com,REJECT
 DOMAIN,livew.l.qq.com,REJECT
