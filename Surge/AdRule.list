@@ -1,4 +1,4 @@
-# Update > 2019.10.23 Go advertising rule Integration lhie1 and shenji
+# Update > 2019.10.29 Go advertising rule Integration lhie1 and shenji
 DOMAIN-SUFFIX,idealads.net
 DOMAIN-SUFFIX,ironsrc.com
 DOMAIN-SUFFIX,apoll.m.taobao.com
@@ -8069,6 +8069,7 @@ DOMAIN,adsdk.dmzj.com
 DOMAIN,adserver.pandora.com
 DOMAIN,adui.tg.meitu.com
 DOMAIN,adv.bandi.so
+DOMAIN,goblin.hupu.com
 DOMAIN,adx.hupu.com
 DOMAIN,adx-api.hupu.com
 DOMAIN,adxserver.ad.cmvideo.cn
@@ -8108,6 +8109,7 @@ DOMAIN,nbsdk-baichuan.alicdn.com
 DOMAIN,tunion-api.m.taobao.com
 DOMAIN,adproxy.autohome.com.cn
 DOMAIN,rd.autohome.com.cn
+DOMAIN,ad.k.21cn.com
 DOMAIN,al.autohome.com.cn
 DOMAIN,applogapi.autohome.com.cn
 DOMAIN-SUFFIX,baidustatic.com
@@ -8402,7 +8404,6 @@ DOMAIN-SUFFIX,4paradigm.com
 DOMAIN-KEYWORD,talkingdata
 DOMAIN-SUFFIX,catch.gift
 DOMAIN-SUFFIX,pubnative.net
-DOMAIN,mtalk.google.com
 DOMAIN,suggestqueries.google.com
 DOMAIN,www.googleadservices.com
 DOMAIN,www.google-analytics.com
@@ -8684,3 +8685,5 @@ IP-CIDR,180.166.52.24/32,no-resolve
 IP-CIDR,211.161.101.106/32,no-resolve
 IP-CIDR,220.115.251.25/32,no-resolve
 IP-CIDR,222.73.156.235/32,no-resolve
+#知乎
+IP-CIDR,188.89.204.198/32,no-resolve

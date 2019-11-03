@@ -1,4 +1,4 @@
-#Update 2019.10.3 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2019.10.29 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,0z5jn.cn
 DOMAIN-SUFFIX,114so.cn
 DOMAIN-SUFFIX,1632j6.cn
@@ -1273,13 +1273,12 @@ DOMAIN,wa.gtimg.com
 DOMAIN,dsp.edm.weibo.cn
 DOMAIN,e.crashlytics.com
 DOMAIN,unidesk.alicdn.com
-DOMAIN,mobile-api.adguard.com
 DOMAIN,cdn-adphone.wenhua.com.cn
 DOMAIN,api.e.qq.com
 DOMAIN,mi.gdt.qq.com
 DOMAIN,net.rayjump.com
 DOMAIN,report.adview.cn
-DOMAIN-SUFFIX,g.doubleclick.net
+DOMAIN-SUFFIX,doubleclick.net
 DOMAIN,gorgon.youdao.com
 DOMAIN,video.c-ctrip.com
 DOMAIN,livew.l.qq.com
@@ -1297,3 +1296,9 @@ DOMAIN-KEYWORD,adsystem
 DOMAIN-KEYWORD,track
 DOMAIN-KEYWORD,talkingdata
 DOMAIN-KEYWORD,uploadMobileData
+DOMAIN-SUFFIX,www.jinshanju.com
+DOMAIN-SUFFIX,iesdouyin.com
+DOMAIN-SUFFIX,test-www.douyin.com
+DOMAIN-SUFFIX,safebrowsing.urlsec.qq.com
+DOMAIN-SUFFIX,adserver-ad.321mh.com
+DOMAIN-SUFFIX,lelefenxi.com
