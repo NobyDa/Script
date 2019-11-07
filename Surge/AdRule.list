@@ -1,4 +1,4 @@
-# Update > 2019.10.29 Go advertising rule Integration lhie1 and shenji
+# Update > 2019.11.7 Go advertising rule Integration lhie1 and shenji
 DOMAIN-SUFFIX,idealads.net
 DOMAIN-SUFFIX,ironsrc.com
 DOMAIN-SUFFIX,apoll.m.taobao.com
@@ -8228,7 +8228,6 @@ DOMAIN,hui.sohu.com
 DOMAIN-SUFFIX,bugly.qq.com
 DOMAIN-SUFFIX,e.qq.com
 DOMAIN-SUFFIX,gdt.qq.com
-DOMAIN-SUFFIX,l.qq.com
 DOMAIN-SUFFIX,rqd.qq.com
 DOMAIN,adsmind.tc.qq.com
 DOMAIN,btrace.qq.com
