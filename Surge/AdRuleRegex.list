@@ -803,4 +803,4 @@ URL-REGEX,^http:\/\/img\.ddrk\.me\/ad190824\.jpg
 URL-REGEX,^http:\/\/ddrk\.me\/image\/logo_footer\.png
 URL-REGEX,^http:\/\/ddrk\.me\/wp-content\/plugins\/advanced-floating-content-lite\/public\/images\/close\.png 
 URL-REGEX,^http:\/\/img\.ddrk\.me\/cover\.png 
-URL-REGEX,^https:\/\/www\.nfmovies\.com\/pic\/bu\/191107_5005\.jpg$
+URL-REGEX,^https:\/\/www\.nfmovies\.com\/pic\/bu\/191107_5005\.jpg
