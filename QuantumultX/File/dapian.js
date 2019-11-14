@@ -1,3 +1,15 @@
+/*
+大片 unlock vip
+
+QX:
+^https?:\/\/api\.vnision\.com\/v1\/(users\/|banners) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/dapian.js
+
+Surge4：
+http-response ^https?:\/\/api\.vnision\.com\/v1\/(users\/|banners) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/dapian.js
+
+Surge & QX MITM = api.vnision.com
+*/
+
 var body = $response.body;
 var url = $request.url;
 
