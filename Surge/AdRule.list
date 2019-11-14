@@ -8499,7 +8499,6 @@ DOMAIN-SUFFIX,appcpi.net
 DOMAIN-SUFFIX,bulldogcpi.com
 DOMAIN-SUFFIX,insurads.com
 DOMAIN-SUFFIX,juicyads.com
-DOMAIN-SUFFIX,wshtgame.com
 IP-CIDR,101.227.97.240/32,no-resolve
 IP-CIDR,101.227.200.11/32,no-resolve
 IP-CIDR,101.227.200.28/32,no-resolve
