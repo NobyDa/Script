@@ -1,0 +1,9 @@
+分享1 = vmess, 47.240.39.163, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径
+分享2 = vmess, 47.240.94.138, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径
+分享3 = vmess, 47.240.41.240, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径
+分享4 = vmess, 149.129.107.134, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径
+分享5 = vmess, 47.240.94.71, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径
+分享6 = vmess, 47.240.40.149, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径
+分享7 = vmess, 149.129.96.14, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径 
+分享8 = vmess, 47.240.95.148, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径
+分享9 = vmess, 47.240.94.4, 80, username=398caa31-20f6-33e2-9a81-bfe9a9f1b51b, ws=true, tls=true, ws-path=/路径
