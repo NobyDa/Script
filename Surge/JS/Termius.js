@@ -3,10 +3,10 @@ Termius unlocks local pro v
 (From the author @Maasea)
 
 Surge4:
-http-response https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Termius.js
+http-response https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/limbopro/Script/master/Surge/JS/Termius.js
 
 QX：
-https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Termius.js
+https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body https://raw.githubusercontent.com/limbopro/Script/master/Surge/JS/Termius.js
 
 Surge & QX MITM = api.termius.com
 */
