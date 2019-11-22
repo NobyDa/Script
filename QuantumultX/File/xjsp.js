@@ -1,3 +1,15 @@
+/*
+Banana video unlock vip
+app download link : http://tinyurl.com/y57j6hjg
+
+QX:
+^https?:\/\/(ios|apple)\.fuliapps\.com\/ url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/xjsp.js
+
+Surge4：
+http-response ^https?:\/\/(ios|apple)\.fuliapps\.com\/ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/xjsp.js
+
+Surge & QX MITM = *.fuliapps.com
+*/
 
 var body = $response.body;
 var url = $request.url;
