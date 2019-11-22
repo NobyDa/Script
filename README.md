@@ -8,7 +8,7 @@
 
 * Store version QX1.0.0 (120) JS function is unlimited, but does not support v2, does not support AlwaysOn
 
-* Store version QX1.0.0 (130) restricts keywords for script VIP types, but supports v2 and supports AlwaysOn
+* Store version QX1.0.1 (130) restricts keywords for script VIP types, but supports v2 and supports AlwaysOn
 
 * Store version QX1.0.2 (136) Relaxed certain keyword restrictions, but limited script remote references (script subscriptions), support for v2 and support for http and support AlwaysOn
 
