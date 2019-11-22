@@ -6,6 +6,7 @@ http-request https?:\/\/musicpay\.kuwo.cn\/music\.pay\?uid=\d+ script-path=https
 #Vip script:
 http-response ^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Kuwo.js
 
+MITM = vip1.kuwo.cn
 */
 
 let url = $request.url.replace(/uid=\d+/g, "uid=1");
