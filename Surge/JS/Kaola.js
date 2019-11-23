@@ -6,6 +6,10 @@ http-request ^https://sp\.kaola\.com/api/openad$ script-path=https://Choler.gith
 hostname = sp.kaola.com
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 var data = {
   body: "{}",
   headers: {
