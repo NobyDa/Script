@@ -1,3 +1,6 @@
+/*
+ * @supported 0C02A0BCC5B7
+ */
 var body = $response.body;
 var url = $request.url;
 const path = "/app_api/v5/getuserinfo/";
