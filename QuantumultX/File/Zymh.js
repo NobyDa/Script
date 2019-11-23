@@ -10,6 +10,10 @@ http-response ^https://getuserinfo-globalapi.zymk.cn/app_api/v5/(getuserinfo|coi
 Surge & QX MITM = getuserinfo-globalapi.zymk.cn
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 let url = $request.url;
 let body = JSON.parse($response.body);
 
