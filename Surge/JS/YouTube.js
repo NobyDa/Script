@@ -6,6 +6,10 @@ http-request ^https://[\s\S]*\.googlevideo\.com/.*&(oad|ctier) script-path=https
 hostname = *.googlevideo.com
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 var data = {
   body: "{}",
   headers: {
