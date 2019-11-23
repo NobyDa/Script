@@ -1,4 +1,7 @@
 /*
+ * @supported 0C02A0BCC5B7
+ */
+/*
 CaiYun Weather (ColorWeather) unlock Vip
 
 QX 1.0.0:
