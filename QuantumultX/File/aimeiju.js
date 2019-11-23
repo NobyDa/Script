@@ -9,6 +9,10 @@ Surge4：
 http-response ^https?:\/\/mjapp\.\w{1,9}\.com\/index\.php\/app\/ios\/(vod\/show|user\/index) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/aimeiju.js
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 var body = $response.body;
 var url = $request.url;
 const path1 = "/index.php/app/ios/user/index";
