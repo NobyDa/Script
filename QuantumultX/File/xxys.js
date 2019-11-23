@@ -1,4 +1,8 @@
 /*
+ * @supported 0C02A0BCC5B7
+ */
+
+/*
 XiaoXiaoYingShi unlock Vip
 QX:
 https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/xxys.js
