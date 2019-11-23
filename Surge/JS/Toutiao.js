@@ -15,3 +15,7 @@ if (obj.data) {
   }
 }
 $done({body: JSON.stringify(obj)});
+
+/**
+ * @supported 8CAAE3BAA2B1
+ */
