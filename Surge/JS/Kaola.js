@@ -1,4 +1,7 @@
 /*
+ * @supported 0C02A0BCC5B7
+ */
+/*
 [Script]
 http-request ^https://sp\.kaola\.com/api/openad$ script-path=https://Choler.github.io/Surge/Script/Kaola.js
 
