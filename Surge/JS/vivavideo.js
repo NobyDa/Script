@@ -1,4 +1,7 @@
 /*
+ * @supported 0C02A0BCC5B7
+ */
+/*
 Vivavideo unlock vip
 Script data comes from @hiepkimcdtk55
 
