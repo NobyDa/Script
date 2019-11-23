@@ -6,6 +6,10 @@ http-request ^https://mp\.weixin\.qq\.com/mp/getappmsgad script-path=https://Cho
 hostname = mp.weixin.qq.com
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 var data = {
   body: "{}",
   headers: {
