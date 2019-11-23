@@ -18,3 +18,7 @@ body = JSON.stringify(obj);
 $done({body});
 
 //By yxiaocai & JO2EY
+
+/**
+ * @supported 8CAAE3BAA2B1
+ */
