@@ -1,4 +1,8 @@
 /*
+ * @supported 0C02A0BCC5B7
+ */
+
+/*
 DaQianShiJie unlock
 
 Surge4：
