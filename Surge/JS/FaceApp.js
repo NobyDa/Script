@@ -6,6 +6,10 @@ http-response ^https?:\/\/api\.faceapp\.io(.*)\/api\/v.*\/auth\/user\/credential
 hostname = api.faceapp.io
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
     let headers = $response.headers;
     let status = $response.status;
     let obj = JSON.parse($response.body);
