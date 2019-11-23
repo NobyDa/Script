@@ -1,3 +1,7 @@
+/**
+ * @supported 68F7E880141E
+ */
+
 let obj = JSON.parse($response.body);
 let url = $request.url;
 
