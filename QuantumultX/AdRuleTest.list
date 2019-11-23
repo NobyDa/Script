@@ -1,4 +1,4 @@
-#Update 2019.11.11 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2019.11.21 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,admaster.com,REJECT
 DOMAIN-SUFFIX,0z5jn.cn,REJECT
 DOMAIN-SUFFIX,114so.cn,REJECT
@@ -1085,7 +1085,6 @@ DOMAIN-SUFFIX,outbrain.com,REJECT
 DOMAIN-SUFFIX,parsely.com,REJECT
 DOMAIN-SUFFIX,peak-adx.com,REJECT
 DOMAIN-SUFFIX,personaly.click,REJECT
-DOMAIN-SUFFIX,qualtrics.com,REJECT
 DOMAIN-SUFFIX,quixdtrk.com,REJECT
 DOMAIN-SUFFIX,simplepath.com,REJECT
 DOMAIN-SUFFIX,skimresources.com,REJECT
@@ -1154,7 +1153,6 @@ DOMAIN-SUFFIX,al.autohome.com.cn,REJECT
 DOMAIN-SUFFIX,api.joybj.com,REJECT
 DOMAIN-SUFFIX,api.whizzone.com,REJECT
 DOMAIN-SUFFIX,applogapi.autohome.com.cn,REJECT
-DOMAIN-SUFFIX,applogios.uc.cn,REJECT
 DOMAIN-SUFFIX,catch.gift,REJECT
 DOMAIN-SUFFIX,dfp.suning.com,REJECT
 DOMAIN-SUFFIX,ggs.myzaker.com,REJECT
