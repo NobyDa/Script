@@ -9,5 +9,9 @@ http-response ^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice)
 MITM = vip1.kuwo.cn
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 let url = $request.url.replace(/uid=\d+/g, "uid=1");
 $done({url});
