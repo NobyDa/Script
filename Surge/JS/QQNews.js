@@ -6,6 +6,10 @@ http-response https://r\.inews\.qq.com\/get(QQNewsUnreadList|RecommendList) requ
 hostname = r.inews.qq.com
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 var obj = JSON.parse($response.body);
 delete obj.adList;
 $done({body: JSON.stringify(obj)});
