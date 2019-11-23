@@ -43,3 +43,7 @@ else if (url.indexOf(free) != -1) {
 $done({body});
 
 //by mieqq
+
+/**
+ * @supported 8CAAE3BAA2B1
+ */
