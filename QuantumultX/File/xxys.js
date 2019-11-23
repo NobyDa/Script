@@ -8,6 +8,10 @@ http-response https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index) requi
 MITM = ios.xiaoxiaoapps.com
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 const path1 = "/ucp/index";
 const path2 = "/vod/reqplay/";
 var body = $response.body;
