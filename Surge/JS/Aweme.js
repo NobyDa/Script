@@ -1,7 +1,3 @@
-/**
- * @supported 68F7E880141E
- */
-
 /*
 [URL Rewrite]
 ^https://aweme-eagle(.*)\.snssdk\.com/aweme/v2/ https://aweme-eagle$1.snssdk.com/aweme/v1/ 302
@@ -12,6 +8,10 @@ http-response ^https://[\s\S]*\/aweme/v1/(feed|aweme/post|follow/feed)/ requires
 [MITM]
 hostname = *.amemv.com, *.snssdk.com
 */
+
+/**
+ * @supported 68F7E880141E
+ */
 
 let arr = {
   "allow_download": true,
