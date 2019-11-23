@@ -10,6 +10,10 @@ QX：
 Surge & QX MITM = viva.v21xy.com
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 var obj = JSON.parse($response.body);
 obj = {
   "autoRenewProductId": "premium_platinum_yearly",
