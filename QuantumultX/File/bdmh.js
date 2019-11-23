@@ -22,3 +22,7 @@ obj.data.user_info.avatar = "https://avatars3.githubusercontent.com/u/53217160?s
 
 body = JSON.stringify(obj); 
 $done({body});
+
+/**
+ * @supported 8CAAE3BAA2B1
+ */
