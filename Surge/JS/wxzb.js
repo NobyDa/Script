@@ -8,6 +8,11 @@ https:\/\/u\.kanghuayun\.com\/api\/v2\/info url script-response-body https://raw
 
 Surge & QX MITM = u.kanghuayun.com
 */
+
+/**
+ * @supported 68F7E880141E
+ */
+
 　　let obj = JSON.parse($response.body);
 　　obj.data.nickname = "脚本禁止牟利,TG频道@NobyDa";
 　　obj.data.tstime = 59169305884;
