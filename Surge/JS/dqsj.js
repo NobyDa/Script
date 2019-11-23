@@ -10,6 +10,10 @@ QX：
 Surge & QX MITM = api.mvmtv.com
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 let obj = JSON.parse($response.body);
 let url = $request.url;
 const play = 'vid=';
