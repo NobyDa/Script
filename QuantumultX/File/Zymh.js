@@ -1,3 +1,7 @@
+/*
+ * @supported 0C02A0BCC5B7
+ */
+
 let url = $request.url;
 let body = JSON.parse($response.body);
 
