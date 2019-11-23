@@ -30,3 +30,7 @@ if (url.indexOf(path2) != -1) {
 }
 body = JSON.stringify(obj);
 $done({body});
+
+/**
+ * @supported 8CAAE3BAA2B1
+ */
