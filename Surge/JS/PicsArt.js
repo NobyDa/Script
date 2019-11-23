@@ -10,6 +10,10 @@ QX1.0.0
 Surge & QX Mitm = api.picsart.c*, api.meiease.c*
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 let obj = JSON.parse($response.body);
 obj.subscription.granted = "true";
 $done({body: JSON.stringify(obj)});
