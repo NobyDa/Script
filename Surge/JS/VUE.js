@@ -10,5 +10,9 @@ QX 1.0.0:
 Surge & QX Mitm = api.vuevideo.net
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 body = $response.body.replace(/\"isPremium\":false/, "\"isPremium\":true").replace(/\"valid\":false/, "\"valid\":true")
 $done({body});
