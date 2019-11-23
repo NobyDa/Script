@@ -11,6 +11,10 @@ https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body h
 Surge & QX MITM = api.termius.com
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 let obj=JSON.parse($response.body)
 obj.account["pro_mode"] = true;
 obj.account["plan_type"] = "Premium";
