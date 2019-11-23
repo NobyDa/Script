@@ -10,6 +10,10 @@ http-response ^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad requires-body=1,m
 Surge & QX MITM = mp.weixin.qq.com,
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 var obj = JSON.parse($response.body);
 obj.advertisement_num = 0;
 obj.advertisement_info = [];
