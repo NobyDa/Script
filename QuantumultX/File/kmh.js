@@ -21,3 +21,7 @@ if (url.indexOf(path) != -1) {
 $done({body});
 
 // From HoGer
+
+/**
+ * @supported 8CAAE3BAA2B1
+ */
