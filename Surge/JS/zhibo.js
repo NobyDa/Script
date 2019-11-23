@@ -15,3 +15,7 @@ if (url.indexOf(cs) != -1) {
 obj.body.videoModel.fees = 1;
 }
 $done({body: JSON.stringify(obj)});
+
+/**
+ * @supported 8CAAE3BAA2B1
+ */
