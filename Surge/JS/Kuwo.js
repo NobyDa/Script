@@ -1,4 +1,8 @@
 /*
+ * @supported 0C02A0BCC5B7
+ */
+
+/*
 Regex: ^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice)
 
 MITM = vip1.kuwo.cn
