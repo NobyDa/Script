@@ -11,6 +11,10 @@ http-request ^https?:\/\/musicpay\.kuwo.cn\/music\.pay\?uid=\d+ script-path=http
 MITM = vip1.kuwo.cn
 */
 
+/**
+ * @supported 68F7E880141E
+ */
+
 var body = $response.body;
 var url = $request.url;
 var obj = JSON.parse(body);
