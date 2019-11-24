@@ -16,3 +16,7 @@ Surge & QX MITM = vip1.kuwo.cn
 
 let url = $request.url.replace(/uid=\d+/g, "uid=1");
 $done({url});
+
+/**
+ * @supported 8CAAE3BAA2B1
+ */
