@@ -2,8 +2,11 @@
 91 short video unlock vip
 app download link : http://i91.porn
 
-QX: 
+QX1.0.0: 
 ^https?:\/\/.+\.(my10api|(.*91.*))\.(com|tips|app|xyz)(:\d{2,5})?\/api.php$ url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/91.js
+
+Surge4.0:
+http-request ^https?:\/\/.+\.(my10api|(.*91.*))\.(com|tips|app|xyz)(:\d{2,5})?\/api.php$ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/91ShortVideo.js
 */
 
 var body = $response.body;
