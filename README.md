@@ -4,6 +4,8 @@
 2. unblockremote.js 最开始是在联萌群看见，原作者暂无出处，欢迎提醒更正。
 3. 亲测教程有效； 
 
+以下为具体教程：
+
 ### fork 本仓库
 `fork` https://github.com/limbopro/Script ；
 
