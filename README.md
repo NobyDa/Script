@@ -49,7 +49,7 @@ hostname = raw.githubusercontent.com, *.github.io, vsco.co, *.my10api.com, *goog
 
 ### 引用远程JS.conf
 
-1.复制`https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js.conf`链接， 2.进入Quantumult X，点击右下角`三菱按钮`，找到`Rewrite`模块-点击` 引用`，粘贴刚刚复制的链接；
+1.复制`https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js.conf`链接（或者你fork后的JS.conf也行）， 2.进入Quantumult X，点击右下角`三菱按钮`，找到`Rewrite`模块-点击` 引用`，粘贴刚刚复制的链接；
 
 以上。
 
