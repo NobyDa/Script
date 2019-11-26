@@ -74,6 +74,7 @@ hostname = raw.githubusercontent.com, *.github.io, vsco.co, *.my10api.com, *goog
 最后，进入 `Quantumult X` App，点击右下角`三菱按钮`，找到`Rewrite`模块，开启按钮，`MitM`模块，开启按钮；
 
 更多或帮助关注频道：https://t.me/limboprossr ；
+个人建议备份下 QuantumultX 1.0.3 基本上很完美了：[仅需三步，免费使用iMazing 轻松下载IPA （当前最新版本）/ 或安装IPA文件（旧版本）（以及解锁完整版本以备份你的整个iPhone）](https://limbopro.xyz/archives/imazing.html) ；
 
 以上。
 
