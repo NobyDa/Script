@@ -24,7 +24,7 @@ $done(body);
 2. 使用`WorkingCopy`App 将 fork 后的仓库同步到 `我的iPhone` - `Quantumult X` - `Scripts` - `NobyDa` 下；
 3. 不会使用`WorkingCopy`App? 参考示例：https://limbopro.xyz/archives/workingcopy.html#01.11.2019QX-1.0.2
 
-## 配置 rewrite_local
+### 配置 rewrite_local
 
 编辑QuantumultX 配置文件 ，找到 [rewrite_local]，并在 [rewrite_local] 添加：
 
