@@ -9,12 +9,14 @@
 ### fork 本仓库
 `fork` https://github.com/limbopro/Script ；
 
-*如果是很久之前就已经 fork 了的小伙伴，或者 fork 了 https://github.com/NobyDa/Script 且又不想学习 [Github进行fork后如何与原（上游仓库）仓库同步？](https://limbopro.xyz/archives/3856.html#fork后如何同步上游仓库新更新内容？) ，请务必参考：https://github.com/limbopro/Script 该仓库的内容结果，在你 Fork 后的仓库下新建 `unblockremote.js`，内容为：
+*如果是很久之前就已经 fork 了的小伙伴，或者 fork 了 https://github.com/NobyDa/Script 且又不想学习 [Github进行fork后如何与原（上游仓库）仓库同步？](https://limbopro.xyz/archives/3856.html#fork后如何同步上游仓库新更新内容？) ，请务必参考：https://github.com/limbopro/Script 该仓库的内容结果，在你 Fork 后的仓库下新建 `unblockremote.js`：
 
 ![unblockremote][1]
 
 
   [1]: https://raw.githubusercontent.com/limbopro/Script/master/unblockremote.png
+
+`unblockremote.js` 内容为：
 
 ```
 var body = $response.body;
