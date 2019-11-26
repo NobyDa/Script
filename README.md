@@ -37,7 +37,7 @@ $done(body);
 ### 使用WorkingCopy同步 fork 到本地
 1. 修改好 `unblockremote.js` 脚本文件后；
 2. 使用`WorkingCopy`App 将 fork 后的仓库同步到 `我的iPhone` - `Quantumult X` - `Scripts` - `NobyDa` 下；
-3. 不会使用`WorkingCopy`App? 参考示例：https://limbopro.xyz/archives/workingcopy.html#01.11.2019QX-1.0.2
+3. 不会使用`WorkingCopy`App? 参考示例：[使用Workingcopy 同步仓库到手机本地示例](https://limbopro.xyz/archives/workingcopy.html#一个需求)；
 
 ### 配置 rewrite_local
 
