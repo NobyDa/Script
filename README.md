@@ -55,9 +55,9 @@ hostname = raw.githubusercontent.com, *.github.io, vsco.co, *.my10api.com, *goog
 
 最后，进入 `Quantumult X` App，点击右下角`三菱按钮`，找到`Rewrite`模块，开启按钮，`MitM`模块，开启按钮；
 
-以上。
+更多或帮助关注频道：https://t.me/limboprossr ；
 
-更多或帮助关注频道：https://t.me/limboprossr
+以上。
 
 ## Quantumult X related Description：
 
