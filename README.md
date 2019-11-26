@@ -5,7 +5,7 @@
 3. 亲测教程有效； 
 
 ### fork 本仓库
-fork https://github.com/limbopro/Script；
+`fork` https://github.com/limbopro/Script ；
 
 ### 修改 unblockremote.js
 
