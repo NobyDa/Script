@@ -7,7 +7,13 @@
 以下为具体教程：
 
 ### fork 本仓库
-`fork` https://github.com/limbopro/Script ；
+`fork` https://github.com/limbopro/Script ，如果是很久之前已经 fork 了的小伙伴，又不想学习 [Github进行fork后如何与原（上游仓库）仓库同步？](https://limbopro.xyz/archives/3856.html#fork后如何同步上游仓库新更新内容？)，参考：https://github.com/limbopro/Script ，在 Fork 后的仓库下新建 `unblockremote.js`：
+
+```
+var body = $response.body;
+body = '\/*\n@supported 你的QuantumultX设备ID填这里\n*\/\n' + body;
+$done(body);
+```
 
 ### 修改 unblockremote.js
 
