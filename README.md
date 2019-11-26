@@ -51,7 +51,13 @@ hostname = raw.githubusercontent.com, *.github.io, vsco.co, *.my10api.com, *goog
 
 1.复制`https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js.conf`链接（或者你fork后的JS.conf也行）， 2.进入Quantumult X，点击右下角`三菱按钮`，找到`Rewrite`模块-点击` 引用`，粘贴刚刚复制的链接；
 
+### 开玩
+
+最后，进入 `Quantumult X` App，点击右下角`三菱按钮`，找到`Rewrite`模块，开启按钮，`MitM`模块，开启按钮；
+
 以上。
+
+更多或帮助关注频道：https://t.me/limboprossr
 
 ## Quantumult X related Description：
 
