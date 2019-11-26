@@ -41,7 +41,7 @@ $done(body);
 
 ### 配置 rewrite_local
 
-编辑QuantumultX 配置文件 ，找到 [rewrite_local]，并在 [rewrite_local] 添加：
+编辑QuantumultX 配置文件（进入 `Quantumult X` App，点击右下角`三菱按钮`，找到`配置文件`模块，点击`编辑`），找到 [rewrite_local]，并在 [rewrite_local] 添加：
 
 ```
 ^https:\/\/(raw.githubusercontent|\w+\.github)\.(com|io)\/.*\.js$ url script-response-body NobyDa/unblockremote.js
@@ -56,7 +56,7 @@ $done(body);
 
 ### 配置 hostname
 
-编辑QuantumultX 配置文件 ，找到 `hostname =`，并在 `hostname =` 后面添加：`raw.githubusercontent.com, *.github.io,`
+编辑QuantumultX 配置文件（进入 `Quantumult X` App，点击右下角`三菱按钮`，找到`配置文件`模块，点击`编辑`），找到 `hostname =`，并在 `hostname =` 后面添加：`raw.githubusercontent.com, *.github.io,`
 
 效果如下：
 
