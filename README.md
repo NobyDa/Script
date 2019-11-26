@@ -7,7 +7,7 @@
 以下为具体教程：
 
 ### fork 本仓库
-`fork` https://github.com/limbopro/Script ，如果是很久之前已经 fork 了的小伙伴，又不想学习 [Github进行fork后如何与原（上游仓库）仓库同步？](https://limbopro.xyz/archives/3856.html#fork后如何同步上游仓库新更新内容？)，参考：https://github.com/limbopro/Script ，在 Fork 后的仓库下新建 `unblockremote.js`：
+`fork` https://github.com/limbopro/Script ；如果是很久之前就已经 fork 了的小伙伴，又不想学习 [Github进行fork后如何与原（上游仓库）仓库同步？](https://limbopro.xyz/archives/3856.html#fork后如何同步上游仓库新更新内容？)，参考：https://github.com/limbopro/Script ，在 Fork 后的仓库下新建 `unblockremote.js`：
 
 ```
 var body = $response.body;
