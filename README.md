@@ -4,6 +4,9 @@
 2. unblockremote.js 最开始是在联萌群看见，原作者暂无出处，欢迎提醒更正。
 3. 亲测教程有效； 
 
+### fork 本仓库
+fork https://github.com/limbopro/Script；
+
 ### 修改 unblockremote.js
 
 1.进入 `fork` 后的`仓库`，找到并修改 `unblockremote.js` 脚本文件； 2.填写你的`设备ID`；（`设备ID`在哪？进入QuantumltX，点击右下角三菱按钮，点击右上角 `...` 更多按钮，滑至底部`关于`，即可找到设备ID）；
@@ -24,14 +27,14 @@ $done(body);
 编辑QuantumultX 配置文件 ，找到 [rewrite_local]，并在 [rewrite_local] 添加：
 
 ```
-^https:\/\/(raw.githubusercontent|\w+\.github)\.(com|io)\/.*\.js$ url script-response-body helpless-master/unblockremote.js
+^https:\/\/(raw.githubusercontent|\w+\.github)\.(com|io)\/.*\.js$ url script-response-body NobyDa/unblockremote.js
 ```
 
 添加后效果：
 
 ```
 [rewrite_local]
-^https:\/\/(raw.githubusercontent|\w+\.github)\.(com|io)\/.*\.js$ url script-response-body helpless-master/unblockremote.js
+^https:\/\/(raw.githubusercontent|\w+\.github)\.(com|io)\/.*\.js$ url script-response-body NobyDa/unblockremote.js
 ```
 
 ### 配置 hostname
