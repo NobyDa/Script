@@ -4,7 +4,7 @@
 ## 26.11.2019 更新
 本地，远程脚本均可用；
 
-[仓库](https://github.com/limbopro/Script)新增加 `unblockremote.js`，以简化 Quantumult 1.0.3 配置`设备ID`流程，最终使得  [rewrite_remote] `远程`引用`脚本配置文件`可用：(`https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js.conf`)；
+[仓库](https://github.com/limbopro/Script)新增加 `unblockremote.js`，以简化 QuantumultX 1.0.3 配置`设备ID`流程，最终使得  [rewrite_remote] `远程`引用`脚本配置文件`可用：(`https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js.conf`)；
 
 `unblockremote.js` 脚本内容最开始是在联萌群看见，原作者暂无出处，欢迎提醒更正。
 
