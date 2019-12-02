@@ -25,6 +25,7 @@ if (url.indexOf(path1) != -1){
 	body = JSON.stringify(obj);
 }
 if (url.indexOf(path2) != -1){
+	url=url+"?playindex=1"
 	let obj = JSON.parse(body); 
 	obj.retcode = "0";
 	obj.data.lastplayindex = "1";
@@ -36,3 +37,5 @@ if (url.indexOf(path2) != -1){
 }
 
 $done({body});
+$done({url});
+//by meeta
