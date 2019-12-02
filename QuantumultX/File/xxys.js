@@ -28,11 +28,11 @@ if (url.indexOf(path1) != -1){
 if (url.indexOf(path2) != -1){
 	let obj = JSON.parse(body); 
 	obj.retcode = "0";
-	obj.data.playindex = "1";
-	if(obj.data.hasOwnProperty("httpurl_preview")){
-		var playurl = obj.data["httpurl_preview"];
-		obj.data["httpurl"] = playurl;
-	};
+	obj.data.lastplayindex = "1";
+//	if(obj.data.hasOwnProperty("httpurl_preview")){
+//		var playurl = obj.data["httpurl_preview"];
+//		obj.data["httpurl"] = playurl;
+//	};
 	body = JSON.stringify(obj);
 }
 
