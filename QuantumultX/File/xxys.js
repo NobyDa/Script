@@ -37,5 +37,4 @@ if (url.indexOf(path2) != -1){
 }
 
 $done({body});
-//$done({url});
 //by meeta
