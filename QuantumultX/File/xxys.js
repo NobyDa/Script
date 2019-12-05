@@ -11,6 +11,7 @@ const path1 = "/ucp/index";
 const path2 = "/vod/reqplay/";
 var body = $response.body;
 var url = $request.url;
+var header= $request.header;
 if (url.indexOf(path1) != -1){
 	let obj = JSON.parse(body);
 	obj.data.uinfo["down_daily_remainders"] = "666";
@@ -34,6 +35,9 @@ if (url.indexOf(path2) != -1){
 	};
 	body = JSON.stringify(obj);
 }
-
+let ob11 = JSON.parse(header);
+header.Cookie="xxx";
+header=JSON.stringify(ob11);
+$done({header});
 $done({body});
 
