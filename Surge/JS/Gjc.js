@@ -5,10 +5,10 @@ if ($response.body) {
         return body.replace(new RegExp(find, 'g'), replace);
     }
 
-    var key = ['华为', '荣耀', '鸿蒙', '任正非', 'HUAWEI'];
+    var key = ['华为', 'vmail', '%E5%8D%8E%E4%B8%BA', '荣耀', '鸿蒙', '任正非', 'emui', 'HUAWEI'];
 
     key.forEach(function(k) {
-        body = replaceAll(body, k, 'XXX');
+        body = replaceAll(body, k, '');
     });
 
     $done({
