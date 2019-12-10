@@ -2,7 +2,9 @@
 
 * **Script remote resources and subscriptions only apply to QX v1.0.0(120). If the version is higher than v1.0.2 (136), you need to point to the local script path yourself.**
 
-* Because the latest version 1.0.2 has limited the "remote resource" of the script, there will be an error in adding the subscription.
+* **It is currently not possible to get QX1.0.0 (120) via sniffing packet capture because the dev has withdrawn**
+
+* Because of the latest QX1.0.3 version, script remote resources need to annotate the device ID, so remote subscriptions for this project are not universal.
 
 ### The difference between the versions :
 
@@ -12,7 +14,20 @@
 
 * Store version QX1.0.2 (136) Relaxed certain keyword restrictions, but limited script remote references (script subscriptions), support for v2 and support for http and support AlwaysOn
 
-* **It is currently not possible to get QX1.0.0 (120) via sniffing packet capture because the dev has withdrawn**
+* Store version QX1.0.3 (155) Removed keyword restrictions and restored script remote references. However, the content in the remote script needs to be annotated with the device ID before it can be executed.
+
+A simple example:
+
+```ini
+/**
+ * @supported 23AD6B11CD4B
+ */
+
+let obj = JSON.parse($response.body)
+obj["example"] = 0;
+$done({body:JSON.stringify(obj)})
+```
+The above random generated device ID can be found at the bottom of Quantumult X additional menu, and it may change after system restore.
 
 ---
 
