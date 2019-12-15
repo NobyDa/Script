@@ -1,4 +1,4 @@
-#Update 2019.11.21 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2019.12.13 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,admaster.com,REJECT
 DOMAIN-SUFFIX,0z5jn.cn,REJECT
 DOMAIN-SUFFIX,114so.cn,REJECT
@@ -1276,7 +1276,6 @@ DOMAIN-SUFFIX,optimizely.com,REJECT
 DOMAIN-SUFFIX,umsns.com,REJECT
 DOMAIN-SUFFIX,x.jd.com,REJECT
 DOMAIN,log.tu.baixing.com,REJECT
-DOMAIN-SUFFIX,sf3-ttcdn-tos.pstatp.com,REJECT
 DOMAIN-SUFFIX,ads.api.vungle.com,REJECT
 DOMAIN-SUFFIX,ads.wakamoment.tk,REJECT
 DOMAIN,wa.gtimg.com,REJECT
