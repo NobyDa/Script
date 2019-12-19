@@ -14,7 +14,7 @@ Update 2019.12.19 20:50 Beta v47
 
 */
 
-var KEY = "---";
+var KEY = '---';
 
 function JingDongBean() {
   var JDBUrl = {
