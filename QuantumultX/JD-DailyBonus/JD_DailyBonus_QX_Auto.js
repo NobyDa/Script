@@ -10,7 +10,7 @@ If reprinted, please indicate the source. My TG channel @NobyDa
 Update 2019.12.19 20:50 Beta v47
 
 [task_local]
-0 9 * * * JD_DailyBonus_QX.js
+0 9 * * * JD_DailyBonus_QX_Auto.js
 
 */
 
