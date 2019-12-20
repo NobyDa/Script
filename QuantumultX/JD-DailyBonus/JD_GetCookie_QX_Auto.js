@@ -5,7 +5,7 @@ Need to manually log in to the https://bean.m.jd.com checkin to get cookie. When
 Note that the following config is only a local script configuration, please put this script into Quantumult X/Script
 
 [rewrite_local]
-https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBeanIndex url script-response-body JD_GetCookie_QX.js
+https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBeanIndex url script-response-body JD_GetCookie_QX_Auto.js
 
 MITM = api.m.jd.com
 */
