@@ -1,3 +1,4 @@
+
 /*
 91 short video unlock vip
 app download link : http://i91.porn
@@ -27,4 +28,3 @@ if (obj.data.match(/^[A-Z0-9]{1000,20000}$/)) {
   }
 }
 
- // From NobyDa, Welcome to focus on my TG channel @NobyDa

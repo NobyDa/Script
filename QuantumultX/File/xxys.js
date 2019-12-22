@@ -3,8 +3,12 @@ XiaoXiaoYingShi unlock Vip
 QX:
 https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index|getGlobalData) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/xxys.js
 Surge:
+<<<<<<< HEAD
 http-response https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index|getGlobalData) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/xxys.js
 
+=======
+http-response https:\/\/ios\.xiaoxiaoapps\.com\/(vod\/reqplay\/|ucp/index) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/xxys.js
+>>>>>>> 569ec49f71a0af56a6922cf2f85f1b0137f0cb19
 MITM = ios.xiaoxiaoapps.com
 */
 
@@ -34,3 +38,4 @@ delete obj.data.adrows
 delete obj.data.adgroups
 }
 $done({body: JSON.stringify(obj)});
+
