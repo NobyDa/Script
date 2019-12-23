@@ -7,7 +7,7 @@ Daily bonus script will be performed every day at 9 am. You can modify the execu
 Fill in your cookie at the following KEY. Or use another script to get cookies
 
 If reprinted, please indicate the source. My TG channel @NobyDa
-Update 2019.12.19 20:50 Beta v47
+Update 2019.12.23 16:50 Beta v48
 
 [task_local]
 0 9 * * * JD_DailyBonus_QX_Auto.js
@@ -39,7 +39,7 @@ function JingDongBean() {
           console.log("京东商城-京豆签到成功response: \n" + response.body)
           if (response.body.match(/dailyAward/)) {
             if (cc.data.dailyAward.beanAward.beanCount) {
-              var JDBean = "京东商城-京豆: 签到成功, 明细: 获得" + cc.data.dailyAward.beanAward.beanCount + "京豆 🐶" + "\n"
+              var JDBean = "京东商城-京豆: 签到成功, 明细: " + cc.data.dailyAward.beanAward.beanCount + "京豆 🐶" + "\n"
               JingDongSteel(JDBean)
             } else {
               var JDBean = "京东商城-京豆: 签到成功, 明细: 显示接口待更新 ⚠️" + "\n"
@@ -48,7 +48,7 @@ function JingDongBean() {
           } else {
             if (response.body.match(/continuityAward/)) {
               if (cc.data.continuityAward.beanAward.beanCount) {
-                var JDBean = "京东商城-京豆: 签到成功, 明细: 获得" + cc.data.continuityAward.beanAward.beanCount + "京豆 🐶" + "\n"
+                var JDBean = "京东商城-京豆: 签到成功, 明细: " + cc.data.continuityAward.beanAward.beanCount + "京豆 🐶" + "\n"
                 JingDongSteel(JDBean)
               } else {
                 var JDBean = "京东商城-京豆: 签到成功, 明细: 显示接口待更新 ⚠️" + "\n"
@@ -58,7 +58,7 @@ function JingDongBean() {
               if (response.body.match(/新人签到/)) {
                 var regex = /beanCount\":\"(\d+)\".+今天/;
                 var quantity = regex.exec(response.body)[1];
-                var JDBean = "京东商城-京豆: 签到成功, 明细: 获得" + quantity + "京豆 🐶" + "\n"
+                var JDBean = "京东商城-京豆: 签到成功, 明细: " + quantity + "京豆 🐶" + "\n"
                 JingDongSteel(JDBean)
               } else {
                 var JDBean = "京东商城-京豆: 需修正‼️日志发至TG:@NobyDa_bot" + "\n"
@@ -79,7 +79,7 @@ function JingDongBean() {
       }
     }
   }, reason => {
-    //$notify("京东签到错误‼️‼️", "", reason.error);
+    $notify("京东签到错误‼️‼️", "", reason.error);
     var JDBean = "京东商城-京豆: 签到接口请求失败 ‼️‼️" + "\n"
     JingDongSteel(JDBean)
   });
@@ -87,39 +87,39 @@ function JingDongBean() {
 
 function JingDongSteel(JDBean) {
   var JDSUrl = {
-    url: 'https://coin.jd.com/m/sign/userSign.do',
-    method: "POST",
+    url: 'https://lottery.jd.com/award/lottery?actKey=RJn2y2',
+    method: "GET",
     headers: {
       "Cookie": KEY,
     }
   };
 
   $task.fetch(JDSUrl).then(response => {
-    var cc = JSON.parse(response.body)
-    if (cc.resultCode == "0000") {
-      console.log("京东商城-钢镚签到成功response: \n" + response.body)
-      if (cc.data.reward.volumn) {
-        var JDSteel = "京东商城-钢镚: 签到成功, 明细: 获得" + cc.data.reward.volumn + "钢镚 💰" + "\n"
-        JingRongBean(JDBean, JDSteel)
-      } else {
-        var JDSteel = "京东商城-钢镚: 签到成功, 明细: 显示接口待更新 ⚠️" + "\n"
-        JingRongBean(JDBean, JDSteel)
-      }
-    } else {
-      console.log("京东商城-钢镚签到失败response: \n" + response.body)
-      if (cc.resultCode == "0015") {
-        var JDSteel = "京东商城-钢镚: 签到失败, 原因: 已签过 ⚠️" + "\n"
-        JingRongBean(JDBean, JDSteel)
-      } else {
-        if (cc.resultCode == "1000") {
-          var JDSteel = "京东商城-钢镚: 签到成功, 明细: 无奖励 🐶" + "\n"
+      var cc = JSON.parse(response.body)
+      if (cc.code == "0000") {
+        console.log("京东商城-钢镚签到成功response: \n" + response.body)
+        if (cc.data.volumn) {
+          var JDSteel = "京东商城-钢镚: 签到成功, 明细: " + cc.data.volumn + "钢镚 💰" + "\n"
           JingRongBean(JDBean, JDSteel)
         } else {
-          var JDSteel = "京东商城-钢镚: 需修正‼️日志发至TG:@NobyDa_bot" + "\n"
+          var JDSteel = "京东商城-钢镚: 签到成功, 明细: 显示接口待更新 ⚠️" + "\n"
           JingRongBean(JDBean, JDSteel)
+          }
+      } else {
+        console.log("京东商城-钢镚签到失败response: \n" + response.body)
+        if (cc.code == "1000") {
+          var JDSteel = "京东商城-钢镚: 签到失败, 原因: 已签过 ⚠️" + "\n"
+          JingRongBean(JDBean, JDSteel)
+        } else {
+          if (cc.code == "3001") {
+            var JDSteel = "京东商城-钢镚: 签到失败, 原因: 活动已结束 ⚠️" + "\n"
+            JingRongBean(JDBean, JDSteel)
+          } else {
+            var JDSteel = "京东商城-钢镚: 需修正‼️日志发至TG:@NobyDa_bot" + "\n"
+            JingRongBean(JDBean, JDSteel)
+          }
         }
       }
-    }
   }, reason => {
     var JDSteel = "京东商城-钢镚: 签到接口请求失败 ‼️‼️" + "\n"
     //$notify("Title", "Subtitle", reason.error)
@@ -142,7 +142,7 @@ function JingRongBean(JDBean, JDSteel) {
        if (cc.resultData.resultCode == "00000") {
         console.log("京东金融-京豆签到成功response: \n" + response.body)
         if (cc.resultData.data.rewardAmount != "0") {
-          var JRBean = "京东金融-京豆: 签到成功, 明细: 获得" + cc.resultData.data.rewardAmount + "京豆 🐶" + "\n"
+          var JRBean = "京东金融-京豆: 签到成功, 明细: " + cc.resultData.data.rewardAmount + "京豆 🐶" + "\n"
           JingRongSteel(JDBean, JDSteel, JRBean)
         } else {
           var JRBean = "京东金融-京豆: 签到成功, 明细: 无奖励 🐶" + "\n"
@@ -187,10 +187,10 @@ function JingRongSteel(JDBean, JDSteel, JRBean) {
         if (cc.resultData.resBusiData.actualTotalRewardsValue) {
           var leng = "" + cc.resultData.resBusiData.actualTotalRewardsValue
           if (leng.length == 1) {
-            var JRSteel = "京东金融-钢镚: 签到成功, 明细: 获得" + "0.0" + cc.resultData.resBusiData.actualTotalRewardsValue + "钢镚 💰" + "\n"
+            var JRSteel = "京东金融-钢镚: 签到成功, 明细: " + "0.0" + cc.resultData.resBusiData.actualTotalRewardsValue + "钢镚 💰" + "\n"
             JingDongShake(JDBean, JDSteel, JRBean, JRSteel)
           } else {
-            var JRSteel = "京东金融-钢镚: 签到成功, 明细: 获得" + "0." + cc.resultData.resBusiData.actualTotalRewardsValue + "钢镚 💰" + "\n"
+            var JRSteel = "京东金融-钢镚: 签到成功, 明细: " + "0." + cc.resultData.resBusiData.actualTotalRewardsValue + "钢镚 💰" + "\n"
             JingDongShake(JDBean, JDSteel, JRBean, JRSteel)
           }
         } else {
@@ -228,7 +228,7 @@ function JingDongShake(JDBean, JDSteel, JRBean, JRSteel) {
       if (response.body.match(/prize/)) {
         console.log("京东商城-摇一摇签到成功response: \n" + response.body)
         if (cc.data.prizeBean) {
-          var JDShake = "京东商城-摇摇: 签到成功, 明细: 获得" + cc.data.prizeBean.count + "京豆 🐶"
+          var JDShake = "京东商城-摇摇: 签到成功, 明细: " + cc.data.prizeBean.count + "京豆 🐶"
           JRDoubleSign(JDBean, JDSteel, JRBean, JRSteel, JDShake)
         } else {
           if (cc.data.prizeCoupon) {
@@ -271,7 +271,7 @@ function JRDoubleSign(JDBean, JDSteel, JRBean, JRSteel, JDShake) {
         if (response.body.match(/京豆X/)) {
           console.log("京东金融-双签签到成功response: \n" + response.body)
           if (cc.resultData.data.businessData.businessData.awardListVo[0].count) {
-            var JRDSign = "京东金融-双签: 签到成功, 明细: 获得" + cc.resultData.data.businessData.businessData.awardListVo[0].count + "京豆 🐶" + "\n"
+            var JRDSign = "京东金融-双签: 签到成功, 明细: " + cc.resultData.data.businessData.businessData.awardListVo[0].count + "京豆 🐶" + "\n"
             notice(JDBean, JDSteel, JRBean, JRSteel, JDShake, JRDSign)
           } else {
             var JRDSign = "京东金融-双签: 签到成功, 明细: 显示接口待更新 ⚠️" + "\n"
