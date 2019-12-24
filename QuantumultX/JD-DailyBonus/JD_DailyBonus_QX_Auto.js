@@ -4,17 +4,17 @@ JingDong bonus six in one.
 Description :
 Please put this script in your local path
 Daily bonus script will be performed every day at 9 am. You can modify the execution time.
-Fill in your cookie at the following KEY. Or go to TG channel @NobyDa for a shortcut
+Fill in your cookie at the following KEY. Or use another script to get cookies
 
 If reprinted, please indicate the source. My TG channel @NobyDa
 Update 2019.12.23 16:50 Beta v48
 
 [task_local]
-0 9 * * * JD_DailyBonus_QX.js
+0 9 * * * JD_DailyBonus_QX_Auto.js
 
 */
 
-var KEY = '---';
+var KEY = $prefs.valueForKey("CookieJD");
 
 function JingDongBean() {
   var JDBUrl = {
