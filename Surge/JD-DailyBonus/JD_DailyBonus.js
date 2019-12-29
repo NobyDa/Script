@@ -241,8 +241,13 @@ function JingRongSteel(JDBean, JDSteel, JRBean) {
             var JRSteel = "京东金融-钢镚: 签到失败, 原因: 已签过 ⚠️" + "\n"
             JingDongShake(JDBean, JDSteel, JRBean, JRSteel)
           } else {
+            if (data.match(/未实名/)) {
+              var JRSteel = "京东金融-钢镚: 签到失败, 原因: 账号未实名 ⚠️" + "\n"
+              JingDongShake(JDBean, JDSteel, JRBean, JRSteel)
+            } else {
             var JRSteel = "京东金融-钢镚: 需修正‼️日志发至TG:@NobyDa_bot" + "\n"
             JingDongShake(JDBean, JDSteel, JRBean, JRSteel)
+            }
           }
         }
       }
