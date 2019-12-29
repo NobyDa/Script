@@ -15,7 +15,7 @@ script will be performed every day at 9 am. You can modify the execution time. a
 
 [Script]
 # iQIYI Daily bonus script
-cron "0 8 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/iQIYI-DailyBonus/iQIYI_DailyBonus.js
+cron "0 9 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/iQIYI-DailyBonus/iQIYI_DailyBonus.js
 
 # Get Cookie
 http-request https:\/\/passport\.iqiyi\.com\/apis\/user\/info\.action.*authcookie script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/iQIYI-DailyBonus/iQIYI_GetCookie.js
