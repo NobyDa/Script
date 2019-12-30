@@ -30,7 +30,7 @@ var WAPJ = $request.headers["Cookie"];
 if (WAPJ) {
   if ($prefs.valueForKey("CookieWA") != undefined) {
     if ($prefs.valueForKey("CookieWA") != WAPJ) {
-      var cookie = $prefs.setValueForKey(WAPJ, "CookieQY");
+      var cookie = $prefs.setValueForKey(WAPJ, "CookieWA");
       if (!cookie) {
         $notify("更新吾爱破解签到Cookie失败‼️", "", "")
       } else {
