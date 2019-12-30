@@ -1,7 +1,7 @@
 /*
 iQIYI Checkin Get Cookie.
 
-Update 2019.12.28 21:30
+Update 2019.12.31 0:30
 
 About the author:
 If reproduced, indicate the source
@@ -16,9 +16,9 @@ Note that the following config is only a local script configuration, please put 
 
 [rewrite_local]
 # Get iQIYI cookie
-https:\/\/passport\.iqiyi\.com\/apis\/user\/info\.action.*authcookie url script-response-body iQIYI_GetCookie_QX.js
+https?:\/\/.*\.iqiyi\.com\/.*authcookie= url script-response-body iQIYI_GetCookie_QX.js
 
-# MITM = passport.iqiyi.com
+# MITM = *.iqiyi.com
 
 [task_local]
 0 9 * * * iQIYI_DailyBonus_QX.js

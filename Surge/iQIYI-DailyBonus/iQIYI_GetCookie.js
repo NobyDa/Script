@@ -1,7 +1,7 @@
 /*
 iQIYI Daily bonus script
 
-Update 2019.12.29 15:30
+Update 2019.12.31 0:30
 
 About the author:
 If reproduced, indicate the source
@@ -18,9 +18,9 @@ script will be performed every day at 9 am. You can modify the execution time. a
 cron "0 9 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/iQIYI-DailyBonus/iQIYI_DailyBonus.js
 
 # Get Cookie
-http-request https:\/\/passport\.iqiyi\.com\/apis\/user\/info\.action.*authcookie script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/iQIYI-DailyBonus/iQIYI_GetCookie.js
+http-request https?:\/\/.*\.iqiyi\.com\/.*authcookie= script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/iQIYI-DailyBonus/iQIYI_GetCookie.js
 
-# MITM = passport.iqiyi.com
+# MITM = *.iqiyi.com
 */
 
 var regex = /authcookie=([A-Za-z0-9]+)/;
