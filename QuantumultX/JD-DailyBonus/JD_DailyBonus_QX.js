@@ -87,45 +87,8 @@ function JingDongBean() {
 
 function JingDongSteel(JDBean) {
   setTimeout(function() {
-    var JDSUrl = {
-      url: 'https://lottery.jd.com/award/lottery?actKey=RJn2y2',
-      method: "GET",
-      headers: {
-        "Cookie": KEY,
-      }
-    };
-
-    $task.fetch(JDSUrl).then(response => {
-      var cc = JSON.parse(response.body)
-      if (cc.code == "0000") {
-        console.log("京东商城-钢镚签到成功response: \n" + response.body)
-        if (cc.data.volumn) {
-          var JDSteel = "京东商城-钢镚: 签到成功, 明细: " + cc.data.volumn + "钢镚 💰" + "\n"
-          JingRongBean(JDBean, JDSteel)
-        } else {
-          var JDSteel = "京东商城-钢镚: 签到成功, 明细: 显示接口待更新 ⚠️" + "\n"
-          JingRongBean(JDBean, JDSteel)
-        }
-      } else {
-        console.log("京东商城-钢镚签到失败response: \n" + response.body)
-        if (cc.code == "1000") {
-          var JDSteel = "京东商城-钢镚: 签到失败, 原因: 已签过 ⚠️" + "\n"
-          JingRongBean(JDBean, JDSteel)
-        } else {
-          if (cc.code == "3001") {
-            var JDSteel = "京东商城-钢镚: 签到失败, 原因: 活动已结束 ⚠️" + "\n"
-            JingRongBean(JDBean, JDSteel)
-          } else {
-            var JDSteel = "京东商城-钢镚: 需修正‼️日志发至TG:@NobyDa_bot" + "\n"
-            JingRongBean(JDBean, JDSteel)
-          }
-        }
-      }
-    }, reason => {
-      var JDSteel = "京东商城-钢镚: 签到接口请求失败 ‼️‼️" + "\n"
-      $notify("京东商城-钢镚-请求失败原因:", "", reason.error)
-      JingRongBean(JDBean, JDSteel)
-    });
+    //因该签到活动已结束
+    JingRongBean(JDBean, null)
   }, 700)
 }
 
@@ -353,7 +316,7 @@ function notice(JDBean, JDSteel, JRBean, JRSteel, JDShake, JRDSign) {
   //var month = date.getMonth() + 1
   //var integrate = JDBean + JRBean + JDSteel + JRSteel + JRDSign + JDShake
   //$notify("京东商城&京东金融", month + "月" + date.getDate() + "日 签到状态:", integrate)
-  $notify(JRDSign, JDBean, JRBean + JDSteel + JRSteel + JDShake)
+  $notify(JRDSign, JDBean, JRBean + JRSteel + JDShake)
 }
 
 JingDongBean()
