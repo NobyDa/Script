@@ -17,7 +17,6 @@ DOMAIN-SUFFIX,cupid.iqiyi.com,REJECT
 DOMAIN-SUFFIX,emoticon.sns.iqiyi.com,REJECT
 DOMAIN-SUFFIX,game.pps.tv,REJECT
 DOMAIN-SUFFIX,gamecenter.iqiyi.com,REJECT
-DOMAIN-SUFFIX,hotchat-im.iqiyi.com,REJECT
 DOMAIN-SUFFIX,mbdlog.iqiyi.com,REJECT
 DOMAIN-SUFFIX,msg.iqiyi.com,REJECT
 DOMAIN-SUFFIX,msg.video.qiyi.com,REJECT

@@ -90,45 +90,8 @@ function JingDongBean() {
 
 function JingDongSteel(JDBean) {
   setTimeout(function() {
-    var JDSUrl = {
-      url: 'https://lottery.jd.com/award/lottery?actKey=RJn2y2',
-      headers: {
-        Cookie: $persistentStore.read("CookieJD"),
-      }
-    };
-
-    $httpClient.get(JDSUrl, function(error, response, data) {
-      if (error) {
-        var JDSteel = "京东商城-钢镚: 签到接口请求失败 ‼️‼️" + "\n"
-        JingRongBean(JDBean, JDSteel)
-      } else {
-        var cc = JSON.parse(data)
-        if (cc.code == "0000") {
-          console.log("京东商城-钢镚签到成功response: \n" + data)
-          if (cc.data.volumn) {
-            var JDSteel = "京东商城-钢镚: 签到成功, 明细: " + cc.data.volumn + "钢镚 💰" + "\n"
-            JingRongBean(JDBean, JDSteel)
-          } else {
-            var JDSteel = "京东商城-钢镚: 签到成功, 明细: 显示接口待更新 ⚠️" + "\n"
-            JingRongBean(JDBean, JDSteel)
-          }
-        } else {
-          console.log("京东商城-钢镚签到失败response: \n" + data)
-          if (cc.code == "1000") {
-            var JDSteel = "京东商城-钢镚: 签到失败, 原因: 已签过 ⚠️" + "\n"
-            JingRongBean(JDBean, JDSteel)
-          } else {
-            if (cc.code == "3001") {
-              var JDSteel = "京东商城-钢镚: 签到失败, 原因: 活动已结束 ⚠️" + "\n"
-              JingRongBean(JDBean, JDSteel)
-            } else {
-              var JDSteel = "京东商城-钢镚: 需修正‼️日志发至TG:@NobyDa_bot" + "\n"
-              JingRongBean(JDBean, JDSteel)
-            }
-          }
-        }
-      }
-    })
+    //因该签到活动已结束
+    JingRongBean(JDBean, null)
   }, 700)
 }
 
@@ -241,8 +204,13 @@ function JingRongSteel(JDBean, JDSteel, JRBean) {
             var JRSteel = "京东金融-钢镚: 签到失败, 原因: 已签过 ⚠️" + "\n"
             JingDongShake(JDBean, JDSteel, JRBean, JRSteel)
           } else {
+            if (data.match(/未实名/)) {
+              var JRSteel = "京东金融-钢镚: 签到失败, 原因: 账号未实名 ⚠️" + "\n"
+              JingDongShake(JDBean, JDSteel, JRBean, JRSteel)
+            } else {
             var JRSteel = "京东金融-钢镚: 需修正‼️日志发至TG:@NobyDa_bot" + "\n"
             JingDongShake(JDBean, JDSteel, JRBean, JRSteel)
+            }
           }
         }
       }
@@ -354,7 +322,7 @@ function notice(JDBean, JDSteel, JRBean, JRSteel, JDShake, JRDSign) {
   //var month = date.getMonth() + 1
   //var integrate = JDBean + JRBean + JDSteel + JRSteel + JRDSign + JDShake
   //$notification.post("京东商城&京东金融", month + "月" + date.getDate() + "日 签到状态:", integrate)
-  $notification.post(JRDSign, JDBean, JRBean + JDSteel + JRSteel + JDShake)
+  $notification.post(JRDSign, JDBean, JRBean + JRSteel + JDShake)
 }
 
 JingDongBean()
