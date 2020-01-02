@@ -1,0 +1,11 @@
+USER-AGENT,AppStore*
+USER-AGENT,com.apple.appstored*
+USER-AGENT,TestFlight*
+DOMAIN-SUFFIX,apple.com
+DOMAIN-SUFFIX,icloud.com
+DOMAIN-SUFFIX,itunes.com
+DOMAIN-SUFFIX,me.com
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN,reserve-prime.apple.com
+DOMAIN,guzzoni.apple.com
+DOMAIN-SUFFIX,cdn-apple.com
