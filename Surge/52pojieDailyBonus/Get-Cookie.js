@@ -1,6 +1,9 @@
 /*
 52pojie Forum get cookie
 
+Description :
+Need to manually log in to the https://www.52pojie.cn/home.php?mod=space checkin to get cookie. If you receive a cookie success notification, you can disable this script.
+
 Surge 4.0 : [Script]
 http-request https:\/\/www\.52pojie\.cn\/home\.php\? script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/52pojieDailyBonus/Get-Cookie.js
 
