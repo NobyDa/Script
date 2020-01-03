@@ -1,0 +1,10 @@
+DOMAIN-KEYWORD,evernote
+DOMAIN-KEYWORD,github
+DOMAIN-KEYWORD,phys
+DOMAIN-KEYWORD,cnbc
+DOMAIN-KEYWORD,yahoo
+DOMAIN-KEYWORD,washingtonpost
+DOMAIN-KEYWORD,nytimes
+# 运营商劫持
+DOMAIN-SUFFIX,ytimg.com
+DOMAIN-SUFFIX,yoyo.org
