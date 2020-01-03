@@ -1,0 +1,10 @@
+#jd
+URL-REGEX,api.m.jd.com/client.action\?functionId=start
+# ZhiHu
+URL-REGEX,https://www.zhihu.com/api/v4/mcn/
+URL-REGEX,https://api.zhihu.com/(ab|adx|fringe|drama|zst|commercial|ad-style-service|market/popover|search/(top|tab|preset)|.*(guide|recommendations|featured-comment-ad))
+AND,((USER-AGENT,osee2*), (NOT,((DOMAIN-SUFFIX,zhihu.com))), (NOT,((DOMAIN-SUFFIX,zhimg.com))))
+# BiliBili
+URL-REGEX,https://app.bilibili.com/x/v2/(splash|search/(defaultword|square))
+URL-REGEX,https://api.bilibili.com/x/v2/dm/advert
+AND,((USER-AGENT,bili*), (NOT,((DOMAIN-SUFFIX,bilibili.com))), (NOT,((DOMAIN-SUFFIX,hdslb.com))))
