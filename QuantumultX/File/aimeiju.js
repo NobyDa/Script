@@ -2,17 +2,17 @@
 爱美剧 unlock vip（官网：xmj.app）
 
 QX : 
-^https?:\/\/mjapp.\w+.com/index.php/app/ios/(vod\/show|(user|vod|topic)/index) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/aimeiju.js
+^https?:\/\/api.bjxkhc.com\/index\.php\/app\/ios\/(vod\/show|(user|vod|topic|type)\/index) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/aimeiju.js
 
 Surge4：
-http-response ^https?:\/\/mjapp.\w+.com/index.php/app/ios/(vod\/show|(user|vod|topic)/index) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/aimeiju.js
+http-response ^https?:\/\/api.bjxkhc.com\/index\.php\/app\/ios\/(vod\/show|(user|vod|topic|type)\/index) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/aimeiju.js
 
-hostname = mjapp.*.com
+hostname = api.bjxkhc.com
 
 #启动广告/弹窗
-^http(s):\/\/mjapp\.\w+\.com/index.php/app/ios/ads/index$ url reject-dict
-^http(s):\/\/mjapp\.\w+\.com/index.php/app/ios/ver/index_ios$ url reject
-^http(s):\/\/mjapp\.\w+\.com\/index\.php\/app\/ios\/pay\/ok$ url reject-dict
+^https?://api.bjxkhc.com/index.php/app/ios/ads/index url reject-dict
+^https?://api.bjxkhc.com/index.php/app/ios/ver/index_ios$ url reject
+^https?://api.bjxkhc.com/index.php/app/ios/pay/ok$ url reject-dict
 */
 var body = $response.body;
 var url = $request.url;
@@ -20,6 +20,7 @@ const user = "/index.php/app/ios/user/index"; //用户信息
 const show = "/index.php/app/ios/vod/show"; //视频播放页面
 const banner = "/index.php/app/ios/vod/index";//首页轮播广告
 const topic = "/index.php/app/ios/topic/index";//豆瓣热榜中间广告
+const type = "/index.php/app/ios/type/index"//综合专区，美剧专区中间广告
 
 if (url.indexOf(user) != -1){
   let obj = JSON.parse(body);
@@ -58,7 +59,7 @@ if (url.indexOf(banner) != -1) {
     body = JSON.stringify(obj);
 }
 
-if (url.indexOf(topic) != -1) {
+if (url.indexOf(topic) != -1||url.indexOf(type) != -1) {
     let obj = JSON.parse(body);
     let data = obj.data
     for (var i = data.length - 1 ; i >= 0 ; i--) {
@@ -70,7 +71,6 @@ if (url.indexOf(topic) != -1) {
     }
     body = JSON.stringify(obj);
 }
-
 $done({body});
 
 

@@ -1,7 +1,7 @@
 /*
 iQIYI Daily bonus script
 
-Update 2019.12.28 21:30
+Update 2020.1.2 17:00
 
 About the author:
 If reproduced, indicate the source
@@ -16,9 +16,9 @@ Note that the following config is only a local script configuration, please put 
 
 [rewrite_local]
 # Get iQIYI cookie
-https:\/\/passport\.iqiyi\.com\/apis\/user\/info\.action.*authcookie url script-response-body iQIYI_GetCookie_QX.js
+https?:\/\/.*\.iqiyi\.com\/.*authcookie= url script-response-body iQIYI_GetCookie_QX.js
 
-# MITM = passport.iqiyi.com
+# MITM = *.iqiyi.com
 
 [task_local]
 0 9 * * * iQIYI_DailyBonus_QX.js
@@ -34,9 +34,10 @@ $task.fetch(bonus).then(response => {
     if (obj.data.signInfo.code == "A00000") {
       console.log("success response: \n" + response.body);
       var status = obj.data.signInfo.msg;
-      var award = obj.data.signInfo.data.acquireGiftList[0];
+      var AwardName = obj.data.signInfo.data.rewards[0].name;
+      var quantity = obj.data.signInfo.data.rewards[0].value;
       var continued = obj.data.signInfo.data.continueSignDaysSum;
-      $notify("爱奇艺签到", "", status + "！获得" + award + ", 已连续签到" + continued + "天 🎉");
+      $notify("爱奇艺签到", "", status + "！获得" + AwardName + quantity + ", 已连续签到" + continued + "天 🎉");
     } else {
       console.log("failure response: \n" + response.body);
       $notify("爱奇艺签到", "", "失败, " + obj.data.signInfo.msg + "⚠️");
