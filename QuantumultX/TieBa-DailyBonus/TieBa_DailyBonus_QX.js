@@ -10,9 +10,9 @@ When TieBa app is opened, click "My", If notification gets cookie success, you c
 script will be performed every day at 9 am. You can modify the execution time.
 Note that the following config is only a local script configuration, please put both scripts into Quantumult X/Script, and the cookie script only works for TieBa apps in china apple store
 
-[rewrite_local]
-# Get TieBa cookie
-https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login url script-response-body TieBa_GetCookie_QX.js
+[rewrite_local] 
+# Get TieBa cookie. 【QX TF188+】:
+https?:\/\/c\.tieba\.baidu\.com\/c\/s\/login url script-request-header TieBa_GetCookie_QX.js
 
 # MITM = c.tieba.baidu.com
 
