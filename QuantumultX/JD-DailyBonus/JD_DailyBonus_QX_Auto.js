@@ -20,7 +20,8 @@ QX 1.0.5 :
 0 9 * * * JD_DailyBonus_QX_Auto.js
 
 [rewrite_local]
-https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBeanIndex url script-response-body JD_GetCookie_QX_Auto.js
+# Get JingDong cookie. 【QX TF188+】:
+https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBeanIndex url script-request-header JD_GetCookie_QX_Auto.js
 ~~~~~~~~~~~~~~~~
 QX or Surge MITM = api.m.jd.com
 ~~~~~~~~~~~~~~~~

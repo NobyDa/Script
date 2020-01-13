@@ -19,8 +19,8 @@ script will be performed every day at 9 am. You can modify the execution time.
 0 9 * * * 52pojie_DailyBonus_QX.js
 
 [rewrite_local]
-# Get Cookie
-https:\/\/www\.52pojie\.cn\/home\.php\?mod=space url script-response-body 52pojie_GetCookie_QX.js
+# Get cookie. 【QX TF188+】:
+https:\/\/www\.52pojie\.cn\/home\.php\?mod=space url script-request-header 52pojie_GetCookie_QX.js
 
 # MITM = www.52pojie.cn
 */

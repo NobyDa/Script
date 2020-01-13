@@ -15,8 +15,8 @@ script will be performed every day at 9 am. You can modify the execution time.
 Note that the following config is only a local script configuration, please put both scripts into Quantumult X/Script, and the cookie script only works for iQIYI apps in china apple store
 
 [rewrite_local]
-# Get iQIYI cookie
-https?:\/\/.*\.iqiyi\.com\/.*authcookie= url script-response-body iQIYI_GetCookie_QX.js
+# Get iQIYI cookie. 【QX TF188+】:
+https?:\/\/.*\.iqiyi\.com\/.*authcookie= url script-request-header iQIYI_GetCookie_QX.js
 
 # MITM = *.iqiyi.com
 
