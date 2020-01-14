@@ -1,12 +1,4 @@
-## Quantumult X related Description：
-
-* **Script remote resources and subscriptions only apply to QX v1.0.0(120). If the version is higher than v1.0.2 (136), you need to point to the local script path yourself.**
-
-* **It is currently not possible to get QX1.0.0 (120) via sniffing packet capture because the dev has withdrawn**
-
-* Because of the latest QX1.0.3 version, script remote resources need to annotate the device ID, so remote subscriptions for this project are not universal.
-
-### The difference between the versions :
+### Difference between Quantumult X versions :
 
 * Store version QX1.0.0 (120) JS function is unlimited, but does not support v2, does not support AlwaysOn
 
@@ -16,7 +8,9 @@
 
 * Store version QX1.0.3 (155) Removed keyword restrictions and restored script remote references. However, the content in the remote script needs to be annotated with the device ID before it can be executed.
 
-A simple example:
+* Store version QX1.0.4 (164) This version completely limits remote script resources, meaning that all scripts can only point to local paths.
+
+QX1.0.3 add device ID, a simple example:
 
 ```ini
 /**
@@ -31,7 +25,45 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 
 ---
 
-### Disclaimer：
+## File related instructions：
+
+### Surge：
+
+* **[AdRule.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list) （More than 8000 ad rules， integrate [lhie1](https://github.com/lhie1/Rules) and [ConnersHua](https://github.com/ConnersHua/Profiles) and added some advertising rules)**
+
+* **[AdRuleTest.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRuleTest.list) （More than 1300 ad rules，This rule is modified from [Scomper](https://github.com/scomper/Surge). Because the original author stopped maintenance, so take over the optimization and delete some normal rules, only for testing**)
+
+* **[AdRuleRegex.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRuleRegex.list) （More than 700 ad rewrite rules, integrate [lhie1](https://github.com/lhie1/Rules)、[ConnersHua](https://github.com/ConnersHua/Profiles)、[onewayticket255](https://github.com/onewayticket255/Surge-Script) and [Choler](https://github.com/Choler/Surge/tree/master/Ruleset).  You need to manually add the hostname of the second line in the file to Surge config file. and open MITM and trust the certificate)**
+
+* **[Download.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Download.list) (Integrate some BT, Thunder, download shunt rules)**
+
+* **Because [ConnersHua](https://github.com/ConnersHua/Profiles) ad rules are already included in this rule, you don't need to repeatedly add.**
+
+### Quantumult X：
+
+* **[AdRule.list](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/AdRule.list) （More than 7000 ad rules, This rule is modified from [lhie1](https://github.com/lhie1/Rules)，and delete [ConnersHua](https://github.com/ConnersHua/Profiles) duplicate)**
+
+* **[AdRuleTest.list](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/AdRuleTest.list)（More than 1300 ad rules，This rule is modified from [Scomper](https://github.com/scomper/Surge). Because the original author stopped maintenance, so take over the optimization and delete some normal rules, only for testing**)
+
+* **[Rewrite_lhie1.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Rewrite_lhie1.conf)（More than 400 ad rewrite rules, integrate [lhie1](https://github.com/lhie1/Rules)、[onewayticket255](https://github.com/onewayticket255/Surge-Script)、[Choler](https://github.com/Choler/Surge/tree/master/Ruleset), and delete [ConnersHua](https://github.com/ConnersHua/Profiles) duplicate，you need to open MITM and trust the certificate)**
+
+* **[Js.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js.conf) (Script subscription of Quantumult X 1.0.0)**
+
+* **[Js_local_WorkingCopy.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_local_WorkingCopy.conf) (Local script subscriptions that need to work with Working Copy apps, this subscription can solve the problem that remote subscription cannot be made above QX 1.0.4)**
+
+* **[Js_local_WorkingCopy_New.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_local_WorkingCopy_New.conf) (Local script subscriptions that need to work with Working Copy apps, This subscription is only available for QX 1.0.5(TF188) and above.)**
+
+* **Note !!! Note !!! Note !!! Unlike the Surge rule, the Quantumult X rule does not include the [ConnersHua](https://github.com/ConnersHua/Profiles) ad rules, you can add it yourself.**
+
+### Rule remarks :
+
+* **Most of these are Chinese advertising rules. overseas users may not applicable**
+* **These rules only include ads. Please choose REJECT for the policy**
+* **Self-use only, Update depend on mood, if you have any questions, please submit a Issues or pull request.**
+
+---
+
+## Disclaimer：
 
 * **Any unlocking and decryption analysis scripts involved in the Script project released by NobyDa are only used for resource sharing and learning research. Legality, accuracy, completeness, and validity cannot be guaranteed. Please judge according to the situation itself.**
 
@@ -46,4 +78,12 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 * You must completely remove the above from your computer or mobile phone within **24 hours** of downloading.
 
 * Anyone who views this project in any way or any script that uses the Script project directly or indirectly should read this statement carefully. And NobyDa reserves the right to change or supplement this disclaimer at any time. **Once you use and reproduce any related scripts or rules of the Script project, you are deemed to have accepted this disclaimer.**
+
+### Special thanks：
+* [@sazs34](https://github.com/sazs34)
+* [@lhie1](https://github.com/lhie1)
+* [@Scomper](https://github.com/scomper)
+* [@onewayticket255](https://github.com/onewayticket255)
+* [@Choler](https://github.com/Choler)
+* [@ConnersHua](https://github.com/ConnersHua)
 
