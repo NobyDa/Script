@@ -1,7 +1,7 @@
 /*
    感谢tg大佬 2333
    Surge 4.0:
-   http-response ^https:\/\/commerce-api\.faceu\.mobi\/commerce\/v1\/subscription\/user_info requires-body=1,script-path= https://raw.githubusercontent.com/velazquez111/Script/master/Surge/JS/ulike.js
+   http-response ^https:\/\/commerce-api\.faceu\.mobi\/commerce\/v1\/subscription\/user_info requires-body=1,script-path=https://raw.githubusercontent.com/velazquez111/Script/master/Surge/JS/ulike.js
 
 */
 let obj = JSON.parse($response.body);
