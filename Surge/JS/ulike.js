@@ -1,3 +1,4 @@
+var body = $response.body;
 let obj = JSON.parse($response.body);
 obj= {
 	“ret":"0",
@@ -13,6 +14,7 @@ obj= {
 		"subscribe_uid":"70851259049"
 		    }
 	}
-$done({body: JSON.stringify(obj)});
+body = JSON.stringify(obj);
+$done({body});
 
 
