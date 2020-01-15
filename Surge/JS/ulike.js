@@ -12,8 +12,7 @@ obj.data = [
 		"is_cancel_subscribe":false,
 		"uid":"4089778978429341",
 		"subscribe_uid":"70851259049"
-		    }
-	]
+		    }];
 body = JSON.stringify(obj);
 $done({body});
 
