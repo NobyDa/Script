@@ -51,7 +51,9 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 
 * **[Js_local_WorkingCopy.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_local_WorkingCopy.conf) (Local script subscriptions that need to work with Working Copy apps, this subscription can solve the problem that remote subscription cannot be made above QX 1.0.4)**
 
-* **[Js_local_WorkingCopy_New.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_local_WorkingCopy_New.conf) (Local script subscriptions that need to work with Working Copy apps, This subscription is only available for QX 1.0.5(TF188) and above.)**
+* **[Js_local_WorkingCopy_New.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_local_WorkingCopy_New.conf) (This subscription is only available for QX 1.0.5 (188+) and above. after the official release of QX1.0.5, this local subscription will be merged with "[Js_local_WorkingCopy.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_local_WorkingCopy.conf)")**
+
+* **[Js_local_WorkingCopy_Cookie.conf](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_local_WorkingCopy_Cookie.conf) (This local subscription is used to resolve the cookie acquisition of QX task scripts, only available for QX 1.0.5 (188+) and above, you can disable it manually after use to avoid meaningless MITM.)**
 
 * **Note !!! Note !!! Note !!! Unlike the Surge rule, the Quantumult X rule does not include the [ConnersHua](https://github.com/ConnersHua/Profiles) ad rules, you can add it yourself.**
 
