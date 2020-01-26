@@ -481,8 +481,8 @@ function notice(JDBean, JDturn, JRBean, JRSteel, JDShake, JRDSign, JRLottery) {
 }
 
 function GetCookie() {
+  var CookieName = "京东";
   if ($request.headers) {
-    var CookieName = "京东";
     var CookieKey = "CookieJD";
     var CookieValue = $request.headers['Cookie'];
     if ($nobyda.read(CookieKey) != (undefined || null)) {
