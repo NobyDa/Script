@@ -74,29 +74,35 @@ function checkin() {
 }
 
 function GetCookie() {
+  var CookieName = "B站漫画";
+  var CookieKey = "CookieBM";
+  var regex = /SESSDATA=.+?;/;
   if ($request.headers) {
-    var CookieName = "B站漫画";
-    var CookieKey = "CookieBM";
-    var CookieValue = $request.headers['Cookie'];
-    if ($nobyda.read(CookieKey) != (undefined || null)) {
-      if ($nobyda.read(CookieKey) != CookieValue) {
+    var header = $request.headers['Cookie'] ? $request.headers['Cookie'] : "";
+    if (header.indexOf("SESSDATA=") != -1) {
+      var CookieValue = regex.exec(header)[0];
+      if ($nobyda.read(CookieKey)) {
+        if ($nobyda.read(CookieKey) != CookieValue) {
+          var cookie = $nobyda.write(CookieValue, CookieKey);
+          if (!cookie) {
+            $nobyda.notify("更新" + CookieName + "Cookie失败‼️", "", "");
+          } else {
+            $nobyda.notify("更新" + CookieName + "Cookie成功 🎉", "", "");
+          }
+        }
+      } else {
         var cookie = $nobyda.write(CookieValue, CookieKey);
         if (!cookie) {
-          $nobyda.notify("更新" + CookieName + "Cookie失败‼️", "", "");
+          $nobyda.notify("首次写入" + CookieName + "Cookie失败‼️", "", "");
         } else {
-          $nobyda.notify("更新" + CookieName + "Cookie成功 🎉", "", "");
+          $nobyda.notify("首次写入" + CookieName + "Cookie成功 🎉", "", "");
         }
       }
     } else {
-      var cookie = $nobyda.write(CookieValue, CookieKey);
-      if (!cookie) {
-        $nobyda.notify("首次写入" + CookieName + "Cookie失败‼️", "", "");
-      } else {
-        $nobyda.notify("首次写入" + CookieName + "Cookie成功 🎉", "", "");
-      }
+      $nobyda.notify("写入" + CookieName + "Cookie失败‼️", "", "Cookie关键值缺失");
     }
   } else {
-    $nobyda.notify("写入" + CookieName + "Cookie失败‼️", "", "配置错误, 无法读取请求头, ");
+    $nobyda.notify("写入" + CookieName + "Cookie失败‼️", "", "配置错误, 无法读取请求头,");
   }
 }
 
