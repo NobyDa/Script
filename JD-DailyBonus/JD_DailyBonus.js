@@ -1,5 +1,5 @@
 /*
-JingDong bonus Seven in one
+JingDong bonus eight in one
 
 Description :
 When using for the first time. Need to manually log in to the https://bean.m.jd.com checkin to get cookie. If notification gets cookie success, you can use the check in script.
@@ -80,7 +80,7 @@ function notify() {
         fail += Number(merge[i].fail)
         notify += merge[i].notify ? "\n" + merge[i].notify : ""
       }
-      var JDbeans = merge.JDShake.Qbear ? merge.JDShake.Qbear + "京豆\n" : "获取失败\n"
+      var JDbeans = merge.JDShake.Qbear ? merge.JDShake.Qbear + "个\n" : "获取失败\n"
       var one = "【京东签到】:  成功" + success + "个, 失败: " + fail + "个\n"
       var two = "【签到总计】:  " + bean + "京豆, " + steel + "钢镚\n"
       var three = "【当前京豆】:  " + JDbeans
@@ -321,6 +321,7 @@ function JingRongBean() {
             }
           }, 200)
         }
+        resolve('done')
       })
     } catch (eor) {
       $nobyda.notify(eor.name, JSON.stringify(eor), eor.message)
@@ -553,7 +554,7 @@ function JDGroceryStore() {
               merge.JDGStore.bean = beanQuantity
               merge.JDGStore.success = 1
             } else {
-              merge.JDGStore.notify = "京东商城-超市: 成功, 明细: 无京豆 ⚠️"
+              merge.JDGStore.notify = "京东商城-超市: 成功, 明细: 无京豆 🐶"
               merge.JDGStore.success = 1
             }
           } else {
@@ -612,7 +613,7 @@ function JingDongClocks() {
               merge.JDClocks.bean = beanQuantity
               merge.JDClocks.success = 1
             } else {
-              merge.JDClocks.notify = "京东商城-钟表: 成功, 明细: 无京豆 ⚠️"
+              merge.JDClocks.notify = "京东商城-钟表: 成功, 明细: 无京豆 🐶"
               merge.JDClocks.success = 1
             }
           } else {
