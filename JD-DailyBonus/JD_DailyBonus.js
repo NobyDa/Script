@@ -1,5 +1,5 @@
 /*
-JingDong bonus twelve in one
+JingDong bonus fifteen in one
 
 Description :
 When using for the first time. Need to manually log in to the https://bean.m.jd.com checkin to get cookie. If notification gets cookie success, you can use the check in script.
@@ -8,7 +8,7 @@ Due to the validity of cookie, if the script pops up a notification of cookie in
 Daily bonus script will be performed every day at 0:05 a.m. You can modify the execution time.
 If reprinted, please indicate the source. My TG channel @NobyDa
 
-Update 2020.2.7 15:00 v57
+Update 2020.2.8 0:00 v58
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]
@@ -44,7 +44,10 @@ var merge = {
   JDPet:   {success:0,fail:0,bean:0,steel:0,notify:''},
   JDFSale: {success:0,fail:0,bean:0,steel:0,notify:''},
   JDBook:  {success:0,fail:0,bean:0,steel:0,notify:''},
-  JDShand:  {success:0,fail:0,bean:0,steel:0,notify:''},
+  JDShand: {success:0,fail:0,bean:0,steel:0,notify:''},
+  JDMakeup:{success:0,fail:0,bean:0,steel:0,notify:''},
+  JDWomen: {success:0,fail:0,bean:0,steel:0,notify:''},
+  JDCash:  {success:0,fail:0,bean:0,steel:0,notify:'',QCash:0},
   JDShake: {success:0,fail:0,bean:0,steel:0,notify:'',Qbear:''}
 }
 
@@ -69,6 +72,9 @@ async function all() {//签到模块相互独立,您可注释某一行以禁用�
   await JingDongBook(); //京东图书
   await JDSecondhand(); //京东拍拍二手
   await JingDongShake(); //京东摇一摇
+  await JingDMakeup(); //京东美妆馆
+  await JingDongWomen(); //京东女装馆
+  await JingDongCash(); //京东现金红包
   await notify(); //通知模块
 }
 
@@ -90,7 +96,7 @@ function notify() {
       }
       var JDbeans = merge.JDShake.Qbear ? merge.JDShake.Qbear + "个\n" : "获取失败, 非首次签到\n"
       var one = "【京东签到】:  成功" + success + "个, 失败: " + fail + "个\n"
-      var two = "【签到总计】:  " + bean + "京豆, " + steel + "钢镚\n"
+      var two = "【签到总计】:  " + bean + "京豆, " + steel + "钢镚, " + merge.JDCash.QCash + "红包\n"
       var three = "【当前京豆】:  " + JDbeans
       var four = "【左滑 '查看' 以显示签到详情】\n"
       $nobyda.notify("", "", one + two + three + four + notify);
@@ -881,6 +887,188 @@ function JDSecondhand() {
                 } else {
                   merge.JDShand.notify = "京东拍拍-二手: 失败, 原因: 未知 ⚠️"
                   merge.JDShand.fail = 1
+                }
+              }
+            }
+          }
+        }
+        resolve('done')
+      })
+    } catch (eor) {
+      $nobyda.notify(eor.name, JSON.stringify(eor), eor.message)
+      resolve('done')
+    }
+  });
+}
+
+function JingDMakeup() {
+
+  return new Promise(resolve => {
+    try {
+      const JDMUrl = {
+        url: 'https://api.m.jd.com/client.action?functionId=userSign',
+        headers: {
+          Cookie: KEY,
+        },
+        body: "body=%7B%22riskParam%22%3A%7B%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22shshshfpb%22%3A%22v1%5C%2FzMYRjEWKgYe%2BUiNwEvaVlrHBQGVwqLx4CsS9PH1s0s0Vs9AWk%2B7vr9KSHh3BQd5NTukznDTZnd75xHzonHnw%3D%3D%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22childActivityUrl%22%3A%22-1%22%7D%2C%22url%22%3A%22%22%2C%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22BrrbMFwDMOFxMQzzIJNfYEoNLQhhUfcDeTnHobclnXIaZs%5C%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%2200138455_29326119_t1%5C%22%2C%5C%22signId%5C%22%3A%5C%22QrWSYkHHb9EaZs%5C%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22geo%22%3A%7B%22lng%22%3A%220.000000%22%2C%22lat%22%3A%220.000000%22%7D%7D&client=apple&clientVersion=8.5.0&d_brand=apple&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&sign=c097f212b640b012dde453e38b170181&st=1581083231607&sv=120"
+      };
+
+      $nobyda.post(JDMUrl, function(error, response, data) {
+        if (error) {
+          merge.JDMakeup.notify = "京东商城-美妆: 签到接口请求失败 ‼️‼️"
+          merge.JDMakeup.fail = 1
+        } else {
+          const cc = JSON.parse(data)
+          if (data.match(/签到成功/)) {
+            if (log) console.log("京东商城-美妆签到成功response: \n" + data)
+            if (data.match(/(\"text\":\"\d+京豆\")/)) {
+              beanQuantity = cc.awardList[0].text.match(/\d+/)
+              merge.JDMakeup.notify = "京东商城-美妆: 成功, 明细: " + beanQuantity + "京豆 🐶"
+              merge.JDMakeup.bean = beanQuantity
+              merge.JDMakeup.success = 1
+            } else {
+              merge.JDMakeup.notify = "京东商城-美妆: 成功, 明细: 无京豆 🐶"
+              merge.JDMakeup.success = 1
+            }
+          } else {
+            if (log) console.log("京东商城-美妆签到失败response: \n" + data)
+            if (data.match(/(已签到|已领取)/)) {
+              merge.JDMakeup.notify = "京东商城-美妆: 失败, 原因: 已签过 ⚠️"
+              merge.JDMakeup.fail = 1
+            } else {
+              if (data.match(/(不存在|已结束)/)) {
+                merge.JDMakeup.notify = "京东商城-美妆: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDMakeup.fail = 1
+              } else {
+                if (cc.code == 3) {
+                  merge.JDMakeup.notify = "京东商城-美妆: 失败, 原因: Cookie失效‼️"
+                  merge.JDMakeup.fail = 1
+                } else if (cc.code == "600"){
+                  merge.JDMakeup.notify = "京东商城-美妆: 失败, 原因: 认证失败 ⚠️"
+                  merge.JDMakeup.fail = 1
+                } else {
+                  merge.JDMakeup.notify = "京东商城-美妆: 失败, 原因: 未知 ⚠️"
+                  merge.JDMakeup.fail = 1
+                }
+              }
+            }
+          }
+        }
+        resolve('done')
+      })
+    } catch (eor) {
+      $nobyda.notify(eor.name, JSON.stringify(eor), eor.message)
+      resolve('done')
+    }
+  });
+}
+
+function JingDongWomen() {
+
+  return new Promise(resolve => {
+    try {
+      const JDMUrl = {
+        url: 'https://api.m.jd.com/client.action?functionId=userSign',
+        headers: {
+          Cookie: KEY,
+        },
+        body: "body=%7B%22riskParam%22%3A%7B%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22shshshfpb%22%3A%22v1%5C%2FzMYRjEWKgYe%2BUiNwEvaVlrHBQGVwqLx4CsS9PH1s0s0Vs9AWk%2B7vr9KSHh3BQd5NTukznDTZnd75xHzonHnw%3D%3D%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22childActivityUrl%22%3A%22-1%22%7D%2C%22url%22%3A%22%22%2C%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22OQmfgxmylrMM6EurCHg9lEjL1ShNb2dVjEja9MceBPgaZs%5C%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%2200002492_28085975_t1%5C%22%2C%5C%22signId%5C%22%3A%5C%22YE5T0wVaiL8aZs%5C%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22geo%22%3A%7B%22lng%22%3A%220.000000%22%2C%22lat%22%3A%220.000000%22%7D%7D&build=167057&client=apple&clientVersion=8.5.0&d_brand=apple&d_model=iPhone8%2C2&networklibtype=JDNetworkBaseAF&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&osVersion=13.3.1&scope=11&screen=1242%2A2208&sign=7329899a26d8a8c3046b882d6df2b329&st=1581083524405&sv=101&uuid=coW0lj7vbXVin6h7ON%2BtMNFQqYBqMahr"
+      };
+
+      $nobyda.post(JDMUrl, function(error, response, data) {
+        if (error) {
+          merge.JDWomen.notify = "京东商城-女装: 签到接口请求失败 ‼️‼️"
+          merge.JDWomen.fail = 1
+        } else {
+          const cc = JSON.parse(data)
+          if (data.match(/签到成功/)) {
+            if (log) console.log("京东商城-女装签到成功response: \n" + data)
+            if (data.match(/(\"text\":\"\d+京豆\")/)) {
+              beanQuantity = cc.awardList[0].text.match(/\d+/)
+              merge.JDWomen.notify = "京东商城-女装: 成功, 明细: " + beanQuantity + "京豆 🐶"
+              merge.JDWomen.bean = beanQuantity
+              merge.JDWomen.success = 1
+            } else {
+              merge.JDWomen.notify = "京东商城-女装: 成功, 明细: 无京豆 🐶"
+              merge.JDWomen.success = 1
+            }
+          } else {
+            if (log) console.log("京东商城-女装签到失败response: \n" + data)
+            if (data.match(/(已签到|已领取)/)) {
+              merge.JDWomen.notify = "京东商城-女装: 失败, 原因: 已签过 ⚠️"
+              merge.JDWomen.fail = 1
+            } else {
+              if (data.match(/(不存在|已结束)/)) {
+                merge.JDWomen.notify = "京东商城-女装: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDWomen.fail = 1
+              } else {
+                if (cc.code == 3) {
+                  merge.JDWomen.notify = "京东商城-女装: 失败, 原因: Cookie失效‼️"
+                  merge.JDWomen.fail = 1
+                } else if (cc.code == "600"){
+                  merge.JDWomen.notify = "京东商城-女装: 失败, 原因: 认证失败 ⚠️"
+                  merge.JDWomen.fail = 1
+                } else {
+                  merge.JDWomen.notify = "京东商城-女装: 失败, 原因: 未知 ⚠️"
+                  merge.JDWomen.fail = 1
+                }
+              }
+            }
+          }
+        }
+        resolve('done')
+      })
+    } catch (eor) {
+      $nobyda.notify(eor.name, JSON.stringify(eor), eor.message)
+      resolve('done')
+    }
+  });
+}
+
+function JingDongCash() {
+
+  return new Promise(resolve => {
+    try {
+      const JDCAUrl = {
+        url: 'https://api.m.jd.com/client.action?functionId=ccSignInNew',
+        headers: {
+          Cookie: KEY,
+        },
+        body: "body=%7B%22pageClickKey%22%3A%22CouponCenter%22%2C%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22shshshfpb%22%3A%22v1%5C%2FzMYRjEWKgYe%2BUiNwEvaVlrHBQGVwqLx4CsS9PH1s0s0Vs9AWk%2B7vr9KSHh3BQd5NTukznDTZnd75xHzonHnw%3D%3D%22%2C%22childActivityUrl%22%3A%22openapp.jdmobile%253a%252f%252fvirtual%253fparams%253d%257b%255c%2522category%255c%2522%253a%255c%2522jump%255c%2522%252c%255c%2522des%255c%2522%253a%255c%2522couponCenter%255c%2522%257d%22%2C%22monitorSource%22%3A%22cc_sign_ios_index_config%22%7D&client=apple&clientVersion=8.5.0&d_brand=apple&d_model=iPhone8%2C2&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&scope=11&screen=1242%2A2208&sign=1cce8f76d53fc6093b45a466e93044da&st=1581084035269&sv=102"
+      };
+
+      $nobyda.post(JDCAUrl, function(error, response, data) {
+        if (error) {
+          merge.JDCash.notify = "京东现金-红包: 签到接口请求失败 ‼️‼️"
+          merge.JDCash.fail = 1
+        } else {
+          const cc = JSON.parse(data)
+          if (cc.busiCode == "0") {
+            if (log) console.log("京东现金-红包签到成功response: \n" + data)
+            if (cc.result.signResult.signData.amount) {
+              merge.JDCash.notify = "京东现金-红包: 成功, 明细: " + cc.result.signResult.signData.amount + "红包 🧧"
+              merge.JDCash.QCash = cc.result.signResult.signData.amount
+              merge.JDCash.success = 1
+            } else {
+              merge.JDCash.notify = "京东现金-红包: 成功, 明细: 无红包 🧧"
+              merge.JDCash.success = 1
+            }
+          } else {
+            if (log) console.log("京东现金-红包签到失败response: \n" + data)
+            if (data.match(/(\"busiCode\":\"1002\"|完成签到)/)) {
+              merge.JDCash.notify = "京东现金-红包: 失败, 原因: 已签过 ⚠️"
+              merge.JDCash.fail = 1
+            } else {
+              if (data.match(/(不存在|已结束)/)) {
+                merge.JDCash.notify = "京东现金-红包: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDCash.fail = 1
+              } else {
+                if (data.match(/(\"busiCode\":\"3\"|未登录)/)) {
+                  merge.JDCash.notify = "京东现金-红包: 失败, 原因: Cookie失效‼️"
+                  merge.JDCash.fail = 1
+                } else {
+                  merge.JDCash.notify = "京东现金-红包: 失败, 原因: 未知 ⚠️"
+                  merge.JDCash.fail = 1
                 }
               }
             }
