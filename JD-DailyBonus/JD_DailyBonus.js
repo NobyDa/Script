@@ -71,10 +71,10 @@ async function all() {//签到模块相互独立,您可注释某一行以禁用�
   await JDFlashSale(); //京东闪购
   await JingDongBook(); //京东图书
   await JDSecondhand(); //京东拍拍二手
-  await JingDongShake(); //京东摇一摇
   await JingDMakeup(); //京东美妆馆
   await JingDongWomen(); //京东女装馆
   await JingDongCash(); //京东现金红包
+  await JingDongShake(); //京东摇一摇
   await notify(); //通知模块
 }
 
