@@ -1,5 +1,5 @@
 /*
-JingDong bonus fifteen in one
+JingDong bonus seventeen in one
 
 Description :
 When using for the first time. Need to manually log in to the https://bean.m.jd.com checkin to get cookie. If notification gets cookie success, you can use the check in script.
@@ -8,7 +8,7 @@ Due to the validity of cookie, if the script pops up a notification of cookie in
 Daily bonus script will be performed every day at 0:05 a.m. You can modify the execution time.
 If reprinted, please indicate the source. My TG channel @NobyDa
 
-Update 2020.2.8 0:00 v58
+Update 2020.2.8 22:30 v60
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]
@@ -47,6 +47,8 @@ var merge = {
   JDShand: {success:0,fail:0,bean:0,steel:0,notify:''},
   JDMakeup:{success:0,fail:0,bean:0,steel:0,notify:''},
   JDWomen: {success:0,fail:0,bean:0,steel:0,notify:''},
+  JDShoes: {success:0,fail:0,bean:0,steel:0,notify:''},
+  JDCube:  {success:0,fail:0,bean:0,steel:0,notify:''},
   JDCash:  {success:0,fail:0,bean:0,steel:0,notify:'',QCash:0},
   JDShake: {success:0,fail:0,bean:0,steel:0,notify:'',Qbear:''}
 }
@@ -74,6 +76,8 @@ async function all() {//签到模块相互独立,您可注释某一行以禁用�
   await JingDMakeup(); //京东美妆馆
   await JingDongWomen(); //京东女装馆
   await JingDongCash(); //京东现金红包
+  await JingDongShoes(); //京东鞋靴馆
+  await JDMagicCube(); //京东小魔方
   await JingDongShake(); //京东摇一摇
   await notify(); //通知模块
 }
@@ -1069,6 +1073,125 @@ function JingDongCash() {
                 } else {
                   merge.JDCash.notify = "京东现金-红包: 失败, 原因: 未知 ⚠️"
                   merge.JDCash.fail = 1
+                }
+              }
+            }
+          }
+        }
+        resolve('done')
+      })
+    } catch (eor) {
+      $nobyda.notify(eor.name, JSON.stringify(eor), eor.message)
+      resolve('done')
+    }
+  });
+}
+
+function JingDongShoes() {
+
+  return new Promise(resolve => {
+    try {
+      const JDSSUrl = {
+        url: 'https://api.m.jd.com/client.action?functionId=userSign',
+        headers: {
+          Cookie: KEY,
+        },
+        body: "body=%7B%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%227Ive90vKJQaMEzWlhMgIwIih1KqMPXNQdPbewzqrg2MaZs%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Atrue%2C%5C%22ruleSrv%5C%22%3A%5C%2200116882_29523722_t0%5C%22%2C%5C%22signId%5C%22%3A%5C%22SeWbLe9ma04aZs%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22riskParam%22%3A%7B%22platform%22%3A%223%22%2C%22orgType%22%3A%222%22%2C%22openId%22%3A%22-1%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22eid%22%3A%22%22%2C%22fp%22%3A%22-1%22%2C%22shshshfp%22%3A%22b3fccfafc270b38e0bddfdc0e455b48f%22%2C%22shshshfpa%22%3A%22%22%2C%22shshshfpb%22%3A%22%22%2C%22childActivityUrl%22%3A%22%22%7D%2C%22siteClient%22%3A%22apple%22%2C%22mitemAddrId%22%3A%22%22%2C%22geo%22%3A%7B%22lng%22%3A%220%22%2C%22lat%22%3A%220%22%7D%2C%22addressId%22%3A%22%22%2C%22posLng%22%3A%22%22%2C%22posLat%22%3A%22%22%2C%22focus%22%3A%22%22%2C%22innerAnchor%22%3A%22%22%2C%22cv%22%3A%222.0%22%7D&client=wh5"
+      };
+
+      $nobyda.post(JDSSUrl, function(error, response, data) {
+        if (error) {
+          merge.JDShoes.notify = "京东商城-鞋靴: 签到接口请求失败 ‼️‼️"
+          merge.JDShoes.fail = 1
+        } else {
+          const cc = JSON.parse(data)
+          if (data.match(/签到成功/)) {
+            if (log) console.log("京东商城-鞋靴签到成功response: \n" + data)
+            if (data.match(/(\"text\":\"\d+京豆\")/)) {
+              beanQuantity = cc.awardList[0].text.match(/\d+/)
+              merge.JDShoes.notify = "京东商城-鞋靴: 成功, 明细: " + beanQuantity + "京豆 🐶"
+              merge.JDShoes.bean = beanQuantity
+              merge.JDShoes.success = 1
+            } else {
+              merge.JDShoes.notify = "京东商城-鞋靴: 成功, 明细: 无京豆 🐶"
+              merge.JDShoes.success = 1
+            }
+          } else {
+            if (log) console.log("京东商城-鞋靴签到失败response: \n" + data)
+            if (data.match(/(已签到|已领取)/)) {
+              merge.JDShoes.notify = "京东商城-鞋靴: 失败, 原因: 已签过 ⚠️"
+              merge.JDShoes.fail = 1
+            } else {
+              if (data.match(/(不存在|已结束)/)) {
+                merge.JDShoes.notify = "京东商城-鞋靴: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDShoes.fail = 1
+              } else {
+                if (cc.code == 3) {
+                  merge.JDShoes.notify = "京东商城-鞋靴: 失败, 原因: Cookie失效‼️"
+                  merge.JDShoes.fail = 1
+                } else if (cc.code == "600"){
+                  merge.JDShoes.notify = "京东商城-鞋靴: 失败, 原因: 认证失败 ⚠️"
+                  merge.JDShoes.fail = 1
+                } else {
+                  merge.JDShoes.notify = "京东商城-鞋靴: 失败, 原因: 未知 ⚠️"
+                  merge.JDShoes.fail = 1
+                }
+              }
+            }
+          }
+        }
+        resolve('done')
+      })
+    } catch (eor) {
+      $nobyda.notify(eor.name, JSON.stringify(eor), eor.message)
+      resolve('done')
+    }
+  });
+}
+
+function JDMagicCube() {
+
+  return new Promise(resolve => {
+    try {
+      const JDMCUrl = {
+        url: 'https://api.m.jd.com/client.action?functionId=getNewsInteractionLotteryInfo&appid=smfe',
+        headers: {
+          Cookie: KEY,
+        }
+      };
+
+      $nobyda.get(JDMCUrl, function(error, response, data) {
+        if (error) {
+          merge.JDCube.notify = "京东商城-魔方: 签到接口请求失败 ‼️‼️"
+          merge.JDCube.fail = 1
+        } else {
+          const cc = JSON.parse(data)
+          if (data.match(/(\"name\":)/)) {
+            if (log) console.log("京东商城-魔方签到成功response: \n" + data)
+            if (data.match(/(\"name\":\"京豆\")/)) {
+              merge.JDCube.notify = "京东商城-魔方: 成功, 明细: " + cc.result.lotterylnfo.quantity + "京豆 🐶"
+              merge.JDCube.bean = cc.result.lotterylnfo.quantity
+              merge.JDCube.success = 1
+            } else {
+              merge.JDCube.notify = "京东商城-魔方: 成功, 明细: " + cc.result.lotterylnfo.name + " 🎉"
+              merge.JDCube.success = 1
+            }
+          } else {
+            if (log) console.log("京东商城-魔方签到失败response: \n" + data)
+            if (data.match(/(一闪而过|已签到|已领取)/)) {
+              merge.JDCube.notify = "京东商城-魔方: 失败, 原因: 已签过 ⚠️"
+              merge.JDCube.fail = 1
+            } else {
+              if (data.match(/(不存在|已结束)/)) {
+                merge.JDCube.notify = "京东商城-魔方: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDCube.fail = 1
+              } else {
+                if (data.match(/(\"code\":3)/)) {
+                  merge.JDCube.notify = "京东商城-魔方: 失败, 原因: Cookie失效‼️"
+                  merge.JDCube.fail = 1
+                } else {
+                  merge.JDCube.notify = "京东商城-魔方: 失败, 原因: 未知 ⚠️"
+                  merge.JDCube.fail = 1
                 }
               }
             }
