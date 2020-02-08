@@ -1169,11 +1169,11 @@ function JDMagicCube() {
           if (data.match(/(\"name\":)/)) {
             if (log) console.log("京东商城-魔方签到成功response: \n" + data)
             if (data.match(/(\"name\":\"京豆\")/)) {
-              merge.JDCube.notify = "京东商城-魔方: 成功, 明细: " + cc.result.lotterylnfo.quantity + "京豆 🐶"
-              merge.JDCube.bean = cc.result.lotterylnfo.quantity
+              merge.JDCube.notify = "京东商城-魔方: 成功, 明细: " + cc.result.lotteryInfo.quantity + "京豆 🐶"
+              merge.JDCube.bean = cc.result.lotteryInfo.quantity
               merge.JDCube.success = 1
             } else {
-              merge.JDCube.notify = "京东商城-魔方: 成功, 明细: " + cc.result.lotterylnfo.name + " 🎉"
+              merge.JDCube.notify = "京东商城-魔方: 成功, 明细: " + cc.result.lotteryInfo.name + " 🎉"
               merge.JDCube.success = 1
             }
           } else {
