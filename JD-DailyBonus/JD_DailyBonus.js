@@ -8,7 +8,7 @@ Due to the validity of cookie, if the script pops up a notification of cookie in
 Daily bonus script will be performed every day at 0:05 a.m. You can modify the execution time.
 If reprinted, please indicate the source. My TG channel @NobyDa
 
-Update 2020.2.9 16:30 v61
+Update 2020.2.9 20:30 v62
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
 [Script]
@@ -37,7 +37,6 @@ var merge = {
   JDBean:  {success:0,fail:0,bean:0,steel:0,notify:''},
   JDTurn:  {success:0,fail:0,bean:0,steel:0,notify:''},
   JRBean:  {success:0,fail:0,bean:0,steel:0,notify:''},
-  JRSteel: {success:0,fail:0,bean:0,steel:0,notify:''},
   JRDSign: {success:0,fail:0,bean:0,steel:0,notify:''},
   JDGStore:{success:0,fail:0,bean:0,steel:0,notify:''},
   JDClocks:{success:0,fail:0,bean:0,steel:0,notify:''},
@@ -51,7 +50,8 @@ var merge = {
   JDCube:  {success:0,fail:0,bean:0,steel:0,notify:''},
   JRGame:  {success:0,fail:0,bean:0,steel:0,notify:''},
   JRSeeAds:{success:0,fail:0,bean:0,steel:0,notify:''},
-  JDCash:  {success:0,fail:0,bean:0,steel:0,notify:'',QCash:0},
+  JRSteel: {success:0,fail:0,bean:0,steel:0,notify:'',TSteel:''},
+  JDCash:  {success:0,fail:0,bean:0,steel:0,notify:'',Cash:0,TCash:0},
   JDShake: {success:0,fail:0,bean:0,steel:0,notify:'',Qbear:''}
 }
 
@@ -83,6 +83,9 @@ async function all() {//签到模块相互独立,您可注释某一行以禁用�
   await JingRSeeAds(); //金融看广告
   await JingRongGame(); //金融游戏大厅
   await JingDongShake(); //京东摇一摇
+
+  await TotalSteel(); //总钢镚查询
+  await TotalCash(); //总红包查询
   await notify(); //通知模块
 }
 
@@ -102,10 +105,13 @@ function notify() {
         fail += Number(merge[i].fail)
         notify += merge[i].notify ? "\n" + merge[i].notify : ""
       }
-      var JDbeans = merge.JDShake.Qbear ? merge.JDShake.Qbear + "个\n" : "获取失败, 非首次签到\n"
+      var JDbeans = merge.JDShake.Qbear ? merge.JDShake.Qbear + "京豆, " : ""
+      var Steel = merge.JRSteel.TSteel ? merge.JRSteel.TSteel + "钢镚, " : ""
+      var Cash = merge.JDCash.TCash ? merge.JDCash.TCash + "红包" : ""
+      var bsc = JDbeans ? "\n" : Steel ? "\n" : Cash ? "\n" : "获取失败\n"
       var one = "【京东签到】:  成功" + success + "个, 失败: " + fail + "个\n"
-      var two = "【签到总计】:  " + bean + "京豆, " + steel + "钢镚, " + merge.JDCash.QCash + "红包\n"
-      var three = "【当前京豆】:  " + JDbeans
+      var two = "【签到总计】:  " + bean + "京豆, " + steel + "钢镚, " + merge.JDCash.Cash + "红包\n"
+      var three = "【账号总计】:  " + JDbeans + Steel + Cash + bsc
       var four = "【左滑 '查看' 以显示签到详情】\n"
       $nobyda.notify("", "", one + two + three + four + notify);
       resolve('done')
@@ -1035,7 +1041,7 @@ function JingDongCash() {
             if (log) console.log("京东现金-红包签到成功response: \n" + data)
             if (cc.result.signResult.signData.amount) {
               merge.JDCash.notify = "京东现金-红包: 成功, 明细: " + cc.result.signResult.signData.amount + "红包 🧧"
-              merge.JDCash.QCash = cc.result.signResult.signData.amount
+              merge.JDCash.Cash = cc.result.signResult.signData.amount
               merge.JDCash.success = 1
             } else {
               merge.JDCash.notify = "京东现金-红包: 成功, 明细: 无红包 🧧"
@@ -1331,6 +1337,61 @@ function GetCookie() {
   } else {
     $nobyda.notify("写入" + CookieName + "Cookie失败‼️", "", "配置错误, 无法读取请求头, ");
   }
+}
+
+function TotalSteel() {
+
+  return new Promise(resolve => {
+    const SteelUrl = {
+      url: 'https://coin.jd.com/m/gb/getBaseInfo.html',
+      headers: {
+        Cookie: KEY,
+      }
+    };
+
+    $nobyda.post(SteelUrl, function(error, response, data) {
+      try {
+        if (!error) {
+          if (data.match(/(\"gbBalance\":\d+\.\d+)/)) {
+            const cc = JSON.parse(data)
+            merge.JRSteel.TSteel = cc.gbBalance
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("钢镚接口" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })
+  });
+}
+
+function TotalCash() {
+
+  return new Promise(resolve => {
+    const CashUrl = {
+      url: 'https://api.m.jd.com/client.action?functionId=myhongbao_balance',
+      headers: {
+        Cookie: KEY,
+      },
+      body: "body=%7B%22fp%22%3A%22-1%22%2C%22appToken%22%3A%22apphongbao_token%22%2C%22childActivityUrl%22%3A%22-1%22%2C%22country%22%3A%22cn%22%2C%22openId%22%3A%22-1%22%2C%22childActivityId%22%3A%22-1%22%2C%22applicantErp%22%3A%22-1%22%2C%22platformId%22%3A%22appHongBao%22%2C%22isRvc%22%3A%22-1%22%2C%22orgType%22%3A%222%22%2C%22activityType%22%3A%221%22%2C%22shshshfpb%22%3A%22-1%22%2C%22platformToken%22%3A%22apphongbao_token%22%2C%22organization%22%3A%22JD%22%2C%22pageClickKey%22%3A%22-1%22%2C%22platform%22%3A%221%22%2C%22eid%22%3A%22-1%22%2C%22appId%22%3A%22appHongBao%22%2C%22childActiveName%22%3A%22-1%22%2C%22shshshfp%22%3A%22-1%22%2C%22jda%22%3A%22-1%22%2C%22extend%22%3A%22-1%22%2C%22shshshfpa%22%3A%22-1%22%2C%22activityArea%22%3A%22-1%22%2C%22childActivityTime%22%3A%22-1%22%7D&client=apple&clientVersion=8.5.0&d_brand=apple&networklibtype=JDNetworkBaseAF&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&sign=fdc04c3ab0ee9148f947d24fb087b55d&st=1581245397648&sv=120"
+    };
+
+    $nobyda.post(CashUrl, function(error, response, data) {
+      try {
+        if (!error) {
+          if (data.match(/(\"totalBalance\":\d+\.\d+)/)) {
+            const cc = JSON.parse(data)
+            merge.JDCash.TCash = cc.totalBalance
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("红包接口" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })
+  });
 }
 
 function nobyda() {
