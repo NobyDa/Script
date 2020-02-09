@@ -1352,7 +1352,7 @@ function TotalSteel() {
     $nobyda.post(SteelUrl, function(error, response, data) {
       try {
         if (!error) {
-          if (data.match(/(\"gbBalance\":\d+\.\d+)/)) {
+          if (data.match(/(\"gbBalance\":\d+)/)) {
             const cc = JSON.parse(data)
             merge.JRSteel.TSteel = cc.gbBalance
           }
@@ -1380,7 +1380,7 @@ function TotalCash() {
     $nobyda.post(CashUrl, function(error, response, data) {
       try {
         if (!error) {
-          if (data.match(/(\"totalBalance\":\d+\.\d+)/)) {
+          if (data.match(/(\"totalBalance\":\d+)/)) {
             const cc = JSON.parse(data)
             merge.JDCash.TCash = cc.totalBalance
           }
