@@ -1428,7 +1428,7 @@ function JingDongPrize() {
                         merge.JDPrize.bean = c.data.beanNumber
                       } else if (data.match(/\"couponInfoVo\"/)) {
                         if (data.match(/\"limitStr\"/)) {
-                          merge.JDPrize.notify = "京东商城-大奖: 成功, 明细: 优惠券→ " + c.data.couponInfoVo.limitStr
+                          merge.JDPrize.notify = "京东商城-大奖: 获得满" + c.data.couponInfoVo.quota + "减" + c.data.couponInfoVo.discount + "优惠券→ " + c.data.couponInfoVo.limitStr
                           merge.JDPrize.success = 1
                         } else {
                           merge.JDPrize.notify = "京东商城-大奖: 成功, 明细: 优惠券"
