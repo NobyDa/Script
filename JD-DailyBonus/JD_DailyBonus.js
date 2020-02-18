@@ -8,7 +8,7 @@ Due to the validity of cookie, if the script pops up a notification of cookie in
 Daily bonus script will be performed every day at 0:05 a.m. You can modify the execution time.
 If reprinted, please indicate the source. My TG channel @NobyDa
 
-Update 2020.2.13 21:00 v66 
+Update 2020.2.19 2:00 v68
 Effective number: 22
 ~~~~~~~~~~~~~~~~
 Surge 4.0 :
@@ -761,8 +761,9 @@ function JDFlashSale(s) {
               merge.JDFSale.fail = 1
             } else {
               if (data.match(/(不存在|已结束|\"2008\")/)) {
-                merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: 需瓜分&已结束 ⚠️"
                 merge.JDFSale.fail = 1
+                FlashSaleDivide(s)
               } else {
                 if (data.match(/(\"code\":\"3\"|\"1003\")/)) {
                   merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: Cookie失效‼️"
@@ -778,6 +779,64 @@ function JDFlashSale(s) {
         resolve('done')
       } catch (eor) {
         $nobyda.notify("京东商城-闪购" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })}, s)
+  });
+}
+
+function FlashSaleDivide(s) {
+
+  return new Promise(resolve => { setTimeout(() => {
+    const Url = {
+      url: 'https://api.m.jd.com/client.action?functionId=partitionJdShare',
+      headers: {
+        Cookie: KEY,
+      },
+      body: "body=%7B%7D&client=apple&clientVersion=8.5.0&d_brand=apple&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&sign=958ba0e805094b4b0f6216e86190ab51&st=1582042405636&sv=120&wifiBssid=unknown"
+    };
+
+    $nobyda.post(Url, function(error, response, data) {
+      try {
+        if (error) {
+          merge.JDFSale.notify += "\n京东闪购-瓜分: 签到接口请求失败 ‼️‼️"
+          merge.JDFSale.fail += 1
+        } else {
+          const cc = JSON.parse(data)
+          if (cc.result.code == 0) {
+            if (log) console.log("京东闪购-瓜分签到成功response: \n" + data)
+            if (data.match(/(\"jdBeanNum\":\d+)/)) {
+              merge.JDFSale.notify += "\n京东闪购-瓜分: 成功, 明细: " + cc.result.jdBeanNum + "京豆 🐶"
+              merge.JDFSale.bean = cc.result.jdBeanNum
+              merge.JDFSale.success = 1
+            } else {
+              merge.JDFSale.notify += "\n京东闪购-瓜分: 成功, 明细: 无京豆 🐶"
+              merge.JDFSale.success = 1
+            }
+          } else {
+            if (log) console.log("京东闪购-瓜分签到失败response: \n" + data)
+            if (data.match(/(已参与|已领取|\"2006\")/)) {
+              merge.JDFSale.notify += "\n京东闪购-瓜分: 失败, 原因: 已瓜分 ⚠️"
+              merge.JDFSale.fail += 1
+            } else {
+              if (data.match(/(不存在|已结束|\"2008\")/)) {
+                merge.JDFSale.notify += "\n京东闪购-瓜分: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDFSale.fail += 1
+              } else {
+                if (data.match(/(\"code\":\"1003\"|未获取)/)) {
+                  merge.JDFSale.notify += "\n京东闪购-瓜分: 失败, 原因: Cookie失效‼️"
+                  merge.JDFSale.fail += 1
+                } else {
+                  merge.JDFSale.notify += "\n京东闪购-瓜分: 失败, 原因: 未知 ⚠️"
+                  merge.JDFSale.fail += 1
+                }
+              }
+            }
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("京东闪购-瓜分" + eor.name + "‼️", JSON.stringify(eor), eor.message)
         resolve('done')
       }
     })}, s)
