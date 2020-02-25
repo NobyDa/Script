@@ -7,6 +7,11 @@
 该脚本同时兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 如使用JSBox 或 Nodejs, 请自行抓取Cookie填入脚本Key处.
 
+JSbox, Node.js 抓取Cookie 说明:
+
+开启抓包app后, Safari浏览器登录 https://bean.m.jd.com 点击签到并且出现签到日历后, 返回抓包app搜索关键字 functionId=signBean 复制请求头Cookie填入脚本即可. 
+注: 如果复制的Cookie开头为"Cookie: "请把它删除后填入
+
 ~~~~~~~~~~~~~~~~
 Quantumult X, Surge, Loon 说明：
 
@@ -53,9 +58,12 @@ QX 或 Surge 或 Loon MITM = api.m.jd.com
 var log = true; //是否开启日志, false则关闭
 var stop = 0; //自定义延迟签到,单位毫秒,(如填200则每个接口延迟0.2秒执行),默认无延迟
 var $nobyda = nobyda();
-var Key = ''; //如果使用JSBox或Node.js, 此处自行抓包填写您的Cookie.
-var KEY = Key?Key:$nobyda.read("CookieJD")
 
+//  填此处↓↓↓
+var Key = ''; //如果使用JSBox或Node.js, 此处自行抓包填写您的Cookie.
+//  填此处↑↑↑
+
+var KEY = Key?Key:$nobyda.read("CookieJD")
 async function all() {//签到模块相互独立,您可注释某一行以禁用某个接口.
   await JingDongBean(stop); //京东京豆
   await JingRongBean(stop); //金融京豆
