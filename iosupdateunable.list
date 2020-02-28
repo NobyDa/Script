@@ -1,0 +1,4 @@
+# Update-2020.2.28 Self-use rule, 屏蔽ios系统升级
+DOMAIN-SUFFIX,mesu.apple.com,REJECT
+DOMAIN-SUFFIX,gdmf.apple.com,REJECT
+DOMAIN-SUFFIX,updates-http.cdn-apple.com,REJECT
