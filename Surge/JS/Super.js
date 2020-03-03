@@ -1,9 +1,14 @@
 /*
-[Script]
-http-response ^https?://[a-z]*\.snssdk\.com/bds/feed/stream/ requires-body=1,max-size=-1,script-path=https://Choler.github.io/Surge/Script/Super.js
+皮皮虾去广告
+原自Choler, 由Liquor030修改
 
-[MITM]
-hostname = *.snssdk.com
+Surge4:
+http-response ^https?://[a-z]*\.snssdk\.com/bds/feed/stream/ requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Super.js
+
+QuanX:
+https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body Super.js
+
+MITM = *.snssdk.com
 */
 
 var obj = JSON.parse($response.body);
@@ -14,4 +19,7 @@ if (obj.data.data) {
     }
   }
 }
-$done({body: JSON.stringify(obj)});
+var obj2 = JSON.stringify(obj);
+var obj3 = obj2.replace(/\"cell_id\":\d+,\"cell_id_str\":\"(\d+)\"/g,'\"cell_id\":$1,\"cell_id_str\":\"$1\"');
+var body = obj3.replace(/\"item_id\":\d+,\"item_id_str\":\"(\d+)\"/g,'\"item_id\":$1,\"item_id_str\":\"$1\"');
+$done({body});
