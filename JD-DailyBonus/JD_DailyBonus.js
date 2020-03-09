@@ -1,7 +1,7 @@
 /*
 京东多合一签到脚本
 
-更新于: 2020.3.5 0:10 v76
+更新于: 2020.3.6 22:00 v77
 有效接口: 21
 
 该脚本同时兼容: QuantumultX, Surge, Loon, JSBox, Node.js
@@ -43,6 +43,7 @@ QX 1.0.5+ :
 
 [task_local]
 # 京东多合一签到
+# 注意此为本地路径, 请根据实际情况自行调整
 5 0 * * * JD_DailyBonus.js
 
 [rewrite_local]
@@ -60,8 +61,7 @@ var stop = 0; //自定义延迟签到,单位毫秒,(如填200则每个接口延�
 var $nobyda = nobyda();
 
 //  填此处↓↓↓
-var Key = ''; //如果使用JSBox或Node.js, 此处自行抓包填写您的Cookie.
-//  填此处↑↑↑
+var Key = ''; //如果使用JSBox或Node.js, 单引号内自行填写您抓取的Cookie.
 
 var KEY = Key?Key:$nobyda.read("CookieJD")
 async function all() {//签到模块相互独立,您可注释某一行以禁用某个接口.
@@ -797,8 +797,8 @@ function JDFlashSale(s) {
               merge.JDFSale.fail = 1
             } else {
               if (data.match(/(不存在|已结束|\"2008\")/)) {
-                merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: 需瓜分 ⚠️"
-                merge.JDFSale.fail = 1
+                //merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: 需瓜分 ⚠️"
+                //merge.JDFSale.fail = 1
                 FlashSaleDivide(s)
               } else {
                 if (data.match(/(\"code\":\"3\"|\"1003\")/)) {
@@ -835,36 +835,36 @@ function FlashSaleDivide(s) {
     $nobyda.post(Url, function(error, response, data) {
       try {
         if (error) {
-          merge.JDFSale.notify += "\n京东闪购-瓜分: 签到接口请求失败 ‼️‼️"
-          merge.JDFSale.fail += 1
+          merge.JDFSale.notify = "京东闪购-瓜分: 签到接口请求失败 ‼️‼️"
+          merge.JDFSale.fail = 1
         } else {
           const cc = JSON.parse(data)
           if (cc.result.code == 0) {
             if (log) console.log("京东闪购-瓜分签到成功response: \n" + data)
             if (data.match(/(\"jdBeanNum\":\d+)/)) {
-              merge.JDFSale.notify += "\n京东闪购-瓜分: 成功, 明细: " + cc.result.jdBeanNum + "京豆 🐶"
+              merge.JDFSale.notify = "京东闪购-瓜分: 成功, 明细: " + cc.result.jdBeanNum + "京豆 🐶"
               merge.JDFSale.bean = cc.result.jdBeanNum
               merge.JDFSale.success = 1
             } else {
-              merge.JDFSale.notify += "\n京东闪购-瓜分: 成功, 明细: 无京豆 🐶"
+              merge.JDFSale.notify = "京东闪购-瓜分: 成功, 明细: 无京豆 🐶"
               merge.JDFSale.success = 1
             }
           } else {
             if (log) console.log("京东闪购-瓜分签到失败response: \n" + data)
             if (data.match(/(已参与|已领取|\"2006\")/)) {
-              merge.JDFSale.notify += "\n京东闪购-瓜分: 失败, 原因: 已瓜分 ⚠️"
-              merge.JDFSale.fail += 1
+              merge.JDFSale.notify = "京东闪购-瓜分: 失败, 原因: 已瓜分 ⚠️"
+              merge.JDFSale.fail = 1
             } else {
               if (data.match(/(不存在|已结束|未开始|\"2008\")/)) {
-                merge.JDFSale.notify += "\n京东闪购-瓜分: 失败, 原因: 活动已结束 ⚠️"
-                merge.JDFSale.fail += 1
+                merge.JDFSale.notify = "京东闪购-瓜分: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDFSale.fail = 1
               } else {
                 if (data.match(/(\"code\":\"1003\"|未获取)/)) {
-                  merge.JDFSale.notify += "\n京东闪购-瓜分: 失败, 原因: Cookie失效‼️"
-                  merge.JDFSale.fail += 1
+                  merge.JDFSale.notify = "京东闪购-瓜分: 失败, 原因: Cookie失效‼️"
+                  merge.JDFSale.fail = 1
                 } else {
-                  merge.JDFSale.notify += "\n京东闪购-瓜分: 失败, 原因: 未知 ⚠️"
-                  merge.JDFSale.fail += 1
+                  merge.JDFSale.notify = "京东闪购-瓜分: 失败, 原因: 未知 ⚠️"
+                  merge.JDFSale.fail = 1
                 }
               }
             }
