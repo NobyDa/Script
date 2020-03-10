@@ -1,7 +1,7 @@
 /*
 京东多合一签到脚本
 
-更新于: 2020.3.9 22:55 v78
+更新于: 2020.3.10 15:30 v79
 有效接口: 21
 
 该脚本同时兼容: QuantumultX, Surge, Loon, JSBox, Node.js
@@ -19,8 +19,8 @@ Quantumult X, Surge, Loon 说明：
 如果通知获得cookie成功, 则可以使用此签到脚本。
 由于cookie的有效性(经测试网页Cookie有效周期最长31天)，如果脚本将来弹出cookie无效的通知，则需要重复上述步骤。
 
-签到脚本将在每天的凌晨0:05执行。您可以修改执行时间, 因部分接口京豆限量领取, 建议调整为凌晨签到.
-注: 京东金融游戏大厅接口因京东服务器负载问题可能无法签到, 可调整签到时间避免签到人数过多导致失败.
+签到脚本将在每天的凌晨0:05执行, 您可以修改执行时间。 
+因部分接口京豆限量领取, 建议调整为凌晨签到。
 
 问题反馈: @NobyDa_bot
 TG频道: @NobyDa
@@ -155,7 +155,8 @@ function notify() {
       var two = "【签到总计】:  " + Tbean + TSteel + TCash + Tbsc
       var three = "【账号总计】:  " + beans + Steel + Cash + bsc
       var four = "【左滑 '查看' 以显示签到详情】\n"
-      if (log) console.log("\n" + one + two + three + four + notify)
+      if (typeof require != "function" && log) console.log("\n" + one + two + three + four + notify)
+      if (typeof $intents != "undefined") $intents.finish(one + two + three + four + notify)
       $nobyda.notify("", "", one + two + three + four + notify);
       resolve('done')
     } catch (eor) {
@@ -1432,58 +1433,92 @@ function JingRSeeAds(s) {
 function JingRongGame(s) {
 
   return new Promise(resolve => { setTimeout(() => {
-    const JRGameUrl = {
-      url: 'https://ylc.m.jd.com/sign/signDone',
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded", Cookie: KEY,
-      },
-      body: "channelId=1"
-    };
+      const JRGameUrl = {
+        url: 'https://ylc.m.jd.com/sign/signDone',
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Cookie: KEY,
+        },
+        body: "channelId=1"
+      };
 
-    $nobyda.post(JRGameUrl, function(error, response, data) {
-      try {
-        if (error) {
-          merge.JRGame.notify = "京东金融-游戏: 签到接口请求失败 ‼️‼️"
-          merge.JRGame.fail = 1
-        } else {
-          const cc = JSON.parse(data)
-          if (data.match(/(\"code\":200)/)) {
-            if (log) console.log("京东金融-游戏签到成功response: \n" + data)
-            if (data.match(/(\"rewardAmount\":\d+)/)) {
-              merge.JRGame.notify = "京东金融-游戏: 成功, 明细: " + cc.data.rewardAmount + "京豆 🐶"
-              merge.JRGame.bean = cc.data.rewardAmount
-              merge.JRGame.success = 1
-            } else {
-              merge.JRGame.notify = "京东金融-游戏: 成功, 明细: 无京豆 🐶"
-              merge.JRGame.success = 1
-            }
+      const JRGamelogin = {
+        url: 'https://ylc.m.jd.com/sign/signGiftDays',
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Cookie: KEY,
+        },
+        body: "channelId=1"
+      };
+
+      $nobyda.post(JRGamelogin, function(error, response, data) {
+        try {
+          if (error) {
+            merge.JRGame.notify = "京东金融-游戏: 登录接口请求失败 ‼️‼️"
+            merge.JRGame.fail = 1
           } else {
-            if (log) console.log("京东金融-游戏签到失败response: \n" + data)
-            if (data.match(/(用户重复|重复点击|\"code\":301|\"code\":303)/)) {
-              merge.JRGame.notify = "京东金融-游戏: 失败, 原因: 已签过 ⚠️"
+            if (data.match(/(未登录)/)) {
+              if (log) console.log("京东金融-游戏登录失败response: \n" + data)
+              merge.JRGame.notify = "京东游戏-登录: 失败, 原因: Cookie失效‼️"
               merge.JRGame.fail = 1
-            } else {
-              if (data.match(/(不存在|已结束|未找到)/)) {
-                merge.JRGame.notify = "京东金融-游戏: 失败, 原因: 活动已结束 ⚠️"
-                merge.JRGame.fail = 1
-              } else {
-                if (data.match(/(\"code\":202|未登录)/)) {
-                  merge.JRGame.notify = "京东金融-游戏: 失败, 原因: Cookie失效‼️"
-                  merge.JRGame.fail = 1
-                } else {
-                  merge.JRGame.notify = "京东金融-游戏: 失败, 原因: 未知 ⚠️"
-                  merge.JRGame.fail = 1
+            } else if (data.match(/(成功)/)) {
+              if (log) console.log("京东金融-游戏登录成功response: \n" + data)
+              $nobyda.post(JRGameUrl, function(error, response, data) {
+                try {
+                  if (error) {
+                    merge.JRGame.notify = "京东金融-游戏: 签到接口请求失败 ‼️‼️"
+                    merge.JRGame.fail = 1
+                  } else {
+                    const cc = JSON.parse(data)
+                    if (data.match(/(\"code\":200)/)) {
+                      if (log) console.log("京东金融-游戏签到成功response: \n" + data)
+                      if (data.match(/(\"rewardAmount\":\d+)/)) {
+                        merge.JRGame.notify = "京东金融-游戏: 成功, 明细: " + cc.data.rewardAmount + "京豆 🐶"
+                        merge.JRGame.bean = cc.data.rewardAmount
+                        merge.JRGame.success = 1
+                      } else {
+                        merge.JRGame.notify = "京东金融-游戏: 成功, 明细: 无京豆 🐶"
+                        merge.JRGame.success = 1
+                      }
+                    } else {
+                      if (log) console.log("京东金融-游戏签到失败response: \n" + data)
+                      if (data.match(/(用户重复|重复点击|\"code\":301|\"code\":303)/)) {
+                        merge.JRGame.notify = "京东金融-游戏: 失败, 原因: 已签过 ⚠️"
+                        merge.JRGame.fail = 1
+                      } else {
+                        if (data.match(/(不存在|已结束|未找到)/)) {
+                          merge.JRGame.notify = "京东金融-游戏: 失败, 原因: 活动已结束 ⚠️"
+                          merge.JRGame.fail = 1
+                        } else {
+                          if (data.match(/(\"code\":202|未登录)/)) {
+                            merge.JRGame.notify = "京东金融-游戏: 失败, 原因: Cookie失效‼️"
+                            merge.JRGame.fail = 1
+                          } else {
+                            merge.JRGame.notify = "京东金融-游戏: 失败, 原因: 未知 ⚠️"
+                            merge.JRGame.fail = 1
+                          }
+                        }
+                      }
+                    }
+                  }
+                  resolve('done')
+                } catch (eor) {
+                  $nobyda.notify("京东金融-游戏" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+                  resolve('done')
                 }
-              }
+              })
+            } else {
+              merge.JRGame.notify = "京东游戏-登录: 失败, 原因: 未知 ⚠️"
+              merge.JRGame.fail = 1
             }
           }
+          resolve('done')
+        } catch (eor) {
+          $nobyda.notify("京东游戏-登录" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+          resolve('done')
         }
-        resolve('done')
-      } catch (eor) {
-        $nobyda.notify("京东金融-游戏" + eor.name + "‼️", JSON.stringify(eor), eor.message)
-        resolve('done')
-      }
-    })}, s)
+      })
+    }, s)
   });
 }
 
@@ -1768,7 +1803,7 @@ function nobyda() {
     const isRequest = typeof $request != "undefined"
     const isSurge = typeof $httpClient != "undefined"
     const isQuanX = typeof $task != "undefined"
-    const isJSBox = typeof $app != "undefined" && $app.info.bundleID == "app.cyan.jsbox"
+    const isJSBox = typeof $app != "undefined" && typeof $http != "undefined"
     const isNode = typeof require == "function" && !isJSBox;
     const node = (() => {
         if (isNode) {
@@ -1867,5 +1902,5 @@ function nobyda() {
         if (isQuanX) isRequest ? $done(value) : null
         if (isSurge) isRequest ? $done(value) : $done()
     }
-    return{ isQuanX, isSurge, isJSBox, isRequest, notify, write, read, get, post, log, done }
+    return { isQuanX, isSurge, isJSBox, isRequest, notify, write, read, get, post, log, done }
 };
