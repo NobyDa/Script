@@ -217,7 +217,7 @@ URL-REGEX,^https?:\/\/dl\.app\.gtja\.com\/dzswem\/kvController\/
 URL-REGEX,^https?:\/\/dl\.app\.gtja\.com\/operation\/config\/startupConfig\.json
 URL-REGEX,^https?:\/\/api\.laifeng\.com\/v1\/start\/ads
 URL-REGEX,^https?:\/\/.+\.pstatp\.com\/img\/ad
-URL-REGEX,^https?:\/\/.+\.snssdk\.com\/api\/ad\/
+URL-REGEX,^https?:\/\/.+\.(snssdk|amemv)\.com\/api\/ad\/
 URL-REGEX,^https?:\/\/aweme\.snssdk\.com\/aweme\/v1\/aweme\/stats\/
 URL-REGEX,^https?:\/\/aweme\.snssdk\.com\/aweme\/v1\/device\/update\/
 URL-REGEX,^https?:\/\/aweme\.snssdk\.com\/aweme\/v1\/screen\/ad\/
