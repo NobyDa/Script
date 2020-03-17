@@ -1,7 +1,7 @@
 /*
 京东多合一签到脚本
 
-更新于: 2020.3.17 11:00 v82
+更新于: 2020.3.17 21:05 v83
 有效接口: 22
 
 该脚本同时兼容: QuantumultX, Surge, Loon, JSBox, Node.js
@@ -62,8 +62,8 @@ var $nobyda = nobyda();
 
 //  填此处↓↓↓
 var Key = ''; //如果使用JSBox或Node.js, 单引号内自行填写您抓取的Cookie.
+//  现已加入JsBox持久化接口, 填写Cookie签到成功一次后, 后续JsBox用户更新脚本无需再次填写, 待Cookie失效后再填写即可.
 
-var KEY = Key?Key:$nobyda.read("CookieJD")
 async function all() {//签到模块相互独立,您可注释某一行以禁用某个接口.
   await JingDongBean(stop); //京东京豆
   await JingRongBean(stop); //金融京豆
@@ -125,8 +125,40 @@ if ($nobyda.isRequest) {
   GetCookie()
   $nobyda.done()
 } else {
-  all()
+  ReadCookie()
   $nobyda.done()
+}
+
+function ReadCookie() {
+  return new Promise(resolve => {
+    if (typeof $app != "undefined") {
+      var file = $file.exists("shared://JD_Cookie.txt")
+      if (Key) {
+        var write = $file.write({
+          data: $data({string: Key}),
+          path: "shared://JD_Cookie.txt"
+          })
+        KEY = Key
+        all()
+      } else {
+        if (file) {
+          KEY = $file.read("shared://JD_Cookie.txt").string
+          all()
+        } else {
+          $nobyda.notify("京东签到", "", "脚本终止, 未填写Cookie ‼️")
+        }
+      }
+      resolve('done')
+    } else {
+      KEY = Key?Key:$nobyda.read("CookieJD")
+      if (KEY) {
+        all()
+      } else {
+        $nobyda.notify("京东签到", "", "脚本终止, 未获取Cookie ‼️")
+      }
+      resolve('done')
+    }
+  });
 }
 
 function notify() {
