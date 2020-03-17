@@ -1,8 +1,8 @@
 /*
 京东多合一签到脚本
 
-更新于: 2020.3.16 21:10 v81
-有效接口: 21
+更新于: 2020.3.17 11:00 v82
+有效接口: 22
 
 该脚本同时兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 如使用JSBox 或 Nodejs, 请自行抓取Cookie填入脚本Key处.
@@ -80,6 +80,7 @@ async function all() {//签到模块相互独立,您可注释某一行以禁用�
   await JingDongWomen(stop); //京东女装馆
   await JingDongCash(stop); //京东现金红包
   await JingDongShoes(stop); //京东鞋靴馆
+  await JingDongFood(stop); //京东美食馆
   //await JingRSeeAds(stop); //金融看广告
   await JingRongGame(stop); //金融游戏大厅
   await JingDongLive(stop); //京东智能生活馆
@@ -112,6 +113,7 @@ var merge = {
   JRSeeAds:{success:0,fail:0,bean:0,steel:0,notify:''},
   JDLive:  {success:0,fail:0,bean:0,steel:0,notify:''},
   JDCare:  {success:0,fail:0,bean:0,steel:0,notify:''},
+  JDFood:  {success:0,fail:0,bean:0,steel:0,notify:''},
   JDClean: {success:0,fail:0,bean:0,steel:0,notify:''},
   JDPrize: {success:0,fail:0,bean:0,steel:0,notify:'',key:0},
   JRSteel: {success:0,fail:0,bean:0,steel:0,notify:'',TSteel:0},
@@ -1682,6 +1684,68 @@ function JingDongPrize(s) {
         resolve('done')
       } catch (eor) {
         $nobyda.notify("京东商城-大奖登录" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+        resolve('done')
+      }
+    })}, s)
+  });
+}
+
+function JingDongFood(s) {
+
+  return new Promise(resolve => { setTimeout(() => {
+    const JDMUrl = {
+      url: 'https://api.m.jd.com/client.action?functionId=userSign',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded", Cookie: KEY,
+      },
+      body: "body=%7B%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%222tZC6DPgRUDcQS2TiaLg7bz0GjIWCxg6l6lGSY5qpyQaZs%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22signId%5C%22%3A%5C%223TljDz03josaZs%2Fn4coLNw%3D%3D%5C%22%7D%22%7D&client=wh5"
+    };
+
+    $nobyda.post(JDMUrl, function(error, response, data) {
+      try {
+        if (error) {
+          merge.JDFood.notify = "京东商城-美食: 签到接口请求失败 ‼️‼️"
+          merge.JDFood.fail = 1
+        } else {
+          const cc = JSON.parse(data)
+          if (data.match(/签到成功/)) {
+            if (log) console.log("京东商城-美食签到成功response: \n" + data)
+            if (data.match(/(\"text\":\"\d+京豆\")/)) {
+              beanQuantity = cc.awardList[0].text.match(/\d+/)
+              merge.JDFood.notify = "京东商城-美食: 成功, 明细: " + beanQuantity + "京豆 🐶"
+              merge.JDFood.bean = beanQuantity
+              merge.JDFood.success = 1
+            } else {
+              merge.JDFood.notify = "京东商城-美食: 成功, 明细: 无京豆 🐶"
+              merge.JDFood.success = 1
+            }
+          } else {
+            if (log) console.log("京东商城-美食签到失败response: \n" + data)
+            if (data.match(/(已签到|已领取)/)) {
+              merge.JDFood.notify = "京东商城-美食: 失败, 原因: 已签过 ⚠️"
+              merge.JDFood.fail = 1
+            } else {
+              if (data.match(/(不存在|已结束)/)) {
+                merge.JDFood.notify = "京东商城-美食: 失败, 原因: 活动已结束 ⚠️"
+                merge.JDFood.fail = 1
+              } else {
+                if (cc.code == 3) {
+                  merge.JDFood.notify = "京东商城-美食: 失败, 原因: Cookie失效‼️"
+                  merge.JDFood.fail = 1
+                } else if (cc.code == "600") {
+                  merge.JDFood.notify = "京东商城-美食: 失败, 原因: 认证失败 ⚠️"
+                  merge.JDFood.fail = 1
+                } else {
+                  merge.JDFood.notify = "京东商城-美食: 失败, 原因: 未知 ⚠️"
+                  merge.JDFood.fail = 1
+                }
+              }
+            }
+          }
+        }
+        resolve('done')
+      } catch (eor) {
+        $nobyda.notify("京东商城-美食" + eor.name + "‼️", JSON.stringify(eor), eor.message)
         resolve('done')
       }
     })}, s)
