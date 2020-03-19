@@ -1,25 +1,77 @@
-/*
-皮皮虾去广告
-原自Choler, 由Liquor030修改
-
-Surge4:
-http-response ^https?://[a-z]*\.snssdk\.com/bds/feed/stream/ requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Super.js
-
-QuanX:
-https:\/\/api\.termius\.com\/api\/v3\/bulk\/account\/ url script-response-body Super.js
-
-MITM = *.snssdk.com
+/*皮皮虾去广告和水印 by Liquor030
+=====================================
+Feed: /feed/stream
+回复: /comment/cell_reply
+评论: /cell/cell_comment
+Detail: /cell/detail
+用户插眼: /ward/list
+用户收藏: /user/favorite
+用户评论: /user/cell_coment
+用户feed: /user/cell_userfeed
+用户发帖: /user/publish_list
+===================================
+[Script]
+http-response ^https?://.*\.snssdk\.com/bds/(feed/stream|comment/cell_reply|cell/cell_comment|cell/detail|ward/list|user/favorite|user/cell_coment|user/cell_userfeed|user/publish_list) requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/Liquor030/Sub_Ruleset/master/Script/Super.js
+[MITM]
+hostname = *.snssdk.com
 */
-
-var obj = JSON.parse($response.body);
-if (obj.data.data) {
-  for (var i = obj.data.data.length - 1; i >= 0; i--) {
-    if (obj.data.data[i].ad_info != null) {
-      obj.data.data.splice(i, 1);
-    }
-  }
+var body = $response.body.replace(/\":([0-9]{15,})/g, '\":\"$1str\"');
+body = JSON.parse(body);
+if (body.data.data) {
+    obj = body.data.data;
+} else if (body.data.replies) {
+    obj = body.data.replies;
+} else if (body.data.cell_comments) {
+    obj = body.data.cell_comments;
+} else {
+    obj = null;
 }
-var obj2 = JSON.stringify(obj);
-var obj3 = obj2.replace(/\"cell_id\":\d+,\"cell_id_str\":\"(\d+)\"/g,'\"cell_id\":$1,\"cell_id_str\":\"$1\"');
-var body = obj3.replace(/\"item_id\":\d+,\"item_id_str\":\"(\d+)\"/g,'\"item_id\":$1,\"item_id_str\":\"$1\"');
-$done({body});
+
+if (obj instanceof Array) {
+    if (obj != null) {
+        for (var i in obj) {
+            if (obj[i].ad_info != null) {
+                obj.splice(i, 1);
+            }
+            if (obj[i].item != null) {
+                if (obj[i].item.video != null) {
+                    obj[i].item.video.video_download.url_list = obj[i].item.origin_video_download.url_list;
+                }
+                for (var j in obj[i].item.comments) {
+                    if (obj[i].item.comments[j].video != null) {
+                        obj[i].item.comments[j].video_download.url_list = obj[i].item.comments[j].video.url_list;
+                    }
+                }
+            }
+            if (obj[i].comment_info != null) {
+                if (obj[i].comment_info.video != null) {
+                    obj[i].comment_info.video_download.url_list = obj[i].comment_info.video.url_list;
+                }
+            }
+        }
+    }
+} else {
+    if (obj.item != null) {
+        if (obj.item.video != null) {
+            obj.item.video.video_download.url_list = obj.item.origin_video_download.url_list;
+        }
+        for (var j in obj.item.comments) {
+            if (obj.item.comments[j].video != null) {
+                obj.item.comments[j].video_download.url_list = obj.item.comments[j].video.url_list;
+            }
+        }
+    }
+    if (obj.comment_info != null) {
+        if (obj.comment_info.video != null) {
+            obj.comment_info.video_download.url_list = obj.comment_info.video.url_list;
+        }
+    }
+}
+body = JSON.stringify(body);
+body = body.replace(/\":\"([0-9]{15,})str\"/g, '\":$1');
+body = body.replace(/\"can_download\":false/g, '\"can_download\":true');
+body = body.replace(/tplv-ppx-logo.image/g, '0x0.gif');
+body = body.replace(/tplv-ppx-logo/g, '0x0');
+$done({
+    body
+});
