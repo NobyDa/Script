@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新于: 2020.3.26 16:00 v0.88
+更新于: 2020.3.26 16:45 v0.89
 有效接口: 22+
 兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 TG频道: @NobyDa 
@@ -137,7 +137,7 @@ var merge = {
   JDPrize: {success:0,fail:0,bean:0,steel:0,notify:'',key:0},
   JRSteel: {success:0,fail:0,bean:0,steel:0,notify:'',TSteel:0},
   JDCash:  {success:0,fail:0,bean:0,steel:0,notify:'',Cash:0,TCash:0},
-  JDShake: {success:0,fail:0,bean:0,steel:0,notify:'',Qbear:0}
+  JDShake: {success:0,fail:0,bean:0,steel:0,notify:'',Qbear:0,nackname:''}
 }
 
 function notify() {
@@ -170,7 +170,7 @@ function notify() {
       var two = "【签到总计】:  " + Tbean + TSteel + TCash + Tbsc
       var three = "【账号总计】:  " + beans + Steel + Cash + bsc
       var four = "【左滑 '查看' 以显示签到详情】\n"
-      var DName = merge.JDShake.steel?merge.JDShake.steel:"获取失败"
+      var DName = merge.JDShake.nickname?merge.JDShake.nickname:"获取失败"
       var Name = add?DualAccount?"【签到号一】:  "+DName+"\n":"【签到号二】:  "+DName+"\n":""
       if (log) console.log("\n" + Name + one + two + three + four + notify)
       if ($nobyda.isJSBox) {
@@ -269,6 +269,7 @@ function double() {
     merge[i].Cash = 0;
     merge[i].TCash = 0;
     merge[i].Qbear = 0;
+    merge[i].nickname = '';
   }
 
   if ($nobyda.isJSBox) {
@@ -1912,9 +1913,11 @@ function TotalBean() {
             merge.JDShake.Qbear = cc.base.jdNum
           }
           if (data.match(/\"nickname\" ?: ?\"(.+?)\",/)) {
-            merge.JDShake.steel = cc.base.nickname
+            merge.JDShake.nickname = cc.base.nickname
           } else if (data.match(/\"no ?login\.?\"/)) {
-            merge.JDShake.steel = "Cookie失效 ‼️"
+            merge.JDShake.nickname = "Cookie失效 ‼️"
+          } else {
+            merge.JDShake.nickname = '';
           }
         }
         resolve('done')
