@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新于: 2020.3.26 16:45 v0.89
+更新于: 2020.3.26 23:35 v0.90
 有效接口: 22+
 兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 TG频道: @NobyDa 
@@ -1960,9 +1960,10 @@ function TotalCash() {
 function GetCookie() {
   try {
     if ($request.headers && $request.url.match(/api\.m\.jd\.com.*=signBean/)) {
-      if ($request.headers['Cookie'].match(/pt_pin=(.+?);/)) {
-        var CookieValue = $request.headers['Cookie']
-        var AccountOne = $nobyda.read("CookieJD") ? $nobyda.read("CookieJD").match(/pt_pin=(.+?);/)[1] : null
+      var CV = $request.headers['Cookie']
+      if (CV.match(/(pt_key=.+?pt_pin=|pt_pin=.+?pt_key=)/)) {
+        var CookieValue = CV.match(/pt_key=.+?;/) + CV.match(/pt_pin=.+?;/)
+        var AccountOne = $nobyda.read("CookieJD") ? $nobyda.read("CookieJD").match(/pin=(.+?);/)[1] : null
         var AccountTwo = $nobyda.read("CookieJD2") ? $nobyda.read("CookieJD2").match(/pt_pin=(.+?);/)[1] : null
         var UserName = CookieValue.match(/pt_pin=(.+?);/)[1]
         var DecodeName = decodeURIComponent(UserName)
@@ -1974,12 +1975,11 @@ function GetCookie() {
           var CookieName = " [账号二] ";
           var CookieKey = "CookieJD2";
         } else {
-          $nobyda.notify("更新京东Cookie失败", "非历史写入账号 ‼️", '请开启脚本内"DeleteCookie"选项 ‼️')
+          $nobyda.notify("更新京东Cookie失败", "非历史写入账号 ‼️", '请开启脚本内"DeleteCookie"以清空Cookie ‼️')
           return
         }
-
       } else {
-        $nobyda.notify("写入京东Cookie失败", "", "无法读取账号用户名 ‼️")
+        $nobyda.notify("写入京东Cookie失败", "", "请查看脚本内说明, 登录网页获取 ‼️")
         return
       }
       if ($nobyda.read(CookieKey)) {
