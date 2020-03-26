@@ -717,7 +717,7 @@ URL-REGEX,^https?:\/\/s3plus\.meituan\.net\/v1\/mss_a002
 URL-REGEX,^https?:\/\/img\.meituan\.net\/midas\/.*@\d{4}h
 URL-REGEX,^https?:\/\/img\.meituan\.net\/display\/\w+\.jpg\.webp
 URL-REGEX,^https?:\/\/[\s\S]*\/eapi\/ad\/
-URL-REGEX,^https?:\/\/iad.*mat\.[a-z]*\.12[67]\.net/\w+\.(jpg|mp4)
+URL-REGEX,^https?:\/\/iad.*mat\.music\.12[67]\.net/\w+\.(jpg|mp4)
 URL-REGEX,^https?:\/\/zt-app\.go189\.cn\/zt-app\/welcome\/.*Animation
 URL-REGEX,^https?:\/\/[\s\S]*\/ting\/[a-z]*\/ts-\d+
 URL-REGEX,^https?:\/\/res\.xiaojukeji\.com\/resapi\/activity\/get(Ruled|Preload)
