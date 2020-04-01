@@ -1,4 +1,4 @@
-# Update-2020.3.26 Self-use rule, Remove versus shenji duplicates and optimizations
+# Update-2020.4.1 Self-use rule, Remove versus shenji duplicates and optimizations
 # This rule does not include shenji
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
@@ -5089,7 +5089,6 @@ DOMAIN-SUFFIX,maw.wnbfw.com,REJECT
 DOMAIN-SUFFIX,maxwebsearch.com,REJECT
 DOMAIN-SUFFIX,maysunmedia.com,REJECT
 DOMAIN-SUFFIX,mb.hockeybuzz.com,REJECT
-DOMAIN-SUFFIX,mb.yidianzixun.com,REJECT
 DOMAIN-SUFFIX,mb.zam.com,REJECT
 DOMAIN-SUFFIX,mbai.cn,REJECT
 DOMAIN-SUFFIX,mbd.weathercn.com,REJECT
@@ -7977,4 +7976,7 @@ DOMAIN-SUFFIX,zzz7.52896368.com,REJECT
 DOMAIN-SUFFIX,zzzzz4.52896368.com,REJECT
 DOMAIN-SUFFIX,analytics.query.yahoo.com,REJECT
 DOMAIN-SUFFIX,ap.dongqiudi.com,REJECT
+DOMAIN,adx.open-adx.com,REJECT
+DOMAIN,adservice.sigmob.cn,REJECT
 DOMAIN,unidesk.alicdn.com,REJECT
+DOMAIN,mcupdate.gstarcad.com,REJECT
