@@ -12,6 +12,10 @@
 
 * Store version QX1.0.5 (192) Remote script resources are unavailable, but "task" script functionality is added.
 
+* Store version QX1.0.6 (212) Supports rewrite of HTTP request body, and replay of HTTP request
+
+* Store version QX1.0.7 (240) Supports TLS 1.3 for TLS based proxy protocols, and new external proxy protocol trojan.
+
 QX1.0.3 add device ID, a simple example:
 
 ```ini
