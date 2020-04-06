@@ -15,7 +15,7 @@ http-response ^https?://.*\.snssdk\.com/bds/(feed/stream|comment/cell_reply|cell
 [MITM]
 hostname = *.snssdk.com
 */
-var body = $response.body.replace(/\":([0-9]{15,})/g, '\":\"$1str\"');
+var body = $response.body.replace(/\":([0-9]{15,})/g, '":"$1str"');
 body = JSON.parse(body);
 if (body.data.data) {
     obj = body.data.data;
@@ -68,8 +68,8 @@ if (obj instanceof Array) {
     }
 }
 body = JSON.stringify(body);
-body = body.replace(/\":\"([0-9]{15,})str\"/g, '\":$1');
-body = body.replace(/\"can_download\":false/g, '\"can_download\":true');
+body = body.replace(/\":\"([0-9]{15,})str\"/g, '":$1');
+body = body.replace(/\"can_download\":false/g, '"can_download":true');
 body = body.replace(/tplv-ppx-logo.image/g, '0x0.gif');
 body = body.replace(/tplv-ppx-logo/g, '0x0');
 $done({
