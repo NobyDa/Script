@@ -1,4 +1,4 @@
-#Update 2020.4.1 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2020.4.9 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,admaster.com,REJECT
 DOMAIN-SUFFIX,0z5jn.cn,REJECT
 DOMAIN-SUFFIX,114so.cn,REJECT
@@ -1121,7 +1121,6 @@ DOMAIN,newloc.map.n.shifen.com,REJECT
 DOMAIN,thirdparty.biliapi.com,REJECT
 DOMAIN,cm.bilibili.com,REJECT
 DOMAIN,mbdlog.iqiyi.com,REJECT
-DOMAIN,mi.gdt.qq.com,REJECT
 DOMAIN,o2o.api.xiaomi.com,REJECT
 DOMAIN,mqtt.zhihu.com,REJECT
 DOMAIN-SUFFIX,linktech.cn,REJECT
@@ -1157,7 +1156,6 @@ DOMAIN-SUFFIX,iadmusicmat.music.126.net,REJECT
 DOMAIN-SUFFIX,imgad0.pconline.com.cn,REJECT
 DOMAIN-SUFFIX,imgadpai.thepaper.cn,REJECT
 DOMAIN-SUFFIX,impservice.dictapp.youdao.com,REJECT
-DOMAIN-SUFFIX,lbs.map.qq.com,REJECT
 DOMAIN-SUFFIX,miniapp.bilibili.com,REJECT
 DOMAIN-SUFFIX,mmstat.com,REJECT
 DOMAIN-SUFFIX,mobilead.kuwo.cn,REJECT
