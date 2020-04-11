@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.4.7 19:15 v0.94
-有效接口: 21+
+更新时间: 2020.4.9 0:22 v0.95
+有效接口: 22+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -99,6 +99,7 @@ async function all() {
       JDSecondhand(stop), //京东拍拍二手
       JingDMakeup(stop), //京东美妆馆
       JingDongWomen(stop), //京东女装馆
+      JingDongFish(stop), //京东小京鱼
       JingDongCash(stop), //京东现金红包
       //JingDongShoes(stop), //京东鞋靴馆
       JingDongFood(stop), //京东美食馆
@@ -125,6 +126,7 @@ async function all() {
     await JDSecondhand(stop); //京东拍拍二手
     await JingDMakeup(stop); //京东美妆馆
     await JingDongWomen(stop); //京东女装馆
+    await JingDongFish(stop); //京东小京鱼
     await JingDongCash(stop); //京东现金红包
     //await JingDongShoes(stop); //京东鞋靴馆
     await JingDongFood(stop); //京东美食馆
@@ -1788,6 +1790,72 @@ function JingDongLive(s) {
   });
 }
 
+function JingDongFish(s) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const JDFishUrl = {
+        url: 'https://api.m.jd.com/client.action?functionId=userSign',
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Cookie: KEY,
+        },
+        body: "body=%7B%22riskParam%22%3A%7B%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22shshshfpb%22%3A%22v1%5C%2FzMYRjEWKgYe%2BUiNwEvaVlrHBQGVwqLx4CsS9PH1s0s0Vs9AWk%2B7vr9KSHh3BQd5NTukznDTZnd75xHzonHnw%3D%3D%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22childActivityUrl%22%3A%22https%3A%5C%2F%5C%2Fpro.m.jd.com%5C%2Fmall%5C%2Factive%5C%2F3BwL7BKvYV3i9imDeVtBbyU1v893%5C%2Findex.html%3Flng%3D0.000000%26lat%3D0.000000%26sid%3Dae5cf92b2f53e23f9339e4dae4789caw%26un_area%3D19_1617_3643_8208%22%7D%2C%22url%22%3A%22https%3A%5C%2F%5C%2Fpro.m.jd.com%5C%2Fmall%5C%2Factive%5C%2F3BwL7BKvYV3i9imDeVtBbyU1v893%5C%2Findex.html%3Flng%3D0.000000%26lat%3D0.000000%26sid%3Dae5cf92b2f53e23f9339e4dae4789caw%26un_area%3D19_1617_3643_8208%22%2C%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22kHUojtemGSfyWMS74j%5C%2FyrQjdkHCZ7LS0OV5zi7BgjzgaZs%5C%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%2200620312_30612459_t1%5C%22%2C%5C%22signId%5C%22%3A%5C%22RWgRKe30%2BokaZs%5C%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22geo%22%3A%7B%22lng%22%3A%220.000000%22%2C%22lat%22%3A%220.000000%22%7D%7D&client=apple&clientVersion=8.5.6&d_brand=apple&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&rfs=0000&scope=11&sign=9be1cb3dbe9d2986bed77e36f20d043a&st=1586362297346&sv=120"
+      };
+      $nobyda.post(JDFishUrl, function(error, response, data) {
+        try {
+          if (error) {
+            merge.JDFish.notify = "京东商城-京鱼: 签到接口请求失败 ‼️‼️"
+            merge.JDFish.fail = 1
+          } else {
+            const cc = JSON.parse(data)
+            if (data.match(/签到成功/)) {
+              var Details = LogDetails ? "response:\n" + data : '';
+              console.log("\n" + "京东商城-京鱼签到成功 " + Details)
+              if (data.match(/(\"text\":\"\d+京豆\")/)) {
+                beanQuantity = cc.awardList[0].text.match(/\d+/)
+                merge.JDFish.notify = "京东商城-京鱼: 成功, 明细: " + beanQuantity + "京豆 🐶"
+                merge.JDFish.bean = beanQuantity
+                merge.JDFish.success = 1
+              } else {
+                merge.JDFish.notify = "京东商城-京鱼: 成功, 明细: 无京豆 🐶"
+                merge.JDFish.success = 1
+              }
+            } else {
+              var Details = LogDetails ? "response:\n" + data : '';
+              console.log("\n" + "京东商城-京鱼签到失败 " + Details)
+              if (data.match(/(已签到|已领取)/)) {
+                merge.JDFish.notify = "京东商城-京鱼: 失败, 原因: 已签过 ⚠️"
+                merge.JDFish.fail = 1
+              } else {
+                if (data.match(/(不存在|已结束|未开始)/)) {
+                  merge.JDFish.notify = "京东商城-京鱼: 失败, 原因: 活动已结束 ⚠️"
+                  merge.JDFish.fail = 1
+                } else {
+                  if (cc.code == 3) {
+                    merge.JDFish.notify = "京东商城-京鱼: 失败, 原因: Cookie失效‼️"
+                    merge.JDFish.fail = 1
+                  } else if (cc.code == "600") {
+                    merge.JDFish.notify = "京东商城-京鱼: 失败, 原因: 认证失败 ⚠️"
+                    merge.JDFish.fail = 1
+                  } else {
+                    merge.JDFish.notify = "京东商城-京鱼: 失败, 原因: 未知 ⚠️"
+                    merge.JDFish.fail = 1
+                  }
+                }
+              }
+            }
+          }
+          resolve()
+        } catch (eor) {
+          $nobyda.notify("京东商城-京鱼" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+          resolve()
+        }
+      })
+    }, s)
+    if (out) setTimeout(resolve, out + s)
+  });
+}
+
 function JingDongPrize(s) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -2103,6 +2171,7 @@ function initial() {
     JRSeeAds: {},
     JDLive: {},
     JDCare: {},
+    JDFish: {},
     JDFood: {},
     JDClean: {},
     JDPrize: {},
