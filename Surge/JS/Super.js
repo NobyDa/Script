@@ -1,4 +1,10 @@
 /*皮皮虾去广告和水印 by Liquor030
+如果只需要去广告功能请在[URL Rewrite]中添加
+ 
+# Remove Super's Ad (By Liquor030)
+app_name=super&([\S]*)aid=\d+ app_name=super_pro&$1aid=1412 header
+ 
+可大幅改善使用体验，强烈建议添加并禁用该脚本，在需要的时候开启脚本去水印！！
 =====================================
 Feed: /feed/stream
 回复: /comment/cell_reply
