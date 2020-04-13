@@ -1,4 +1,4 @@
-#Update 2020.3.26 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2020.4.9 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,admaster.com,REJECT
 DOMAIN-SUFFIX,0z5jn.cn,REJECT
 DOMAIN-SUFFIX,114so.cn,REJECT
@@ -136,7 +136,6 @@ DOMAIN-SUFFIX,adfilter.imtt.qq.com,REJECT
 DOMAIN-SUFFIX,adsrich.qq.com,REJECT
 DOMAIN-SUFFIX,aexception.bugly.qq.com,REJECT
 DOMAIN-SUFFIX,android.bugly.qq.com,REJECT
-DOMAIN-SUFFIX,appsupport.qq.com,REJECT
 DOMAIN-SUFFIX,astat.bugly.qq.com,REJECT
 DOMAIN-SUFFIX,beacon.qq.com,REJECT
 DOMAIN-SUFFIX,bs.l.qq.com,REJECT
@@ -147,7 +146,6 @@ DOMAIN-SUFFIX,c2.l.qq.com,REJECT
 DOMAIN-SUFFIX,cb.l.qq.com,REJECT
 DOMAIN-SUFFIX,cdn.ark.qq.com,REJECT
 DOMAIN-SUFFIX,cfg.imtt.qq.com,REJECT
-DOMAIN-SUFFIX,cgi.connect.qq.com,REJECT
 DOMAIN-SUFFIX,client.show.qq.com,REJECT
 DOMAIN-SUFFIX,cm.e.qq.com,REJECT
 DOMAIN-SUFFIX,cm.l.qq.com,REJECT
@@ -936,7 +934,6 @@ DOMAIN-SUFFIX,uimg.123hala.com,REJECT
 DOMAIN-SUFFIX,uma.gtags.net,REJECT
 DOMAIN-SUFFIX,ums.adtechjp.com,REJECT
 DOMAIN-SUFFIX,ums.adtechus.com,REJECT
-DOMAIN-SUFFIX,umtrack.com,REJECT
 DOMAIN-SUFFIX,union2.50bang.org,REJECT
 DOMAIN-SUFFIX,up1.tj.u2.ucweb.com,REJECT
 DOMAIN-SUFFIX,update.123juzi.net,REJECT
@@ -1124,7 +1121,6 @@ DOMAIN,newloc.map.n.shifen.com,REJECT
 DOMAIN,thirdparty.biliapi.com,REJECT
 DOMAIN,cm.bilibili.com,REJECT
 DOMAIN,mbdlog.iqiyi.com,REJECT
-DOMAIN,mi.gdt.qq.com,REJECT
 DOMAIN,o2o.api.xiaomi.com,REJECT
 DOMAIN,mqtt.zhihu.com,REJECT
 DOMAIN-SUFFIX,linktech.cn,REJECT
@@ -1160,7 +1156,6 @@ DOMAIN-SUFFIX,iadmusicmat.music.126.net,REJECT
 DOMAIN-SUFFIX,imgad0.pconline.com.cn,REJECT
 DOMAIN-SUFFIX,imgadpai.thepaper.cn,REJECT
 DOMAIN-SUFFIX,impservice.dictapp.youdao.com,REJECT
-DOMAIN-SUFFIX,lbs.map.qq.com,REJECT
 DOMAIN-SUFFIX,miniapp.bilibili.com,REJECT
 DOMAIN-SUFFIX,mmstat.com,REJECT
 DOMAIN-SUFFIX,mobilead.kuwo.cn,REJECT
@@ -1207,7 +1202,6 @@ DOMAIN-KEYWORD,supersonicads,REJECT
 DOMAIN-KEYWORD,taboola,REJECT
 DOMAIN-KEYWORD,traffic,REJECT
 DOMAIN-KEYWORD,uedas,REJECT
-DOMAIN-KEYWORD,umtrack,REJECT
 DOMAIN-KEYWORD,uploadMobileData,REJECT
 DOMAIN-KEYWORD,wlmonitor,REJECT
 DOMAIN-KEYWORD,zjtoolbar,REJECT

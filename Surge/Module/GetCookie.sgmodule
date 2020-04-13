@@ -1,0 +1,16 @@
+#!name=Get cookie. By NobyDa
+#!desc=该模块适用于定时签到脚本的Cookie获取. 集成: 京东, 吾爱破解, 爱奇艺, 哔哩哔哩漫画. 您可以在使用后手动将其禁用，以免产生不必要的MITM.
+#!system=ios
+
+[Script]
+
+Get-Cookie.js = type=http-request,pattern=https:\/\/www\.52pojie\.cn\/home\.php\?,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/52pojieDailyBonus/Get-Cookie.js
+
+iQIYI_GetCookie.js = type=http-request,pattern=https?:\/\/.*\.iqiyi\.com\/.*authcookie=,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/iQIYI-DailyBonus/iQIYI_GetCookie.js
+
+Manga.js = type=http-request,pattern=https:\/\/manga\.bilibili\.com\/.*\.User\/GetWallet,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
+
+JD_DailyBonus.js = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+
+[MITM]
+hostname = %APPEND% *.iqiyi.com, www.52pojie.cn, api.m.jd.com, manga.bilibili.com
