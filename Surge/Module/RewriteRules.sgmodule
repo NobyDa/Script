@@ -1,9 +1,9 @@
 #!name=Ad rewrite rules, By NobyDa
-#!desc=This module integrate lhie1 and ConnersHua, and some self use rules
+#!desc=This module integrate lhie1 and ConnersHua, and some self use rewrite rules
 
 [URL Rewrite]
 
-# Update time: 2020.4.13
+# Update time: 2020.4.14
 
 ^https?:\/\/interface\.music\.163\.com\/eapi\/ad - reject
 ^https?:\/\/iadmusicmat\.music.126.net\/.*jpg$ - reject
@@ -72,7 +72,6 @@
 ^https?:\/\/itunes\.apple\.com\/lookup\?id=575826903 - reject
 ^https?:\/\/.+\/cdn\/qiyiapp\/\d{8}\/.+&dis_dz= - reject
 ^https?:\/\/.+\/cdn\/qiyiapp\/\d{8}\/.+&z=\w - reject
-^https?:\/\/.+\/videos\/other\/ - reject
 ^https?:\/\/iface2\.iqiyi\.com\/fusion\/3\.0\/fusion_switch - reject
 ^https?:\/\/agn\.aty\.sohu\.com\/m? - reject
 ^https?:\/\/api\.k\.sohu\.com\/api\/news\/adsense - reject
