@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.4.13 15:00 v0.97
+更新时间: 2020.4.17 22:00 v0.98
 有效接口: 22+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -108,7 +108,7 @@ async function all() {
       JingDongLive(stop), //京东智能生活馆
       JingDongClean(stop), //京东清洁馆
       JDPersonalCare(stop), //京东个人护理馆
-      //JDMagicCube(stop), //京东小魔方
+      JDMagicCube(stop), //京东小魔方
       JingDongPrize(stop), //京东抽大奖
       JingDongShake(stop) //京东摇一摇
     ])
@@ -128,7 +128,7 @@ async function all() {
     await JingDMakeup(stop); //京东美妆馆
     await JingDongWomen(stop); //京东女装馆
     await JingDongFish(stop); //京东小京鱼
-    //await JDMagicCube(stop); //京东小魔方
+    await JDMagicCube(stop); //京东小魔方
     await JingDongCash(stop); //京东现金红包
     //await JingDongShoes(stop); //京东鞋靴馆
     await JingDongFood(stop); //京东美食馆
@@ -2047,7 +2047,7 @@ function JingDongFood(s) {
           "Content-Type": "application/x-www-form-urlencoded",
           Cookie: KEY,
         },
-        body: "body=%7B%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22FXy4qPoGOckBeTSpyYzozEW3M9mj%2BXDDcciQAT4BCBQaZs%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%2200149803_31265281_t1%5C%22%2C%5C%22signId%5C%22%3A%5C%22Z3x1jBClFqsaZs%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22riskParam%22%3A%7B%22platform%22%3A%223%22%2C%22orgType%22%3A%222%22%2C%22openId%22%3A%22-1%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22fp%22%3A%22-1%22%2C%22shshshfp%22%3A%22b8ff826674dda95c4258d632e7c5845e%22%2C%22shshshfpa%22%3A%22f6ca1cb3-300a-fef7-ce56-11b2dc685988-1582473660%22%2C%22shshshfpb%22%3A%22ao0pyKirmGbxBzmszs2h%2Fsw%3D%3D%22%2C%22childActivityUrl%22%3A%22https%3A%2F%2Fpro.m.jd.com%2Fmall%2Factive%2F43tTmWFv8cBQM6YNtJpq1gCFmCfv%2Findex.html%3FcollectionId%3D249%26un_area%3D20_1806_1810_12325%26lng%3D0%26lat%3D0%22%7D%2C%22siteClient%22%3A%22apple%22%2C%22mitemAddrId%22%3A%22%22%2C%22geo%22%3A%7B%22lng%22%3A%220%22%2C%22lat%22%3A%220%22%7D%2C%22addressId%22%3A%22%22%2C%22posLng%22%3A%22%22%2C%22posLat%22%3A%22%22%2C%22focus%22%3A%22%22%2C%22innerAnchor%22%3A%22%22%2C%22cv%22%3A%222.0%22%7D&client=wh5"
+        body: "body=%7B%22riskParam%22%3A%7B%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22shshshfpb%22%3A%22v1%5C%2FzMYRjEWKgYe%2BUiNwEvaVlrHBQGVwqLx4CsS9PH1s0s0Vs9AWk%2B7vr9KSHh3BQd5NTukznDTZnd75xHzonHnw%3D%3D%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22childActivityUrl%22%3A%22https%3A%5C%2F%5C%2Fpro.m.jd.com%5C%2Fmall%5C%2Factive%5C%2F4PzvVmLSBq5K63oq4oxKcDtFtzJo%5C%2Findex.html%3Fhas_native%3D1%26collectionId%3D249%26lng%3D0.000000%26lat%3D0.000000%26sid%3De04bcaa274340902c2b867287c7a453w%26un_area%3D19_1617_3643_8208%22%7D%2C%22url%22%3A%22https%3A%5C%2F%5C%2Fpro.m.jd.com%5C%2Fmall%5C%2Factive%5C%2F4PzvVmLSBq5K63oq4oxKcDtFtzJo%5C%2Findex.html%3Fhas_native%3D1%26collectionId%3D249%26lng%3D0.000000%26lat%3D0.000000%26sid%3De04bcaa274340902c2b867287c7a453w%26un_area%3D19_1617_3643_8208%22%2C%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%228%5C%2FDviXGn3N1boQsO5shUsOVtunAdqW1r%2BKEXRNqYRDoaZs%5C%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%2200635175_32487094_t1%5C%22%2C%5C%22signId%5C%22%3A%5C%22YNc11unSqTgaZs%5C%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22geo%22%3A%7B%22lng%22%3A%220.000000%22%2C%22lat%22%3A%220.000000%22%7D%7D&client=apple&clientVersion=8.5.8&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&partner=apple&rfs=0000&scope=11&sign=250936af6370bdcf509f98c716bfe504&st=1587131955849&sv=112"
       };
       $nobyda.post(JDMUrl, function(error, response, data) {
         try {
