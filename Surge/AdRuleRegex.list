@@ -677,7 +677,6 @@ URL-REGEX,^https?:\/\/img\.meituan\.net\/(adunion|display|midas)\/.+\.(gif|jpg|j
 URL-REGEX,^https?:\/\/s3plus\.meituan\.net\/.+\/linglong\/.+\.(gif|jpg|mp4)
 URL-REGEX,^https?:\/\/pan-api\.bitqiu\.com\/activity\/(getPromoteGuide|getUrlList)
 URL-REGEX,^http:\/\/dssp\.stnts\.com
-URL-REGEX,^https?:\/\/[a-z]*\.alicdn\.com\/.*\.jpg_(9\d{2}|\d{4})
 URL-REGEX,^https?:\/\/mps\.95508\.com\/mps\/club\/cardPortals\/adv\/.{25}\.jpg
 URL-REGEX,^https?:\/\/api\.feng\.com\/v\d\/advertisement\/.*Claunch
 URL-REGEX,^https?:\/\/www\.bodivis\.com\.cn\/app\/splashAdvertise
