@@ -1,4 +1,4 @@
-# Update-2020.4.27 Self-use rule, Remove versus shenji duplicates and optimizations
+# Update-2020.4.28 Self-use rule, Remove versus shenji duplicates and optimizations
 # This rule does not include shenji
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
@@ -7964,7 +7964,7 @@ DOMAIN-SUFFIX,zzz7.52896368.com,REJECT
 DOMAIN-SUFFIX,zzzzz4.52896368.com,REJECT
 DOMAIN-SUFFIX,analytics.query.yahoo.com,REJECT
 DOMAIN-SUFFIX,ap.dongqiudi.com,REJECT
-DOMAIN,adx.open-adx.com,REJECT
-DOMAIN,adservice.sigmob.cn,REJECT
-DOMAIN,unidesk.alicdn.com,REJECT
-DOMAIN,mcupdate.gstarcad.com,REJECT
+DOMAIN-SUFFIX,adx.open-adx.com,REJECT
+DOMAIN-SUFFIX,adservice.sigmob.cn,REJECT
+DOMAIN-SUFFIX,unidesk.alicdn.com,REJECT
+DOMAIN-SUFFIX,mcupdate.gstarcad.com,REJECT
