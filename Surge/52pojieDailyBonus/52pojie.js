@@ -6,7 +6,8 @@ When using for the first time. Need to manually log in to the 52pojie forum to g
 Due to the validity of cookie, if the script pops up a notification of cookie invalidation in the future, you need to repeat the above steps.
 
 
-Surge 4.0 : [Script]
+Surge4.0 or Loon : 
+[Script]
 
 // Daily bonus Script. Will be performed every day at 8 am. You can modify the execution time.
 cron "0 8 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/52pojieDailyBonus/52pojie.js
@@ -33,15 +34,15 @@ $httpClient.get(bonus, function(error, response, data) {
     $notification.post("52pojie Daily bonus. Interface error‼️‼️‼️", "", error)
     $done()
   } else {
-    if (data.match(/ÒÑÍê³É/)) {
+    if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8)/)) {
       $notification.post("52pojie Daily bonus", "", week[date.getDay()] + ", " + month[date.getMonth()] + " " + date.getDate() + ", " + "Daily bonus success！🎉")
       $done()
     } else {
-      if (data.match(/ÄúÒÑ/)) {
+      if (data.match(/(ÄúÒÑ|\u4e0b\u671f\u518d\u6765)/)) {
         $notification.post("52pojie Daily bonus", "", week[date.getDay()] + ", " + month[date.getMonth()] + " " + date.getDate() + ", " + "Repeat ⚠️")
         $done()
       } else {
-        if (data.match(/ÏÈµÇÂ¼/)) {
+        if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55)/)) {
           $notification.post("52pojie Daily bonus. Error. Cookies expire", "", "Please reopen the script to get‼️")
           $done()
         } else {
