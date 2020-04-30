@@ -652,7 +652,7 @@ URL-REGEX,^https?:\/\/sax\w?\.sina\.com\.cn
 URL-REGEX,^https?:\/\/server-\w+\.imrworldwide\.com
 URL-REGEX,^https?:\/\/t\d{2}\.baidu\.com
 URL-REGEX,^https?:\/\/www\.bldimg\.com\/(background|splash)\/.+\.png$
-URL-REGEX,^https?:\/\/ups\.youku\.com\/(\.*)needad=1& 
+URL-REGEX,^https?:\/\/ups\.youku\.com\/.*?needad=1&
 URL-REGEX,^http?:\/\/www\.tsytv\.com\.cn\/api\/app\/ios\/ads
 URL-REGEX,^https?:\/\/qidian\.qpic\.cn\/qidian_common
 URL-REGEX,^https?:\/\/123\.59\.30\.10\/adv\/advInfos

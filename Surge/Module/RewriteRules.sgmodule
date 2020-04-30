@@ -656,7 +656,7 @@
 ^https?:\/\/server-\w+\.imrworldwide\.com - reject
 ^https?:\/\/t\d{2}\.baidu\.com - reject
 ^https?:\/\/www\.bldimg\.com\/(background|splash)\/.+\.png$ - reject
-^https?:\/\/ups\.youku\.com\/(\.*)needad=1&  - reject
+^https?:\/\/ups\.youku\.com\/.*?needad=1& - reject
 ^http?:\/\/www\.tsytv\.com\.cn\/api\/app\/ios\/ads - reject
 ^https?:\/\/qidian\.qpic\.cn\/qidian_common - reject
 ^https?:\/\/123\.59\.30\.10\/adv\/advInfos - reject
