@@ -1,4 +1,10 @@
 /*皮皮虾去广告和水印 by Liquor030
+如果只需要去广告功能请在[URL Rewrite]中添加
+ 
+# Remove Super's Ad (By Liquor030)
+app_name=super&([\S]*)aid=\d+ app_name=super_pro&$1aid=1412 header
+ 
+可大幅改善使用体验，强烈建议添加并禁用该脚本，在需要的时候开启脚本去水印！！
 =====================================
 Feed: /feed/stream
 回复: /comment/cell_reply
@@ -15,7 +21,7 @@ http-response ^https?://.*\.snssdk\.com/bds/(feed/stream|comment/cell_reply|cell
 [MITM]
 hostname = *.snssdk.com
 */
-var body = $response.body.replace(/\":([0-9]{15,})/g, '\":\"$1str\"');
+var body = $response.body.replace(/\":([0-9]{15,})/g, '":"$1str"');
 body = JSON.parse(body);
 if (body.data.data) {
     obj = body.data.data;
@@ -68,8 +74,8 @@ if (obj instanceof Array) {
     }
 }
 body = JSON.stringify(body);
-body = body.replace(/\":\"([0-9]{15,})str\"/g, '\":$1');
-body = body.replace(/\"can_download\":false/g, '\"can_download\":true');
+body = body.replace(/\":\"([0-9]{15,})str\"/g, '":$1');
+body = body.replace(/\"can_download\":false/g, '"can_download":true');
 body = body.replace(/tplv-ppx-logo.image/g, '0x0.gif');
 body = body.replace(/tplv-ppx-logo/g, '0x0');
 $done({
