@@ -1,4 +1,4 @@
-# Update-2019.12.13 Self-use rule, Remove versus shenji duplicates and optimizations
+# Update-2020.4.28 Self-use rule, Remove versus shenji duplicates and optimizations
 # This rule does not include shenji
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
@@ -2527,7 +2527,6 @@ DOMAIN-SUFFIX,daima.youbian.com,REJECT
 DOMAIN-SUFFIX,daima123.cc,REJECT
 DOMAIN-SUFFIX,dairuqi.com,REJECT
 DOMAIN-SUFFIX,dajean.com,REJECT
-DOMAIN-SUFFIX,dajiyuan.com,REJECT
 DOMAIN-SUFFIX,dajiyuan.org,REJECT
 DOMAIN-SUFFIX,dalianhengtai.com,REJECT
 DOMAIN-SUFFIX,dandan11.top,REJECT
@@ -3158,8 +3157,6 @@ DOMAIN-SUFFIX,ent1.12584.cn,REJECT
 DOMAIN-SUFFIX,entry.baidu.com,REJECT
 DOMAIN-SUFFIX,e-p4p.163.com,REJECT
 DOMAIN-SUFFIX,epernn.cn,REJECT
-DOMAIN-SUFFIX,epochtimes.org,REJECT
-DOMAIN-SUFFIX,epochweekly.com,REJECT
 DOMAIN-SUFFIX,epowernetworktrackerimages.s3.amazonaws.com,REJECT
 DOMAIN-SUFFIX,er.dlhygj.com,REJECT
 DOMAIN-SUFFIX,erebor.douban.com,REJECT
@@ -3301,7 +3298,6 @@ DOMAIN-SUFFIX,fge9vbrzwt.bid,REJECT
 DOMAIN-SUFFIX,fghm.ga25.com,REJECT
 DOMAIN-SUFFIX,fghmc.ga25.com,REJECT
 DOMAIN-SUFFIX,fghmimg.ga25.com,REJECT
-DOMAIN-SUFFIX,fgmtv.org,REJECT
 DOMAIN-SUFFIX,file.bmob.cn,REJECT
 DOMAIN-SUFFIX,files2.sogou.com,REJECT
 DOMAIN-SUFFIX,fimserve.ign.com,REJECT
@@ -3795,7 +3791,6 @@ DOMAIN-SUFFIX,i.bigmir.net,REJECT
 DOMAIN-SUFFIX,i.clkservice.youdao.com,REJECT
 DOMAIN-SUFFIX,i.dreamfull.cn,REJECT
 DOMAIN-SUFFIX,i.flow.browser.oppomobile.com,REJECT
-DOMAIN-SUFFIX,i.gdt.qq.com,REJECT
 DOMAIN-SUFFIX,i.go.sohu.com,REJECT
 DOMAIN-SUFFIX,i.haloapps.com,REJECT
 DOMAIN-SUFFIX,i.hao61.net,REJECT
@@ -5089,7 +5084,6 @@ DOMAIN-SUFFIX,maw.wnbfw.com,REJECT
 DOMAIN-SUFFIX,maxwebsearch.com,REJECT
 DOMAIN-SUFFIX,maysunmedia.com,REJECT
 DOMAIN-SUFFIX,mb.hockeybuzz.com,REJECT
-DOMAIN-SUFFIX,mb.yidianzixun.com,REJECT
 DOMAIN-SUFFIX,mb.zam.com,REJECT
 DOMAIN-SUFFIX,mbai.cn,REJECT
 DOMAIN-SUFFIX,mbd.weathercn.com,REJECT
@@ -6441,9 +6435,7 @@ DOMAIN-SUFFIX,shbywsd.cn,REJECT
 DOMAIN-SUFFIX,shenghuo.xiaomi.com,REJECT
 DOMAIN-SUFFIX,shenleyuni.com,REJECT
 DOMAIN-SUFFIX,shenyian.net,REJECT
-DOMAIN-SUFFIX,shenyun.com,REJECT
 DOMAIN-SUFFIX,shenyun.org,REJECT
-DOMAIN-SUFFIX,shenyunperformingarts.org,REJECT
 DOMAIN-SUFFIX,shglegle.com,REJECT
 DOMAIN-SUFFIX,shibeiou.com,REJECT
 DOMAIN-SUFFIX,shiftrro.com,REJECT
@@ -6971,8 +6963,6 @@ DOMAIN-SUFFIX,tuanxue360.net,REJECT
 DOMAIN-SUFFIX,tui.gtimg.com,REJECT
 DOMAIN-SUFFIX,tui1999.com,REJECT
 DOMAIN-SUFFIX,tui98.cn,REJECT
-DOMAIN-SUFFIX,tuidang.epochtimes.org,REJECT
-DOMAIN-SUFFIX,tuidang.org,REJECT
 DOMAIN-SUFFIX,tuigoo.com,REJECT
 DOMAIN-SUFFIX,tuiguang.178.com,REJECT
 DOMAIN-SUFFIX,tuiguang.meitu.com,REJECT
@@ -7614,7 +7604,6 @@ DOMAIN-SUFFIX,xingjuhe.com,REJECT
 DOMAIN-SUFFIX,xiniuz.com,REJECT
 DOMAIN-SUFFIX,xinju.cc,REJECT
 DOMAIN-SUFFIX,xinray.com,REJECT
-DOMAIN-SUFFIX,xinsheng.net,REJECT
 DOMAIN-SUFFIX,xiongdong.com,REJECT
 DOMAIN-SUFFIX,xiuxiu.android.dl.meitu.com,REJECT
 DOMAIN-SUFFIX,xiuxiu.mobile.meitudata.com,REJECT
@@ -7892,7 +7881,6 @@ DOMAIN-SUFFIX,zhaoshang8.com,REJECT
 DOMAIN-SUFFIX,zh-cn.shenyun.com,REJECT
 DOMAIN-SUFFIX,zh-cn.shenyun.org,REJECT
 DOMAIN-SUFFIX,zheng.cs12d.com,REJECT
-DOMAIN-SUFFIX,zhengjian.org,REJECT
 DOMAIN-SUFFIX,zhichi08.com,REJECT
 DOMAIN-SUFFIX,zhidian3g.cn,REJECT
 DOMAIN-SUFFIX,zhifenjie.com,REJECT
@@ -7907,7 +7895,6 @@ DOMAIN-SUFFIX,zhtjdl.com,REJECT
 DOMAIN-SUFFIX,zhuanfakong.com,REJECT
 DOMAIN-SUFFIX,zhuba8.com,REJECT
 DOMAIN-SUFFIX,zhudiaosz.com,REJECT
-DOMAIN-SUFFIX,zhuichaguoji.org,REJECT
 DOMAIN-SUFFIX,zhushou.2345.com,REJECT
 DOMAIN-SUFFIX,zhuuv.maoyumao.net,REJECT
 DOMAIN-SUFFIX,zhwnlapi.etouch.cn,REJECT
@@ -7977,3 +7964,7 @@ DOMAIN-SUFFIX,zzz7.52896368.com,REJECT
 DOMAIN-SUFFIX,zzzzz4.52896368.com,REJECT
 DOMAIN-SUFFIX,analytics.query.yahoo.com,REJECT
 DOMAIN-SUFFIX,ap.dongqiudi.com,REJECT
+DOMAIN-SUFFIX,adx.open-adx.com,REJECT
+DOMAIN-SUFFIX,adservice.sigmob.cn,REJECT
+DOMAIN-SUFFIX,unidesk.alicdn.com,REJECT
+DOMAIN-SUFFIX,mcupdate.gstarcad.com,REJECT
