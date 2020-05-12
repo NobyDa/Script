@@ -105,7 +105,7 @@ function signTieBa() {
       $nobyda.notify("贴吧签到", "签到失败", "未获取到签到列表");
     } else {
       // $nobyda.notify("贴吧签到", "贴吧列表", response.body);
-      var body = JSON.parse(response.body);
+      var body = JSON.parse(data);
       var isSuccessResponse = body && body.no == 0 && body.error == "success" && body.data.tbs;
       if (!isSuccessResponse) {
         $nobyda.notify("贴吧签到", "签到失败", (body && body.error) ? body.error : "接口数据获取失败");
@@ -150,7 +150,7 @@ function signBar(bar, tbs) {
         checkIsAllProcessed();
       } else {
         try {
-          var addResult = JSON.parse(response.body);
+          var addResult = JSON.parse(data);
           if (addResult.no == 0) {
             process.result.push({
               bar: bar.forum_name,
@@ -201,7 +201,7 @@ function signBars(bars, tbs, index) {
           signBars(bars, tbs, ++index);
         } else {
           try {
-            var addResult = JSON.parse(response.body);
+            var addResult = JSON.parse(data);
             if (addResult.no == 0) {
               process.result.push({
                 bar: bar.forum_name,
