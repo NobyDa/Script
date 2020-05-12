@@ -75,9 +75,9 @@ function checkin() {
       $nobyda.notify("吾爱破解", "签到请求失败 ‼️‼️", error)
     } else {
       if (data.match(/(ÒÑÍê³É|\u606d\u559c\u60a8)/)) {
-        $nobyda.notify("吾爱破解", "", date.getMonth() + "月" + date.getDate() + 1 + "日, 签到成功 🎉")
+        $nobyda.notify("吾爱破解", "", date.getMonth() + 1 + "月" + date.getDate() + "日, 签到成功 🎉")
       } else if (data.match(/(ÄúÒÑ|\u4e0b\u671f\u518d\u6765)/)) {
-        $nobyda.notify("吾爱破解", "", date.getMonth() + "月" + date.getDate() + 1 + "日, 已签过 ⚠️")
+        $nobyda.notify("吾爱破解", "", date.getMonth() + 1 + "月" + date.getDate() + "日, 已签过 ⚠️")
       } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55)/)) {
         $nobyda.notify("吾爱破解", "", "签到失败, Cookie失效 ‼️‼️")
       } else {
