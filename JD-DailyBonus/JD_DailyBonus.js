@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.5.11 0:20 v1.02
+更新时间: 2020.5.12 10:05 v1.03
 有效接口: 22+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -100,6 +100,7 @@ async function all() {
       JDSecondhand(stop), //京东拍拍二手
       JingDMakeup(stop), //京东美妆馆
       JingDongWomen(stop), //京东女装馆
+      JdVegeMarket(stop), //京东菜场
       //JingDongFish(stop), //京东小京鱼
       JingDongCash(stop), //京东现金红包
       //JingDongShoes(stop), //京东鞋靴馆
@@ -130,6 +131,7 @@ async function all() {
     await JDSecondhand(stop); //京东拍拍二手
     await JingDMakeup(stop); //京东美妆馆
     await JingDongWomen(stop); //京东女装馆
+    await JdVegeMarket(stop); //京东菜场
     //await JingDongFish(stop); //京东小京鱼
     await JDMagicCube(stop); //京东小魔方
     await JingDongCash(stop); //京东现金红包
@@ -204,8 +206,8 @@ function notify() {
 
 function ReadCookie() {
   initial()
-  $nobyda.done()
   DualAccount = true;
+  if (!$nobyda.isRequest) $nobyda.done();
   if (DeleteCookie) {
     if ($nobyda.isJSBox) {
       if ($file.exists("shared://JD_Cookie.txt")) {
@@ -2240,6 +2242,72 @@ function JDRawFresh(s) {
   });
 }
 
+function JdVegeMarket(s) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const JDVegeUrl = {
+        url: 'https://api.m.jd.com/client.action?functionId=userSign',
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Cookie: KEY,
+        },
+        body: "body=%7B%22riskParam%22%3A%7B%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22shshshfpb%22%3A%22v1%5C%2FzMYRjEWKgYe%2BUiNwEvaVlrHBQGVwqLx4CsS9PH1s0s0Vs9AWk%2B7vr9KSHh3BQd5NTukznDTZnd75xHzonHnw%3D%3D%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22childActivityUrl%22%3A%22https%3A%5C%2F%5C%2Fpro.m.jd.com%5C%2Fmall%5C%2Factive%5C%2FWcu2LVCFMkBP3HraRvb7pgSpt64%5C%2Findex.html%3Futm_source%3Diosapp%26utm_medium%3Dappshare%26utm_campaign%3Dt_335139774%26utm_term%3DWxfriends%26ad_od%3Dshare%26utm_user%3Dplusmember%26from%3Dsinglemessage%26isappinstalled%3D0%22%7D%2C%22url%22%3A%22https%3A%5C%2F%5C%2Fpro.m.jd.com%5C%2Fmall%5C%2Factive%5C%2FWcu2LVCFMkBP3HraRvb7pgSpt64%5C%2Findex.html%3Futm_source%3Diosapp%26utm_medium%3Dappshare%26utm_campaign%3Dt_335139774%26utm_term%3DWxfriends%26ad_od%3Dshare%26utm_user%3Dplusmember%26from%3Dsinglemessage%26isappinstalled%3D0%22%2C%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22XIs7%2BTB0I7M9fe6ZjErQVpzmhmhTXjOXFCkf3xUGNc8aZs%5C%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Atrue%2C%5C%22ruleSrv%5C%22%3A%5C%2200598978_33728097_t0%5C%22%2C%5C%22signId%5C%22%3A%5C%22bd7qSPr9bMQaZs%5C%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22geo%22%3A%7B%22lng%22%3A%220.000000%22%2C%22lat%22%3A%220.000000%22%7D%7D&build=167194&client=apple&clientVersion=8.5.10&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&partner=apple&scope=11&sign=2eb441524baa8bef7c841bbe28be9b23&st=1589248025202&sv=111"
+      };
+      $nobyda.post(JDVegeUrl, function(error, response, data) {
+        try {
+          if (error) {
+            merge.JDVege.notify = "京东商城-菜场: 签到接口请求失败 ‼️‼️"
+            merge.JDVege.fail = 1
+          } else {
+            const cc = JSON.parse(data)
+            if (data.match(/签到成功/)) {
+              var Details = LogDetails ? "response:\n" + data : '';
+              console.log("\n" + "京东商城-菜场签到成功 " + Details)
+              if (data.match(/(\"text\":\"\d+京豆\")/)) {
+                beanQuantity = cc.awardList[0].text.match(/\d+/)
+                merge.JDVege.notify = "京东商城-菜场: 成功, 明细: " + beanQuantity + "京豆 🐶"
+                merge.JDVege.bean = beanQuantity
+                merge.JDVege.success = 1
+              } else {
+                merge.JDVege.notify = "京东商城-菜场: 成功, 明细: 无京豆 🐶"
+                merge.JDVege.success = 1
+              }
+            } else {
+              var Details = LogDetails ? "response:\n" + data : '';
+              console.log("\n" + "京东商城-菜场签到失败 " + Details)
+              if (data.match(/(已签到|已领取)/)) {
+                merge.JDVege.notify = "京东商城-菜场: 失败, 原因: 已签过 ⚠️"
+                merge.JDVege.fail = 1
+              } else {
+                if (data.match(/(不存在|已结束|未开始)/)) {
+                  merge.JDVege.notify = "京东商城-菜场: 失败, 原因: 活动已结束 ⚠️"
+                  merge.JDVege.fail = 1
+                } else {
+                  if (cc.code == 3) {
+                    merge.JDVege.notify = "京东商城-菜场: 失败, 原因: Cookie失效‼️"
+                    merge.JDVege.fail = 1
+                  } else if (cc.code == "600") {
+                    merge.JDVege.notify = "京东商城-菜场: 失败, 原因: 认证失败 ⚠️"
+                    merge.JDVege.fail = 1
+                  } else {
+                    merge.JDVege.notify = "京东商城-菜场: 失败, 原因: 未知 ⚠️"
+                    merge.JDVege.fail = 1
+                  }
+                }
+              }
+            }
+          }
+          resolve()
+        } catch (eor) {
+          $nobyda.notify("京东商城-菜场" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+          resolve()
+        }
+      })
+    }, s)
+    if (out) setTimeout(resolve, out + s)
+  });
+}
+
 function TotalSteel() {
   return new Promise(resolve => {
     const SteelUrl = {
@@ -2373,6 +2441,7 @@ function initial() {
     JDFish: {},
     JDFood: {},
     JDClean: {},
+    JDVege: {},
     JDFresh: {},
     JDJewels: {},
     JDCube: {},
@@ -2414,10 +2483,12 @@ function GetCookie() {
           var CookieKey = "CookieJD2";
         } else {
           $nobyda.notify("更新京东Cookie失败", "非历史写入账号 ‼️", '请开启脚本内"DeleteCookie"以清空Cookie ‼️')
+          $nobyda.done()
           return
         }
       } else {
         $nobyda.notify("写入京东Cookie失败", "", "请查看脚本内说明, 登录网页获取 ‼️")
+        $nobyda.done()
         return
       }
       if ($nobyda.read(CookieKey)) {
@@ -2444,6 +2515,7 @@ function GetCookie() {
     $nobyda.notify("写入京东Cookie失败", "", "未知错误 ‼️")
     console.log(JSON.stringify(eor) + "\n" + eor + "\n" + JSON.stringify($request.headers))
   }
+  $nobyda.done()
 }
 // Modified from yichahucha
 function nobyda() {
