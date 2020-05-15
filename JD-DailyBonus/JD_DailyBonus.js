@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.5.12 10:05 v1.03
-有效接口: 22+
+更新时间: 2020.5.15 18:37 v1.04
+有效接口: 25+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -87,6 +87,7 @@ var $nobyda = nobyda();
 async function all() {
   if (stop == 0) {
     await Promise.all([
+      JingDongSpeedUp(stop, null), //京东天天加速
       JingDongBean(stop), //京东京豆
       JingRongBean(stop), //金融京豆
       JingRongSteel(stop), //金融钢镚
@@ -116,6 +117,7 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ])
   } else {
+    await JingDongSpeedUp(stop, null); //京东天天加速
     await JingDongBean(stop); //京东京豆
     await JingRongBean(stop); //金融京豆
     await JingRongSteel(stop); //金融钢镚
@@ -195,7 +197,11 @@ function notify() {
         }
       }
       if (!$nobyda.isNode) $nobyda.notify("", "", Name + one + two + three + four + notify);
-      if (DualAccount) double()
+      if (DualAccount) {
+        double();
+      } else {
+        $nobyda.done();
+      }
       resolve()
     } catch (eor) {
       $nobyda.notify("通知模块 " + eor.name + "‼️", JSON.stringify(eor), eor.message)
@@ -207,7 +213,6 @@ function notify() {
 function ReadCookie() {
   initial()
   DualAccount = true;
-  if (!$nobyda.isRequest) $nobyda.done();
   if (DeleteCookie) {
     if ($nobyda.isJSBox) {
       if ($file.exists("shared://JD_Cookie.txt")) {
@@ -222,9 +227,11 @@ function ReadCookie() {
       $nobyda.write("", "CookieJD")
       $nobyda.write("", "CookieJD2")
       $nobyda.notify("京东Cookie清除成功 !", "", '请手动关闭脚本内"DeleteCookie"选项')
+      $nobyda.done()
       return
     }
     $nobyda.notify("脚本终止", "", '未关闭脚本内"DeleteCookie"选项 ‼️')
+    $nobyda.done()
     return
   } else if ($nobyda.isRequest) {
     GetCookie()
@@ -261,6 +268,7 @@ function ReadCookie() {
     all()
   } else {
     $nobyda.notify("京东签到", "", "脚本终止, 未获取Cookie ‼️")
+    $nobyda.done()
   }
 }
 
@@ -276,6 +284,8 @@ function double() {
   } else if (DualKey || $nobyda.read("CookieJD2")) {
     KEY = DualKey ? DualKey : $nobyda.read("CookieJD2")
     all()
+  } else {
+    $nobyda.done();
   }
 }
 
@@ -2053,7 +2063,7 @@ function JingDongFood(s) {
           "Content-Type": "application/x-www-form-urlencoded",
           Cookie: KEY,
         },
-        body: "body=%7B%22riskParam%22%3A%7B%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22shshshfpb%22%3A%22v1%5C%2FzMYRjEWKgYe%2BUiNwEvaVlrHBQGVwqLx4CsS9PH1s0s0Vs9AWk%2B7vr9KSHh3BQd5NTukznDTZnd75xHzonHnw%3D%3D%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22childActivityUrl%22%3A%22https%3A%5C%2F%5C%2Fpro.m.jd.com%5C%2Fmall%5C%2Factive%5C%2F4PzvVmLSBq5K63oq4oxKcDtFtzJo%5C%2Findex.html%3Fhas_native%3D1%26collectionId%3D249%26lng%3D0.000000%26lat%3D0.000000%26sid%3De04bcaa274340902c2b867287c7a453w%26un_area%3D19_1617_3643_8208%22%7D%2C%22url%22%3A%22https%3A%5C%2F%5C%2Fpro.m.jd.com%5C%2Fmall%5C%2Factive%5C%2F4PzvVmLSBq5K63oq4oxKcDtFtzJo%5C%2Findex.html%3Fhas_native%3D1%26collectionId%3D249%26lng%3D0.000000%26lat%3D0.000000%26sid%3De04bcaa274340902c2b867287c7a453w%26un_area%3D19_1617_3643_8208%22%2C%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%228%5C%2FDviXGn3N1boQsO5shUsOVtunAdqW1r%2BKEXRNqYRDoaZs%5C%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%2200635175_32487094_t1%5C%22%2C%5C%22signId%5C%22%3A%5C%22YNc11unSqTgaZs%5C%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22geo%22%3A%7B%22lng%22%3A%220.000000%22%2C%22lat%22%3A%220.000000%22%7D%7D&client=apple&clientVersion=8.5.8&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&partner=apple&rfs=0000&scope=11&sign=250936af6370bdcf509f98c716bfe504&st=1587131955849&sv=112"
+        body: "body=%7B%22riskParam%22%3A%7B%22eid%22%3A%22O5X6JYMZTXIEX4VBCBWEM5PTIZV6HXH7M3AI75EABM5GBZYVQKRGQJ5A2PPO5PSELSRMI72SYF4KTCB4NIU6AZQ3O6C3J7ZVEP3RVDFEBKVN2RER2GTQ%22%2C%22shshshfpb%22%3A%22v1%5C%2FzMYRjEWKgYe%2BUiNwEvaVlrHBQGVwqLx4CsS9PH1s0s0Vs9AWk%2B7vr9KSHh3BQd5NTukznDTZnd75xHzonHnw%3D%3D%22%2C%22pageClickKey%22%3A%22Babel_Sign%22%2C%22childActivityUrl%22%3A%22-1%22%7D%2C%22url%22%3A%22%22%2C%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22eKMU39uKNsxuvUsX7aGcN4iuJPftNr%5C%2FnotgMJ0wLTY8aZs%5C%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%2200635175_33724189_t1%5C%22%2C%5C%22signId%5C%22%3A%5C%22fC45lf2MkQQaZs%5C%2Fn4coLNw%3D%3D%5C%22%7D%22%2C%22geo%22%3A%7B%22lng%22%3A%220.000000%22%2C%22lat%22%3A%220.000000%22%7D%7D&client=apple&clientVersion=8.5.12&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&partner=apple&scope=11&sign=6358a819595c9a871bf8e95dad81dc59&st=1589478579816&sv=110"
       };
       $nobyda.post(JDMUrl, function(error, response, data) {
         try {
@@ -2308,6 +2318,76 @@ function JdVegeMarket(s) {
   });
 }
 
+function JingDongSpeedUp(s, id) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const GameUrl = {
+        url: 'https://api.m.jd.com/?appid=memberTaskCenter&functionId=flyTask_' + (id ? 'start&body=%7B%22source%22%3A%22game%22%2C%22source_id%22%3A' + id + '%7D' : 'state&body=%7B%22source%22%3A%22game%22%7D'),
+        headers: {
+          Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
+          Cookie: KEY
+        }
+      };
+      $nobyda.get(GameUrl, async function(error, response, data) {
+        try {
+          if (error) {
+            merge.SpeedUp.notify = "京东天天-加速: 签到接口请求失败 ‼️‼️"
+            merge.SpeedUp.fail = 1
+          } else {
+            var Details = LogDetails ? "response:\n" + data : '';
+            var cc = JSON.parse(data)
+            if (!id) {
+              var status = merge.SpeedUp.success ? "今日" : ""
+              console.log("\n" + "天天加速-查询" + status + "任务中 " + Details)
+            } else {
+              console.log("\n" + "天天加速-开始任务 " + Details)
+            }
+            if (cc.message == "not login") {
+              merge.SpeedUp.fail = 1
+              merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: Cookie失效‼️"
+              console.log("\n天天加速-Cookie失效")
+            } else if (cc.message == "success") {
+              if (cc.data.task_status == 0 && cc.data.source_id) {
+                console.log("\n天天加速-查询今日任务成功")
+                const taskID = cc.data.source_id
+                await JingDongSpeedUp(s, taskID)
+              } else if (cc.data.task_status == 1) {
+                if (!merge.SpeedUp.notify) merge.SpeedUp.fail = 1;
+                if (!merge.SpeedUp.notify) merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 加速中 ⚠️";
+                const EndTime = cc.data.end_time ? cc.data.end_time : ""
+                console.log("\n天天加速-任务进行中... \n结束时间: " + EndTime)
+              } else if (cc.data.task_status == 2) {
+                if (data.match(/\"beans_num\":\d+/)) {
+                  merge.SpeedUp.notify = "京东天天-加速: 成功, 明细: " + data.match(/\"beans_num\":(\d+)/)[1] + "京豆 🐶"
+                  merge.SpeedUp.bean = data.match(/\"beans_num\":(\d+)/)[1]
+                } else {
+                  merge.SpeedUp.notify = "京东天天-加速: 成功, 明细: 无京豆 🐶"
+                }
+                merge.SpeedUp.success = 1
+                console.log("\n天天加速-领取昨日奖励成功")
+                await JingDongSpeedUp(s, null)
+              } else {
+                merge.SpeedUp.fail = 1
+                merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 未知 ⚠️"
+                console.log("\n" + "天天加速-判断状态码失败")
+              }
+            } else {
+              merge.SpeedUp.fail = 1
+              merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 未知 ⚠️"
+              console.log("\n" + "天天加速-判断状态失败")
+            }
+          }
+          resolve()
+        } catch (eor) {
+          $nobyda.notify("京东天天-加速" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+          resolve()
+        }
+      })
+    }, s)
+    if (out) setTimeout(resolve, out + s)
+  });
+}
+
 function TotalSteel() {
   return new Promise(resolve => {
     const SteelUrl = {
@@ -2421,6 +2501,7 @@ function TotalCash() {
 
 function initial() {
   merge = {
+    SpeedUp: {},
     JDBean: {},
     JDTurn: {},
     JRBean: {},
