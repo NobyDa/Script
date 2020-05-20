@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.5.18 17:40 v1.05
+更新时间: 2020.5.20 0:55 v1.06
 有效接口: 25+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -82,6 +82,8 @@ var DeleteCookie = false; //是否清除Cookie, true则开启
 
 var out = 5000; //接口超时退出, 用于可能发生的网络不稳定. 建议不少于3000毫秒, 0则关闭.
 
+var start = Date.now();
+
 var $nobyda = nobyda();
 
 async function all() {
@@ -112,6 +114,7 @@ async function all() {
       JingDongJewels(stop), //京东珠宝馆
       JDMagicCube(stop), //京东小魔方
       JingDongPrize(stop), //京东抽大奖
+      JingDongSubsidy(stop), //京东金贴
       JingDongShake(stop) //京东摇一摇
     ])
   } else {
@@ -140,6 +143,7 @@ async function all() {
     await JingDongLive(stop); //京东智能生活馆
     await JingDongClean(stop); //京东清洁馆
     await JDPersonalCare(stop); //京东个人护理馆
+    await JingDongSubsidy(stop); //京东金贴
   }
   await JRDoubleSign(stop); //金融双签
   await Promise.all([
@@ -195,6 +199,7 @@ function notify() {
       if (DualAccount) {
         double();
       } else {
+        console.log('\n脚本用时: ' + ((Date.now() - start) / 1000).toFixed(2) + ' 秒')
         $nobyda.done();
       }
       resolve()
@@ -280,6 +285,7 @@ function double() {
     KEY = DualKey ? DualKey : $nobyda.read("CookieJD2")
     all()
   } else {
+    console.log('\n脚本用时: ' + ((Date.now() - start) / 1000).toFixed(2) + ' 秒')
     $nobyda.done();
   }
 }
@@ -2200,10 +2206,10 @@ function JingDongSpeedUp(s, id) {
             var Details = LogDetails ? "response:\n" + data : '';
             var cc = JSON.parse(data)
             if (!id) {
-              var status = merge.SpeedUp.success ? "今日" : ""
+              var status = merge.SpeedUp.success ? "本次" : ""
               console.log("\n" + "天天加速-查询" + status + "任务中 " + Details)
             } else {
-              console.log("\n" + "天天加速-开始任务 " + Details)
+              console.log("\n" + "天天加速-开始本次任务 " + Details)
             }
             if (cc.message == "not login") {
               merge.SpeedUp.fail = 1
@@ -2211,7 +2217,7 @@ function JingDongSpeedUp(s, id) {
               console.log("\n天天加速-Cookie失效")
             } else if (cc.message == "success") {
               if (cc.data.task_status == 0 && cc.data.source_id) {
-                console.log("\n天天加速-查询今日任务成功")
+                console.log("\n天天加速-查询本次任务成功")
                 const taskID = cc.data.source_id
                 await JingDongSpeedUp(s, taskID)
               } else if (cc.data.task_status == 1) {
@@ -2231,7 +2237,7 @@ function JingDongSpeedUp(s, id) {
                   merge.SpeedUp.notify = "京东天天-加速: 成功, 明细: 无京豆 🐶"
                 }
                 merge.SpeedUp.success = 1
-                console.log("\n天天加速-领取昨日奖励成功")
+                console.log("\n天天加速-领取上次奖励成功")
                 await JingDongSpeedUp(s, null)
               } else {
                 merge.SpeedUp.fail = 1
@@ -2272,6 +2278,7 @@ function JDQueryTask(s) {
             console.log("\n京东天天-加速: 查询道具请求失败 ‼️‼️")
           } else {
             const cc = JSON.parse(data)
+            const Details = LogDetails ? "response:\n" + data : '';
             if (cc.message == "success" && cc.data.length > 0) {
               for (var i = 0; i < cc.data.length; i++) {
                 if (cc.data[i].thaw_time == 0) {
@@ -2280,12 +2287,12 @@ function JDQueryTask(s) {
               }
               if (TaskID.length > 0) {
                 TaskID = TaskID.substr(0, TaskID.length - 1).split(",")
-                console.log("\n天天加速-查询到" + TaskID.length + "个有效道具")
+                console.log("\n天天加速-查询到" + TaskID.length + "个有效道具" + Details)
               } else {
-                console.log("\n天天加速-暂无有效道具")
+                console.log("\n天天加速-暂无有效道具" + Details)
               }
             } else {
-              console.log("\n天天加速-查询无道具")
+              console.log("\n天天加速-查询无道具" + Details)
             }
           }
           resolve(TaskID)
@@ -2320,16 +2327,15 @@ function JDReceiveTask(s, CID) {
                 console.log("\n天天加速-领取道具请求失败 ‼️‼️")
               } else {
                 const cc = JSON.parse(data)
+                const Details = LogDetails ? "response:\n" + data : '';
+                console.log("\n天天加速-尝试领取第" + count + "个道具" + Details)
                 if (cc.message == 'success') {
                   NumTask += 1
                 }
               }
               if (CID.length == count) {
-                console.log("\n天天加速-尝试领取第" + count + "个道具")
                 console.log("\n天天加速-已成功领取" + NumTask + "个道具")
                 resolve(NumTask)
-              } else {
-                console.log("\n天天加速-尝试领取第" + count + "个道具")
               }
             } catch (eor) {
               $nobyda.notify("天天加速-领取道具" + eor.name + "‼️", JSON.stringify(eor), eor.message)
@@ -2364,6 +2370,7 @@ function JDQueryTaskID(s, EID) {
               console.log("\n天天加速-查询道具ID请求失败 ‼️‼️")
             } else {
               const cc = JSON.parse(data)
+              const Details = LogDetails ? "response:\n" + data : '';
               if (cc.data.length > 0) {
                 for (var i = 0; i < cc.data.length; i++) {
                   if (cc.data[i].id) {
@@ -2372,12 +2379,12 @@ function JDQueryTaskID(s, EID) {
                 }
                 if (TaskCID.length > 0) {
                   TaskCID = TaskCID.substr(0, TaskCID.length - 1).split(",")
-                  console.log("\n天天加速-查询成功" + TaskCID.length + "个道具ID")
+                  console.log("\n天天加速-查询成功" + TaskCID.length + "个道具ID" + Details)
                 } else {
-                  console.log("\n天天加速-暂无有效道具ID")
+                  console.log("\n天天加速-暂无有效道具ID" + Details)
                 }
               } else {
-                console.log("\n天天加速-查询无道具ID")
+                console.log("\n天天加速-查询无道具ID" + Details)
               }
             }
             resolve(TaskCID)
@@ -2416,16 +2423,15 @@ function JDUseProps(s, PropID) {
                 console.log("\n天天加速-使用道具请求失败 ‼️‼️")
               } else {
                 const cc = JSON.parse(data)
-                if (cc.message == 'success') {
+                const Details = LogDetails ? "response:\n" + data : '';
+                console.log("\n天天加速-尝试使用第" + PropCount + "个道具" + Details)
+                if (cc.message == 'success' && cc.success == true) {
                   PropNumTask += 1
                 }
               }
               if (PropID.length == PropCount) {
-                console.log("\n天天加速-尝试使用第" + PropCount + "个道具")
                 console.log("\n天天加速-已成功使用" + PropNumTask + "个道具")
                 resolve()
-              } else {
-                console.log("\n天天加速-尝试使用第" + PropCount + "个道具")
               }
             } catch (eor) {
               $nobyda.notify("天天加速-使用道具" + eor.name + "‼️", JSON.stringify(eor), eor.message)
@@ -2439,6 +2445,55 @@ function JDUseProps(s, PropID) {
       console.log("\n天天加速-跳过使用道具")
       resolve()
     }
+  });
+}
+
+function JingDongSubsidy(s) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const subsidyUrl = {
+        url: 'https://ms.jr.jd.com/gw/generic/uc/h5/m/signIn7',
+        headers: {
+          Referer: "https://active.jd.com/forever/cashback/index",
+          Cookie: KEY
+        }
+      };
+      $nobyda.get(subsidyUrl, function(error, response, data) {
+        try {
+          if (error) {
+            merge.subsidy.notify = "京东商城-金贴: 签到接口请求失败 ‼️‼️"
+            merge.subsidy.fail = 1
+          } else {
+            var Details = LogDetails ? "response:\n" + data : '';
+            if (data.match(/\"msg\":\"操作成功\"/)) {
+              console.log("\n" + "京东商城-金贴签到成功 " + Details)
+              merge.subsidy.success = 1
+              if (data.match(/\"thisAmountStr\":\".+?\"/)) {
+                var Quantity = data.match(/\"thisAmountStr\":\"(.+?)\"/)[1]
+                merge.subsidy.notify = "京东商城-金贴: 成功, 明细: " + Quantity + "金贴 💰"
+              } else {
+                merge.subsidy.notify = "京东商城-金贴: 成功, 明细: 无金贴 💰"
+              }
+            } else {
+              console.log("\n" + "京东商城-金贴签到失败 " + Details)
+              merge.subsidy.fail = 1
+              if (data.match(/已存在/)) {
+                merge.subsidy.notify = "京东商城-金贴: 失败, 原因: 已签过 ⚠️"
+              } else if (data.match(/请先登录/)) {
+                merge.subsidy.notify = "京东商城-金贴: 失败, 原因: Cookie失效‼️"
+              } else {
+                merge.subsidy.notify = "京东商城-金贴: 失败, 原因: 未知 ⚠️"
+              }
+            }
+          }
+          resolve()
+        } catch (eor) {
+          $nobyda.notify("京东商城-金贴" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+          resolve()
+        }
+      })
+    }, s)
+    if (out) setTimeout(resolve, out + s)
   });
 }
 
@@ -2580,6 +2635,7 @@ function initial() {
     JDCube: {},
     JDPrize: {},
     JRSteel: {},
+    subsidy: {},
     JDCash: {},
     JDShake: {}
   }
