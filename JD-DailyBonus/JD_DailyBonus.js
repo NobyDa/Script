@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.6.1 0:10 v1.10
-有效接口: 27+
+更新时间: 2020.6.4 13:30 v1.11
+有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -20,7 +20,7 @@ var Key = ''; //单引号内自行填写您抓取的Cookie
 var DualKey = ''; //如需双账号签到,此处单引号内填写抓取的"账号2"Cookie, 否则请勿填写
 
 /* 注1: 以上选项仅针对于JsBox或Node.js, 如果使用QX,Surge,Loon, 请使用脚本获取Cookie.
-   注2: 双账号用户抓取"账号1"Cookie后,请勿点击退出账号,请清除浏览器资料或更换浏览器登录"账号2"抓取.
+   注2: 双账号用户抓取"账号1"Cookie后, 请勿点击退出账号(可能会导致Cookie失效), 需清除浏览器资料或更换浏览器登录"账号2"抓取.
    注3: 如果复制的Cookie开头为"Cookie: "请把它删除后填入.
    注4: 如果使用QX,Surge,Loon并获取Cookie后, 再重复填写以上选项, 则签到优先读取以上Cookie.
 
@@ -30,27 +30,37 @@ var DualKey = ''; //如需双账号签到,此处单引号内填写抓取的"账�
 
 初次使用时, app配置文件添加脚本配置,并启用Mitm后, Safari浏览器打开登录 https://bean.m.jd.com ,点击签到并且出现签到日历后, 如果通知获得cookie成功, 则可以使用此签到脚本。 注: 请勿在京东APP内获取!!!
 
-由于cookie的有效性(经测试网页Cookie有效周期最长31天)，如果脚本后续弹出cookie无效的通知，则需要重复上述步骤。 签到脚本将在每天的凌晨0:05执行, 您可以修改执行时间。 因部分接口京豆限量领取, 建议调整为凌晨签到。
+由于cookie的有效性(经测试网页Cookie有效周期最长31天)，如果脚本后续弹出cookie无效的通知，则需要重复上述步骤。 
+签到脚本将在每天的凌晨0:05执行, 您可以修改执行时间。 因部分接口京豆限量领取, 建议调整为凌晨签到。
 
 *************************
 【 配置双京东账号签到说明 】 : 
 *************************
 
-正确配置QX、Surge、Loon后, 并使用此脚本获取"账号1"Cookie成功后, 请勿点击退出账号,并清除浏览器资料或更换浏览器登录"账号2"获取即可.
+正确配置QX、Surge、Loon后, 并使用此脚本获取"账号1"Cookie成功后, 请勿点击退出账号(可能会导致Cookie失效), 需清除浏览器资料或更换浏览器登录"账号2"获取即可.
 
 注: 获取"账号1"或"账号2"的Cookie后, 后续仅可更新该"账号1"或"账号2"的Cookie.
 如需写入其他账号,您可开启脚本内"DeleteCookie"选项以清除Cookie
-
 *************************
-【Surge, Loon2.1+ 脚本配置】:
+【Surge 4.2+ 脚本配置】:
 *************************
 
 [Script]
-# 京东多合一签到
-cron "5 0 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+京东多合一签到 = type=cron,cronexp=5 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
-# 获取京东Cookie.
-http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+获取京东Cookie = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+
+[MITM]
+hostname = api.m.jd.com
+
+*************************
+【Loon 2.1+ 脚本配置】:
+*************************
+
+[Script]
+cron "5 0 * * *" tag=京东多合一签到, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+
+http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean tag=获取京东Cookie, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
 [MITM]
 hostname = api.m.jd.com
@@ -76,7 +86,7 @@ hostname = api.m.jd.com
 
 var LogDetails = false; //是否开启响应日志, true则开启
 
-var stop = 0; //自定义延迟签到,单位毫秒. 该延迟作用于每个签到接口,如填入延迟则切换为顺序签到. 默认无延迟且为并发签到.
+var stop = 0; //自定义延迟签到,单位毫秒. 默认并发无延迟. (延迟作用于每个签到接口, 如填入延迟则切换顺序签到. Surge用户请注意在UI界面调整脚本超时)
 
 var DeleteCookie = false; //是否清除Cookie, true则开启
 
@@ -85,11 +95,12 @@ var out = 5000; //接口超时退出, 用于可能发生的网络不稳定. 建�
 var $nobyda = nobyda();
 
 async function all() {
-  await JingDongSpeedUp(stop, null); //京东天天加速
+  await JingDongSpeedUp(stop); //京东天天加速
   if (stop == 0) {
     await Promise.all([
       JingDongBean(stop), //京东京豆
       JingRongBean(stop), //金融京豆
+      JingRongDoll(stop), //金融抓娃娃
       JingRongSteel(stop), //金融钢镚
       JingDongTurn(stop), //京东转盘
       JDGroceryStore(stop), //京东超市
@@ -120,6 +131,7 @@ async function all() {
     await JingDongBean(stop); //京东京豆
     await JingRongBean(stop); //金融京豆
     await JingRongSteel(stop); //金融钢镚
+    await JingRongDoll(stop); //金融抓娃娃
     await JingDongTurn(stop); //京东转盘
     await JingDongShake(stop); //京东摇一摇
     await JingDongPrize(stop); //京东抽大奖
@@ -318,7 +330,7 @@ function JingDongBean(s) {
                 merge.JDBean.notify = "京东商城-京豆: 失败, 原因: 需要拼图验证 ⚠️"
                 merge.JDBean.fail = 1
               } else {
-                if (cc.data.status == 1) {
+                if (data.match(/\"status\":\"?1\"?/)) {
                   console.log("\n" + "京东商城-京豆签到成功 " + Details)
                   if (data.match(/dailyAward/)) {
                     merge.JDBean.notify = "京东商城-京豆: 成功, 明细: " + cc.data.dailyAward.beanAward.beanCount + "京豆 🐶"
@@ -2514,6 +2526,72 @@ function JingDongSubsidy(s) {
   });
 }
 
+function JingRongDoll(s, type, num) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const DollUrl = {
+        url: "https://nu.jr.jd.com/gw/generic/jrm/h5/m/process",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Cookie: KEY
+        },
+        body: "reqData=%7B%22actCode%22%3A%22890418F764%22%2C%22type%22%3A" + (type ? type : "3") + "%7D"
+      };
+      $nobyda.post(DollUrl, async function(error, response, data) {
+        try {
+          if (error) {
+            merge.JRDoll.notify = "京东金融-娃娃: " + (type ? "签到" : "领取") + "接口请求失败 ‼️‼️"
+            merge.JRDoll.fail = 1
+          } else {
+            var cc = JSON.parse(data)
+            const Details = LogDetails ? "response:\n" + data : '';
+            if (cc.resultCode == 0) {
+              if (cc.resultData.data.businessData != null) {
+              	console.log("\n" + "京东金融-娃娃登录成功 " + Details)
+                if (cc.resultData.data.businessData.pickStatus == 2) {
+                  if (data.match(/\"rewardPrice\":\"?(\d+)/)) {
+                    var JRDoll_bean = data.match(/\"rewardPrice\":\"?(\d+)/)[1]
+                    await JingRongDoll(s, "4", JRDoll_bean)
+                  } else {
+                    merge.JRDoll.success = 1
+                    merge.JRDoll.notify = "京东金融-娃娃: 成功, 明细: 无京豆 🐶"
+                  }
+                } else {
+                  console.log("\n" + "京东金融-娃娃签到失败 " + Details)
+                  merge.JRDoll.notify = "京东金融-娃娃: 失败, 原因: 已签过 ⚠️";
+                  merge.JRDoll.fail = 1
+                }
+              } else if (cc.resultData.data.businessCode == 200) {
+                console.log("\n" + "京东金融-娃娃签到成功 " + Details)
+                merge.JRDoll.bean = num ? num : 0
+                merge.JRDoll.success = num ? 1 : 0
+                merge.JRDoll.notify = "京东金融-娃娃: 成功, 明细: " + (num ? num + "京豆 🐶" : "无京豆 🐶")
+              } else {
+                console.log("\n" + "京东金融-娃娃签到异常 " + Details)
+                merge.JRDoll.fail = 1;
+                merge.JRDoll.notify = "京东金融-娃娃: 失败, 原因: 领取异常 ⚠️";
+              }
+            } else if (cc.resultCode == 3) {
+              console.log("\n" + "京东金融-娃娃签到失败 " + Details)
+              merge.JRDoll.notify = "京东金融-娃娃: 失败, 原因: Cookie失效‼️"
+              merge.JRDoll.fail = 1;
+            } else {
+              console.log("\n" + "京东金融-娃娃判断失败 " + Details)
+              merge.JRDoll.notify = "京东金融-娃娃: 失败, 原因: 未知 ⚠️"
+              merge.JRDoll.fail = 1;
+            }
+          }
+          resolve()
+        } catch (eor) {
+          $nobyda.notify("京东金融-娃娃" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+          resolve()
+        }
+      })
+    }, s)
+    if (out) setTimeout(resolve, out + s)
+  });
+}
+
 function TotalSteel() {
   return new Promise(resolve => {
     const SteelUrl = {
@@ -2626,6 +2704,7 @@ function initial() {
     JDBean: {},
     JDTurn: {},
     JRBean: {},
+    JRDoll: {},
     JRDSign: {},
     JDGStore: {},
     JDClocks: {},
