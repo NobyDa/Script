@@ -1,4 +1,4 @@
-# Update-2020.4.28 Self-use rule, Remove versus shenji duplicates and optimizations
+# Update-2020.6.6 Self-use rule, Remove versus shenji duplicates and optimizations
 # This rule does not include shenji
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
@@ -2239,7 +2239,6 @@ DOMAIN-SUFFIX,co.dtech.baofeng.com,REJECT
 DOMAIN-SUFFIX,cocounion.com,REJECT
 DOMAIN-SUFFIX,cod.southmoney.com,REJECT
 DOMAIN-SUFFIX,code.3shangyou.com,REJECT
-DOMAIN-SUFFIX,code.createjs.com,REJECT
 DOMAIN-SUFFIX,code.fastclick.net,REJECT
 DOMAIN-SUFFIX,code.hajuwang.cn,REJECT
 DOMAIN-SUFFIX,code.hot-mob.com,REJECT
