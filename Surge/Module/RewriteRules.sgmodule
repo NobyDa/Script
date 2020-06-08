@@ -3,7 +3,7 @@
 
 [URL Rewrite]
 
-# Update time: 2020.6.6
+# Update time: 2020.6.8
 # This rewrite rule does not decrypt Youtube ads. if you need to, please add the host name：*.googlevideo.com
 
 ^https?:\/\/interface\.music\.163\.com\/eapi\/ad - reject
@@ -477,7 +477,7 @@
 ^https?:\/\/ssl\.kohsocialapp\.qq\.com:10001\/game\/buttons - reject
 ^https?:\/\/qt\.qq\.com\/lua\/mengyou\/get_splash_screen_info - reject
 ^https?:\/\/3gimg\.qq\.com\/tencentMapTouch\/app\/activity\/ - reject
-^https?:\/\/btrace.qq.com - reject
+^https?:\/\/btrace\.qq\.com - reject
 ^https?:\/\/vv\.video\.qq\.com\/getvmind\? - reject
 ^https?:\/\/r\.inews\.qq\.com\/getQQNewsRemoteConfig - reject
 ^https?:\/\/mp\.weixin\.qq.com\/mp\/ad_complaint - reject
@@ -576,37 +576,37 @@
 ^https?:\/\/ss0\.bdstatic\.com/.+_\d{3}_\d{4}\.jpg - reject
 ^https?:\/\/123\.59\.31\.1\/(adgateway|adv)\/ - reject
 ^https?:\/\/119\.18\.193\.135\/(adgateway|adv)\/ - reject
-^https?:\/\/.+.atm.youku.com - reject
-^https?:\/\/img\w.g.pptv.com - reject
-^https?:\/\/h\w{2}.hxsame.hexun.com - reject
-^https?:\/\/[^(apple|10010)]+.(com|cn)\/(a|A)d(s|v)?(/|.js) - reject
+^https?:\/\/.+\.atm\.youku\.com - reject
+^https?:\/\/img\w\.g\.pptv\.com - reject
+^https?:\/\/h\w{2}\.hxsame\.hexun\.com - reject
+^https?:\/\/[^(apple|10010)]+\.(com|cn)\/(a|A)d(s|v)?(/|\.js) - reject
 ^https?:\/\/[^bbs].tianya\.cn - reject
-^https?:\/\/\w.?up.qingdaonews.com - reject
-^https?:\/\/w{6}.com1.z0.glb.clouddn.com - reject
-^https?:\/\/w{8}.logic.cpm.cm.kankan.com - reject
-^https?:\/\/w+.beacon.qq.com - reject
-^https?:\/\/w+.cloudfront.net/banner - reject
-^https?:\/\/w+.gdt.qq.com - reject
-^https?:\/\/w+.kingsoft-office-service.com - reject
-^https?:\/\/w+.l.qq.com - reject
-^https?:\/\/9377\w{2}.com - reject
-^https?:\/\/a0b\w{2}.com - reject
+^https?:\/\/\w.?up\.qingdaonews\.com - reject
+^https?:\/\/\w{6}\.com1\.z0\.glb\.clouddn\.com - reject
+^https?:\/\/\w{8}\.logic\.cpm\.cm\.kankan\.com - reject
+^https?:\/\/\w+\.beacon\.qq\.com - reject
+^https?:\/\/\w+\.cloudfront\.net\/banner - reject
+^https?:\/\/\w+\.gdt\.qq\.com - reject
+^https?:\/\/\w+\.kingsoft-office-service\.com - reject
+^https?:\/\/\w+\.l\.qq\.com - reject
+^https?:\/\/9377\w{2}\.com - reject
+^https?:\/\/a0b\w{2}\.com - reject
 ^https?:\/\/(a?d|sax)\d.sina.com - reject
-^https?:\/\/api\d.tuisong.baidu.com - reject
+^https?:\/\/api\d\.tuisong\.baidu\.com - reject
 ^https?:\/\/d\d.sinaimg.cn - reject
-^https?:\/\/dl.app.gtja.com/.+\d+.jpg$ - reject
+^https?:\/\/dl\.app.gtja\.com\/.+\d+\.jpg$ - reject
 ^https?:\/\/impservice.+?youdao.com - reject
-^https?:\/\/log.+?baidu.com - reject
-^https?:\/\/notice.send-anywhere.com/banner - reject
+^https?:\/\/log.+?baidu\.com - reject
+^https?:\/\/notice\.send-anywhere\.com\/banner - reject
 ^https?:\/\/sa\d.tuisong.baidu.com - reject
-^https?:\/\/sax\w?.sina.cn - reject
-^https?:\/\/sax\w?.sina.com.cn - reject
+^https?:\/\/sax\w?\.sina\.cn - reject
+^https?:\/\/sax\w?\.sina\.com\.cn - reject
 ^https?:\/\/server-\w+.imrworldwide.com - reject
-^https?:\/\/t\d{2}.baidu.com - reject
+^https?:\/\/t\d{2}\.baidu\.com - reject
 ^https?:\/\/paopao\w?.qiyipic.com - reject
-^https?:\/\/www.bldimg.com/(background|splash)/.+.png$ - reject
+^https?:\/\/www\.bldimg\.com/(background|splash)/.+\.png$ - reject
 ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/player\/ad_ - reject
-^https?://.+ccode=0902 - reject
+^https?:\/\/.+ccode=0902 - reject
 ^https?:\/\/ulogs\.umeng\.com - reject
 ^https?:\/\/ulogs\.umengcloud\.com - reject
 ^https?:\/\/alogs\.umeng\.co - reject
@@ -643,7 +643,7 @@
 ^https?:\/\/qidian\.qpic\.cn\/qidian_common - reject
 ^https?:\/\/123\.59\.30\.10\/adv\/advInfos - reject
 ^https:\/\/static\.api\.m\.panda\.tv\/index\.php\?method=clientconf\.firstscreen&__version=(play_cnmb|(\d+\.){0,3}\d+)&__plat=ios&__channel=appstore - reject
-^https?:\/\/i\d\.hoopchina\.com\.cn/blogfile\//d+\//d+\/BbsImg\.(?<=(big.(png|jpg)))$ - reject
+^https?:\/\/i\d\.hoopchina\.com\.cn/blogfile\/\d+\/\d+\/BbsImg\.(?<=(big.(png|jpg)))$ - reject
 ^https?:\/\/api-163\.biliapi\.net\/cover - reject
 ^https?:\/\/api-mifit\.huami\.com\/(discovery\/mi\/discovery\/(homepage|sleep|sport(_(summary|training))?|step_detail|training_video)_ad|v1\/app\/startpages\.json)\? - reject
 ^https?:\/\/c\.tieba\.baidu\.com\/\w+\/\w+\/(sync|newRnSync|mlog) - reject
@@ -706,16 +706,16 @@
 ^https?:\/\/ggx\.cmvideo\.cn\/request\/ - reject
 ^https?:\/\/oral\.youdao\.com\/oral\/adInfo - reject
 ^https?:\/\/impservice\.dictapp\.youdao\.com\/imp\/request - reject
-^https?://du\.hupucdn\.com\/\w+h\d{4} - reject
+^https?:\/\/du\.hupucdn\.com\/\w+h\d{4} - reject
 ^https?:\/\/api\.yangkeduo\.com\/api\/cappuccino\/splash - reject
 ^https?:\/\/mp\.weixin\.qq\.com\/(s|mp)\/(ad_|advertisement|getappmsgad|report|appmsgreport|appmsgpicreport) - reject
 ^https?:\/\/dl\.app\.gtja\.com\/dzswem\/kvController\/.+\.jpg$ - reject
 ^https?:\/\/yxyapi\d\.drcuiyutao\.com\/yxy-api-gateway\/api\/json\/advert\/ - reject
 ^https?:\/\/(api|www)\.zhihu\.com\/((terms\/privacy\/confirm|app_config|banner|commercial_api\/(launch|real_time))|(fringe|zst|drama|adx|commercial|real_time|ad-style-service|banners|market/popover|mqtt|.*(launch|featured-comment-ad|guide|recommendations|community-ad)|search/(top|tab|preset)|ab)) - reject
 ^https?:\/\/ap(i|p)\.bilibili\.com\/((x\/v2|pgc)\/(search\/defaultword|season\/rank\/cn|splash\/)|(pgc/season/rank/cn|x/v2/(search/(defaultword|hot|recommend|resource)))) - reject
-https?://interface3?.music.163.com/eapi/(ad|abtest|sp|hot|store|mlog|search/(specialkeyword|defaultkeyword|hot)) - reject
+^https?:\/\/interface3?\.music\.163\.com/eapi/(ad|abtest|sp|hot|store|mlog|search/(specialkeyword|defaultkeyword|hot)) - reject
 ^https?:\/\/capis-slb\.didapinche\.com\/ad\/ - reject
-^https://weibointl.api.weibo.cn/portal.php\?a=get_coopen_ads - reject
+^https?:\/\/weibointl\.api\.weibo\.cn\/portal.php\?a=get_coopen_ads - reject
 ^https?:\/\/yxyapi2\.drcuiyutao\.com\/yxy-api-gateway\/api\/json\/advert\/getsAd - reject
 ^https?:\/\/capis-clb\.didapinche\.com\/ad\/ - reject
 ^https?:\/\/api\.vistopia\.com\.cn\/api\/(v1|v\/d)\/home\/advertisement - reject
