@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.6.12 22:00 v1.13
+更新时间: 2020.6.12 22:40 v1.14
 有效接口: 29+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -2616,8 +2616,8 @@ function JDOverseas(s) {
               console.log("\n" + "京东商城-国际签到成功 " + Details)
               merge.Overseas.success = 1
               if (data.match(/\"jdBeanAmount\":[1-9]+/)) {
-                const Quantity = data.match(/\"jdBeanAmount\":(\d+)/)[1]
-                merge.Overseas.notify = "京东商城-国际: 成功, 明细: " + Quantity + "京豆 🐶" 
+                merge.Overseas.bean = data.match(/\"jdBeanAmount\":(\d+)/)[1]
+                merge.Overseas.notify = "京东商城-国际: 成功, 明细: " + merge.Overseas.bean + "京豆 🐶" 
               } else {
                 merge.Overseas.notify = "京东商城-国际: 成功, 明细: 无京豆 🐶"
               }
