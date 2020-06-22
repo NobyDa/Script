@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.6.12 22:40 v1.14
+更新时间: 2020.6.22 8:40 v1.16
 有效接口: 29+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -123,7 +123,7 @@ async function all() {
       JDPersonalCare(stop), //京东个人护理馆
       JingDongJewels(stop), //京东珠宝馆
       JDMagicCube(stop), //京东小魔方
-      JingDongFish(stop), //京东小京鱼
+      //JingDongFish(stop), //京东小京鱼
       JingDongPrize(stop), //京东抽大奖
       JingDongSubsidy(stop), //京东金贴
       JingDongShake(stop) //京东摇一摇
@@ -157,7 +157,7 @@ async function all() {
     await JingDongClean(stop); //京东清洁馆
     await JDPersonalCare(stop); //京东个人护理馆
     await JingDongSubsidy(stop); //京东金贴
-    await JingDongFish(stop); //京东小京鱼
+    //await JingDongFish(stop); //京东小京鱼
   }
   await JRDoubleSign(stop); //金融双签
   await Promise.all([
@@ -1248,7 +1248,7 @@ function JingDongClean(s) {
           "Content-Type": "application/x-www-form-urlencoded",
           Cookie: KEY,
         },
-        body: "body=%7B%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%227mdc%2B5n2j0UXbWyvL9anyMh8lgRy8r63xFsvEENqalwaZs%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%22%5C%22%2C%5C%22signId%5C%22%3A%5C%22BwPxKwLESVwaZs%2Fn4coLNw%3D%3D%5C%22%7D%22%7D&client=wh5"
+        body: "body=%7B%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22HIOyycfmx330SrJ4SukarhW1Nb8OyCEFt%2FRE30D8oREaZs%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%22%5C%22%2C%5C%22signId%5C%22%3A%5C%226alqR%2FjtRGgaZs%2Fn4coLNw%3D%3D%5C%22%7D%22%7D&client=wh5"
       };
       $nobyda.post(JDCUUrl, function(error, response, data) {
         try {
@@ -1439,7 +1439,7 @@ function JDPersonalCare(s) {
           "Content-Type": "application/x-www-form-urlencoded",
           Cookie: KEY,
         },
-        body: "body=%7B%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%225orLuHl03NGp6P5%2FdmLf1PMfngICkMP6ILP8xX4jSRUaZs%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%22%5C%22%2C%5C%22signId%5C%22%3A%5C%22UZKIH1NL3McaZs%2Fn4coLNw%3D%3D%5C%22%7D%22%7D&client=wh5"
+        body: "body=%7B%22params%22%3A%22%7B%5C%22enActK%5C%22%3A%5C%22NOtPxXOcYgbv%2BxX3%2BohTjVuzYUtcP0iaSyiYhRLP9NMaZs%2Fn4coLNw%3D%3D%5C%22%2C%5C%22isFloatLayer%5C%22%3Afalse%2C%5C%22ruleSrv%5C%22%3A%5C%22%5C%22%2C%5C%22signId%5C%22%3A%5C%22PKmYqc8WDMUaZs%2Fn4coLNw%3D%3D%5C%22%7D%22%7D&client=wh5"
       };
       $nobyda.post(JDPCUrl, function(error, response, data) {
         try {
