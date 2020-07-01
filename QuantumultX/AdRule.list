@@ -1,5 +1,4 @@
-# Update-2020.6.6 Self-use rule, Remove versus shenji duplicates and optimizations
-# This rule does not include shenji
+# Update > 2020.6.29 This rule is based on optimization by lhie1/Rules.
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
 DOMAIN-SUFFIX,gemini.yahoo.com,REJECT
@@ -2186,7 +2185,6 @@ DOMAIN-SUFFIX,clkservice.union.youdao.com,REJECT
 DOMAIN-SUFFIX,clkservice.youdao.com,REJECT
 DOMAIN-SUFFIX,clkservice2.dict.youdao.com,REJECT
 DOMAIN-SUFFIX,cloud.codenow.cn,REJECT
-DOMAIN-SUFFIX,cloud.rovio.com,REJECT
 DOMAIN-SUFFIX,cloud.zyiis.net,REJECT
 DOMAIN-SUFFIX,cloudad.asia,REJECT
 DOMAIN-SUFFIX,cloudcdn.yousee.com,REJECT
@@ -6121,7 +6119,6 @@ DOMAIN-SUFFIX,rotate.ymtracking.com,REJECT
 DOMAIN-SUFFIX,rotator.tradetracker.net,REJECT
 DOMAIN-SUFFIX,router.bittorrent.com,REJECT
 DOMAIN-SUFFIX,router.gwdang.com,REJECT
-DOMAIN-SUFFIX,rovio-news-app.angrybirdsgame.com,REJECT
 DOMAIN-SUFFIX,rp.crasheye.cn,REJECT
 DOMAIN-SUFFIX,rp.gwallet.com,REJECT
 DOMAIN-SUFFIX,rpaulfrank.com,REJECT
