@@ -782,8 +782,18 @@ function JDUserSignPre(s, key, title) {
               let params = (od.floatLayerList || []).filter(o=>o.params && o.params.match(/enActK/)).map(o=>o.params).pop();
               if(!params){ // 第一处找到签到所需数据
                 // floatLayerList未找到签到所需数据，从floorList中查找
-                params = (od.floorList || []).filter(o=>o.template=='signIn' && o.signInfos && o.signInfos.params && o.signInfos.params.match(/enActK/))
-                    .map(o=>o.signInfos.params).pop();
+                let signInfo = (od.floorList || []).filter(o=>o.template=='signIn' && o.signInfos && o.signInfos.params && o.signInfos.params.match(/enActK/))
+                    .map(o=>o.signInfos).pop();
+                if(signInfo){
+                  if(signInfo.signStat=='1'){
+                    merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`
+                    merge[key].fail = 1
+                    reject();
+                    return;
+                  } else {
+                    params = signInfo.params;
+                  }
+                }
               }
               if(params){
                 resolve({params: params}); // 执行签到处理
@@ -803,7 +813,7 @@ function JDUserSignPre(s, key, title) {
     if (out) setTimeout(reject, out + s)
   }).then(data=>{
     return JDUserSign(s, key, title, encodeURIComponent(JSON.stringify(data)));
-  });
+  },()=>{});
 }
 
 function JDUserSign(s, key, title, body) {
@@ -842,7 +852,7 @@ function JDUserSign(s, key, title, body) {
                 merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`
                 merge[key].fail = 1
               } else {
-                if (data.match(/(不存在|已结束)/)) {
+                if (data.match(/(不存在|已结束|未开始)/)) {
                   merge[key].notify = `${title}: 失败, 原因: 活动已结束 ⚠️`
                   merge[key].fail = 1
                 } else {
