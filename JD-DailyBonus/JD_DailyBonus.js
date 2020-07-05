@@ -135,7 +135,7 @@ async function all() {
       JDUserSignPre(stop, 'JDBook', '京东商城-图书'), //京东图书
       JDUserSignPre(stop, 'JDShand', '京东拍拍-二手'), //京东拍拍二手
       JDUserSignPre(stop, 'JDMakeup', '京东商城-美妆'), //京东美妆馆
-      JDUserSignPre2(stop, 'JDWomen', '京东商城-女装'), //京东女装馆
+      JDUserSignPre(stop, 'JDWomen', '京东商城-女装'), //京东女装馆
       JDUserSignPre(stop, 'JDVege', '京东商城-菜场'), //京东菜场
       JingDongCash(stop), //京东现金红包
       JDUserSignPre(stop, 'JDFood', '京东商城-美食'), //京东美食馆
@@ -162,7 +162,7 @@ async function all() {
     await JDUserSignPre(stop, 'JDBook', '京东商城-图书'); //京东图书
     await JDUserSignPre(stop, 'JDShand', '京东拍拍-二手'); //京东拍拍二手
     await JDUserSignPre(stop, 'JDMakeup', '京东商城-美妆'); //京东美妆馆
-    await JDUserSignPre2(stop, 'JDWomen', '京东商城-女装'); //京东女装馆
+    await JDUserSignPre(stop, 'JDWomen', '京东商城-女装'); //京东女装馆
     await JDUserSignPre(stop, 'JDVege', '京东商城-菜场'); //京东菜场
     await JingDongCash(stop); //京东现金红包
     await JDUserSignPre(stop, 'JDFood', '京东商城-美食'); //京东美食馆
@@ -754,7 +754,7 @@ function JingDongShake(s) {
 
 function JDUserSignPre(s, key, title) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
+    //setTimeout(() => {
       const JDUrl = {
         url: 'https://api.m.jd.com/?client=wh5&functionId=qryH5BabelFloors',
         headers: {
@@ -763,7 +763,7 @@ function JDUserSignPre(s, key, title) {
         },
         body: `body={"activityId":"${acData[key]}"}`
       };
-      if (!$nobyda.isJSBox && !$nobyda.isNode && key == "JDWomen") return reject()
+      if (!$nobyda.isJSBox && !$nobyda.isNode && key == "JDWomen") return reject(key)
       $nobyda.post(JDUrl, function(error, response, data) {
         try {
           if (error) {
@@ -802,16 +802,18 @@ function JDUserSignPre(s, key, title) {
           reject()
         }
       })
-    }, s)
+    //}, s)
     if (out) setTimeout(reject, out + s)
   }).then(data=>{
     return JDUserSign(s, key, title, encodeURIComponent(JSON.stringify(data)));
-  },()=>{});
+  }).catch(er => {
+    if (er == "JDWomen") return JDUserSignPre2(s, key, title)
+    });
 }
 
 function JDUserSignPre2(s, key, title) {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
+    //setTimeout(() => {
       const JDUrl = {
         url: `https://pro.m.jd.com/mall/active/${acData[key]}/index.html`,
         headers: {
@@ -837,7 +839,7 @@ function JDUserSignPre2(s, key, title) {
           reject()
         }
       })
-    }, s)
+    //}, s)
     if (out) setTimeout(reject, out + s)
   }).then(data=>{
     return JDUserSign(s, key, title, encodeURIComponent(data));
