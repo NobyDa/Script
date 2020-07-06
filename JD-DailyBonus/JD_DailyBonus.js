@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.7.05 14:55 v1.22
+更新时间: 2020.7.06 18:30 v1.23
 有效接口: 24+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -753,6 +753,14 @@ function JingDongShake(s) {
 }
 
 function JDUserSignPre(s, key, title) {
+  if ($nobyda.isNode) {
+    return JDUserSignPre1(s, key, title)
+  } else {
+    return JDUserSignPre2(s, key, title);
+  }
+}
+
+function JDUserSignPre1(s, key, title) {
   return new Promise((resolve, reject) => {
     //setTimeout(() => {
       const JDUrl = {
@@ -763,7 +771,6 @@ function JDUserSignPre(s, key, title) {
         },
         body: `body={"activityId":"${acData[key]}"}`
       };
-      if (!$nobyda.isJSBox && !$nobyda.isNode && key == "JDWomen") return reject(key)
       $nobyda.post(JDUrl, function(error, response, data) {
         try {
           if (error) {
@@ -806,9 +813,7 @@ function JDUserSignPre(s, key, title) {
     if (out) setTimeout(reject, out + s)
   }).then(data=>{
     return JDUserSign(s, key, title, encodeURIComponent(JSON.stringify(data)));
-  }).catch(er => {
-    if (er == "JDWomen") return JDUserSignPre2(s, key, title)
-    });
+  },()=>{});
 }
 
 function JDUserSignPre2(s, key, title) {
