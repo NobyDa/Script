@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.7.07 17:00 v1.25
+更新时间: 2020.7.08 15:00 v1.26
 有效接口: 24+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -87,7 +87,7 @@ hostname = api.m.jd.com
 
 var LogDetails = false; //是否开启响应日志, true则开启
 
-var stop = 0; //自定义延迟签到,单位毫秒. 默认分批并发无延迟. (延迟作用于每个签到接口, 如填入延迟则切换顺序签到. Surge用户请注意在UI界面调整脚本超时)
+var stop = 0; //自定义延迟签到,单位毫秒. 默认分批并发无延迟. (延迟作用于每个签到接口, 如填入延迟则切换顺序签到. Surge用户请注意在UI界面调整脚本超时) 注: QX用户将强制使用顺序签到 (即默认stop=1)
 
 var DeleteCookie = false; //是否清除Cookie, true则开启
 
@@ -250,6 +250,7 @@ function notify() {
 function ReadCookie() {
   initial()
   DualAccount = true;
+  if ($nobyda.isQuanX && stop === 0) stop = 1;
   if (DeleteCookie) {
     if ($nobyda.isJSBox) {
       if ($file.exists("shared://JD_Cookie.txt")) {
@@ -2198,6 +2199,7 @@ function nobyda() {
     isRequest,
     isJSBox,
     isSurge,
+    isQuanX,
     isLoon,
     isNode,
     notify,
