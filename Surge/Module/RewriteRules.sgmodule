@@ -3,7 +3,7 @@
 
 [URL Rewrite]
 
-# Update time: 2020.6.21
+# Update time: 2020.7.8
 # This rewrite rule does not decrypt Youtube ads. if you need to, please add the host name：*.googlevideo.com
 
 ^https?:\/\/interface\.music\.163\.com\/eapi\/ad - reject
@@ -717,7 +717,7 @@
 ^https?:\/\/api\.zhihu\.com\/(launch|ad-style-service|app_config|real_time|ab\/api) - reject
 ^https?:\/\/api\.zhihu\.com\/commercial_api\/(launch|real_time) - reject
 ^https?:\/\/(api|www)\.zhihu\.com\/.*(featured-comment-ad|recommendations|community-ad) - reject
-^https?:\/\/(api|www)\.zhihu\.com\/(fringe|zst|adx|commercial|ad-style-service|banners|mqtt) - reject
+^https?:\/\/(api|www)\.zhihu\.com\/(fringe|adx|commercial|ad-style-service|banners|mqtt) - reject
 ^https?:\/\/ap(i|p)\.bilibili\.com\/((x\/v2|pgc)\/(search\/defaultword|season\/rank\/cn|splash\/)|(pgc/season/rank/cn|x/v2/(search/(defaultword|hot|recommend|resource)))) - reject
 ^https?:\/\/interface3?\.music\.163\.com/eapi/(ad|abtest|sp|hot|store|mlog|search/(specialkeyword|defaultkeyword|hot)) - reject
 ^https?:\/\/capis-slb\.didapinche\.com\/ad\/ - reject
