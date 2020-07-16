@@ -1,0 +1,36 @@
+{
+  "id": "NobyDa.app.sub",
+  "name": "NobyDa 脚本订阅",
+  "author": "@NobyDa",
+  "icon": "https://avatars2.githubusercontent.com/u/53217160",
+  "repo": "https://github.com/NobyDa/Script/tree/master",
+  "apps": [{
+    "id": "多合一签到",
+    "name": "京东",
+    "keys": ["CookieJD", "CookieJD2"],
+    "settings": [{
+      "id": "JD_DailyBonusLog",
+      "name": "响应日志",
+      "val": false,
+      "type": "boolean",
+      "desc": ""
+    }, {
+      "id": "JD_DailyBonusTimeOut",
+      "name": "超时退出 (毫秒)",
+      "val": "",
+      "type": "text",
+      "placeholder": "默认无超时 (点击以展开说明)",
+      "desc": "按需填写, 用于由网络不稳定引起的脚本中断, 正常或越狱用户建议留空. 如QX日志出现大量\"JS Context timeout\"后脚本中断时, 建议填写6000"
+    }, {
+      "id": "JD_DailyBonusDelay",
+      "name": "接口延迟 (毫秒)",
+      "val": "",
+      "type": "text",
+      "placeholder": "默认并发无延迟 (点击以展开说明)",
+      "desc": "延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长), VPN重启或越狱用户建议填写1, Surge用户请注意在SurgeUI界面调整脚本超时"
+    }],
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/tree/master/JD-DailyBonus",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/jd.png", "https://raw.githubusercontent.com/Orz-3/task/master/jd.png"]
+  }]
+}
