@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.7.18 17:20 v1.29
+更新时间: 2020.7.26 19:00 v1.30
 有效接口: 24+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -1092,11 +1092,40 @@ function JingDongCash(s) {
 }
 
 function JDMagicCube(s) {
+  return new Promise((resolve, reject) => {
+    if (disable("JDCube")) return reject()
+    const JDUrl = {
+      url: 'https://api.m.jd.com/client.action?functionId=getNewsInteractionInfo&appid=smfe',
+      headers: {
+        Cookie: KEY,
+      }
+    };
+    $nobyda.get(JDUrl, function(error, response, data) {
+      try {
+        if (!error && data.match(/\"interactionId\":\d+/)) {
+          const Details = LogDetails ? "response:\n" + data : '';
+          merge.JDCube.key = data.match(/\"interactionId\":(\d+)/)[1]
+          console.log("\n京东魔方-查询活动成功 " + Details)
+        } else {
+          console.log("\n京东魔方-查询活动失败 ")
+        }
+      } catch (eor) {
+        $nobyda.notify("京东魔方-查询" + eor.name + "‼️", JSON.stringify(eor), eor.message)
+      } finally {
+        resolve(merge.JDCube.key)
+      }
+    })
+    if (out) setTimeout(reject, out + s)
+  }).then(data => {
+    return JDMagicCubeSign(s, data)
+  }, () => {});
+}
+
+function JDMagicCubeSign(s, id) {
   return new Promise(resolve => {
-    if (disable("JDCube")) return resolve()
     setTimeout(() => {
       const JDMCUrl = {
-        url: 'https://api.m.jd.com/client.action?functionId=getNewsInteractionLotteryInfo&appid=smfe',
+        url: `https://api.m.jd.com/client.action?functionId=getNewsInteractionLotteryInfo&${id ? `body=%7B%22interactionId%22%3A${id}%2C%22taskPoolId%22%3A-1%2C%22sign%22%3A2%7D&appid=content_ecology` : `appid=smfe`}`,
         headers: {
           Cookie: KEY,
         }
@@ -1812,6 +1841,7 @@ function disable(name) {
     return false
   }
 }
+
 function initial() {
 
   acData = {
