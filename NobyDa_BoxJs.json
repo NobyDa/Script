@@ -65,8 +65,33 @@
       "placeholder": "默认并发无延迟 (点击以展开说明)",
       "desc": "延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长), VPN重启或越狱用户建议填写1, Surge用户请注意在SurgeUI界面调整脚本超时"
     }],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js",
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/tree/master/JD-DailyBonus",
     "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/jd.png", "https://raw.githubusercontent.com/Orz-3/task/master/jd.png"]
+  }, {
+    "id": "iQIYI",
+    "name": "爱奇艺",
+    "keys": ["CookieQY"],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/iQIYI.png", "https://raw.githubusercontent.com/Orz-3/task/master/iQIYI.png"]
+  }, {
+    "id": "BiliManga",
+    "name": "哔哩漫画",
+    "keys": ["CookieBM"],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/bilibili.png", "https://raw.githubusercontent.com/Orz-3/task/master/bilibili.png"]
+  }, {
+    "id": "52poje",
+    "name": "吾爱破解",
+    "keys": ["CookieWA"],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/52pj.png", "https://raw.githubusercontent.com/Orz-3/task/master/52pj.png"]
   }]
 }
