@@ -86,6 +86,33 @@
     "repo": "https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js",
     "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/bilibili.png", "https://raw.githubusercontent.com/Orz-3/task/master/bilibili.png"]
   }, {
+    "id": "BaiduTB",
+    "name": "百度贴吧",
+    "keys": ["CookieTB"],
+    "settings": [{
+      "id": "BDTB_DailyBonus_Mode",
+      "name": "签到模式",
+      "val": "0",
+      "type": "radios",
+      "desc": "",
+      "items": [
+        {"key": "0","label": "自动切换"}, 
+        {"key": "1","label": "顺序执行"}, 
+        {"key": "2","label": "并发执行"}
+      ]
+    }, {
+      "id": "BDTB_DailyBonus_notify",
+      "name": "通知汇总",
+      "val": "",
+      "type": "number",
+      "placeholder": "默认20 (点击以展开说明)",
+      "desc": "想签到几个汇总到一个通知里, 这里就填几个(比如我有13个要签到的, 这里填了5, 就会分三次推送通知)"
+    }],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
+    "author": "@sazs34 (Original)",
+    "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/baidu.png","https://raw.githubusercontent.com/Orz-3/task/master/baidu.png"]
+  }, {
     "id": "52poje",
     "name": "吾爱破解",
     "keys": ["CookieWA"],

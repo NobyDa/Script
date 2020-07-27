@@ -54,7 +54,6 @@ hostname= c.tieba.baidu.com
 */
 var $nobyda = nobyda();
 var cookieVal = $nobyda.read("CookieTB");
-var done = $nobyda.done();
 var useParallel = 0; //0自动切换,1串行,2并行(当贴吧数量大于30个以后,并行可能会导致QX崩溃,所以您可以自动切换)
 var singleNotifyCount = 20; //想签到几个汇总到一个通知里,这里就填几个(比如我有13个要签到的,这里填了5,就会分三次消息通知过去)
 var process = {
@@ -96,20 +95,23 @@ if ($nobyda.isRequest) {
 
 
 function signTieBa() {
+  useParallel = $nobyda.read("BDTB_DailyBonus_Mode") || useParallel
+  singleNotifyCount = $nobyda.read("BDTB_DailyBonus_notify") || singleNotifyCount
   if (!cookieVal) {
     $nobyda.notify("贴吧签到", "签到失败", "未获取到cookie");
-    return;
+    return $nobyda.done()
   }
   $nobyda.get(url_fetch_sign, function(error, response, data) {
     if (error) {
       $nobyda.notify("贴吧签到", "签到失败", "未获取到签到列表");
+      $nobyda.done()
     } else {
       // $nobyda.notify("贴吧签到", "贴吧列表", response.body);
       var body = JSON.parse(data);
       var isSuccessResponse = body && body.no == 0 && body.error == "success" && body.data.tbs;
       if (!isSuccessResponse) {
         $nobyda.notify("贴吧签到", "签到失败", (body && body.error) ? body.error : "接口数据获取失败");
-        return;
+        return $nobyda.done()
       }
       process.total = body.data.like_forum.length;
       if (body.data.like_forum && body.data.like_forum.length > 0) {
@@ -122,7 +124,7 @@ function signTieBa() {
         }
       } else {
         $nobyda.notify("贴吧签到", "签到失败", "请确认您有关注的贴吧");
-        return;
+        return $nobyda.done()
       }
     }
   })
@@ -166,6 +168,7 @@ function signBar(bar, tbs) {
           }
         } catch (e) {
           $nobyda.notify("贴吧签到", "贴吧签到数据处理异常", JSON.stringify(e));
+          $nobyda.done()
         }
         checkIsAllProcessed();
       }
@@ -217,6 +220,7 @@ function signBars(bars, tbs, index) {
             }
           } catch (e) {
             $nobyda.notify("贴吧签到", "贴吧签到数据处理异常", JSON.stringify(e));
+            $nobyda.done()
           }
           signBars(bars, tbs, ++index)
         }
@@ -245,6 +249,7 @@ function checkIsAllProcessed() {
       }
     }
     $nobyda.notify("贴吧签到", `签到${spliceArr.length}个,成功${notifySuccessCount}个`, notify);
+    $nobyda.done()
   }
 }
 
@@ -273,6 +278,7 @@ function GetCookie() {
       }
     }
   }
+  $nobyda.done()
 }
 
 function nobyda() {
