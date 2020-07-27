@@ -1,4 +1,4 @@
-# Update > 2020.6.29 This rule is based on optimization by lhie1/Rules.
+# Update > 2020.7.27 This rule is based on optimization by lhie1/Rules.
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
 DOMAIN-SUFFIX,gemini.yahoo.com,REJECT
@@ -5820,7 +5820,6 @@ DOMAIN-SUFFIX,promos.fling.com,REJECT
 DOMAIN-SUFFIX,promote.biz.weibo.cn,REJECT
 DOMAIN-SUFFIX,promote.caixin.com,REJECT
 DOMAIN-SUFFIX,promote.pair.com,REJECT
-DOMAIN-SUFFIX,promotion.aliyun.com,REJECT
 DOMAIN-SUFFIX,promotion.gomlab.com,REJECT
 DOMAIN-SUFFIX,promotions.iasbet.com,REJECT
 DOMAIN-SUFFIX,propellerads.com,REJECT
