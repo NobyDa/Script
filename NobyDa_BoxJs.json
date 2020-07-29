@@ -73,6 +73,20 @@
     "id": "iQIYI",
     "name": "爱奇艺",
     "keys": ["CookieQY"],
+      "settings": [{
+      "id": "iQIYI_LogDetails",
+      "name": "响应日志",
+      "val": false,
+      "type": "boolean",
+      "desc": ""
+    }, {
+      "id": "iQIYI_TimeOut",
+      "name": "超时退出 (毫秒)",
+      "val": "",
+      "type": "number",
+      "placeholder": "默认无超时 (点击以展开说明)",
+      "desc": "按需填写, 用于由网络不稳定引起的脚本中断, 正常用户建议留空. 如QX日志出现\"JS Context timeout\"后脚本中断时, 建议填写6000"
+    }],
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js",
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js",
