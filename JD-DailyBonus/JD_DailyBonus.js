@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.7.29 11:57 v1.33
+更新时间: 2020.7.29 20:50 v1.34
 有效接口: 24+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -171,7 +171,7 @@ function notify() {
       var fail = 0;
       var notify = '';
       for (var i in merge) {
-        bean += Number(merge[i].bean.toFixed(0))
+        bean += Number(merge[i].bean)
         steel += Number(merge[i].steel)
         success += Number(merge[i].success)
         fail += Number(merge[i].fail)
