@@ -39,7 +39,7 @@
         {"key": "JDFSale","label": "京东闪购"},
         {"key": "Overseas","label": "京东国际"},
         {"key": "JDBook","label": "京东图书"},
-        {"key": "JDShand","label": "京东二手"},
+        {"key": "JDShand","label": "京东二手 (如VPN重启,建议禁用)"},
         {"key": "JDMakeup","label": "京东美妆"},
         {"key": "JDWomen","label": "京东女装"},
         {"key": "JDVege","label": "京东菜场"},
