@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.8.3 18:50 v1.36 (Beta)
+更新时间: 2020.8.3 21:50 v1.37 (Beta)
 有效接口: 24+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -197,7 +197,7 @@ function notify() {
       var DName = merge.JDShake.nickname ? merge.JDShake.nickname : "获取失败"
       var Name = add ? DualAccount ? "【签到号一】:  " + DName + "\n" : "【签到号二】:  " + DName + "\n" : ""
       console.log("\n" + Name + one + two + three + four + notify)
-      move(0,0,1)
+      move(0, 0, 1)
       if ($nobyda.isJSBox) {
         if (add && DualAccount) {
           Shortcut = Name + one + two + three + "\n"
@@ -807,6 +807,7 @@ function JDUserSignPre1(s, key, title) {
           merge[key].notify = `${title}: 签到活动获取失败 ‼️‼️`
           merge[key].fail = 1
         } else {
+          const turnTableId = data.match(/\"turnTableId\":\"(\d+)\"/)
           if (data.match(/enActK/)) { // 含有签到活动数据
             const od = JSON.parse(data);
             let params = (od.floatLayerList || []).filter(o => o.params && o.params.match(/enActK/)).map(o => o.params).pop();
@@ -831,6 +832,9 @@ function JDUserSignPre1(s, key, title) {
               }); // 执行签到处理
               return;
             }
+          } else if (turnTableId) {
+            reject(turnTableId[1])
+            return;
           }
           merge[key].notify = `${title}: 失败, 原因: 不含活动数据 ⚠️`
           merge[key].fail = 1
@@ -845,9 +849,10 @@ function JDUserSignPre1(s, key, title) {
     if (out) setTimeout(reject, out + s)
   }).then(data => {
     disable(key, title, 2)
-    return JDUserSign(s, key, title, encodeURIComponent(JSON.stringify(data)));
+    return JDUserSign1(s, key, title, encodeURIComponent(JSON.stringify(data)));
   }).catch(err => {
-    return disable(key, title, 2)
+    disable(key, title, 2)
+    if (err) return JDUserSign2(s, key, title, err)
   })
 }
 
@@ -867,8 +872,12 @@ function JDUserSignPre2(s, key, title) {
           merge[key].notify = `${title}: 签到活动获取失败 ‼️‼️`
           merge[key].fail = 1
         } else {
+          const turnTable = data.match(/\"turnTableId\":\"(\d+)\"/)
           if (data.match(/"params":"{\\"enActK\\".*?\\"}"/)) { // 含有签到活动数据
             resolve(`{${data.match(/"params":"{\\"enActK\\".*?\\"}"/)}}`); // 执行签到处理
+            return;
+          } else if (turnTable) {
+            reject(turnTable[1])
             return;
           }
           merge[key].notify = `${title}: 失败, 原因: 不含活动数据 ⚠️`
@@ -884,13 +893,14 @@ function JDUserSignPre2(s, key, title) {
     if (out) setTimeout(reject, out + s)
   }).then(data => {
     disable(key, title, 2)
-    return JDUserSign(s, key, title, encodeURIComponent(data));
+    return JDUserSign1(s, key, title, encodeURIComponent(data));
   }).catch(err => {
-    return disable(key, title, 2)
+    disable(key, title, 2)
+    if (err) return JDUserSign2(s, key, title, err)
   })
 }
 
-function JDUserSign(s, key, title, body) {
+function JDUserSign1(s, key, title, body) {
   return new Promise(resolve => {
     setTimeout(() => {
       const JDUrl = {
@@ -910,7 +920,7 @@ function JDUserSign(s, key, title, body) {
             const Details = LogDetails ? `response:\n${data}` : '';
             const cc = JSON.parse(data)
             if (data.match(/签到成功/)) {
-              console.log(`\n${title}签到成功${Details}`)
+              console.log(`\n${title}签到成功(1)${Details}`)
               if (data.match(/(\"text\":\"\d+京豆\")/)) {
                 let beanQuantity = cc.awardList[0].text.match(/\d+/)
                 merge[key].notify = `${title}: 成功, 明细: ${beanQuantity}京豆 🐶`
@@ -921,7 +931,7 @@ function JDUserSign(s, key, title, body) {
                 merge[key].success = 1
               }
             } else {
-              console.log(`\n${title}签到失败 ${Details}`)
+              console.log(`\n${title}签到失败(1)${Details}`)
               if (data.match(/(已签到|已领取)/)) {
                 merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`
                 merge[key].fail = 1
@@ -939,6 +949,59 @@ function JDUserSign(s, key, title, body) {
                   }
                 }
               }
+            }
+          }
+        } catch (eor) {
+          $nobyda.notify(`${title}${eor.name} ‼️`, JSON.stringify(eor), eor.message)
+        } finally {
+          resolve()
+        }
+      })
+    }, s)
+    if (out) setTimeout(resolve, out + s)
+  });
+}
+
+function JDUserSign2(s, key, title, tid) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      const JDUrl = {
+        url: 'https://jdjoy.jd.com/api/turncard/channel/sign',
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Cookie: KEY,
+        },
+        body: `turnTableId=${tid}`
+      };
+      $nobyda.post(JDUrl, function(error, response, data) {
+        try {
+          if (error) {
+            merge[key].notify = `${title}: 签到接口请求失败 ‼️‼️`
+            merge[key].fail = 1
+          } else {
+            const Details = LogDetails ? `response:\n${data}` : '';
+            const cc = JSON.parse(data)
+            if (cc.success == true) {
+              console.log(`\n${title}签到成功(2)${Details}`)
+              if (data.match(/\"jdBeanQuantity\":\d+/)) {
+                merge[key].notify = `${title}: 成功, 明细: ${cc.data.jdBeanQuantity}京豆 🐶`
+                merge[key].bean = cc.data.jdBeanQuantity
+              } else {
+                merge[key].notify = `${title}: 成功, 明细: 无京豆 🐶`
+              }
+              merge[key].success = 1
+            } else {
+              console.log(`\n${title}签到失败(2)${Details}`)
+              if (data.match(/(已经签到|已经领取)/)) {
+                merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`
+              } else if (data.match(/(不存在|已结束|未开始)/)) {
+                merge[key].notify = `${title}: 失败, 原因: 活动已结束 ⚠️`
+              } else if (data.match(/(没有登录|B0001)/)) {
+                merge[key].notify = `${title}: 失败, 原因: Cookie失效‼️`
+              } else {
+                merge[key].notify = `${title}: 失败, 原因: 未知 ⚠️`
+              }
+              merge[key].fail = 1
             }
           }
         } catch (eor) {

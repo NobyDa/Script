@@ -35,6 +35,7 @@
         {"key": "JDTurn","label": "京东转盘"},
         {"key": "JDGStore","label": "京东超市"},
         {"key": "JDDrug","label": "京东医药"},
+        {"key": "JDClocks","label": "京东钟表"},
         {"key": "JDPet","label": "京东宠物"},
         {"key": "JDFSale","label": "京东闪购"},
         {"key": "Overseas","label": "京东国际"},
