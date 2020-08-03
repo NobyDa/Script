@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.8.1 19:30 v1.35 (Beta)
+更新时间: 2020.8.3 18:50 v1.36 (Beta)
 有效接口: 24+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -115,6 +115,7 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'), //京东钟表馆
       JDUserSignPre(stop, 'JDDrug', '京东商城-医药'), //京东医药馆
       JDUserSignPre(stop, 'JDVege', '京东商城-菜场'), //京东菜场
       JDUserSignPre(stop, 'JDFood', '京东商城-美食'), //京东美食馆
@@ -134,6 +135,7 @@ async function all() {
     await JingRongDoll(stop); //金融抓娃娃
     await JingRongSteel(stop); //金融钢镚
     await JingDongTurn(stop); //京东转盘
+    await JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'); //京东钟表馆
     await JDUserSignPre(stop, 'JDDrug', '京东商城-医药'); //京东医药馆
     await JDUserSignPre(stop, 'JDGStore', '京东商城-超市'); //京东超市
     await JDUserSignPre(stop, 'JDPet', '京东商城-宠物'); //京东宠物馆
@@ -1474,9 +1476,9 @@ function JDReceiveTask(s, CID) {
               Cookie: KEY
             }
           };
-          count += 1
           $nobyda.get(TUrl, function(error, response, data) {
             try {
+              count++
               if (error) {
                 console.log("\n天天加速-领取道具请求失败 ‼️‼️")
               } else {
@@ -1569,9 +1571,9 @@ function JDUseProps(s, PropID) {
               Cookie: KEY
             }
           };
-          PropCount += 1
           $nobyda.get(PropUrl, function(error, response, data) {
             try {
+              PropCount++
               if (error) {
                 console.log("\n天天加速-使用道具请求失败 ‼️‼️")
               } else {
@@ -1882,7 +1884,7 @@ function disable(Val, name, way) {
   const read = $nobyda.read("JD_DailyBonusDisables")
   const annal = $nobyda.read("JD_Crash_" + Val)
   const boxds = $nobyda.read("JD_Crash_disable") === "false" ? false : true
-  const old = (Val == "JDDrug" || way == 2) ? false : move(Val, read, 0)
+  const old = (Val == "JDDrug" || Val == "JDClocks" || way == 2) ? false : move(Val, read, 0)
   if (annal && way == 1 && boxds) {
     var Crash = $nobyda.write("", "JD_Crash_" + Val)
     if (read) {
@@ -1934,6 +1936,8 @@ function move(ValKey, NewKey, DelOld) {
 function initial() {
 
   acData = {
+    // 京东商城-钟表
+    JDClocks: '2BcJPCVVzMEtMUynXkPscCSsx68W',
     // 京东商城-医药
     JDDrug: '3tqTG5sF1xCUyC6vgEF5CLCxGn7w',
     // 京东商城-超市
@@ -1969,6 +1973,7 @@ function initial() {
     JDGStore: {},
     JDPet: {},
     JDDrug: {},
+    JDClocks: {},
     JDFSale: {},
     JDBook: {},
     JDShand: {},
