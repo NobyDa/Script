@@ -1,7 +1,7 @@
 /*
 爱奇艺会员签到脚本
 
-更新时间: 2020.7.29 16:30
+更新时间: 2020.8.5 17:00
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -66,7 +66,7 @@ var out = 0; // 超时 (毫秒) 如填写, 则不少于3000
 
 var $nobyda = nobyda();
 
-(async function ReadCookie() {
+(async () => {
   out = $nobyda.read("iQIYI_TimeOut") || out
   cookie = cookie || $nobyda.read("CookieQY")
   LogDetails = $nobyda.read("iQIYI_LogDetails") === "true" ? true : LogDetails
@@ -75,14 +75,14 @@ var $nobyda = nobyda();
   } else if (cookie) {
     await login();
     await Checkin();
-    await Lottery();
+    await Lottery(500);
     await $nobyda.time();
-    await $nobyda.done();
   } else {
     $nobyda.notify("爱奇艺会员", "", "签到终止, 未获取Cookie");
-    return $nobyda.done();
   }
-})()
+})().finally(() => {
+  $nobyda.done();
+})
 
 function login() {
   return new Promise(resolve => {
@@ -141,42 +141,44 @@ function Checkin() {
   })
 }
 
-function Lottery() {
+function Lottery(s) {
   return new Promise(resolve => {
     $nobyda.times++
       const URL = {
         url: 'https://iface2.iqiyi.com/aggregate/3.0/lottery_activity?app_k=0&app_v=0&platform_id=0&dev_os=0&dev_ua=0&net_sts=0&qyid=0&psp_uid=0&psp_cki=' + cookie + '&psp_status=0&secure_p=0&secure_v=0&req_sn=0'
       }
-    $nobyda.get(URL, function(error, response, data) {
-      if (error) {
-        $nobyda.data += "\n抽奖失败: 接口请求出错 ‼️"
-        console.log(`爱奇艺-抽奖失败: 接口请求出错 ‼️ ${error} (${$nobyda.times})`)
-        $nobyda.notify("爱奇艺", "", $nobyda.data)
-      } else {
-        const obj = JSON.parse(data);
-        const Details = LogDetails ? `response:\n${data}` : ''
-        const last = data.match(/\"daysurpluschance\":\"(1|2)\"/)
-        if (obj.awardName && obj.code == 0) {
-          $nobyda.data += "\n抽奖成功: " + obj.awardName.replace(/《.+》/, "未中奖") + " 🎉"
-          console.log(`爱奇艺-抽奖成功: ${obj.awardName.replace(/《.+》/, "未中奖")} 🎉 (${$nobyda.times}) ${Details}`)
-        } else if (data.match(/\"errorReason\"/)) {
-          msg = data.match(/msg=(.+?)\)/) ? data.match(/msg=(.+?)\)/)[1] : "" + '\n'
-          $nobyda.data += "\n抽奖失败: " + msg.replace(/用户(未登录|不存在)/, "Cookie无效") + " ⚠️"
-          console.log(`爱奇艺-抽奖失败: ${msg.replace(/用户(未登录|不存在)/, "Cookie无效")} ⚠️ (${$nobyda.times}) ${Details}`)
+    setTimeout(() => {
+      $nobyda.get(URL, async function(error, response, data) {
+        if (error) {
+          $nobyda.data += "\n抽奖失败: 接口请求出错 ‼️"
+          console.log(`爱奇艺-抽奖失败: 接口请求出错 ‼️ ${error} (${$nobyda.times})`)
+          //$nobyda.notify("爱奇艺", "", $nobyda.data)
         } else {
-          $nobyda.data += "\n抽奖错误: 已输出日志 ⚠️"
-          console.log(`爱奇艺-抽奖失败: \n${data} (${$nobyda.times}) ${Details}`)
+          const obj = JSON.parse(data);
+          const Details = LogDetails ? `response:\n${data}` : ''
+          $nobyda.last = data.match(/(机会|已经)用完/) ? true : false
+          if (obj.awardName && obj.code == 0) {
+            $nobyda.data += `\n抽奖成功: ${obj.awardName.replace(/《.+》/, "未中奖")} 🎉`
+            console.log(`爱奇艺-抽奖成功: ${obj.awardName.replace(/《.+》/, "未中奖")} 🎉 (${$nobyda.times}) ${Details}`)
+          } else if (data.match(/\"errorReason\"/)) {
+            msg = data.match(/msg=.+?\)/) ? data.match(/msg=(.+?)\)/)[1].replace(/用户(未登录|不存在)/, "Cookie无效") : ""
+            $nobyda.data += `\n抽奖失败: ${msg || `未知错误`} ⚠️`
+            console.log(`爱奇艺-抽奖失败: ${msg || `未知错误`} ⚠️ (${$nobyda.times}) ${msg ? Details : `response:\n${data}`}`)
+          } else {
+            $nobyda.data += "\n抽奖错误: 已输出日志 ⚠️"
+            console.log(`爱奇艺-抽奖失败: \n${data} (${$nobyda.times})`)
+          }
         }
-        if (last) {
-          Lottery()
+        if (!$nobyda.last && $nobyda.times < 3) {
+          await Lottery(s)
         } else {
           const expires = $nobyda.expire ? $nobyda.expire.replace(/\u5230\u671f/, "") : "获取失败 ⚠️"
           if (!$nobyda.isNode) $nobyda.notify("爱奇艺", "到期时间: " + expires, $nobyda.data)
-          resolve()
         }
-      }
-    })
-    if (out) setTimeout(resolve, out)
+        resolve()
+      })
+    }, s)
+    if (out) setTimeout(resolve, out + s)
   })
 }
 
@@ -205,7 +207,6 @@ function GetCookie() {
   } else {
     $nobyda.notify("写入爱奇艺Cookie失败", "", "URL不匹配 ‼️")
   }
-  $nobyda.done();
 }
 
 function nobyda() {
