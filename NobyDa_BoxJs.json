@@ -54,6 +54,7 @@
         {"key": "JDPrize","label": "京东大奖"},
         {"key": "JRDSign","label": "金融双签"},
         {"key": "subsidy","label": "京东金贴"},
+        {"key": "JDGetCash","label": "京东现金"},
         {"key": "JDShake","label": "京东摇一摇"},
         {"key": "Qbear","label": "总京豆查询"},
         {"key": "TCash","label": "总红包查询"},
