@@ -1,5 +1,6 @@
 /*
 国区wps
+by eHpo1
 
 [Script]
 http-response ^https?:\/\/account\.wps\.cn\/api\/users requires-body=1,max-size=-1,script-path=https://raw.githubusercontent.com/eHpo1/Surge/master/Script/wps.js
@@ -45,5 +46,3 @@ obj = {
 obj.userid = id;
 
 $done({ body: JSON.stringify(obj) });
-
-// by eHpo1

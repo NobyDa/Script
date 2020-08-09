@@ -33,6 +33,3 @@ if (url.indexOf(path1) != -1) {
  }
 
 $done({body});
-
-// 自用 转载需注明出处
-// TG频道: https://t.me/NobyDa

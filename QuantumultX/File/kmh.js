@@ -1,6 +1,6 @@
 /*
 看漫画极速版 unlock vip, currently off the shelf
-
+From HoGer
 QX:
 ^https?:\/\/getuserinfo\.321mh\.com\/app_api\/v5\/getuserinfo\/ url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/kmh.js
 
@@ -19,5 +19,3 @@ if (url.indexOf(path) != -1) {
 	body = JSON.stringify(obj);
  }
 $done({body});
-
-// From HoGer
