@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.8.3 21:50 v1.37 (Beta)
-有效接口: 24+
+更新时间: 2020.8.9 17:00 v1.38 (Beta)
+有效接口: 25+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -115,6 +115,7 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'), //京东晚市补贴金
       JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'), //京东钟表馆
       JDUserSignPre(stop, 'JDDrug', '京东商城-医药'), //京东医药馆
       JDUserSignPre(stop, 'JDVege', '京东商城-菜场'), //京东菜场
@@ -135,6 +136,7 @@ async function all() {
     await JingRongDoll(stop); //金融抓娃娃
     await JingRongSteel(stop); //金融钢镚
     await JingDongTurn(stop); //京东转盘
+    await JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'); //京东晚市补贴金
     await JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'); //京东钟表馆
     await JDUserSignPre(stop, 'JDDrug', '京东商城-医药'); //京东医药馆
     await JDUserSignPre(stop, 'JDGStore', '京东商城-超市'); //京东超市
@@ -1947,7 +1949,7 @@ function disable(Val, name, way) {
   const read = $nobyda.read("JD_DailyBonusDisables")
   const annal = $nobyda.read("JD_Crash_" + Val)
   const boxds = $nobyda.read("JD_Crash_disable") === "false" ? false : true
-  const old = (Val == "JDDrug" || Val == "JDClocks" || way == 2) ? false : move(Val, read, 0)
+  const old = (Val == "JDSubsidy" || Val == "JDDrug" || Val == "JDClocks" || way == 2) ? false : move(Val, read, 0)
   if (annal && way == 1 && boxds) {
     var Crash = $nobyda.write("", "JD_Crash_" + Val)
     if (read) {
@@ -1999,6 +2001,8 @@ function move(ValKey, NewKey, DelOld) {
 function initial() {
 
   acData = {
+    // 京东晚市-补贴
+    JDSubsidy: 'xK148m4kWj5hBcTPuJUNNXH3AkJ',
     // 京东商城-钟表
     JDClocks: '2BcJPCVVzMEtMUynXkPscCSsx68W',
     // 京东商城-医药
@@ -2035,6 +2039,7 @@ function initial() {
     JRDSign: {},
     JDGStore: {},
     JDPet: {},
+    JDSubsidy: {},
     JDDrug: {},
     JDClocks: {},
     JDFSale: {},

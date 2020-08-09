@@ -35,6 +35,7 @@
         {"key": "JDTurn","label": "京东转盘"},
         {"key": "JDGStore","label": "京东超市"},
         {"key": "JDDrug","label": "京东医药"},
+        {"key": "JDSubsidy","label": "京东晚市"},
         {"key": "JDClocks","label": "京东钟表"},
         {"key": "JDPet","label": "京东宠物"},
         {"key": "JDFSale","label": "京东闪购"},
@@ -131,7 +132,7 @@
       "desc": "想签到几个汇总到一个通知里, 这里就填几个(比如我有13个要签到的, 这里填了5, 就会分三次推送通知)"
     }],
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
-    "author": "@sazs34 (Original)",
+    "author": "@sazs34, @NobyDa",
     "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
     "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/baidu.png","https://raw.githubusercontent.com/Orz-3/task/master/baidu.png"]
   }, {
