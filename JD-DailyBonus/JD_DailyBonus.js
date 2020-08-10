@@ -598,7 +598,7 @@ function JingRongSteel(s) {
     if (disable("JRSteel")) return resolve()
     setTimeout(() => {
       const JRSUrl = {
-        url: 'https://ms.jr.jd.com/gw/generic/gry/h5/m/signIn',
+        url: 'https://ms.jr.jd.com/gw/generic/gry/h5/m/signIn1',
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Cookie: KEY,
