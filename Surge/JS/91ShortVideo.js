@@ -1,6 +1,7 @@
 /*
 91 short video unlock vip
 app download link : http://i91.porn
+From NobyDa, Welcome to focus on my TG channel @NobyDa
 
 QX1.0.0: 
 ^https?:\/\/.+\.(my10api|(.*91.*))\.(com|tips|app|xyz)(:\d{2,5})?\/api.php$ url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/91.js
@@ -17,5 +18,3 @@ if (obj.data.match(/^[A-Z0-9]{1000,20000}$/)) {
   } else {
     $done({})
   }
-
- // From NobyDa, Welcome to focus on my TG channel @NobyDa

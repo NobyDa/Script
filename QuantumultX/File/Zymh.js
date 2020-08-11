@@ -1,6 +1,6 @@
 /*
 知音漫客 unlock vip
-
+by mieqq
 QX:
 ^https://getuserinfo-globalapi.zymk.cn/app_api/v5/(getuserinfo|coin_account|getuserinfo_ticket|getcomicinfo)/ url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Zymh.js
 
@@ -41,5 +41,3 @@ else if (url.indexOf(free) != -1) {
 	body = JSON.stringify(body);
 
 $done({body});
-
-//by mieqq

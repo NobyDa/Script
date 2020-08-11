@@ -1,0 +1,148 @@
+{
+  "id": "NobyDa.app.sub",
+  "name": "NobyDa 脚本订阅",
+  "author": "@NobyDa",
+  "icon": "https://avatars2.githubusercontent.com/u/53217160",
+  "repo": "https://github.com/NobyDa/Script/tree/master",
+  "apps": [{
+    "id": "多合一签到",
+    "name": "京东",
+    "keys": ["CookieJD", "CookieJD2"],
+    "settings": [{
+      "id": "JD_DailyBonusLog",
+      "name": "详细响应日志",
+      "val": false,
+      "type": "boolean",
+      "desc": ""
+    }, {
+      "id": "JD_Crash_disable",
+      "name": "崩溃自动禁用",
+      "val": true,
+      "type": "boolean",
+      "desc": ""
+    }, {
+      "id": "JD_DailyBonusDisables",
+      "name": "签到接口禁用",
+      "val": "",
+      "type": "checkboxes",
+      "desc": "",
+      "items": [
+        {"key": "SpeedUp","label": "天天加速"}, 
+        {"key": "JDBean","label": "京东京豆"}, 
+        {"key": "JRBean","label": "金融金贴"},
+        {"key": "JRDoll","label": "金融娃娃"},
+        {"key": "JRSteel","label": "金融钢镚"},
+        {"key": "JDTurn","label": "京东转盘"},
+        {"key": "JDGStore","label": "京东超市"},
+        {"key": "JDDrug","label": "京东医药"},
+        {"key": "JDSubsidy","label": "京东晚市"},
+        {"key": "JDClocks","label": "京东钟表"},
+        {"key": "JDPet","label": "京东宠物"},
+        {"key": "JDFSale","label": "京东闪购"},
+        {"key": "Overseas","label": "京东国际"},
+        {"key": "JDBook","label": "京东图书"},
+        {"key": "JDShand","label": "京东二手 (如VPN重启,建议禁用)"},
+        {"key": "JDMakeup","label": "京东美妆"},
+        {"key": "JDWomen","label": "京东女装"},
+        {"key": "JDVege","label": "京东菜场"},
+        {"key": "JDCash","label": "京东红包"},
+        {"key": "JDFood","label": "京东美食"},
+        {"key": "JDClean","label": "京东清洁"},
+        {"key": "JDCare","label": "京东个护"},
+        {"key": "JDJewels","label": "京东珠宝 (如VPN重启,建议禁用)"},
+        {"key": "JDCube","label": "京东魔方"},
+        {"key": "JDPrize","label": "京东大奖"},
+        {"key": "JRDSign","label": "金融双签"},
+        {"key": "subsidy","label": "京东金贴"},
+        {"key": "JDGetCash","label": "京东现金"},
+        {"key": "JDShake","label": "京东摇一摇"},
+        {"key": "Qbear","label": "总京豆查询"},
+        {"key": "TCash","label": "总红包查询"},
+        {"key": "TSteel","label": "总钢镚查询"}
+      ]
+    }, {
+      "id": "JD_DailyBonusTimeOut",
+      "name": "超时退出 (毫秒)",
+      "val": "",
+      "type": "number",
+      "placeholder": "默认无超时 (点击以展开说明)",
+      "desc": "按需填写, 用于由网络不稳定引起的脚本中断, 正常或越狱用户建议留空. 如QX日志出现大量\"JS Context timeout\"后脚本中断时, 建议填写6000"
+    }, {
+      "id": "JD_DailyBonusDelay",
+      "name": "接口延迟 (毫秒)",
+      "val": "",
+      "type": "number",
+      "placeholder": "默认并发无延迟 (点击以展开说明)",
+      "desc": "延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长), VPN重启或越狱用户建议填写1, Surge用户请注意在SurgeUI界面调整脚本超时"
+    }],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/tree/master/JD-DailyBonus",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/jd.png", "https://raw.githubusercontent.com/Orz-3/task/master/jd.png"]
+  }, {
+    "id": "iQIYI",
+    "name": "爱奇艺",
+    "keys": ["CookieQY"],
+      "settings": [{
+      "id": "iQIYI_LogDetails",
+      "name": "响应日志",
+      "val": false,
+      "type": "boolean",
+      "desc": ""
+    }, {
+      "id": "iQIYI_TimeOut",
+      "name": "超时退出 (毫秒)",
+      "val": "",
+      "type": "number",
+      "placeholder": "默认无超时 (点击以展开说明)",
+      "desc": "按需填写, 用于由网络不稳定引起的脚本中断, 正常用户建议留空. 如QX日志出现\"JS Context timeout\"后脚本中断时, 建议填写6000"
+    }],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/iQIYI.png", "https://raw.githubusercontent.com/Orz-3/task/master/iQIYI.png"]
+  }, {
+    "id": "BiliManga",
+    "name": "哔哩漫画",
+    "keys": ["CookieBM"],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/bilibili.png", "https://raw.githubusercontent.com/Orz-3/task/master/bilibili.png"]
+  }, {
+    "id": "BaiduTB",
+    "name": "百度贴吧",
+    "keys": ["CookieTB"],
+    "settings": [{
+      "id": "BDTB_DailyBonus_Mode",
+      "name": "签到模式",
+      "val": "0",
+      "type": "radios",
+      "desc": "",
+      "items": [
+        {"key": "0","label": "自动切换"}, 
+        {"key": "1","label": "顺序执行"}, 
+        {"key": "2","label": "并发执行"}
+      ]
+    }, {
+      "id": "BDTB_DailyBonus_notify",
+      "name": "通知汇总",
+      "val": "",
+      "type": "number",
+      "placeholder": "默认20 (点击以展开说明)",
+      "desc": "想签到几个汇总到一个通知里, 这里就填几个(比如我有13个要签到的, 这里填了5, 就会分三次推送通知)"
+    }],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
+    "author": "@sazs34, @NobyDa",
+    "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/baidu.png","https://raw.githubusercontent.com/Orz-3/task/master/baidu.png"]
+  }, {
+    "id": "52poje",
+    "name": "吾爱破解",
+    "keys": ["CookieWA"],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/52pj.png", "https://raw.githubusercontent.com/Orz-3/task/master/52pj.png"]
+  }]
+}

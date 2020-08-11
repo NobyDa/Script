@@ -1,6 +1,6 @@
 /*
 Remove the WeChat public account bottom ad
-
+by Choler
 QX:
 ^https?:\/\/mp\.weixin\.qq\.com\/mp\/getappmsgad url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Wechat.js
 
@@ -15,5 +15,3 @@ obj.advertisement_num = 0;
 obj.advertisement_info = [];
 delete obj.appid;
 $done({body: JSON.stringify(obj)}); 
-
-//by Choler

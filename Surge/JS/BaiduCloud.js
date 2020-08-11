@@ -1,6 +1,6 @@
 /*
 Baidu netdisc unlocks online video play speed.
-
+Key data from thor filter
 Surge4.0:
 http-response https:\/\/pan\.baidu\.com\/rest\/2\.0\/membership\/user requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/BaiduCloud.js
 
@@ -42,5 +42,3 @@ obj = {
   "request_id": 7501873289383874371
 };
 $done({body: JSON.stringify(obj)});
-
-//Key data from thor filter
