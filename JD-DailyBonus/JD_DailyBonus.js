@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.8.9 18:00 v1.39 (Beta)
-有效接口: 26+
+更新时间: 2020.8.12 22:30 v1.40 (Beta)
+有效接口: 27+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -116,6 +116,7 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JD3C', '京东商城-数码'), //京东数码电器馆
       JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'), //京东晚市补贴金
       JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'), //京东钟表馆
       JDUserSignPre(stop, 'JDDrug', '京东商城-医药'), //京东医药馆
@@ -137,6 +138,7 @@ async function all() {
     await JingRongDoll(stop); //金融抓娃娃
     await JingRongSteel(stop); //金融钢镚
     await JingDongTurn(stop); //京东转盘
+    await JDUserSignPre(stop, 'JD3C', '京东商城-数码'); //京东数码电器馆
     await JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'); //京东晚市补贴金
     await JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'); //京东钟表馆
     await JDUserSignPre(stop, 'JDDrug', '京东商城-医药'); //京东医药馆
@@ -201,7 +203,6 @@ function notify() {
       var DName = merge.JDShake.nickname ? merge.JDShake.nickname : "获取失败"
       var Name = add ? DualAccount ? "【签到号一】:  " + DName + "\n" : "【签到号二】:  " + DName + "\n" : ""
       console.log("\n" + Name + one + two + three + four + notify)
-      move(0, 0, 1)
       if ($nobyda.isJSBox) {
         if (add && DualAccount) {
           Shortcut = Name + one + two + three + "\n"
@@ -363,13 +364,14 @@ function JingDongBean(s) {
                     }
                   }
                 } else {
+                  merge.JDBean.fail = 1
                   console.log("\n" + "京东商城-京豆签到失败 " + Details)
                   if (data.match(/(已签到|新人签到)/)) {
                     merge.JDBean.notify = "京东商城-京豆: 失败, 原因: 已签过 ⚠️"
-                    merge.JDBean.fail = 1
+                  } else if (data.match(/人数较多|S101/)) {
+                    merge.JDBean.notify = "京东商城-京豆: 失败, 签到人数较多 ⚠️"
                   } else {
                     merge.JDBean.notify = "京东商城-京豆: 失败, 原因: 未知 ⚠️"
-                    merge.JDBean.fail = 1
                   }
                 }
               }
@@ -568,7 +570,7 @@ function JRBeanCheckin(s) {
               }
             } else {
               console.log("\n" + "京东金融-金贴签到失败 " + Details)
-              if (data.match(/(发放失败|70111)/)) {
+              if (data.match(/发放失败|70111|10000/)) {
                 merge.JRBean.notify = "京东金融-金贴: 失败, 原因: 已签过 ⚠️"
                 merge.JRBean.fail = 1
               } else {
@@ -793,25 +795,25 @@ function JDUserSignPre(s, key, title) {
   }
 }
 
-function JDUserSignPre1(s, key, title) {
+function JDUserSignPre1(s, key, title, ask) {
   return new Promise((resolve, reject) => {
     if (disable(key, title, 1)) return reject()
-    //setTimeout(() => {
     const JDUrl = {
       url: 'https://api.m.jd.com/?client=wh5&functionId=qryH5BabelFloors',
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Cookie: KEY,
       },
-      body: `body={"activityId":"${acData[key]}"}`
+      body: `body=${encodeURIComponent(`{"activityId":"${acData[key]}"${ask ? `,"paginationParam":"2",${ask}` : ``}}`)}`
     };
-    $nobyda.post(JDUrl, function(error, response, data) {
+    $nobyda.post(JDUrl, async function(error, response, data) {
       try {
         if (error) {
           merge[key].notify = `${title}: 签到活动获取失败 ‼️‼️`
           merge[key].fail = 1
         } else {
           const turnTableId = data.match(/\"turnTableId\":\"(\d+)\"/)
+          const page = data.match(/\"paginationFlrs\":\"\[\[.+?\]\]\"/)
           if (data.match(/enActK/)) { // 含有签到活动数据
             const od = JSON.parse(data);
             let params = (od.floatLayerList || []).filter(o => o.params && o.params.match(/enActK/)).map(o => o.params).pop();
@@ -836,11 +838,30 @@ function JDUserSignPre1(s, key, title) {
               }); // 执行签到处理
               return;
             }
-          } else if (turnTableId) {
-            reject(turnTableId[1])
-            return;
+          } else if (turnTableId) { // 无签到数据, 但含有关注店铺签到
+            const boxds = $nobyda.read("JD_Follow_disable") === "false" ? false : true
+            if (boxds) {
+              console.log(`\n${title}关注店铺`)
+              return reject(turnTableId[1])
+            } else {
+              merge[key].notify = `${title}: 失败, 需要关注店铺 ⚠️`
+              merge[key].fail = 1
+              return reject()
+            }
+          } else if (page && !ask) { // 无签到数据, 尝试带参查询
+            const boxds = $nobyda.read("JD_Retry_disable") === "false" ? false : true
+            if (boxds) {
+              console.log(`\n${title}二次查询`)
+              await disable(key, title, 2)
+              await JDUserSignPre1(s, key, title, page[0])
+              return reject()
+            } else {
+              merge[key].notify = `${title}: 失败, 请尝试开启增强 ⚠️`
+              merge[key].fail = 1
+              return reject()
+            }
           }
-          merge[key].notify = `${title}: 失败, 原因: 不含活动数据 ⚠️`
+          merge[key].notify = `${title}: 失败, 不含活动数据 ⚠️`
           merge[key].fail = 1
         }
       } catch (eor) {
@@ -849,7 +870,6 @@ function JDUserSignPre1(s, key, title) {
         reject()
       }
     })
-    //}, s)
     if (out) setTimeout(reject, out + s)
   }).then(data => {
     disable(key, title, 2)
@@ -863,28 +883,47 @@ function JDUserSignPre1(s, key, title) {
 function JDUserSignPre2(s, key, title) {
   return new Promise((resolve, reject) => {
     if (disable(key, title, 1)) return reject()
-    //setTimeout(() => {
     const JDUrl = {
       url: `https://pro.m.jd.com/mall/active/${acData[key]}/index.html`,
       headers: {
         Cookie: KEY,
       }
     };
-    $nobyda.get(JDUrl, function(error, response, data) {
+    $nobyda.get(JDUrl, async function(error, response, data) {
       try {
         if (error) {
           merge[key].notify = `${title}: 签到活动获取失败 ‼️‼️`
           merge[key].fail = 1
         } else {
+          const act = data.match(/"params":"{\\"enActK\\".*?\\"}"/)
           const turnTable = data.match(/\"turnTableId\":\"(\d+)\"/)
-          if (data.match(/"params":"{\\"enActK\\".*?\\"}"/)) { // 含有签到活动数据
-            resolve(`{${data.match(/"params":"{\\"enActK\\".*?\\"}"/)}}`); // 执行签到处理
-            return;
-          } else if (turnTable) {
-            reject(turnTable[1])
-            return;
+          const page = data.match(/\"paginationFlrs\":\"\[\[.+?\]\]\"/)
+          if (act) { // 含有签到活动数据
+            return resolve(`{${act}}`)
+          } else if (turnTable) { // 无签到数据, 但含有关注店铺签到
+            const boxds = $nobyda.read("JD_Follow_disable") === "false" ? false : true
+            if (boxds) {
+              console.log(`\n${title}关注店铺`)
+              return reject(turnTableId[1])
+            } else {
+              merge[key].notify = `${title}: 失败, 需要关注店铺 ⚠️`
+              merge[key].fail = 1
+              return reject()
+            }
+          } else if (page) { // 无签到数据, 尝试带参查询
+            const boxds = $nobyda.read("JD_Retry_disable") === "false" ? false : true
+            if (boxds) {
+              console.log(`\n${title}二次查询`)
+              await disable(key, title, 2)
+              await JDUserSignPre1(s, key, title, page[0])
+              return reject()
+            } else {
+              merge[key].notify = `${title}: 失败, 请尝试开启增强 ⚠️`
+              merge[key].fail = 1
+              return reject()
+            }
           }
-          merge[key].notify = `${title}: 失败, 原因: 不含活动数据 ⚠️`
+          merge[key].notify = `${title}: 失败, 不含活动数据 ⚠️`
           merge[key].fail = 1
         }
       } catch (eor) {
@@ -893,7 +932,6 @@ function JDUserSignPre2(s, key, title) {
         reject()
       }
     })
-    //}, s)
     if (out) setTimeout(reject, out + s)
   }).then(data => {
     disable(key, title, 2)
@@ -1385,17 +1423,15 @@ function JDPrizeCheckin(s) {
               }
             } else {
               console.log("\n" + "京东商城-大奖签到失败 " + Details)
+              merge.JDPrize.fail = 1
               if (data.match(/(已用光|7000003)/)) {
                 merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: 已签过 ⚠️"
-                merge.JDPrize.fail = 1
+              } else if (data.match(/(未登录|\"101\")/)) {
+                merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: Cookie失效‼️"
+              } else if (data.match(/7000005/)) {
+                merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: 未中奖 ⚠️"
               } else {
-                if (data.match(/(未登录|\"101\")/)) {
-                  merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: Cookie失效‼️"
-                  merge.JDPrize.fail = 1
-                } else {
-                  merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: 未知 ⚠️"
-                  merge.JDPrize.fail = 1
-                }
+                merge.JDPrize.notify = "京东商城-大奖: 失败, 原因: 未知 ⚠️"
               }
             }
           }
@@ -2001,7 +2037,6 @@ function disable(Val, name, way) {
   const read = $nobyda.read("JD_DailyBonusDisables")
   const annal = $nobyda.read("JD_Crash_" + Val)
   const boxds = $nobyda.read("JD_Crash_disable") === "false" ? false : true
-  const old = (Val == "JDGetCash" || Val == "JDSubsidy" || Val == "JDDrug" || Val == "JDClocks" || way == 2) ? false : move(Val, read, 0)
   if (annal && way == 1 && boxds) {
     var Crash = $nobyda.write("", "JD_Crash_" + Val)
     if (read) {
@@ -2019,31 +2054,7 @@ function disable(Val, name, way) {
   } else if (way == 2 && annal) {
     var Crash = $nobyda.write("", "JD_Crash_" + Val)
   }
-  if (read && read.indexOf(Val) != -1 || old) {
-    return true
-  } else {
-    return false
-  }
-}
-
-function move(ValKey, NewKey, DelOld) {
-  const OldKey = $nobyda.read("JD_DailyBonusDisable")
-  if (DelOld && OldKey) {
-    if (OldKey.split(",").length != 28) {
-      $nobyda.notify("京东签到", "BoxJs禁用迁移成功", "请更新京东BoxJs订阅以适配新版本")
-    }
-    var Crash = $nobyda.write("", "JD_DailyBonusDisable")
-    return true
-  }
-  if (OldKey && OldKey.indexOf(ValKey) == -1) {
-    console.log(`\nBoxJs禁用迁移成功 (${ValKey})`)
-    if (NewKey) {
-      if (NewKey.indexOf(ValKey) == -1) {
-        var Crash = $nobyda.write(`${NewKey},${ValKey}`, "JD_DailyBonusDisables")
-      }
-    } else {
-      var Crash = $nobyda.write(ValKey, "JD_DailyBonusDisables")
-    }
+  if (read && read.indexOf(Val) != -1) {
     return true
   } else {
     return false
@@ -2053,6 +2064,8 @@ function move(ValKey, NewKey, DelOld) {
 function initial() {
 
   acData = {
+    // 京东商城-数码
+    JD3C: '4SWjnZSCTHPYjE5T7j35rxxuMTb6',
     // 京东晚市-补贴
     JDSubsidy: 'xK148m4kWj5hBcTPuJUNNXH3AkJ',
     // 京东商城-钟表
@@ -2091,6 +2104,7 @@ function initial() {
     JRDSign: {},
     JDGStore: {},
     JDPet: {},
+    JD3C: {},
     JDSubsidy: {},
     JDDrug: {},
     JDClocks: {},

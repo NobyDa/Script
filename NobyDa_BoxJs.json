@@ -8,18 +8,34 @@
     "id": "多合一签到",
     "name": "京东",
     "keys": ["CookieJD", "CookieJD2"],
+    "descs_html": [
+        "<h3 align=\"center\">签到相关教程</h3>",
+        "<p align=\"center\"><iframe src=\"https://www.youtube.com/embed/6vMz1LKF1-8\" width=\"100%\" height=\"100%\"></iframe></p>"
+      ],
     "settings": [{
       "id": "JD_DailyBonusLog",
       "name": "详细响应日志",
       "val": false,
       "type": "boolean",
-      "desc": ""
+      "desc": "打印原始签到结果, 用于调试脚本, 一般用户建议关闭."
     }, {
       "id": "JD_Crash_disable",
       "name": "崩溃自动禁用",
       "val": true,
       "type": "boolean",
-      "desc": ""
+      "desc": "脚本运行崩溃时(如VPN断连), 下次运行时将自动禁用相关崩溃接口(仅部分接口启用), 注: 崩溃时可能会误禁用正常接口."
+    }, {
+      "id": "JD_Retry_disable",
+      "name": "签到接口增强",
+      "val": true,
+      "type": "boolean",
+      "desc": "用于部分接口提示\"不含活动数据\"问题, 开启后会进行二次查询, 注: 可能会导致崩溃(小概率)."
+    }, {
+      "id": "JD_Follow_disable",
+      "name": "自动关注店铺",
+      "val": true,
+      "type": "boolean",
+      "desc": "部分接口签到过程可能需要关注店铺, 如介意可选择关闭."
     }, {
       "id": "JD_DailyBonusDisables",
       "name": "签到接口禁用",
@@ -34,6 +50,7 @@
         {"key": "JRSteel","label": "金融钢镚"},
         {"key": "JDTurn","label": "京东转盘"},
         {"key": "JDGStore","label": "京东超市"},
+        {"key": "JD3C","label": "京东数码"},
         {"key": "JDDrug","label": "京东医药"},
         {"key": "JDSubsidy","label": "京东晚市"},
         {"key": "JDClocks","label": "京东钟表"},
