@@ -64,7 +64,7 @@
         {"key": "JDVege","label": "京东菜场"},
         {"key": "JDCash","label": "京东红包"},
         {"key": "JDFood","label": "京东美食"},
-        {"key": "JDClean","label": "京东清洁"},
+        {"key": "JDClean","label": "京东清洁 (如VPN重启,建议禁用)"},
         {"key": "JDCare","label": "京东个护"},
         {"key": "JDJewels","label": "京东珠宝 (如VPN重启,建议禁用)"},
         {"key": "JDCube","label": "京东魔方"},
