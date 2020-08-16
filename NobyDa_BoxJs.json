@@ -52,6 +52,8 @@
         {"key": "JDGStore","label": "京东超市"},
         {"key": "JD3C","label": "京东数码"},
         {"key": "JDDrug","label": "京东医药"},
+        {"key": "JDJewel","label": "京东夺宝"},
+        {"key": "JDBaby","label": "京东母婴"},
         {"key": "JDSubsidy","label": "京东晚市"},
         {"key": "JDClocks","label": "京东钟表"},
         {"key": "JDPet","label": "京东宠物"},
