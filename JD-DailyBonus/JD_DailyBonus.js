@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.8.16 8:00 v1.42 (Beta)
+更新时间: 2020.8.16 8:20 v1.43 (Beta)
 有效接口: 29+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -120,7 +120,7 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
-      JDUserSignPre(stop, 'JDJewel', '京东商城-夺宝'), //京东夺宝岛
+      JDUserSignPre(stop, 'JDTreasure', '京东商城-夺宝'), //京东夺宝岛
       JDUserSignPre(stop, 'JDBaby', '京东商城-母婴'), //京东母婴馆
       JDUserSignPre(stop, 'JD3C', '京东商城-数码'), //京东数码电器馆
       JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'), //京东晚市补贴金
@@ -144,7 +144,7 @@ async function all() {
     await JingRongDoll(stop); //金融抓娃娃
     await JingRongSteel(stop); //金融钢镚
     await JingDongTurn(stop); //京东转盘
-    await JDUserSignPre(stop, 'JDJewel', '京东商城-夺宝'); //京东夺宝岛
+    await JDUserSignPre(stop, 'JDTreasure', '京东商城-夺宝'); //京东夺宝岛
     await JDUserSignPre(stop, 'JDBaby', '京东商城-母婴'); //京东母婴馆
     await JDUserSignPre(stop, 'JD3C', '京东商城-数码'); //京东数码电器馆
     await JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'); //京东晚市补贴金
@@ -2033,7 +2033,7 @@ function initial() {
 
   acData = {
     // 京东商城-夺宝
-    JDJewel: '29xMZdGiiGYmMZ5CQcGmb7iPhN7n',
+    JDTreasure: '29xMZdGiiGYmMZ5CQcGmb7iPhN7n',
     // 京东商城-母婴
     JDBaby: '3BbAVGQPDd6vTyHYjmAutXrKAos6',
     // 京东商城-数码
@@ -2078,7 +2078,7 @@ function initial() {
     JDFSale: {},
     JDPet: {},
     JD3C: {},
-    JDJewel: {},
+    JDTreasure: {},
     JDBaby: {},
     JDSubsidy: {},
     JDDrug: {},
