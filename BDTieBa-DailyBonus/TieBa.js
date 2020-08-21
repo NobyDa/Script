@@ -338,7 +338,7 @@ function nobyda() {
     }
   }
   const done = (value = {}) => {
-    if (isQuanX) isRequest ? $done(value) : null
+    if (isQuanX) return $done(value)
     if (isSurge) isRequest ? $done(value) : $done()
   }
   return {

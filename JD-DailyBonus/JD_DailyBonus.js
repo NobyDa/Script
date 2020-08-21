@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.8.19 0:10 v1.45 (Beta)
+更新时间: 2020.8.21 22:00 v1.46 (Beta)
 有效接口: 29+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -2303,7 +2303,7 @@ function nobyda() {
     return console.log('\n签到用时: ' + end + ' 秒')
   }
   const done = (value = {}) => {
-    if (isQuanX) isRequest ? $done(value) : null
+    if (isQuanX) return $done(value)
     if (isSurge) isRequest ? $done(value) : $done()
   }
   return {

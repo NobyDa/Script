@@ -1,7 +1,7 @@
 /*
 爱奇艺会员签到脚本
 
-更新时间: 2020.8.5 17:00
+更新时间: 2020.8.21
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -295,7 +295,7 @@ function nobyda() {
     return console.log('\n签到用时: ' + end + ' 秒')
   }
   const done = (value = {}) => {
-    if (isQuanX) isRequest ? $done(value) : null
+    if (isQuanX) return $done(value)
     if (isSurge) isRequest ? $done(value) : $done()
   }
   return {

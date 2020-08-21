@@ -1,7 +1,7 @@
 /*
 吾爱破解签到脚本
 
-更新时间: 2020.5.12 18:25
+更新时间: 2020.8.21
 脚本兼容: QuantumultX, Surge, Loon
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -162,7 +162,7 @@ function nobyda() {
     })
   }
   const done = (value = {}) => {
-    if (isQuanX) isRequest ? $done(value) : null
+    if (isQuanX) return $done(value)
     if (isSurge) isRequest ? $done(value) : $done()
   }
   return {
