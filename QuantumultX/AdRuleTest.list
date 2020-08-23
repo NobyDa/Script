@@ -1,4 +1,4 @@
-#Update 2020.7.21 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2020.8.23 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,admaster.com,REJECT
 DOMAIN-SUFFIX,0z5jn.cn,REJECT
 DOMAIN-SUFFIX,114so.cn,REJECT
@@ -1127,7 +1127,6 @@ DOMAIN-SUFFIX,impservice.dictapp.youdao.com,REJECT
 DOMAIN-SUFFIX,miniapp.bilibili.com,REJECT
 DOMAIN-SUFFIX,mmstat.com,REJECT
 DOMAIN-SUFFIX,mobilead.kuwo.cn,REJECT
-DOMAIN-SUFFIX,mtalk.google.com,REJECT
 DOMAIN-SUFFIX,pv.sohu.com,REJECT
 DOMAIN-SUFFIX,rd.autohome.com.cn,REJECT
 DOMAIN-SUFFIX,rich.kuwo.cn,REJECT
@@ -1145,7 +1144,6 @@ DOMAIN-SUFFIX,gss0.bdstatic.com,REJECT
 DOMAIN-SUFFIX,alogs.umengcloud.com,REJECT
 DOMAIN-SUFFIX,sss.bxmns.com,REJECT
 DOMAIN-SUFFIX,extlog.snssdk.com,REJECT
-DOMAIN-SUFFIX,play.googleapis.com,REJECT
 DOMAIN-SUFFIX,dcps.nuomi.com,REJECT
 DOMAIN-SUFFIX,focusbaiduafp.allyes.com,REJECT
 DOMAIN-SUFFIX,m.simaba.taobao.com,REJECT
