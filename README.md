@@ -1,4 +1,4 @@
-### Difference between Quantumult X versions :
+## Difference between Quantumult X versions
 
 * Store version QX1.0.0 (120) JS function is unlimited, but does not support v2, does not support AlwaysOn
 
@@ -33,11 +33,9 @@ $done({body:JSON.stringify(obj)})
 ```
 The above random generated device ID can be found at the bottom of Quantumult X additional menu, and it may change after system restore.
 
----
+## File related instructions
 
-## File related instructions：
-
-### Surge：
+#### Surge：
 
 * **[AdRule.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRule.list) （More than 8000 ad rules， integrate [lhie1](https://github.com/lhie1/Rules) and [ConnersHua](https://github.com/ConnersHua/Profiles) and added some advertising rules)**
 
@@ -49,7 +47,7 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 
 * **Because [ConnersHua](https://github.com/ConnersHua/Profiles) ad rules are already included in this rule, you don't need to repeatedly add.**
 
-### Quantumult X：
+#### Quantumult X：
 
 * **[AdRule.list](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/AdRule.list) （More than 7000 ad rules, This rule is modified from [lhie1](https://github.com/lhie1/Rules)，and delete [ConnersHua](https://github.com/ConnersHua/Profiles) duplicate)**
 
@@ -65,31 +63,47 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 
 * **Note !!! Note !!! Note !!! Unlike the Surge rule, the Quantumult X rule does not include the [ConnersHua](https://github.com/ConnersHua/Profiles) ad rules, you can add it yourself.**
 
-### Rule remarks :
+#### Rule remarks :
 
 * **Most of these are Chinese advertising rules. overseas users may not applicable**
 * **These rules only include ads. Please choose REJECT for the policy**
 * **Self-use only, Update depend on mood, if you have any questions, please submit a Issues or pull request.**
 
----
+## Disclaimer
+```
+In the following disclaimer :
 
-## Disclaimer：
+"Script project" specifically refers to the open source scripts and rules in https://github.com/NobyDa/Script/tree/master
 
-* **Any unlocking and decryption analysis scripts involved in the Script project released by NobyDa are only used for resource sharing and learning research. Legality, accuracy, completeness, and validity cannot be guaranteed. Please judge according to the situation itself.**
+"NobyDa" specifically refers to the author and owner in https://github.com/NobyDa/Script/tree/master
+```
 
-* Any user who uses the script indirectly, Including but not limited to building a VPS or spreading if a certain behavior violates the country and laws or relevant regulations, **NobyDa is not responsible for any privacy leak or other consequences caused by it.**
+**Decrypt :**
+* Any unlocking and decryption analysis scripts involved in the "Script project" are for resource sharing and study purposes only. 
+* Legality, accuracy, completeness, and validity cannot be guaranteed. **Please judge for yourself based on the actual situation.**
+* You must completely delete the scripts involving decryption from your computer or phone within **24 hours** of downloading.
 
-* **Do not use any content of the Script project for commercial or illegal purposes，otherwise, all consequences are at your own risk.**
+**Privacy :**
+* Any user who indirectly uses any of the scripts in the "Script project", including but not limited to violating relevant laws and regulations or establishing VPS to spread, **NobyDa is not responsible for any privacy leakage or other consequences caused by this.**
 
-* If any unit or individual believes that a script of the project may be suspected of infringing its rights, it shall promptly notify and **provide proof of identity, proof of ownership,** we will delete the relevant script after receiving the certification file.
 
-* **NobyDa is not responsible for any scripting issues, including but not limited to any loss or damage caused by any script error.**
+**Commercial :**
+* Do not use any scripts of the "Script project" for commercial or illegal purposes, **otherwise you will be responsible for the consequences.**
 
-* You must completely remove the above from your computer or mobile phone within **24 hours** of downloading.
 
-* Anyone who views this project in any way or any script that uses the Script project directly or indirectly should read this statement carefully. And NobyDa reserves the right to change or supplement this disclaimer at any time. **Once you use and reproduce any related scripts or rules of the Script project, you are deemed to have accepted this disclaimer.**
+**Infringement :**
+* If any company or individual believes that a scripts from "Script project" may be infringe on rights, you should promptly notify and provide proof of **identity** and **ownership**, and we will delete the scripts after receiving the relevant documents.
 
-### Special thanks：
+
+**Liability :**
+* NobyDa is not responsible for any scripts problems, **including but not limited to any loss or damage caused by any scripting errors.**
+
+
+**Change :**
+* Anyone viewing or using the scripts of the "Script project" in any way, directly or indirectly, should read this statement carefully. And NobyDa reserves the right to change or supplement this disclaimer at any time. 
+* **Once you use or copy any related scripts of the "Script project", you will be deemed to have accepted this disclaimer.**
+
+## Special thanks to
 * [@sazs34](https://github.com/sazs34)
 * [@lhie1](https://github.com/lhie1)
 * [@Scomper](https://github.com/scomper)
