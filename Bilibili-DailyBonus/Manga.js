@@ -1,36 +1,39 @@
 /*
-Bilibili Manga Daily Bonus
+哔哩哔哩漫画签到
 
-About the author:
-If reproduced, indicate the source
-Telegram channel: @NobyDa
-Telegram bots: @NobyDa_bot
+脚本兼容: QuantumultX, Surge, Loon
+电报频道：@NobyDa
+问题反馈：@NobyDa_bot
+如果转载，请注明出处
 
-Description :
-When Bilibili Manga app is opened, click "My", If notification gets cookie success, you can use the check in script. because script will automatically judgment whether the cookie is updated, so you dont need to disable it manually.
+说明：
+打开哔哩哔哩漫画后 (AppStore中国区)，单击"我的", 如果通知获取cookie成功, 则可以使用此脚本. 
 
-script will be performed every day at 9 am. You can modify the execution time.
+脚本将在每天上午9点执行。 您可以修改执行时间。
 
 ~~~~~~~~~~~~~~~~
-Surge 4.0 :
+Surge 4.2.0+ :
+
 [Script]
-cron "0 9 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
+Bili漫画签到 = type=cron,cronexp=0 9 * * *,wake-system=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
 
-# Get bilibili cookie.
-http-request https:\/\/manga\.bilibili\.com\/.*\.User\/GetWallet max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
+Bili漫画Cookie = type=http-request,pattern=^https:\/\/passport\.biligame\.com\/api\/login\/sso.+?version%22%3A%22(3|4|5),script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
+
+[MITM]
+hostname = passport.biligame.com
 ~~~~~~~~~~~~~~~~
-QX 1.0.5 :
+QX 1.0.10+ :
+
 [task_local]
-0 9 * * * Manga.js
+0 9 * * * https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=Bili漫画签到
 
 [rewrite_local]
-# Get bilibili cookie. QX 1.0.5(188+):
-https:\/\/manga\.bilibili\.com\/.*\.User\/GetWallet url script-request-header Manga.js
-~~~~~~~~~~~~~~~~
-QX or Surge MITM = manga.bilibili.com
-~~~~~~~~~~~~~~~~
+#获取Bili漫画Cookie
+^https:\/\/passport\.biligame\.com\/api\/login\/sso.+?version%22%3A%22(3|4|5) url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
 
-
+[mitm]
+hostname = passport.biligame.com
+~~~~~~~~~~~~~~~~
 */
 
 
