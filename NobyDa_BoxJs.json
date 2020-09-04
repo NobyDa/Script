@@ -9,9 +9,11 @@
     "name": "京东",
     "keys": ["CookieJD", "CookieJD2"],
     "descs_html": [
-        "<h3 align=\"center\">签到相关教程</h3>",
-        "<p align=\"center\"><iframe src=\"https://www.youtube.com/embed/6vMz1LKF1-8\" width=\"100%\" height=\"100%\"></iframe></p>"
-      ],
+      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js\">脚本注释</a></h4>",
+      "<br />",
+      "<h3 align=\"center\">签到相关教程</h3>",
+      "<p align=\"center\"><iframe src=\"https://www.youtube.com/embed/6vMz1LKF1-8\" width=\"100%\" height=\"100%\"></iframe></p>"
+    ],
     "settings": [{
       "id": "JD_DailyBonusLog",
       "name": "详细响应日志",
@@ -42,43 +44,112 @@
       "val": "",
       "type": "checkboxes",
       "desc": "",
-      "items": [
-        {"key": "SpeedUp","label": "天天加速"}, 
-        {"key": "JDBean","label": "京东京豆"}, 
-        {"key": "JRBean","label": "金融金贴"},
-        {"key": "JRDoll","label": "金融娃娃"},
-        {"key": "JRSteel","label": "金融钢镚"},
-        {"key": "JDTurn","label": "京东转盘"},
-        {"key": "JDGStore","label": "京东超市"},
-        {"key": "JD3C","label": "京东数码"},
-        {"key": "JDDrug","label": "京东医药"},
-        {"key": "JDTreasure","label": "京东夺宝"},
-        {"key": "JDBaby","label": "京东母婴"},
-        {"key": "JDSubsidy","label": "京东晚市"},
-        {"key": "JDClocks","label": "京东钟表"},
-        {"key": "JDPet","label": "京东宠物"},
-        {"key": "JDFSale","label": "京东闪购"},
-        {"key": "Overseas","label": "京东国际"},
-        {"key": "JDBook","label": "京东图书"},
-        {"key": "JDShand","label": "京东二手 (如VPN重启,建议禁用)"},
-        {"key": "JDMakeup","label": "京东美妆"},
-        {"key": "JDWomen","label": "京东女装"},
-        {"key": "JDVege","label": "京东菜场"},
-        {"key": "JDCash","label": "京东红包"},
-        {"key": "JDFood","label": "京东美食"},
-        {"key": "JDClean","label": "京东清洁 (如VPN重启,建议禁用)"},
-        {"key": "JDCare","label": "京东个护"},
-        {"key": "JDJewels","label": "京东珠宝 (如VPN重启,建议禁用)"},
-        {"key": "JDCube","label": "京东魔方"},
-        {"key": "JDPrize","label": "京东大奖"},
-        {"key": "JRDSign","label": "金融双签"},
-        {"key": "subsidy","label": "京东金贴"},
-        {"key": "JDGetCash","label": "京东现金"},
-        {"key": "JDShake","label": "京东摇一摇"},
-        {"key": "Qbear","label": "总京豆查询"},
-        {"key": "TCash","label": "总红包查询"},
-        {"key": "TSteel","label": "总钢镚查询"}
-      ]
+      "items": [{
+        "key": "SpeedUp",
+        "label": "天天加速"
+      }, {
+        "key": "JDBean",
+        "label": "京东京豆"
+      }, {
+        "key": "JRBean",
+        "label": "金融金贴"
+      }, {
+        "key": "JRDoll",
+        "label": "金融娃娃"
+      }, {
+        "key": "JRSteel",
+        "label": "金融钢镚"
+      }, {
+        "key": "JDTurn",
+        "label": "京东转盘"
+      }, {
+        "key": "JDGStore",
+        "label": "京东超市"
+      }, {
+        "key": "JD3C",
+        "label": "京东数码"
+      }, {
+        "key": "JDDrug",
+        "label": "京东医药"
+      }, {
+        "key": "JDTreasure",
+        "label": "京东夺宝"
+      }, {
+        "key": "JDBaby",
+        "label": "京东母婴"
+      }, {
+        "key": "JDSubsidy",
+        "label": "京东晚市"
+      }, {
+        "key": "JDClocks",
+        "label": "京东钟表"
+      }, {
+        "key": "JDPet",
+        "label": "京东宠物"
+      }, {
+        "key": "JDFSale",
+        "label": "京东闪购"
+      }, {
+        "key": "Overseas",
+        "label": "京东国际"
+      }, {
+        "key": "JDBook",
+        "label": "京东图书"
+      }, {
+        "key": "JDShand",
+        "label": "京东二手 (如VPN重启,建议禁用)"
+      }, {
+        "key": "JDMakeup",
+        "label": "京东美妆"
+      }, {
+        "key": "JDWomen",
+        "label": "京东女装"
+      }, {
+        "key": "JDVege",
+        "label": "京东菜场"
+      }, {
+        "key": "JDCash",
+        "label": "京东红包"
+      }, {
+        "key": "JDFood",
+        "label": "京东美食"
+      }, {
+        "key": "JDClean",
+        "label": "京东清洁 (如VPN重启,建议禁用)"
+      }, {
+        "key": "JDCare",
+        "label": "京东个护"
+      }, {
+        "key": "JDJewels",
+        "label": "京东珠宝 (如VPN重启,建议禁用)"
+      }, {
+        "key": "JDCube",
+        "label": "京东魔方"
+      }, {
+        "key": "JDPrize",
+        "label": "京东大奖"
+      }, {
+        "key": "JRDSign",
+        "label": "金融双签"
+      }, {
+        "key": "subsidy",
+        "label": "京东金贴"
+      }, {
+        "key": "JDGetCash",
+        "label": "京东现金"
+      }, {
+        "key": "JDShake",
+        "label": "京东摇一摇"
+      }, {
+        "key": "Qbear",
+        "label": "总京豆查询"
+      }, {
+        "key": "TCash",
+        "label": "总红包查询"
+      }, {
+        "key": "TSteel",
+        "label": "总钢镚查询"
+      }]
     }, {
       "id": "JD_DailyBonusTimeOut",
       "name": "超时退出 (毫秒)",
@@ -94,7 +165,13 @@
       "placeholder": "默认并发无延迟 (点击以展开说明)",
       "desc": "延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长), VPN重启或越狱用户建议填写1, Surge用户请注意在SurgeUI界面调整脚本超时"
     }],
-    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js",
+    "scripts": [{
+      "name": "京东签到",
+      "script": "https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js"
+    }, {
+      "name": "初始化设置",
+      "script": "https://gist.githubusercontent.com/NobyDa/91cbe57dd50b3588a975af8922507a72/raw/JD_initial.js"
+    }],
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/tree/master/JD-DailyBonus",
     "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/jd.png", "https://raw.githubusercontent.com/Orz-3/task/master/jd.png"]
@@ -102,7 +179,10 @@
     "id": "iQIYI",
     "name": "爱奇艺",
     "keys": ["CookieQY"],
-      "settings": [{
+    "descs_html": [
+      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js\">脚本注释</a></h4>"
+    ],
+    "settings": [{
       "id": "iQIYI_LogDetails",
       "name": "响应日志",
       "val": false,
@@ -124,6 +204,9 @@
     "id": "BiliManga",
     "name": "哔哩漫画",
     "keys": ["CookieBM"],
+    "descs_html": [
+      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js\">脚本注释</a></h4>"
+    ],
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js",
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js",
@@ -132,17 +215,25 @@
     "id": "BaiduTB",
     "name": "百度贴吧",
     "keys": ["CookieTB"],
+    "descs_html": [
+      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js\">脚本注释</a></h4>"
+    ],
     "settings": [{
       "id": "BDTB_DailyBonus_Mode",
       "name": "签到模式",
       "val": "0",
       "type": "radios",
       "desc": "",
-      "items": [
-        {"key": "0","label": "自动切换"}, 
-        {"key": "1","label": "顺序执行"}, 
-        {"key": "2","label": "并发执行"}
-      ]
+      "items": [{
+        "key": "0",
+        "label": "自动切换"
+      }, {
+        "key": "1",
+        "label": "顺序执行"
+      }, {
+        "key": "2",
+        "label": "并发执行"
+      }]
     }, {
       "id": "BDTB_DailyBonus_notify",
       "name": "通知汇总",
@@ -154,14 +245,35 @@
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js",
     "author": "@sazs34, @NobyDa",
     "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
-    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/baidu.png","https://raw.githubusercontent.com/Orz-3/task/master/baidu.png"]
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/tieba.png", "https://raw.githubusercontent.com/Orz-3/task/master/tieba.png"]
   }, {
     "id": "52poje",
     "name": "吾爱破解",
     "keys": ["CookieWA"],
+    "descs_html": [
+      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js\">脚本注释</a></h4>"
+    ],
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js",
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js",
     "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/52pj.png", "https://raw.githubusercontent.com/Orz-3/task/master/52pj.png"]
+  }, {
+    "id": "KuaiKan",
+    "name": "快看漫画",
+    "keys": ["@KKMH.COOKIE", "@KKMH.TIME", "@KKMH.UID", "@KKMH.DATE"],
+    "descs_html": [
+      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/KuaiKan-DailyBonus/KKMH.js\">脚本注释</a></h4>"
+    ],
+    "settings": [{
+      "id": "@KKMH.LOG",
+      "name": "响应日志",
+      "val": false,
+      "type": "boolean",
+      "desc": "打印原始签到结果, 用于调试脚本, 一般用户建议关闭."
+    }],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/KuaiKan-DailyBonus/KKMH.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js",
+    "icons": ["https://ftp.bmp.ovh/imgs/2020/09/5eb8495e3582aca9.png", "https://ftp.bmp.ovh/imgs/2020/09/a3345da5e9094363.png"]
   }]
 }
