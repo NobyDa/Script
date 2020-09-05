@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.8.23 16:30 v1.47 (Beta)
-有效接口: 29+
+更新时间: 2020.9.5 18:00 v1.48 (Beta)
+有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -119,7 +119,7 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
-      JDUserSignPre(stop, 'JDTreasure', '京东商城-夺宝'), //京东夺宝岛
+      //JDUserSignPre(stop, 'JDTreasure', '京东商城-夺宝'), //京东夺宝岛
       JDUserSignPre(stop, 'JDBaby', '京东商城-母婴'), //京东母婴馆
       JDUserSignPre(stop, 'JD3C', '京东商城-数码'), //京东数码电器馆
       JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'), //京东晚市补贴金
@@ -153,7 +153,7 @@ async function all() {
     await JingDongPrize(stop); //京东抽大奖
     await JingDongSubsidy(stop); //京东金贴
     await JingDongShake(stop) //京东摇一摇
-    await JDUserSignPre(stop, 'JDTreasure', '京东商城-夺宝'); //京东夺宝岛
+    //await JDUserSignPre(stop, 'JDTreasure', '京东商城-夺宝'); //京东夺宝岛
     await JDUserSignPre(stop, 'JDBaby', '京东商城-母婴'); //京东母婴馆
     await JDUserSignPre(stop, 'JD3C', '京东商城-数码'); //京东数码电器馆
     await JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'); //京东晚市补贴金
@@ -859,11 +859,9 @@ function JDUserSignPre1(s, key, title, ask) {
             merge[key].fail = 1
           }
         }
-        disable(key, title, 2)
         reject()
       } catch (eor) {
         $nobyda.AnError(title, key, eor)
-        disable(key, title, 2)
         reject()
       }
     })
@@ -873,7 +871,7 @@ function JDUserSignPre1(s, key, title, ask) {
     if (typeof(data) == "object") return JDUserSign1(s, key, title, encodeURIComponent(JSON.stringify(data)));
     if (typeof(data) == "number") return JDUserSign2(s, key, title, data);
     if (typeof(data) == "string") return JDUserSignPre1(s, key, title, data);
-  }, () => {})
+  }, () => disable(key, title, 2))
 }
 
 function JDUserSignPre2(s, key, title) {
@@ -918,11 +916,9 @@ function JDUserSignPre2(s, key, title) {
             merge[key].fail = 1
           }
         }
-        disable(key, title, 2)
         reject()
       } catch (eor) {
         $nobyda.AnError(title, key, eor)
-        disable(key, title, 2)
         reject()
       }
     })
@@ -932,7 +928,7 @@ function JDUserSignPre2(s, key, title) {
     if (typeof(data) == "object") return JDUserSign1(s, key, title, encodeURIComponent(`{${data}}`));
     if (typeof(data) == "number") return JDUserSign2(s, key, title, data)
     if (typeof(data) == "string") return JDUserSignPre1(s, key, title, data)
-  }, () => {})
+  }, () => disable(key, title, 2))
 }
 
 function JDUserSign1(s, key, title, body) {
@@ -2227,9 +2223,9 @@ function nobyda() {
         url: options
       }
       options["method"] = "GET"
-      options["opts"] = {
-        "hints": false
-      }
+      //options["opts"] = {
+      //  "hints": false
+      //}
       $task.fetch(options).then(response => {
         callback(null, adapterStatus(response), response.body)
       }, reason => callback(reason.error, null, null))
@@ -2267,9 +2263,9 @@ function nobyda() {
         url: options
       }
       options["method"] = "POST"
-      options["opts"] = {
-        "hints": false
-      }
+      //options["opts"] = {
+      //  "hints": false
+      //}
       $task.fetch(options).then(response => {
         callback(null, adapterStatus(response), response.body)
       }, reason => callback(reason.error, null, null))
