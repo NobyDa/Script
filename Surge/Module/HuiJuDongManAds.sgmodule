@@ -6,16 +6,17 @@
 DOMAIN,www.umeng.com,DIRECT
 DOMAIN,adview.cn,DIRECT
 #底栏
-#URL-REGEX,https:\/\/www\.19831110\.com\/\d\/getad\.asp,REJECT-TINYGIF
-DOMAIN,googleads.g.doubleclick.net,REJECT-DROP
-DOMAIN,www.19831110.com,REJECT-DROP
-#弹屏
-URL-REGEX,^https?:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/,REJECT-TINYGIF
-URL-REGEX,^https?:\/\/sf.*-ttcdn-tos\.pstatp\.com\/obj\/ad,REJECT-TINYGIF
-URL-REGEX,^https?:\/\/www\.51devapp\.com\/adconfigs,REJECT-TINYGIF
-URL-REGEX,^https?:\/\/.+?\.snssdk\.com\/ad\/,REJECT-TINYGIF
+DOMAIN,googleads.g.doubleclick.net,REJECT-TINYGIF
+DOMAIN,www.19831110.com,REJECT-TINYGIF
 #HTTP
 AND,((USER-AGENT,%E8%8D%9F%E8%81%9A%E5%8A%A8%E6%BC%AB*), (URL-REGEX,\/ad)),REJECT-TINYGIF
 
+[URL Rewrite]
+#弹屏
+^https?:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/ - reject
+^https?:\/\/sf\d-ttcdn-tos\.pstatp\.com\/obj\/ad - reject
+^https?:\/\/www\.51devapp\.com\/adconfigs - reject
+^https?:\/\/.+?\.snssdk\.com\/ad\/ - reject
+
 [MITM]
-hostname = %APPEND% sf*-ttcdn-tos.pstatp.com, www.51devapp.com, *.snssdk.com, www.19831110.com, api-access.pangolin-sdk-toutiao.com
+hostname = %APPEND% sf?-ttcdn-tos.pstatp.com, www.51devapp.com, *.snssdk.com, www.19831110.com, api-access.pangolin-sdk-toutiao.com
