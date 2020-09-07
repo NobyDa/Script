@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.6 21:30 v1.49 (Beta)
+更新时间: 2020.9.7 16:20 v1.50 (Beta)
 有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -1015,12 +1015,11 @@ async function JDUserSign2(s, key, title, tid) {
             throw new Error(error)
           } else {
             const Details = LogDetails ? `response:\n${data}` : '';
-            const cc = JSON.parse(data)
-            if (cc.success == true) {
+            if (data.match(/\"success\":true/)) {
               console.log(`\n${title}签到成功(2)${Details}`)
               if (data.match(/\"jdBeanQuantity\":\d+/)) {
-                merge[key].notify = `${title}: 成功, 明细: ${cc.data.jdBeanQuantity}京豆 🐶`
-                merge[key].bean = cc.data.jdBeanQuantity
+                merge[key].bean = data.match(/\"jdBeanQuantity\":(\d+)/)[1]
+                merge[key].notify = `${title}: 成功, 明细: ${merge[key].bean}京豆 🐶`
               } else {
                 merge[key].notify = `${title}: 成功, 明细: 无京豆 🐶`
               }
@@ -1045,8 +1044,8 @@ async function JDUserSign2(s, key, title, tid) {
           resolve()
         }
       })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
+    }, 500 + s)
+    if (out) setTimeout(resolve, out + s + 500)
   });
 }
 
