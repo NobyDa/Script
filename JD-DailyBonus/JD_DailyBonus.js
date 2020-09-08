@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.7 16:20 v1.50 (Beta)
+更新时间: 2020.9.8 17:20 v1.51 (Beta)
 有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -950,25 +950,20 @@ function JDUserSign1(s, key, title, body) {
             throw new Error(error)
           } else {
             const Details = LogDetails ? `response:\n${data}` : '';
-            const cc = JSON.parse(data)
             if (data.match(/签到成功/)) {
               console.log(`\n${title}签到成功(1)${Details}`)
-              if (data.match(/(\"text\":\"\d+京豆\")/)) {
-                let beanQuantity = cc.awardList[0].text.match(/\d+/)
-                merge[key].notify = `${title}: 成功, 明细: ${beanQuantity}京豆 🐶`
-                merge[key].bean = beanQuantity
-                merge[key].success = 1
-              } else {
-                merge[key].notify = `${title}: 成功, 明细: 无京豆 🐶`
-                merge[key].success = 1
+              if (data.match(/\"text\":\"\d+京豆\"/)) {
+                merge[key].bean = data.match(/\"text\":\"(\d+)京豆\"/)[1]
               }
+              merge[key].notify = `${title}: 成功, 明细: ${merge[key].bean || '无'}京豆 🐶`
+              merge[key].success = 1
             } else {
               console.log(`\n${title}签到失败(1)${Details}`)
               if (data.match(/(已签到|已领取)/)) {
                 merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`
               } else if (data.match(/(不存在|已结束|未开始)/)) {
                 merge[key].notify = `${title}: 失败, 原因: 活动已结束 ⚠️`
-              } else if (cc.code == 3) {
+              } else if (data.match(/\"code\":\"?3\"?/)) {
                 merge[key].notify = `${title}: 失败, 原因: Cookie失效‼️`
               } else {
                 merge[key].notify = `${title}: 失败, 原因: 未知 ⚠️`
@@ -1019,10 +1014,8 @@ async function JDUserSign2(s, key, title, tid) {
               console.log(`\n${title}签到成功(2)${Details}`)
               if (data.match(/\"jdBeanQuantity\":\d+/)) {
                 merge[key].bean = data.match(/\"jdBeanQuantity\":(\d+)/)[1]
-                merge[key].notify = `${title}: 成功, 明细: ${merge[key].bean}京豆 🐶`
-              } else {
-                merge[key].notify = `${title}: 成功, 明细: 无京豆 🐶`
               }
+              merge[key].notify = `${title}: 成功, 明细: ${merge[key].bean || '无'}京豆 🐶`
               merge[key].success = 1
             } else {
               console.log(`\n${title}签到失败(2)${Details}`)
@@ -1084,7 +1077,8 @@ function JDFlashSale(s) {
               } else if (data.match(/(\"code\":\"3\"|\"1003\")/)) {
                 merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: Cookie失效‼️"
               } else {
-                merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: 未知 ⚠️"
+                const msg = data.match(/\"msg\":\"([\u4e00-\u9fa5].+?)\"/)
+                merge.JDFSale.notify = `京东商城-闪购: 失败, ${msg ? msg[1] : `原因: 未知`} ⚠`
               }
             }
           }
@@ -1132,7 +1126,8 @@ function FlashSaleDivide(s) {
               } else if (data.match(/\"code\":\"1003\"|未获取/)) {
                 merge.JDFSale.notify = "京东闪购-瓜分: 失败, 原因: Cookie失效‼️"
               } else {
-                merge.JDFSale.notify = "京东闪购-瓜分: 失败, 原因: 未知 ⚠️"
+                const msg = data.match(/\"msg\":\"([\u4e00-\u9fa5].+?)\"/)
+                merge.JDFSale.notify = `京东闪购-瓜分: 失败, ${msg ? msg[1] : `原因: 未知`} ⚠`
               }
             }
           }
@@ -1220,12 +1215,12 @@ function JDMagicCube(s) {
     $nobyda.get(JDUrl, function(error, response, data) {
       try {
         if (error) throw new Error(error)
+        const Details = LogDetails ? "response:\n" + data : '';
         if (data.match(/\"interactionId\":\d+/)) {
-          const Details = LogDetails ? "response:\n" + data : '';
           merge.JDCube.key = data.match(/\"interactionId\":(\d+)/)[1]
           console.log("\n京东魔方-查询活动成功 " + Details)
         } else {
-          console.log("\n京东魔方-查询活动失败 ")
+          console.log("\n京东魔方-暂无有效活动 " + Details)
         }
       } catch (eor) {
         $nobyda.AnError("京东魔方-查询", "JDCube", eor)
