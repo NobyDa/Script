@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.8 17:20 v1.51 (Beta)
+更新时间: 2020.9.10 23:20 v1.52 (Beta)
 有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -1037,8 +1037,8 @@ async function JDUserSign2(s, key, title, tid) {
           resolve()
         }
       })
-    }, 500 + s)
-    if (out) setTimeout(resolve, out + s + 500)
+    }, 200 + s)
+    if (out) setTimeout(resolve, out + s + 200)
   });
 }
 
@@ -1078,7 +1078,7 @@ function JDFlashSale(s) {
                 merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: Cookie失效‼️"
               } else {
                 const msg = data.match(/\"msg\":\"([\u4e00-\u9fa5].+?)\"/)
-                merge.JDFSale.notify = `京东商城-闪购: 失败, ${msg ? msg[1] : `原因: 未知`} ⚠`
+                merge.JDFSale.notify = `京东商城-闪购: 失败, ${msg ? msg[1] : `原因: 未知`} ⚠️`
               }
             }
           }
@@ -1127,7 +1127,7 @@ function FlashSaleDivide(s) {
                 merge.JDFSale.notify = "京东闪购-瓜分: 失败, 原因: Cookie失效‼️"
               } else {
                 const msg = data.match(/\"msg\":\"([\u4e00-\u9fa5].+?)\"/)
-                merge.JDFSale.notify = `京东闪购-瓜分: 失败, ${msg ? msg[1] : `原因: 未知`} ⚠`
+                merge.JDFSale.notify = `京东闪购-瓜分: 失败, ${msg ? msg[1] : `原因: 未知`} ⚠️`
               }
             }
           }
@@ -1207,7 +1207,7 @@ function JDMagicCube(s) {
   return new Promise((resolve, reject) => {
     if (disable("JDCube")) return reject()
     const JDUrl = {
-      url: 'https://api.m.jd.com/client.action?functionId=getNewsInteractionInfo&appid=smfe',
+      url: 'https://api.m.jd.com/client.action?functionId=getNewsInteractionInfo&body=%7B%22sign%22%3A2%7D&appid=smfe',
       headers: {
         Cookie: KEY,
       }
@@ -1423,10 +1423,10 @@ function JingDongSpeedUp(s, id) {
             const Details = LogDetails ? "response:\n" + data : '';
             var cc = JSON.parse(data)
             if (!id) {
-              var status = merge.SpeedUp.success ? "本次" : ""
-              console.log("\n" + "天天加速-查询" + status + "任务中 " + Details)
+              var status = $nobyda.ItemIsUsed ? "再次检查" : merge.SpeedUp.notify ? "查询本次" : "查询上次"
+              console.log(`\n天天加速-${status}任务 ${Details}`)
             } else {
-              console.log("\n" + "天天加速-开始本次任务 " + Details)
+              console.log(`\n天天加速-开始${$nobyda.ItemIsUsed?`下轮`:`本次`}任务 ${Details}`)
             }
             if (cc.message == "not login") {
               merge.SpeedUp.fail = 1
@@ -1434,24 +1434,29 @@ function JingDongSpeedUp(s, id) {
               console.log("\n天天加速-Cookie失效")
             } else if (cc.message == "success") {
               if (cc.data.task_status == 0 && cc.data.source_id) {
-                const taskID = cc.data.source_id
-                await JingDongSpeedUp(s, taskID)
+                if ($nobyda.ItemIsUsed) {//如果使用道具后再次开始任务, 则收到奖励
+                  console.log("\n天天加速-领取本次奖励成功")
+                  merge.SpeedUp.bean = cc.data.beans_num || 0
+                  merge.SpeedUp.success = 1
+                  merge.SpeedUp.notify = `京东天天-加速: 成功, 明细: ${merge.SpeedUp.bean || `无`}京豆 🐶`
+                }
+                await JingDongSpeedUp(s, cc.data.source_id)
               } else if (cc.data.task_status == 1) {
-                if (!merge.SpeedUp.notify) merge.SpeedUp.fail = 1;
-                if (!merge.SpeedUp.notify) merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 加速中 ⚠️";
-                const EndTime = cc.data.end_time ? cc.data.end_time : ""
-                console.log("\n天天加速-目前结束时间: \n" + EndTime)
+                console.log(`\n天天加速-目前结束时间: \n${cc.data.end_time || ``}`)
+                $nobyda.ItemIsUsed = false
                 var step1 = await JDQueryTask(s)
                 var step2 = await JDReceiveTask(s, step1)
-                var step3 = await JDQueryTaskID(s, step2)
+                var step3 = await JDQueryTaskID(s)
                 var step4 = await JDUseProps(s, step3)
-              } else if (cc.data.task_status == 2) {
-                if (data.match(/\"beans_num\":\d+/)) {
-                  merge.SpeedUp.notify = "京东天天-加速: 成功, 明细: " + data.match(/\"beans_num\":(\d+)/)[1] + "京豆 🐶"
-                  merge.SpeedUp.bean = data.match(/\"beans_num\":(\d+)/)[1]
-                } else {
-                  merge.SpeedUp.notify = "京东天天-加速: 成功, 明细: 无京豆 🐶"
+                if (step4 && $nobyda.ItemIsUsed) {//如果使用了道具, 则再次检查任务
+                  await JingDongSpeedUp(s)
+                } else if (!merge.SpeedUp.notify) {
+                  merge.SpeedUp.fail = 1
+                  merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 加速中 ⚠️";
                 }
+              } else if (cc.data.task_status == 2) {
+                merge.SpeedUp.bean = cc.data.beans_num || 0
+                merge.SpeedUp.notify = `京东天天-加速: 成功, 明细: ${merge.SpeedUp.bean || `无`}京豆 🐶`
                 merge.SpeedUp.success = 1
                 console.log("\n天天加速-领取上次奖励成功")
                 await JingDongSpeedUp(s, null)
@@ -1568,52 +1573,48 @@ function JDReceiveTask(s, CID) {
   });
 }
 
-function JDQueryTaskID(s, EID) {
+function JDQueryTaskID(s) {
   return new Promise(resolve => {
     var TaskCID = ""
-    if (EID) {
-      setTimeout(() => {
-        const EUrl = {
-          url: 'https://api.m.jd.com/?appid=memberTaskCenter&functionId=energyProp_usalbeList&body=%7B%22source%22%3A%22game%22%7D',
-          headers: {
-            Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
-            Cookie: KEY
-          }
-        };
-        $nobyda.get(EUrl, function(error, response, data) {
-          try {
-            if (error) {
-              throw new Error(error)
-            } else {
-              const cc = JSON.parse(data)
-              const Details = LogDetails ? "response:\n" + data : '';
-              if (cc.data.length > 0) {
-                for (var i = 0; i < cc.data.length; i++) {
-                  if (cc.data[i].id) {
-                    TaskCID += cc.data[i].id + ",";
-                  }
+    setTimeout(() => {
+      const EUrl = {
+        url: 'https://api.m.jd.com/?appid=memberTaskCenter&functionId=energyProp_usalbeList&body=%7B%22source%22%3A%22game%22%7D',
+        headers: {
+          Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
+          Cookie: KEY
+        }
+      };
+      $nobyda.get(EUrl, function(error, response, data) {
+        try {
+          if (error) {
+            throw new Error(error)
+          } else {
+            const cc = JSON.parse(data)
+            const Details = LogDetails ? "response:\n" + data : '';
+            if (cc.data.length > 0) {
+              for (var i = 0; i < cc.data.length; i++) {
+                if (cc.data[i].id) {
+                  TaskCID += cc.data[i].id + ",";
                 }
-                if (TaskCID.length > 0) {
-                  TaskCID = TaskCID.substr(0, TaskCID.length - 1).split(",")
-                  console.log("\n天天加速-查询成功" + TaskCID.length + "个道具ID" + Details)
-                } else {
-                  console.log("\n天天加速-暂无有效道具ID" + Details)
-                }
-              } else {
-                console.log("\n天天加速-查询无道具ID" + Details)
               }
+              if (TaskCID.length > 0) {
+                TaskCID = TaskCID.substr(0, TaskCID.length - 1).split(",")
+                console.log(`\n天天加速-查询成功${TaskCID.length}个道具ID ${Details}`)
+              } else {
+                console.log(`\n天天加速-暂无有效道具ID ${Details}`)
+              }
+            } else {
+              console.log(`\n天天加速-查询无道具ID ${Details}`)
             }
-          } catch (eor) {
-            $nobyda.AnError("查询号码-加速", "SpeedUp", eor)
-          } finally {
-            resolve(TaskCID)
           }
-        })
-      }, s + 200)
-      if (out) setTimeout(resolve, out + s)
-    } else {
-      resolve(TaskCID)
-    }
+        } catch (eor) {
+          $nobyda.AnError("查询号码-加速", "SpeedUp", eor)
+        } finally {
+          resolve(TaskCID)
+        }
+      })
+    }, s + 200)
+    if (out) setTimeout(resolve, out + s)
   });
 }
 
@@ -1644,13 +1645,13 @@ function JDUseProps(s, PropID) {
                   PropNumTask += 1
                 }
               }
-
             } catch (eor) {
               $nobyda.AnError("使用道具-加速", "SpeedUp", eor)
             } finally {
               if (PropID.length == PropCount) {
                 console.log("\n天天加速-已成功使用" + PropNumTask + "个道具")
-                resolve()
+                if (PropNumTask) $nobyda.ItemIsUsed = true;
+                resolve(PropNumTask)
               }
             }
           })
