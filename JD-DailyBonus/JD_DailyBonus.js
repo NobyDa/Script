@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.10 23:20 v1.52 (Beta)
+更新时间: 2020.9.11 19:50 v1.53 (Beta)
 有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -24,6 +24,7 @@ var DualKey = ''; //如需双账号签到,此处单引号内填写抓取的"账�
    注3: 如果复制的Cookie开头为"Cookie: "请把它删除后填入.
    注4: 如果使用QX,Surge,Loon并获取Cookie后, 再重复填写以上选项, 则签到优先读取以上Cookie.
    注5: 如果使用Node.js, 需自行安装'request'模块. 例: npm install request -g
+   注6: Node.js或JSbox环境下已配置数据持久化, 填写Cookie运行一次后, 后续更新脚本无需再次填写, 待Cookie失效后重新抓取填写即可.
 
 *************************
 【 QX, Surge, Loon 说明 】 :
@@ -91,7 +92,7 @@ var LogDetails = false; //是否开启响应日志, true则开启
 
 var stop = 0; //自定义延迟签到,单位毫秒. 默认分批并发无延迟. 延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长), VPN重启或越狱用户建议填写1, Surge用户请注意在SurgeUI界面调整脚本超时
 
-var DeleteCookie = false; //是否清除Cookie, true则开启. (该选项仅适用于QX,Surge,Loon,JsBox)
+var DeleteCookie = false; //是否清除Cookie, true则开启.
 
 var boxdis = true; //是否开启自动禁用, false则关闭. 脚本运行崩溃时(如VPN断连), 下次运行时将自动禁用相关崩溃接口(仅部分接口启用), 崩溃时可能会误禁用正常接口. (该选项仅适用于QX,Surge,Loon)
 
@@ -246,19 +247,12 @@ function notify() {
 function ReadCookie() {
   initial()
   DualAccount = true;
+  const EnvInfo = $nobyda.isJSBox ? "JD_Cookie" : "CookieJD"
+  const EnvInfo2 = $nobyda.isJSBox ? "JD_Cookie2" : "CookieJD2"
   if (DeleteCookie) {
-    if ($nobyda.isJSBox) {
-      if ($file.exists("shared://JD_Cookie.txt")) {
-        if ($file.exists("shared://JD_Cookie2.txt")) {
-          $file.delete("shared://JD_Cookie2.txt")
-        }
-        $file.delete("shared://JD_Cookie.txt")
-        $nobyda.notify("京东Cookie清除成功 !", "", '请手动关闭脚本内"DeleteCookie"选项')
-        return
-      }
-    } else if ($nobyda.read("CookieJD")) {
-      $nobyda.write("", "CookieJD")
-      $nobyda.write("", "CookieJD2")
+    if ($nobyda.read(EnvInfo) || $nobyda.read(EnvInfo2)) {
+      $nobyda.write("", EnvInfo)
+      $nobyda.write("", EnvInfo2)
       $nobyda.notify("京东Cookie清除成功 !", "", '请手动关闭脚本内"DeleteCookie"选项')
       $nobyda.done()
       return
@@ -270,38 +264,17 @@ function ReadCookie() {
     GetCookie()
     return
   }
-  if ($nobyda.isJSBox) {
-    add = DualKey || $file.exists("shared://JD_Cookie2.txt") ? true : false
-    if (DualKey) {
-      $file.write({
-        data: $data({
-          string: DualKey
-        }),
-        path: "shared://JD_Cookie2.txt"
-      })
+  if (Key || $nobyda.read(EnvInfo)) {
+    if ($nobyda.isJSBox || $nobyda.isNode) {
+      if (Key) $nobyda.write(Key, EnvInfo);
+      if (DualKey) $nobyda.write(DualKey, EnvInfo2);
     }
-    if (Key) {
-      $file.write({
-        data: $data({
-          string: Key
-        }),
-        path: "shared://JD_Cookie.txt"
-      })
-      KEY = Key
-      all()
-    } else if ($file.exists("shared://JD_Cookie.txt")) {
-      KEY = $file.read("shared://JD_Cookie.txt").string
-      all()
-    } else {
-      $nobyda.notify("京东签到", "", "脚本终止, 未填写Cookie ‼️")
-    }
-  } else if (Key || $nobyda.read("CookieJD")) {
-    add = DualKey || $nobyda.read("CookieJD2") ? true : false
-    KEY = Key ? Key : $nobyda.read("CookieJD")
+    add = DualKey || $nobyda.read(EnvInfo2) ? true : false
+    KEY = Key ? Key : $nobyda.read(EnvInfo)
     out = parseInt($nobyda.read("JD_DailyBonusTimeOut")) || out
     stop = parseInt($nobyda.read("JD_DailyBonusDelay")) || stop
-    boxdis = $nobyda.read("JD_Crash_disable") === "false" ? false : boxdis
-    LogDetails = $nobyda.read("JD_DailyBonusLog") === "true" ? true : LogDetails
+    boxdis = $nobyda.read("JD_Crash_disable") === "false" || $nobyda.isNode || $nobyda.isJSBox ? false : boxdis
+    LogDetails = $nobyda.read("JD_DailyBonusLog") === "true" || LogDetails
     ReDis = ReDis ? $nobyda.write("", "JD_DailyBonusDisables") : ""
     all()
   } else {
@@ -314,15 +287,8 @@ function double() {
   initial()
   add = true
   DualAccount = false
-  if ($nobyda.isJSBox) {
-    if (DualKey || $file.exists("shared://JD_Cookie2.txt")) {
-      KEY = DualKey ? DualKey : $file.read("shared://JD_Cookie2.txt").string
-      all()
-    } else {
-      $nobyda.time();
-    }
-  } else if (DualKey || $nobyda.read("CookieJD2")) {
-    KEY = DualKey ? DualKey : $nobyda.read("CookieJD2")
+  if (DualKey || $nobyda.read($nobyda.isJSBox ? "JD_Cookie2" : "CookieJD2")) {
+    KEY = DualKey ? DualKey : $nobyda.read($nobyda.isJSBox ? "JD_Cookie2" : "CookieJD2")
     all()
   } else {
     $nobyda.time();
@@ -1434,7 +1400,7 @@ function JingDongSpeedUp(s, id) {
               console.log("\n天天加速-Cookie失效")
             } else if (cc.message == "success") {
               if (cc.data.task_status == 0 && cc.data.source_id) {
-                if ($nobyda.ItemIsUsed) {//如果使用道具后再次开始任务, 则收到奖励
+                if ($nobyda.ItemIsUsed) { //如果使用道具后再次开始任务, 则收到奖励
                   console.log("\n天天加速-领取本次奖励成功")
                   merge.SpeedUp.bean = cc.data.beans_num || 0
                   merge.SpeedUp.success = 1
@@ -1448,7 +1414,7 @@ function JingDongSpeedUp(s, id) {
                 var step2 = await JDReceiveTask(s, step1)
                 var step3 = await JDQueryTaskID(s)
                 var step4 = await JDUseProps(s, step3)
-                if (step4 && $nobyda.ItemIsUsed) {//如果使用了道具, 则再次检查任务
+                if (step4 && $nobyda.ItemIsUsed) { //如果使用了道具, 则再次检查任务
                   await JingDongSpeedUp(s)
                 } else if (!merge.SpeedUp.notify) {
                   merge.SpeedUp.fail = 1
@@ -2176,11 +2142,14 @@ function nobyda() {
   const isLoon = typeof $loon != "undefined"
   const isJSBox = typeof $app != "undefined" && typeof $http != "undefined"
   const isNode = typeof require == "function" && !isJSBox;
+  const NodeSet = 'CookieSet.json'
   const node = (() => {
     if (isNode) {
       const request = require('request');
+      const fs = require("fs");
       return ({
-        request
+        request,
+        fs
       })
     } else {
       return (null)
@@ -2189,7 +2158,7 @@ function nobyda() {
   const notify = (title, subtitle, message) => {
     if (isQuanX) $notify(title, subtitle, message)
     if (isSurge) $notification.post(title, subtitle, message)
-    if (isNode) log(title + subtitle + message)
+    if (isNode) console.log(`${title}\n${subtitle}\n${message}`)
     if (isJSBox) $push.schedule({
       title: title,
       body: subtitle ? subtitle + "\n" + message : message
@@ -2198,10 +2167,43 @@ function nobyda() {
   const write = (value, key) => {
     if (isQuanX) return $prefs.setValueForKey(value, key)
     if (isSurge) return $persistentStore.write(value, key)
+    if (isNode) {
+      try {
+        if (!node.fs.existsSync(NodeSet)) node.fs.writeFileSync(NodeSet, JSON.stringify({}));
+        const dataValue = JSON.parse(node.fs.readFileSync(NodeSet));
+        if (value) dataValue[key] = value;
+        if (!value) delete dataValue[key];
+        return node.fs.writeFileSync(NodeSet, JSON.stringify(dataValue));
+      } catch (er) {
+        return AnError('Node.js持久化写入', null, er);
+      }
+    }
+    if (isJSBox) {
+      if (!value) return $file.delete(`shared://${key}.txt`);
+      return $file.write({
+        data: $data({
+          string: value
+        }),
+        path: `shared://${key}.txt`
+      })
+    }
   }
   const read = (key) => {
     if (isQuanX) return $prefs.valueForKey(key)
     if (isSurge) return $persistentStore.read(key)
+    if (isNode) {
+      try {
+        if (!node.fs.existsSync(NodeSet)) return null;
+        const dataValue = JSON.parse(node.fs.readFileSync(NodeSet))
+        return dataValue[key]
+      } catch (er) {
+        return AnError('Node.js持久化读取', null, er)
+      }
+    }
+    if (isJSBox) {
+      if (!$file.exists(`shared://${key}.txt`)) return null;
+      return $file.read(`shared://${key}.txt`).string
+    }
   }
   const adapterStatus = (response) => {
     if (response) {
@@ -2293,14 +2295,15 @@ function nobyda() {
       $http.post(options);
     }
   }
-  const log = (message) => console.log(message)
-  const AnError = (name, key, er) => {
-    if (!merge[key].notify) {
-      merge[key].notify = `${name}: 异常, 已输出日志 ‼️`
-    } else {
-      merge[key].notify += `\n${name}: 异常, 已输出日志 ‼️ (2)`
+  const AnError = (name, keyname, er) => {
+    if (typeof(merge) != "undefined" && keyname) {
+      if (!merge[keyname].notify) {
+        merge[keyname].notify = `${name}: 异常, 已输出日志 ‼️`
+      } else {
+        merge[keyname].notify += `\n${name}: 异常, 已输出日志 ‼️ (2)`
+      }
+      merge[keyname].error = 1
     }
-    merge[key].error = 1
     return console.log(`\n‼️${name}发生错误\n‼️名称: ${er.name}\n‼️描述: ${er.message}${JSON.stringify(er).match(/\"line\"/) ? `\n‼️行列: ${JSON.stringify(er)}` : ``}`)
   }
   const time = () => {
@@ -2324,7 +2327,6 @@ function nobyda() {
     read,
     get,
     post,
-    log,
     time,
     done
   }
