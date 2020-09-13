@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.12 19:25 v1.54 (Beta)
+更新时间: 2020.9.13 21:10 v1.55
 有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -1335,15 +1335,19 @@ function JingDongSpeedUp(s, id) {
                 const percent = Math.round((cc.data.done_distance / cc.data.distance) * 100)
                 console.log(`\n天天加速-目前结束时间: \n${cc.data.end_time} [${percent}%]`)
                 $nobyda.ItemIsUsed = false
-                var step1 = await JDSpaceEvent(s); //处理太空事件
-                var step2 = await JDQueryTask(s); //处理任务道具
+                if (!$nobyda.isAllEvents) await JDSpaceEvent(s); //处理太空事件
+                if (!$nobyda.isAlltasks) await JDQueryTask(s); //处理太空任务
                 var step3 = await JDQueryTaskID(s); //查询道具ID
                 var step4 = await JDUseProps(s, step3); //使用道具
                 if (step4 && $nobyda.ItemIsUsed) { //如果使用了道具, 则再次检查任务
                   await JingDongSpeedUp(s)
-                } else if (!merge.SpeedUp.notify) {
-                  merge.SpeedUp.fail = 1
-                  merge.SpeedUp.notify = `京东天天-加速: 失败, 加速中${percent<10?`  `:``}[${percent}%] ⚠️`
+                } else {
+                  $nobyda.isAllEvents = false; //避免多账号问题
+                  $nobyda.isAlltasks = false;
+                  if (!merge.SpeedUp.notify) {
+                    merge.SpeedUp.fail = 1
+                    merge.SpeedUp.notify = `京东天天-加速: 失败, 加速中${percent<10?`  `:``}[${percent}%] ⚠️`
+                  }
                 }
               } else if (cc.data.task_status == 2) {
                 merge.SpeedUp.bean = cc.data.beans_num || 0
@@ -1441,6 +1445,7 @@ function JDSpaceEvent(s) {
               $nobyda.AnError("太空事件-领取", "SpeedUp", eor)
             } finally {
               if (list.length == spaceEventCount) {
+                if (list.length == spaceNumTask) $nobyda.isAllEvents = true; //避免重复查询
                 console.log(`\n天天加速-已成功领取${spaceNumTask}个事件`)
                 resolve()
               }
@@ -1449,6 +1454,7 @@ function JDSpaceEvent(s) {
         }
         if (out) setTimeout(resolve, out + s)
       } else {
+        $nobyda.isAllEvents = true; //避免重复查询
         resolve()
       }
     })
@@ -1527,6 +1533,7 @@ function JDQueryTask(s) {
               $nobyda.AnError("领取道具-加速", "SpeedUp", eor)
             } finally {
               if (CID.length == count) {
+                if (CID.length == NumTask) $nobyda.isAlltasks = true; //避免重复查询
                 console.log("\n天天加速-已成功领取" + NumTask + "个道具")
                 resolve(NumTask)
               }
@@ -1535,6 +1542,7 @@ function JDQueryTask(s) {
         }
         if (out) setTimeout(resolve, out + s)
       } else {
+        $nobyda.isAlltasks = true; //避免重复查询
         resolve(NumTask)
       }
     })
