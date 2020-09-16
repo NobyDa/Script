@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.13 21:10 v1.55
+更新时间: 2020.9.16 19:30 v1.56
 有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -1110,7 +1110,7 @@ function JDMagicCube(s) {
   return new Promise((resolve, reject) => {
     if (disable("JDCube")) return reject()
     const JDUrl = {
-      url: 'https://api.m.jd.com/client.action?functionId=getNewsInteractionInfo&body=%7B%22sign%22%3A2%7D&appid=smfe',
+      url: 'https://api.m.jd.com/client.action?functionId=getNewsInteractionInfo&appid=smfe',
       headers: {
         Cookie: KEY,
       }
