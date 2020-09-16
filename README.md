@@ -41,7 +41,7 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 
 * **[AdRuleTest.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRuleTest.list) （More than 1300 ad rules，This rule is modified from [Scomper](https://github.com/scomper/Surge). Because the original author stopped maintenance, so take over the optimization and delete some normal rules, only for testing**)
 
-* **[AdRuleRegex.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/AdRuleRegex.list) （More than 700 ad rewrite rules, integrate [lhie1](https://github.com/lhie1/Rules)、[ConnersHua](https://github.com/ConnersHua/Profiles)、[onewayticket255](https://github.com/onewayticket255/Surge-Script) and [Choler](https://github.com/Choler/Surge/tree/master/Ruleset).  You need to manually add the hostname of the second line in the file to Surge config file. and open MITM and trust the certificate)**
+* **[RewriteRules.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/RewriteRules.sgmodule) （More than 700 ad rewrite module, integrate [lhie1](https://github.com/lhie1/Rules)、[ConnersHua](https://github.com/ConnersHua/Profiles)、[onewayticket255](https://github.com/onewayticket255/Surge-Script) and [Choler](https://github.com/Choler/Surge/tree/master/Ruleset).  you need to open MITM and trust the certificate.)**
 
 * **[Download.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Download.list) (Integrate some BT, Thunder, download shunt rules)**
 
