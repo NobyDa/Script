@@ -72,8 +72,8 @@
         "key": "JDDrug",
         "label": "京东医药"
       }, {
-        "key": "JDTreasure",
-        "label": "京东夺宝"
+        "key": "JDChild",
+        "label": "京东童装"
       }, {
         "key": "JDBaby",
         "label": "京东母婴"
@@ -81,11 +81,11 @@
         "key": "JDSubsidy",
         "label": "京东晚市"
       }, {
-        "key": "JDClocks",
-        "label": "京东钟表"
+        "key": "JDWomen",
+        "label": "京东女装"
       }, {
-        "key": "JDPet",
-        "label": "京东宠物"
+        "key": "JDCash",
+        "label": "京东红包"
       }, {
         "key": "JDFSale",
         "label": "京东闪购"
@@ -100,25 +100,25 @@
         "label": "京东二手 (如VPN重启,建议禁用)"
       }, {
         "key": "JDMakeup",
-        "label": "京东美妆"
+        "label": "京东美妆 (如VPN重启,建议禁用)"
       }, {
-        "key": "JDWomen",
-        "label": "京东女装"
+        "key": "JDClocks",
+        "label": "京东钟表 (如VPN重启,建议禁用)"
       }, {
         "key": "JDVege",
-        "label": "京东菜场"
+        "label": "京东菜场 (如VPN重启,建议禁用)"
       }, {
-        "key": "JDCash",
-        "label": "京东红包"
+        "key": "JDPet",
+        "label": "京东宠物 (如VPN重启,建议禁用)"
       }, {
         "key": "JDFood",
-        "label": "京东美食"
+        "label": "京东美食 (如VPN重启,建议禁用)"
       }, {
         "key": "JDClean",
         "label": "京东清洁 (如VPN重启,建议禁用)"
       }, {
         "key": "JDCare",
-        "label": "京东个护"
+        "label": "京东个护 (如VPN重启,建议禁用)"
       }, {
         "key": "JDJewels",
         "label": "京东珠宝 (如VPN重启,建议禁用)"
