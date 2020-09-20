@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.17 19:30 v1.57
-有效接口: 29+
+更新时间: 2020.9.20 22:20 v1.58
+有效接口: 28+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -70,18 +70,18 @@ http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean tag=
 hostname = api.m.jd.com
 
 *************************
-【 QX 1.0.5+ 脚本配置 】 :
+【 QX 1.0.10+ 脚本配置 】 :
 *************************
 
 [task_local]
 # 京东多合一签到
-# 注意此为本地路径, 请根据实际情况自行调整
-5 0 * * * JD_DailyBonus.js
+# 注意此为远程路径, 低版本用户请自行调整为本地路径.
+5 0 * * * https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东多合一签到, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png,enabled=true
 
 [rewrite_local]
 # 获取京东Cookie. 
-# 注意此为本地路径, 请根据实际情况自行调整.
-https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean url script-request-header JD_DailyBonus.js
+# 注意此为远程路径, 低版本用户请自行调整为本地路径.
+https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
 [mitm]
 hostname = api.m.jd.com
@@ -126,13 +126,13 @@ async function all() {
       JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'), //京东晚市补贴金
       JDUserSignPre(stop, 'JDDrug', '京东商城-医药'), //京东医药馆
       JDUserSignPre(stop, 'JDWomen', '京东商城-女装'), //京东女装馆
-      JDUserSignPre(stop, 'JDGStore', '京东商城-超市'), //京东超市
+      // JDUserSignPre(stop, 'JDGStore', '京东商城-超市'), //京东超市
       JDUserSignPre(stop, 'JDBook', '京东商城-图书') //京东图书
     ]);
     await Promise.all([
       JDUserSignPre(stop, 'JDPet', '京东商城-宠物'), //京东宠物馆
       JDUserSignPre(stop, 'JDShand', '京东拍拍-二手'), //京东拍拍二手
-      JDUserSignPre(stop, 'JDClean', '京东商城-清洁'), //京东清洁馆
+      // JDUserSignPre(stop, 'JDClean', '京东商城-清洁'), //京东清洁馆
       JDUserSignPre(stop, 'JDCare', '京东商城-个护'), //京东个人护理馆
       JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝'), //京东珠宝馆
       JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'), //京东钟表馆
@@ -160,7 +160,7 @@ async function all() {
     await JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'); //京东晚市补贴金
     await JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'); //京东钟表馆
     await JDUserSignPre(stop, 'JDDrug', '京东商城-医药'); //京东医药馆
-    await JDUserSignPre(stop, 'JDGStore', '京东商城-超市'); //京东超市
+    // await JDUserSignPre(stop, 'JDGStore', '京东商城-超市'); //京东超市
     await JDUserSignPre(stop, 'JDPet', '京东商城-宠物'); //京东宠物馆
     await JDUserSignPre(stop, 'JDBook', '京东商城-图书'); //京东图书
     await JDUserSignPre(stop, 'JDShand', '京东拍拍-二手'); //京东拍拍二手
@@ -168,7 +168,7 @@ async function all() {
     await JDUserSignPre(stop, 'JDWomen', '京东商城-女装'); //京东女装馆
     await JDUserSignPre(stop, 'JDVege', '京东商城-菜场'); //京东菜场
     await JDUserSignPre(stop, 'JDFood', '京东商城-美食'); //京东美食馆
-    await JDUserSignPre(stop, 'JDClean', '京东商城-清洁'); //京东清洁馆
+    // await JDUserSignPre(stop, 'JDClean', '京东商城-清洁'); //京东清洁馆
     await JDUserSignPre(stop, 'JDCare', '京东商城-个护'); //京东个人护理馆
     await JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝'); //京东珠宝馆
   }
@@ -443,7 +443,7 @@ function JingDongTurnSign(s, code) {
               } else if (data.match(/(T210|密码)/)) {
                 merge.JDTurn.notify = "京东商城-转盘: 失败, 原因: 无支付密码 ⚠️"
               } else {
-                merge.JDTurn.notify += `${also?`\n`:``}京东商城-转盘: ${also?`多次`:`成功`}, 原因: 未知 ⚠️`
+                merge.JDTurn.notify += `${also?`\n`:``}京东商城-转盘: 失败, 原因: 未知 ⚠️${also?` (多次)`:``}`
               }
             }
           }
@@ -1326,7 +1326,7 @@ function JingDongSpeedUp(s, id) {
               if (cc.data.task_status == 0 && cc.data.source_id) {
                 if ($nobyda.ItemIsUsed) { //如果使用道具后再次开始任务, 则收到奖励
                   console.log("\n天天加速-领取本次奖励成功")
-                  merge.SpeedUp.bean = cc.data.beans_num || 0
+                  merge.SpeedUp.bean += cc.data.beans_num || 0
                   merge.SpeedUp.success = 1
                   merge.SpeedUp.notify = `京东天天-加速: 成功, 明细: ${merge.SpeedUp.bean || `无`}京豆 🐶`
                 }
@@ -1344,6 +1344,7 @@ function JingDongSpeedUp(s, id) {
                 } else {
                   $nobyda.isAllEvents = false; //避免多账号问题
                   $nobyda.isAlltasks = false;
+                  $nobyda.tryAgain = false;
                   if (!merge.SpeedUp.notify) {
                     merge.SpeedUp.fail = 1
                     merge.SpeedUp.notify = `京东天天-加速: 失败, 加速中${percent<10?`  `:``}[${percent}%] ⚠️`
@@ -1361,9 +1362,22 @@ function JingDongSpeedUp(s, id) {
                 console.log("\n" + "天天加速-判断状态码失败")
               }
             } else {
-              merge.SpeedUp.fail = 1
-              merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 未知 ⚠️"
-              console.log("\n" + "天天加速-判断状态失败")
+              if (data.match(/领过此任务/)) { //处理任务频繁问题
+                if (!$nobyda.tryAgain || $nobyda.tryAgain < 3) { //避免死循环
+                  $nobyda.tryAgain ? $nobyda.tryAgain += 1 : $nobyda.tryAgain = 1
+                  console.log(`\n天天加速-延迟一秒查询 (${$nobyda.tryAgain})`);
+                  await JingDongSpeedUp(1000);
+                } else {
+                  $nobyda.tryAgain = false;
+                  console.log(`\n天天加速-放弃查询任务`);
+                }
+                return
+              }
+              if (!merge.SpeedUp.notify) {
+                merge.SpeedUp.fail = 1
+                merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 未知 ⚠️"
+              }
+              console.log("\n天天加速-判断状态失败")
             }
           }
         } catch (eor) {
@@ -1997,7 +2011,7 @@ function initial() {
 
   acData = {
     // 京东商城-童装
-    JDChild: '493G2Fs896uTbbRxZKGae86K3aGm',
+    JDChild: '3Af6mZNcf5m795T8dtDVfDwWVNhJ',
     // 京东商城-母婴
     JDBaby: '3BbAVGQPDd6vTyHYjmAutXrKAos6',
     // 京东商城-数码
