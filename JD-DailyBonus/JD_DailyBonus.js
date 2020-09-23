@@ -120,6 +120,7 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴'), //京东鞋靴
       JDUserSignPre(stop, 'JDEsports', '京东商城-电竞'), //京东电竞
       JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌'), //京东日历翻牌
       JDUserSignPre(stop, 'JDChild', '京东商城-童装'), //京东童装馆
@@ -156,6 +157,7 @@ async function all() {
     await JingDongPrize(stop); //京东抽大奖
     await JingDongSubsidy(stop); //京东金贴
     await JingDongShake(stop) //京东摇一摇
+    await JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴'), //京东鞋靴
     await JDUserSignPre(stop, 'JDEsports', '京东商城-电竞'); //京东电竞
     await JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌'); //京东日历翻牌
     await JDUserSignPre(stop, 'JDChild', '京东商城-童装'); //京东童装馆
@@ -2014,6 +2016,8 @@ function disable(Val, name, way) {
 function initial() {
 
   acData = {
+    // 京豆商城-鞋靴
+    JDShoes: '4RXyb1W4Y986LJW8ToqMK14BdTD',
     // 京东商城-电竞
     JDEsports: 'CHdHQhA5AYDXXQN9FLt3QUAPRsB',
     // 京东商城-日历
@@ -2065,6 +2069,7 @@ function initial() {
     JDPet: {},
     JDEsports: {},
     JDCalendar: {},
+    JDShoes: {},
     JD3C: {},
     JDChild: {},
     JDBaby: {},
