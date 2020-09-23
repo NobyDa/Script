@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.20 22:20 v1.58
-有效接口: 28+
+更新时间: 2020.9.23 8:10 v1.59
+有效接口: 30+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -106,7 +106,7 @@ async function all() {
   if (stop == 0) {
     await Promise.all([
       JingDongBean(stop), //京东京豆
-      JingRongBean(stop), //金融京豆
+      // JingRongBean(stop), //金融京豆
       JingRongDoll(stop), //金融抓娃娃
       JingRongSteel(stop), //金融钢镚
       JingDongTurn(stop), //京东转盘
@@ -120,6 +120,8 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDEsports', '京东商城-电竞'), //京东电竞
+      JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌'), //京东日历翻牌
       JDUserSignPre(stop, 'JDChild', '京东商城-童装'), //京东童装馆
       JDUserSignPre(stop, 'JDBaby', '京东商城-母婴'), //京东母婴馆
       JDUserSignPre(stop, 'JD3C', '京东商城-数码'), //京东数码电器馆
@@ -132,7 +134,7 @@ async function all() {
     await Promise.all([
       JDUserSignPre(stop, 'JDPet', '京东商城-宠物'), //京东宠物馆
       JDUserSignPre(stop, 'JDShand', '京东拍拍-二手'), //京东拍拍二手
-      // JDUserSignPre(stop, 'JDClean', '京东商城-清洁'), //京东清洁馆
+      JDUserSignPre(stop, 'JDClean', '京东商城-清洁'), //京东清洁馆
       JDUserSignPre(stop, 'JDCare', '京东商城-个护'), //京东个人护理馆
       JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝'), //京东珠宝馆
       JDUserSignPre(stop, 'JDClocks', '京东商城-钟表'), //京东钟表馆
@@ -142,7 +144,7 @@ async function all() {
     ]);
   } else {
     await JingDongBean(stop); //京东京豆
-    await JingRongBean(stop); //金融京豆
+    // await JingRongBean(stop); //金融京豆
     await JingRongDoll(stop); //金融抓娃娃
     await JingRongSteel(stop); //金融钢镚
     await JingDongTurn(stop); //京东转盘
@@ -154,6 +156,8 @@ async function all() {
     await JingDongPrize(stop); //京东抽大奖
     await JingDongSubsidy(stop); //京东金贴
     await JingDongShake(stop) //京东摇一摇
+    await JDUserSignPre(stop, 'JDEsports', '京东商城-电竞'); //京东电竞
+    await JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌'); //京东日历翻牌
     await JDUserSignPre(stop, 'JDChild', '京东商城-童装'); //京东童装馆
     await JDUserSignPre(stop, 'JDBaby', '京东商城-母婴'); //京东母婴馆
     await JDUserSignPre(stop, 'JD3C', '京东商城-数码'); //京东数码电器馆
@@ -168,7 +172,7 @@ async function all() {
     await JDUserSignPre(stop, 'JDWomen', '京东商城-女装'); //京东女装馆
     await JDUserSignPre(stop, 'JDVege', '京东商城-菜场'); //京东菜场
     await JDUserSignPre(stop, 'JDFood', '京东商城-美食'); //京东美食馆
-    // await JDUserSignPre(stop, 'JDClean', '京东商城-清洁'); //京东清洁馆
+    await JDUserSignPre(stop, 'JDClean', '京东商城-清洁'); //京东清洁馆
     await JDUserSignPre(stop, 'JDCare', '京东商城-个护'); //京东个人护理馆
     await JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝'); //京东珠宝馆
   }
@@ -2010,6 +2014,10 @@ function disable(Val, name, way) {
 function initial() {
 
   acData = {
+    // 京东商城-电竞
+    JDEsports: 'CHdHQhA5AYDXXQN9FLt3QUAPRsB',
+    // 京东商城-日历
+    JDCalendar: '36V2Qw59VPNsuLxY84vCFtxFzrFs',
     // 京东商城-童装
     JDChild: '3Af6mZNcf5m795T8dtDVfDwWVNhJ',
     // 京东商城-母婴
@@ -2055,6 +2063,8 @@ function initial() {
     Overseas: {},
     JDFSale: {},
     JDPet: {},
+    JDEsports: {},
+    JDCalendar: {},
     JD3C: {},
     JDChild: {},
     JDBaby: {},

@@ -96,6 +96,12 @@
         "key": "JDBook",
         "label": "京东图书"
       }, {
+        "key": "JDEsports",
+        "label": "京东电竞"
+      }, {
+        "key": "JDCalendar",
+        "label": "京东日历"
+      }, {
         "key": "JDShand",
         "label": "京东二手 (如VPN重启,建议禁用)"
       }, {
