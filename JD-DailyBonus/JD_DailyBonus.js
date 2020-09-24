@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.23 8:10 v1.60
-有效接口: 30+
+更新时间: 2020.9.25 0:40 v1.61
+有效接口: 31+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -106,7 +106,7 @@ async function all() {
   if (stop == 0) {
     await Promise.all([
       JingDongBean(stop), //京东京豆
-      // JingRongBean(stop), //金融京豆
+      JingRongBean(stop), //金融简单赚钱
       JingRongDoll(stop), //金融抓娃娃
       JingRongSteel(stop), //金融钢镚
       JingDongTurn(stop), //京东转盘
@@ -145,7 +145,7 @@ async function all() {
     ]);
   } else {
     await JingDongBean(stop); //京东京豆
-    // await JingRongBean(stop); //金融京豆
+    await JingRongBean(stop); //金融简单赚钱
     await JingRongDoll(stop); //金融抓娃娃
     await JingRongSteel(stop); //金融钢镚
     await JingDongTurn(stop); //京东转盘
@@ -469,12 +469,11 @@ function JingRongBean(s) {
     if (disable("JRBean")) return resolve()
     setTimeout(() => {
       const login = {
-        url: 'https://ms.jr.jd.com/gw/generic/zc/h5/m/signRecords',
+        url: 'https://ms.jr.jd.com/gw/generic/zc/h5/m/queryOpenScreenReward',
         headers: {
-          Cookie: KEY,
-          Referer: "https://jddx.jd.com/m/money/index.html?from=sign"
+          Cookie: KEY
         },
-        body: "reqData=%7B%22bizLine%22%3A2%7D"
+        body: "reqData=%7B%22channelCode%22%3A%22ZHUANQIAN%22%2C%22clientType%22%3A%22sms%22%2C%22clientVersion%22%3A%2211.0%22%7D"
       };
       $nobyda.post(login, async function(error, response, data) {
         try {
@@ -483,17 +482,24 @@ function JingRongBean(s) {
           } else {
             const Details = LogDetails ? "response:\n" + data : '';
             if (data.match(/\"login\":true/)) {
-              console.log("\n" + "京东金融-金贴登录成功 " + Details)
-              await JRBeanCheckin(200)
+              console.log("\n" + "京东金融-金贴查询成功 " + Details)
+              const cc = JSON.parse(data)
+              if (cc.resultData.data.reward === false) {
+                await JRBeanCheckin(s, cc.resultData.data.rewardAmount);
+              } else {
+                const tp = cc.resultData.data.reward === true
+                merge.JRBean.notify = `京东金融-金贴: 失败, 原因: ${tp?`已签过`:`未知`} ⚠️`
+                merge.JRBean.fail = 1
+              }
             } else {
-              console.log("\n" + "京东金融-金贴登录失败 " + Details)
+              console.log("\n" + "京东金融-金贴查询失败 " + Details)
               const lt = data.match(/\"login\":false/)
               merge.JRBean.fail = 1
-              merge.JRBean.notify = `京东金融-金贴: 失败, 原因: ${lt?`Cookie失效‼️`:`需修正 ‼️`}`
+              merge.JRBean.notify = `京东金融-金贴: 失败, 原因: ${lt?`Cookie失效‼️`:`未知 ⚠️`}`
             }
           }
         } catch (eor) {
-          $nobyda.AnError("金融金贴-登录", "JRBean", eor)
+          $nobyda.AnError("金融金贴-查询", "JRBean", eor)
         } finally {
           resolve()
         }
@@ -503,31 +509,29 @@ function JingRongBean(s) {
   });
 }
 
-function JRBeanCheckin(s) {
+function JRBeanCheckin(s, amount) {
   return new Promise(resolve => {
     setTimeout(() => {
       const JRBUrl = {
-        url: 'https://ms.jr.jd.com/gw/generic/zc/h5/m/signRewardGift',
+        url: 'https://ms.jr.jd.com/gw/generic/zc/h5/m/openScreenReward',
         headers: {
-          Cookie: KEY,
-          Referer: "https://jddx.jd.com/m/jddnew/money/index.html"
+          Cookie: KEY
         },
-        body: "reqData=%7B%22bizLine%22%3A2%2C%22signDate%22%3A%221%22%2C%22deviceInfo%22%3A%7B%22os%22%3A%22iOS%22%7D%2C%22clientType%22%3A%22sms%22%2C%22clientVersion%22%3A%2211.0%22%7D"
+        body: "reqData=%7B%22channelCode%22%3A%22ZHUANQIAN%22%2C%22clientType%22%3A%22sms%22%2C%22clientVersion%22%3A%2211.0%22%7D"
       };
       $nobyda.post(JRBUrl, function(error, response, data) {
         try {
           if (error) {
             throw new Error(error)
           } else {
-            const c = JSON.parse(data)
             const Details = LogDetails ? "response:\n" + data : '';
-            if (data.match(/\"resultCode\":\"00000\"/)) {
+            if (data.match(/\"rewardCode\":\"00000\"/)) {
               console.log("\n" + "京东金融-金贴签到成功 " + Details)
-              merge.JRBean.notify = `京东金融-金贴: 成功, 明细: ${c.resultData.data.rewardAmount || `无`}金贴 💰`
+              merge.JRBean.notify = `京东金融-金贴: 成功, 明细: ${amount || `无`}金贴 💰`
               merge.JRBean.success = 1
             } else {
               console.log("\n" + "京东金融-金贴签到失败 " + Details)
-              if (data.match(/发放失败|70111|10000/)) {
+              if (data.match(/发放失败|70111|10000|60203/)) {
                 merge.JRBean.notify = "京东金融-金贴: 失败, 原因: 已签过 ⚠️"
                 merge.JRBean.fail = 1
               } else {
