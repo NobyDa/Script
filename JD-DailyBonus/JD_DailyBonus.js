@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.26 20:00 v1.62
+更新时间: 2020.9.26 22:00 v1.63
 有效接口: 32+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -146,7 +146,7 @@ async function all() {
     ]);
   } else {
     await JingDongBean(stop); //京东京豆
-    await JingDongWebcasts(s); //京东直播
+    await JingDongWebcasts(stop); //京东直播
     await JingRongBean(stop); //金融简单赚钱
     await JingRongDoll(stop); //金融抓娃娃
     await JingRongSteel(stop); //金融钢镚
