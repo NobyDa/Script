@@ -51,6 +51,9 @@
         "key": "JDBean",
         "label": "京东京豆"
       }, {
+        "key": "JDWebcasts",
+        "label": "京东直播"
+      }, {
         "key": "JRBean",
         "label": "金融金贴"
       }, {
