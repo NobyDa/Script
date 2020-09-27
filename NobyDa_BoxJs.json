@@ -99,6 +99,9 @@
         "key": "JDBook",
         "label": "京东图书"
       }, {
+        "key": "JDSchool",
+        "label": "京东校园"
+      }, {
         "key": "JDShoes",
         "label": "京东鞋靴"
       },{
