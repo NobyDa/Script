@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.26 22:00 v1.63
-有效接口: 32+
+更新时间: 2020.9.27 13:28 v1.64
+有效接口: 33+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -121,6 +121,7 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDSchool', '京东商城-校园'), //京东校园
       JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴'), //京东鞋靴
       JDUserSignPre(stop, 'JDEsports', '京东商城-电竞'), //京东电竞
       JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌'), //京东日历翻牌
@@ -159,6 +160,7 @@ async function all() {
     await JingDongPrize(stop); //京东抽大奖
     await JingDongSubsidy(stop); //京东金贴
     await JingDongShake(stop) //京东摇一摇
+    await JDUserSignPre(stop, 'JDSchool', '京东商城-校园'), //京东校园
     await JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴'); //京东鞋靴
     await JDUserSignPre(stop, 'JDEsports', '京东商城-电竞'); //京东电竞
     await JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌'); //京东日历翻牌
@@ -2059,7 +2061,9 @@ function disable(Val, name, way) {
 function initial() {
 
   acData = {
-    // 京豆商城-鞋靴
+    // 京东商城-校园
+    JDSchool: '4812pn2PAcUyfNdWr7Cvpww5MCyW',
+    // 京东商城-鞋靴
     JDShoes: '4RXyb1W4Y986LJW8ToqMK14BdTD',
     // 京东商城-电竞
     JDEsports: 'CHdHQhA5AYDXXQN9FLt3QUAPRsB',
