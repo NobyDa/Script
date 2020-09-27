@@ -121,7 +121,6 @@ async function all() {
       JingDongShake(stop) //京东摇一摇
     ]);
     await Promise.all([
-      JDUserSignPre(stop, 'JDSchool', '京东商城-校园'), //京东校园
       JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴'), //京东鞋靴
       JDUserSignPre(stop, 'JDEsports', '京东商城-电竞'), //京东电竞
       JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌'), //京东日历翻牌
@@ -135,6 +134,7 @@ async function all() {
       JDUserSignPre(stop, 'JDBook', '京东商城-图书') //京东图书
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDSchool', '京东商城-校园'), //京东校园
       JDUserSignPre(stop, 'JDPet', '京东商城-宠物'), //京东宠物馆
       JDUserSignPre(stop, 'JDShand', '京东拍拍-二手'), //京东拍拍二手
       JDUserSignPre(stop, 'JDClean', '京东商城-清洁'), //京东清洁馆
@@ -159,8 +159,8 @@ async function all() {
     await JingDongGetCash(stop); //京东领现金
     await JingDongPrize(stop); //京东抽大奖
     await JingDongSubsidy(stop); //京东金贴
-    await JingDongShake(stop) //京东摇一摇
-    await JDUserSignPre(stop, 'JDSchool', '京东商城-校园'), //京东校园
+    await JingDongShake(stop); //京东摇一摇
+    await JDUserSignPre(stop, 'JDSchool', '京东商城-校园'); //京东校园
     await JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴'); //京东鞋靴
     await JDUserSignPre(stop, 'JDEsports', '京东商城-电竞'); //京东电竞
     await JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌'); //京东日历翻牌
@@ -2115,6 +2115,7 @@ function initial() {
     JDFSale: {},
     JDPet: {},
     JDEsports: {},
+    JDSchool: {},
     JDCalendar: {},
     JDShoes: {},
     JD3C: {},
