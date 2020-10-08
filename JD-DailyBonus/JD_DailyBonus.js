@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.9.28 18:00 v1.65
+更新时间: 2020.10.8 19:10 v1.66
 有效接口: 35+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -131,7 +131,7 @@ async function all() {
       JDUserSignPre(stop, 'JD3C', '京东商城-数码'), //京东数码电器馆
       JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴'), //京东晚市补贴金
       JDUserSignPre(stop, 'JDDrug', '京东商城-医药'), //京东医药馆
-      JDUserSignPre(stop, 'JDWomen', '京东商城-女装'), //京东女装馆
+      JDUserSignPre(stop, 'JDFineWine', '京东商城-酒饮'), //京东酒饮馆
       JDUserSignPre(stop, 'JDBook', '京东商城-图书') //京东图书
     ]);
     await Promise.all([
@@ -177,7 +177,7 @@ async function all() {
     await JDUserSignPre(stop, 'JDBook', '京东商城-图书'); //京东图书
     await JDUserSignPre(stop, 'JDShand', '京东拍拍-二手'); //京东拍拍二手
     await JDUserSignPre(stop, 'JDMakeup', '京东商城-美妆'); //京东美妆馆
-    await JDUserSignPre(stop, 'JDWomen', '京东商城-女装'); //京东女装馆
+    await JDUserSignPre(stop, 'JDFineWine', '京东商城-酒饮'); //京东酒饮馆
     await JDUserSignPre(stop, 'JDVege', '京东商城-菜场'); //京东菜场
     await JDUserSignPre(stop, 'JDFood', '京东商城-美食'); //京东美食馆
     await JDUserSignPre(stop, 'JDClean', '京东商城-清洁'); //京东清洁馆
@@ -635,7 +635,7 @@ function JRDoubleSign(s) {
                 } else if (data.match(/未在/)) {
                   merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 未在京东签到 ⚠️"
                 } else {
-                  merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 无奖励 🐶"
+                  merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 无奖励 ⚠️"
                 }
               }
             } else {
@@ -725,7 +725,7 @@ function JingDongShake(s) {
 function JDUserSignPre(s, key, title) {
   if ($nobyda.isNode) {
     return JDUserSignPre1(s, key, title);
-  } else if (key == 'JDWomen' || key == 'JDJewels' || $nobyda.isJSBox) {
+  } else if (key == 'JDJewels' || $nobyda.isJSBox) {
     return JDUserSignPre2(s, key, title);
   } else {
     return JDUserSignPre1(s, key, title);
@@ -1000,19 +1000,19 @@ function JDFlashSale(s) {
               merge.JDFSale.notify = "京东商城-闪购: 成功, 明细: " + (merge.JDFSale.bean || "无") + "京豆 🐶"
               merge.JDFSale.success = 1
             } else {
-              merge.JDFSale.fail = 1
               console.log("\n" + "京东商城-闪购签到失败 " + Details)
               if (data.match(/(已签到|已领取|\"2005\")/)) {
                 merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: 已签过 ⚠️"
               } else if (data.match(/不存在|已结束|\"2008\"|\"3001\"/)) {
-                //merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: 需瓜分 ⚠️"
-                await FlashSaleDivide(s)
+                await FlashSaleDivide(s); //瓜分京豆
+                return
               } else if (data.match(/(\"code\":\"3\"|\"1003\")/)) {
                 merge.JDFSale.notify = "京东商城-闪购: 失败, 原因: Cookie失效‼️"
               } else {
                 const msg = data.match(/\"msg\":\"([\u4e00-\u9fa5].+?)\"/)
                 merge.JDFSale.notify = `京东商城-闪购: 失败, ${msg ? msg[1] : `原因: 未知`} ⚠️`
               }
+              merge.JDFSale.fail = 1
             }
           }
         } catch (eor) {
@@ -1933,7 +1933,9 @@ function JDTakeaLook(s) {
           if (error) throw new Error(error);
           const cc = JSON.parse(data);
           const Details = LogDetails ? "response:\n" + data : '';
-          const tm = new Date(new Date().setHours(0, 0, 0, 0)).getTime()
+          const zone = new Date().getTimezoneOffset()
+          const tm = zone == -480 ? new Date().setHours(0, 0, 0, 0) : new Date(Date.now + 28800000).setHours(0, 0, 0, 0);
+          if (zone !== -480 && zone !== 0) throw new Error('非UTC+8时区, 签到结果未知.');
           if (data.match(/签到成功/) && !data.match(tm)) {
             console.log(`\n京东发现-看看签到成功 ${Details}`)
             const aw = data.match(/\"签到成功，获得(\d+)京豆\"/)
@@ -2169,8 +2171,8 @@ function initial() {
     JDMakeup: '2smCxzLNuam5L14zNJHYu43ovbAP',
     // 京东商城-清洁
     JDClean: '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6',
-    // 京东商城-女装
-    JDWomen: 'DpSh7ma8JV7QAxSE2gJNro8Q2h9',
+    // 京东商城-酒饮
+    JDFineWine: 'zGwAUzL3pVGjptBBGeYfpKjYdtX',
     // 京东商城-个护
     JDCare: 'NJ1kd1PJWhwvhtim73VPsD1HwY3',
     // 京东商城-美食
@@ -2205,7 +2207,7 @@ function initial() {
     JDGStore: {},
     JDShand: {},
     JDMakeup: {},
-    JDWomen: {},
+    JDFineWine: {},
     JDCare: {},
     JDFood: {},
     JDClean: {},
