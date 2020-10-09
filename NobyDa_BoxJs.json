@@ -107,7 +107,7 @@
       }, {
         "key": "JDShoes",
         "label": "京东鞋靴"
-      },{
+      }, {
         "key": "JDEsports",
         "label": "京东电竞"
       }, {
@@ -228,7 +228,7 @@
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js",
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js",
-    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/bilibili.png", "https://raw.githubusercontent.com/Orz-3/task/master/bilibili.png"]
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/manga.png", "https://raw.githubusercontent.com/Orz-3/task/master/manga.png"]
   }, {
     "id": "BaiduTB",
     "name": "百度贴吧",
@@ -292,6 +292,50 @@
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/KuaiKan-DailyBonus/KKMH.js",
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js",
-    "icons": ["https://ftp.bmp.ovh/imgs/2020/09/5eb8495e3582aca9.png", "https://ftp.bmp.ovh/imgs/2020/09/a3345da5e9094363.png"]
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/KuaiKan.png", "https://raw.githubusercontent.com/Orz-3/task/master/KuaiKan.png"]
+  }, {
+    "id": "BiliRegion",
+    "name": "哔哩番剧自动地区",
+    "descs_html": [
+      "<h4 align=\"center\">脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js\">脚本注释</a></h4>"
+    ],
+    "settings": [{
+      "id": "BiliAreaNotify",
+      "name": "静默运行",
+      "val": false,
+      "type": "boolean",
+      "desc": "不再发出切换策略通知"
+    }, {
+      "id": "BiliArea_Policy",
+      "name": "策略组名",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "哔哩哔哩分流的策略组名"
+    }, {
+      "id": "BiliArea_CN",
+      "name": "中国大陆-子策略名",
+      "val": "DIRECT",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "哔哩哔哩分流策略组里的中国大陆子策略名"
+    }, {
+      "id": "BiliArea_HK",
+      "name": "中国香港-子策略名",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "哔哩哔哩分流策略组里的香港子策略名"
+    }, {
+      "id": "BiliArea_TW",
+      "name": "中国台湾-子策略名",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "哔哩哔哩分流策略组里的台湾子策略名"
+    }],
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js",
+    "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/bilibili.png", "https://raw.githubusercontent.com/Orz-3/task/master/bilibili.png"]
   }]
 }
