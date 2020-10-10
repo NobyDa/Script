@@ -299,6 +299,7 @@
     "descs_html": [
       "<h4 align=\"center\">脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js\">脚本注释</a></h4>"
     ],
+    "keys": [],
     "settings": [{
       "id": "BiliAreaNotify",
       "name": "静默运行",
