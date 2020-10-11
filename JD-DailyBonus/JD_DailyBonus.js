@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.11 13:40 v1.67
+更新时间: 2020.10.12 1:00 v1.68
 有效接口: 38+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -342,7 +342,7 @@ function JingDongBean(s) {
               merge.JDBean.notify = "京东商城-京豆: 失败, 原因: Cookie失效‼️"
               merge.JDBean.fail = 1
             } else if (data.match(/跳转至拼图/)) {
-              merge.JDBean.notify = "京东商城-京豆: 失败, 原因: 需要拼图验证 ⚠️"
+              merge.JDBean.notify = "京东商城-京豆: 失败, 需要拼图验证 ⚠️"
               merge.JDBean.fail = 1
             } else if (data.match(/\"status\":\"?1\"?/)) {
               console.log("\n" + "京东商城-京豆签到成功 " + Details)
@@ -596,7 +596,7 @@ function JingRongSteel(s) {
             if (data.match(/已经领取|\"resBusiCode\":15/)) {
               merge.JRSteel.notify = "京东金融-钢镚: 失败, 原因: 已签过 ⚠️"
             } else if (data.match(/未实名/)) {
-              merge.JRSteel.notify = "京东金融-钢镚: 失败, 原因: 账号未实名 ⚠️"
+              merge.JRSteel.notify = "京东金融-钢镚: 失败, 账号未实名 ⚠️"
             } else if (data.match(/(\"resultCode\":3|请先登录)/)) {
               merge.JRSteel.notify = "京东金融-钢镚: 失败, 原因: Cookie失效‼️"
             } else {
@@ -643,7 +643,7 @@ function JRDoubleSign(s) {
                 if (data.match(/已领取/)) {
                   merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 已签过 ⚠️"
                 } else if (data.match(/未在/)) {
-                  merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 未在京东签到 ⚠️"
+                  merge.JRDSign.notify = "京东金融-双签: 失败, 未在京东签到 ⚠️"
                 } else {
                   merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 无奖励 ⚠️"
                 }
@@ -1759,7 +1759,7 @@ function JingRongDoll(s, key, title, code, type, num) {
                   merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`;
                   merge[key].fail = 1
                 }
-              } else if (cc.resultData.data.businessCode == 200) {
+              } else if (cc.resultData.code == 200 && cc.resultData.msg == '成功') {
                 console.log(`\n${title}签到成功 ${Details}`)
                 merge[key].bean = num || 0
                 merge[key].success = 1
