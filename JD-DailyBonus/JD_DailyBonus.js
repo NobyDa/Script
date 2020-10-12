@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.12 1:00 v1.68
+更新时间: 2020.10.12 23:00 v1.69
 有效接口: 38+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -1759,13 +1759,13 @@ function JingRongDoll(s, key, title, code, type, num) {
                   merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`;
                   merge[key].fail = 1
                 }
-              } else if (cc.resultData.code == 200 && cc.resultData.msg == '成功') {
+              } else if (cc.resultData.data.businessCode == 200) {
                 console.log(`\n${title}签到成功 ${Details}`)
                 merge[key].bean = num || 0
                 merge[key].success = 1
                 merge[key].notify = `${title}: 成功, 明细: ${num||`无`}京豆 🐶`
               } else {
-                console.log(`\n${title}签到异常 response:\n${data}`)
+                console.log(`\n${title}领取异常 ${Details}\n请尝试手动领取, 预计可得${num||'0'}京豆: \nhttps://uf1.jr.jd.com/up/redEnvelopes/index.html?actCode=${code}\n`)
                 merge[key].fail = 1;
                 merge[key].notify = `${title}: 失败, 原因: 领取异常 ⚠️`;
               }
