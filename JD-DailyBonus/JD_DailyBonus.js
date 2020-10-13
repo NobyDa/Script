@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.13 10:30 v1.70
+更新时间: 2020.10.14 0:30 v1.71
 有效接口: 39+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -232,9 +232,9 @@ function notify() {
       var Money = merge.TotalMoney.TMoney ? `${merge.TotalMoney.TMoney}现金` : ""
       var Subsidy = merge.TotalSubsidy.TSubsidy ? `${merge.TotalSubsidy.TSubsidy}金贴${Money?", ":""}` : ""
       var Sbsc = Subsidy ? "\n" : Money ? "\n" : "获取失败\n"
-      var Tbean = bean ? bean + "京豆" + (steel || cash ? ", " : "") : ""
-      var TSteel = steel ? steel + "钢镚" + (cash ? ", " : "") : ""
-      var TCash = cash ? cash + "红包" : ""
+      var Tbean = bean ? `${bean.toFixed(0)}京豆${steel||cash?", ":""}` : ""
+      var TSteel = steel ? `${steel.toFixed(2)}钢镚${cash?", ":""}` : ""
+      var TCash = cash ? `${cash.toFixed(2)}红包` : ""
       var Tbsc = Tbean ? "\n" : TSteel ? "\n" : TCash ? "\n" : "获取失败\n"
       var Ts = success ? "成功" + success + "个" + (fail || err ? ", " : "") : ""
       var Tf = fail ? "失败" + fail + "个" + (err ? ", " : "") : ""
