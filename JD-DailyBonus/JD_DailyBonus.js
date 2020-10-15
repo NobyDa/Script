@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.15 10:00 v1.72
+更新时间: 2020.10.15 19:00 v1.73
 有效接口: 39+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -1935,9 +1935,7 @@ function JDTakeaLook(s) {
           if (error) throw new Error(error);
           const cc = JSON.parse(data);
           const Details = LogDetails ? "response:\n" + data : '';
-          const zone = new Date().getTimezoneOffset()
-          const tm = zone == -480 ? new Date().setHours(0, 0, 0, 0) : new Date(Date.now() + 28800000).setHours(0, 0, 0, 0);
-          if (zone !== -480 && zone !== 0) throw new Error('非UTC+8时区, 签到结果未知.');
+          const tm = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000
           if (data.match(/签到成功/) && !data.match(tm)) {
             console.log(`\n京东发现-看看签到成功 ${Details}`)
             const aw = data.match(/\"签到成功，获得(\d+)京豆\"/)
