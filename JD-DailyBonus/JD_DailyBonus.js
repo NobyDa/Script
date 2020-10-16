@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.15 19:00 v1.73
-有效接口: 39+
+更新时间: 2020.10.16 19:00 v1.74
+有效接口: 38+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -139,7 +139,7 @@ async function all() {
       JDUserSignPre(stop, 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi') //京东图书
     ]);
     await Promise.all([
-      JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'), //京东校园
+      //JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'), //京东校园
       JDUserSignPre(stop, 'JDPet', '京东商城-宠物', '37ta5sh5ocrMZF3Fz5UMJbTsL42'), //京东宠物馆
       JDUserSignPre(stop, 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'), //京东拍拍二手
       JDUserSignPre(stop, 'JDClean', '京东商城-清洁', '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6'), //京东清洁馆
@@ -170,7 +170,7 @@ async function all() {
     await JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '890418F764');
     await JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
     await JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
-    await JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'); //京东校园
+    //await JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'); //京东校园
     await JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'); //京东鞋靴
     await JDUserSignPre(stop, 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'); //京东电竞
     await JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'); //京东日历翻牌
@@ -737,9 +737,7 @@ function JingDongShake(s) {
 }
 
 function JDUserSignPre(s, key, title, ac) {
-  if ($nobyda.isNode) {
-    return JDUserSignPre1(s, key, title, ac);
-  } else if (key == 'JDJewels' || $nobyda.isJSBox) {
+  if ($nobyda.isJSBox) {
     return JDUserSignPre2(s, key, title, ac);
   } else {
     return JDUserSignPre1(s, key, title, ac);
@@ -754,6 +752,9 @@ function JDUserSignPre1(s, key, title, acData, ask) {
       headers: {
         Cookie: KEY
       },
+      opts: {
+        'filter': 'try{var od=JSON.parse(body);var params=(od.floatLayerList||[]).filter(o=>o.params&&o.params.match(/enActK/)).map(o=>o.params).pop()||(od.floorList||[]).filter(o=>o.template=="signIn"&&o.signInfos&&o.signInfos.params&&o.signInfos.params.match(/enActK/)).map(o=>o.signInfos&&o.signInfos.params).pop();var tId=(od.floorList||[]).filter(o=>o.boardParams&&o.boardParams.turnTableId).map(o=>o.boardParams.turnTableId).pop();var page=od.paginationFlrs;return JSON.stringify({qxAct:params||null,qxTid:tId||null,qxPage:page||null})}catch(e){return `=> 过滤器发生错误: ${e.message}`}'
+      },
       body: `body=${encodeURIComponent(`{"activityId":"${acData}"${ask ? `,"paginationParam":"2",${ask}` : ``}}`)}`
     };
     $nobyda.post(JDUrl, async function(error, response, data) {
@@ -761,11 +762,11 @@ function JDUserSignPre1(s, key, title, acData, ask) {
         if (error) {
           throw new Error(error)
         } else {
-          const turnTableId = data.match(/\"turnTableId\":\"(\d+)\"/)
-          const page = data.match(/\"paginationFlrs\":\"\[\[.+?\]\]\"/)
+          const od = JSON.parse(data);
+          const turnTableId = od.qxTid || (od.floorList || []).filter(o => o.boardParams && o.boardParams.turnTableId).map(o => o.boardParams.turnTableId).pop();
+          const page = od.qxPage || od.paginationFlrs;
           if (data.match(/enActK/)) { // 含有签到活动数据
-            const od = JSON.parse(data);
-            let params = (od.floatLayerList || []).filter(o => o.params && o.params.match(/enActK/)).map(o => o.params).pop();
+            let params = od.qxAct || (od.floatLayerList || []).filter(o => o.params && o.params.match(/enActK/)).map(o => o.params).pop()
             if (!params) { // 第一处找到签到所需数据
               // floatLayerList未找到签到所需数据，从floorList中查找
               let signInfo = (od.floorList || []).filter(o => o.template == 'signIn' && o.signInfos && o.signInfos.params && o.signInfos.params.match(/enActK/))
@@ -792,7 +793,7 @@ function JDUserSignPre1(s, key, title, acData, ask) {
             const boxds = $nobyda.read("JD_Follow_disable") === "false" ? false : true
             if (boxds) {
               console.log(`\n${title}关注店铺`)
-              return resolve(parseInt(turnTableId[1]))
+              return resolve(parseInt(turnTableId))
             } else {
               merge[key].notify = `${title}: 失败, 需要关注店铺 ⚠️`
               merge[key].fail = 1
@@ -801,7 +802,7 @@ function JDUserSignPre1(s, key, title, acData, ask) {
             const boxds = $nobyda.read("JD_Retry_disable") === "false" ? false : true
             if (boxds) {
               console.log(`\n${title}二次查询`)
-              return resolve(page[0])
+              return resolve(page)
             } else {
               merge[key].notify = `${title}: 失败, 请尝试开启增强 ⚠️`
               merge[key].fail = 1
