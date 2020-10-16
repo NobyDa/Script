@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.16 19:00 v1.74
+更新时间: 2020.10.16 23:55 v1.75
 有效接口: 38+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -755,7 +755,7 @@ function JDUserSignPre1(s, key, title, acData, ask) {
       opts: {
         'filter': 'try{var od=JSON.parse(body);var params=(od.floatLayerList||[]).filter(o=>o.params&&o.params.match(/enActK/)).map(o=>o.params).pop()||(od.floorList||[]).filter(o=>o.template=="signIn"&&o.signInfos&&o.signInfos.params&&o.signInfos.params.match(/enActK/)).map(o=>o.signInfos&&o.signInfos.params).pop();var tId=(od.floorList||[]).filter(o=>o.boardParams&&o.boardParams.turnTableId).map(o=>o.boardParams.turnTableId).pop();var page=od.paginationFlrs;return JSON.stringify({qxAct:params||null,qxTid:tId||null,qxPage:page||null})}catch(e){return `=> 过滤器发生错误: ${e.message}`}'
       },
-      body: `body=${encodeURIComponent(`{"activityId":"${acData}"${ask ? `,"paginationParam":"2",${ask}` : ``}}`)}`
+      body: `body=${encodeURIComponent(`{"activityId":"${acData}"${ask?`,"paginationParam":"2","paginationFlrs":"${ask}"`:``}}`)}`
     };
     $nobyda.post(JDUrl, async function(error, response, data) {
       try {
