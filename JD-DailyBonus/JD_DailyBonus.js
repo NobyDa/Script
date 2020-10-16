@@ -843,7 +843,7 @@ function JDUserSignPre2(s, key, title, acData) {
         } else {
           const act = data.match(/\"params\":\"\{\\\"enActK.+?\\\"\}\"/)
           const turnTable = data.match(/\"turnTableId\":\"(\d+)\"/)
-          const page = data.match(/\"paginationFlrs\":\"\[\[.+?\]\]\"/)
+          const page = data.match(/\"paginationFlrs\":\"(\[\[.+?\]\])\"/)
           if (act) { // 含有签到活动数据
             return resolve(act)
           } else if (turnTable) { // 无签到数据, 但含有关注店铺签到
@@ -859,7 +859,7 @@ function JDUserSignPre2(s, key, title, acData) {
             const boxds = $nobyda.read("JD_Retry_disable") === "false" ? false : true
             if (boxds) {
               console.log(`\n${title}二次查询`)
-              return resolve(page[0])
+              return resolve(page[1])
             } else {
               merge[key].notify = `${title}: 失败, 请尝试开启增强 ⚠️`
               merge[key].fail = 1
