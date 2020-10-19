@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.16 23:55 v1.75
-有效接口: 38+
+更新时间: 2020.10.19 18:55 v1.76
+有效接口: 39+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -140,6 +140,7 @@ async function all() {
     ]);
     await Promise.all([
       //JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'), //京东校园
+      JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'), //京东健康
       JDUserSignPre(stop, 'JDPet', '京东商城-宠物', '37ta5sh5ocrMZF3Fz5UMJbTsL42'), //京东宠物馆
       JDUserSignPre(stop, 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'), //京东拍拍二手
       JDUserSignPre(stop, 'JDClean', '京东商城-清洁', '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6'), //京东清洁馆
@@ -171,6 +172,7 @@ async function all() {
     await JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
     await JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
     //await JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'); //京东校园
+    await JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'); //京东健康
     await JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'); //京东鞋靴
     await JDUserSignPre(stop, 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'); //京东电竞
     await JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'); //京东日历翻牌
@@ -762,7 +764,7 @@ function JDUserSignPre1(s, key, title, acData, ask) {
         if (error) {
           throw new Error(error)
         } else {
-          const od = JSON.parse(data);
+          const od = JSON.parse(data || '{}');
           const turnTableId = od.qxTid || (od.floorList || []).filter(o => o.boardParams && o.boardParams.turnTableId).map(o => o.boardParams.turnTableId).pop();
           const page = od.qxPage || od.paginationFlrs;
           if (data.match(/enActK/)) { // 含有签到活动数据
@@ -2271,6 +2273,7 @@ function initial() {
     JRDoll: {},
     JRTwoDoll: {},
     JRThreeDoll: {},
+    JDHealth: {},
     JDEsports: {},
     JDSchool: {},
     JDCalendar: {},
