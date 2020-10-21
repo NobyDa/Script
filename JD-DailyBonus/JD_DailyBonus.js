@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.21 19:30 v1.77
-有效接口: 40+
+更新时间: 2020.10.21 20:00 v1.78
+有效接口: 41+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -126,6 +126,7 @@ async function all() {
       JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C')
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDToyMusic', '京东商城-乐器', '4N6RzwtBZdtdcgodvdsK7ZEzkUbZ'), //京东玩具乐器馆
       JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'), //京东鞋靴
       JDUserSignPre(stop, 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'), //京东电竞
       JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'), //京东日历翻牌
@@ -171,6 +172,7 @@ async function all() {
     await JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '890418F764');
     await JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
     await JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
+    await JDUserSignPre(stop, 'JDToyMusic', '京东商城-乐器', '4N6RzwtBZdtdcgodvdsK7ZEzkUbZ'); //京东玩具乐器馆
     await JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'); //京东校园
     await JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'); //京东健康
     await JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'); //京东鞋靴
@@ -2275,6 +2277,7 @@ function initial() {
     Overseas: {},
     JDFSale: {},
     JDPet: {},
+    JDToyMusic: {},
     JRDoll: {},
     JRTwoDoll: {},
     JRThreeDoll: {},
