@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.10.21 20:00 v1.78
-有效接口: 41+
+更新时间: 2020.10.24 21:00 v1.79
+有效接口: 42+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -121,6 +121,7 @@ async function all() {
       JingDongGetCash(stop), //京东领现金
       JingDongShake(stop), //京东摇一摇
       JDSecKilling(stop), //京东秒杀
+      DoubleElevenSale(stop), //京东超值特卖入场红包
       JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '890418F764'),
       JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252'),
       JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C')
@@ -169,6 +170,7 @@ async function all() {
     await JingDongSubsidy(stop); //京东金贴
     await JingDongShake(stop); //京东摇一摇
     await JDSecKilling(stop); //京东秒杀
+    await DoubleElevenSale(stop); //京东超值特卖入场红包
     await JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '890418F764');
     await JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
     await JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
@@ -2079,6 +2081,45 @@ function JDSecKilling(s) {
   }, () => {});
 }
 
+function DoubleElevenSale(s) {
+  return new Promise(resolve => {
+    if (disable("ElevenSale")) return resolve();
+    setTimeout(() => {
+      $nobyda.post({
+        url: 'https://api.m.jd.com/client.action',
+        headers: {
+          Cookie: KEY,
+          Origin: 'https://h5.m.jd.com'
+        },
+        body: 'functionId=noahHaveFunLottery&appid=publicUseApi&body=%7B%22actId%22%3A%22RRD7PgE4k1PYkLBEJRWv6gfPkZUqgY%22%7D&client=wh5'
+      }, (error, response, data) => {
+        try {
+          if (error) throw new Error(error);
+          const cc = JSON.parse(data);
+          const Details = LogDetails ? "response:\n" + data : '';
+          if (cc.code == 0 && cc.lotteryResult) {
+            console.log(`\n京东入场-红包签到成功 ${Details}`)
+            const qt = data.match(/"disCount":"(\d.*?)",/);
+            merge.ElevenSale.success = 1;
+            merge.ElevenSale.Cash = qt ? Number(qt[1]) : 0;
+            merge.ElevenSale.notify = `京东入场-红包: 成功, 明细: ${merge.ElevenSale.Cash||`无`}红包 🧧${qt?` (2天)`:``}`;
+          } else {
+            console.log(`\n京东入场-红包签到失败 ${Details}`)
+            const tp = cc.subCode == 8 ? `无机会` : cc.code == 3 ? `Cookie失效` : `${cc.msg||`未知`}`
+            merge.ElevenSale.notify = `京东入场-红包: 失败, 原因: ${tp}${cc.code==3?`‼️`:` ⚠️`}`
+            merge.ElevenSale.fail = 1
+          }
+        } catch (eor) {
+          $nobyda.AnError("京东入场-红包", "ElevenSale", eor, response, data)
+        } finally {
+          resolve()
+        }
+      })
+    }, s)
+    if (out) setTimeout(resolve, out + s)
+  });
+}
+
 function TotalSteel() {
   return new Promise(resolve => {
     if (disable("TSteel")) return resolve()
@@ -2309,6 +2350,7 @@ function initial() {
     JRSteel: {},
     JRBean: {},
     subsidy: {},
+    ElevenSale: {},
     JDSecKill: {},
     JDCash: {},
     JDGetCash: {},

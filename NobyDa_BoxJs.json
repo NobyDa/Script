@@ -132,6 +132,9 @@
         "key": "JDSecKill",
         "label": "京东秒杀"
       }, {
+        "key": "ElevenSale",
+        "label": "京东入场"
+      }, {
         "key": "JDShand",
         "label": "京东二手 (如VPN重启,建议禁用)"
       }, {
