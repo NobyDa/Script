@@ -66,6 +66,18 @@
         "key": "JRThreeDoll",
         "label": "金融签叁"
       }, {
+        "key": "JRFourDoll",
+        "label": "金融签肆"
+      }, {
+        "key": "JRFiveDoll",
+        "label": "金融签伍"
+      }, {
+        "key": "JRSixDoll",
+        "label": "金融签陆"
+      }, {
+        "key": "JRLottery",
+        "label": "金融抽奖"
+      }, {
         "key": "JRSteel",
         "label": "金融钢镚"
       }, {
