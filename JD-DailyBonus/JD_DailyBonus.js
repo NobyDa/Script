@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.11.08 23:30 v1.80
+更新时间: 2020.11.09 0:30 v1.81
 有效接口: 46+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -930,7 +930,8 @@ function JDUserSign1(s, key, title, body) {
               } else if (data.match(/\"code\":\"?3\"?/)) {
                 merge[key].notify = `${title}: 失败, 原因: Cookie失效‼️`
               } else {
-                merge[key].notify = `${title}: 失败, 原因: 未知 ⚠️`
+                const ng = data.match(/\"(errorMessage|subCodeMsg)\":\"(.+?)\"/)
+                merge[key].notify = `${title}: 失败, ${ng?ng[2]:`原因: 未知`} ⚠️`
               }
               merge[key].fail = 1
             }
@@ -989,7 +990,8 @@ async function JDUserSign2(s, key, title, tid) {
               } else if (data.match(/(没有登录|B0001)/)) {
                 merge[key].notify = `${title}: 失败, 原因: Cookie失效‼️`
               } else {
-                merge[key].notify = `${title}: 失败, 原因: 未知 ⚠️`
+                const ng = data.match(/\"(errorMessage|subCodeMsg)\":\"(.+?)\"/)
+                merge[key].notify = `${title}: 失败, ${ng?ng[2]:`原因: 未知`} ⚠️`
               }
               merge[key].fail = 1
             }
@@ -1425,7 +1427,7 @@ function JingDongSpeedUp(s, id) {
               }
               if (!merge.SpeedUp.notify) {
                 merge.SpeedUp.fail = 1
-                merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 未知 ⚠️"
+                merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 无任务 ⚠️"
               }
               console.log("\n天天加速-判断状态失败")
             }
@@ -2151,7 +2153,7 @@ function JRLuckyLottery(s) { //https://jdda.jd.com/app/hd/#/turntable
             merge.JRLottery.notify = `京东金融-抽奖: 成功, 明细: ${merge.JRLottery.bean||`无`}京豆 🐶`;
           } else {
             console.log(`\n京东金融-抽奖签到失败 ${Details}`);
-            const tp = cc.match(/重复签到/) ? `已签过` : cc.resultCode == 3 ? `Cookie失效` : `${cc.resultMsg||`未知`}`;
+            const tp = data.match(/重复签到/) ? `已签过` : cc.resultCode == 3 ? `Cookie失效` : `${cc.resultMsg||`未知`}`;
             merge.JRLottery.notify = `京东金融-抽奖: 失败, 原因: ${tp}${cc.resultCode==3?`‼️`:` ⚠️`}`;
             merge.JRLottery.fail = 1;
           }
