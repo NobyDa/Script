@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.11.09 0:30 v1.81
-有效接口: 46+
+更新时间: 2020.11.10 8:10 v1.82
+有效接口: 48+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -131,6 +131,7 @@ async function all() {
       JingRongDoll(stop, 'JRSixDoll', '京东金融-签陆', 'F1455B50EF')
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDComputer', '京东电脑-数码', '31HbNBjr6YLyZfJtR5biFFc9ZYXN'), //京东电脑数码馆
       JDUserSignPre(stop, 'JDToyMusic', '京东商城-乐器', '4N6RzwtBZdtdcgodvdsK7ZEzkUbZ'), //京东玩具乐器馆
       JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'), //京东鞋靴
       JDUserSignPre(stop, 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'), //京东电竞
@@ -145,6 +146,7 @@ async function all() {
       JDUserSignPre(stop, 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi') //京东图书
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDConstell', '京东商城-京鱼', '3BPdJHCESW5cfak79ZRz37wTKbuV'), //京东京鱼座
       JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'), //京东校园
       JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'), //京东健康
       JDUserSignPre(stop, 'JDPet', '京东商城-宠物', '37ta5sh5ocrMZF3Fz5UMJbTsL42'), //京东宠物馆
@@ -182,6 +184,8 @@ async function all() {
     await JingRongDoll(stop, 'JRFourDoll', '京东金融-签肆', '30C4F86264');
     await JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F');
     await JingRongDoll(stop, 'JRSixDoll', '京东金融-签陆', 'F1455B50EF');
+    await JDUserSignPre(stop, 'JDComputer', '京东电脑-数码', '31HbNBjr6YLyZfJtR5biFFc9ZYXN'); //京东电脑数码馆
+    await JDUserSignPre(stop, 'JDConstell', '京东商城-京鱼', '3BPdJHCESW5cfak79ZRz37wTKbuV'); //京东京鱼座
     await JDUserSignPre(stop, 'JDToyMusic', '京东商城-乐器', '4N6RzwtBZdtdcgodvdsK7ZEzkUbZ'); //京东玩具乐器馆
     await JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'); //京东校园
     await JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'); //京东健康
@@ -2379,6 +2383,8 @@ function initial() {
     JDSchool: {},
     JDCalendar: {},
     JDShoes: {},
+    JDComputer: {},
+    JDConstell: {},
     JD3C: {},
     JDChild: {},
     JDBaby: {},
