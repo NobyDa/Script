@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.11.10 8:10 v1.82
+更新时间: 2020.11.11 15:10 v1.83
 有效接口: 48+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -146,6 +146,7 @@ async function all() {
       JDUserSignPre(stop, 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi') //京东图书
     ]);
     await Promise.all([
+      JDUserSignPre(stop, 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'), //京东箱包馆
       JDUserSignPre(stop, 'JDConstell', '京东商城-京鱼', '3BPdJHCESW5cfak79ZRz37wTKbuV'), //京东京鱼座
       JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'), //京东校园
       JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'), //京东健康
@@ -184,6 +185,7 @@ async function all() {
     await JingRongDoll(stop, 'JRFourDoll', '京东金融-签肆', '30C4F86264');
     await JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F');
     await JingRongDoll(stop, 'JRSixDoll', '京东金融-签陆', 'F1455B50EF');
+    await JDUserSignPre(stop, 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'); //京东箱包馆
     await JDUserSignPre(stop, 'JDComputer', '京东电脑-数码', '31HbNBjr6YLyZfJtR5biFFc9ZYXN'); //京东电脑数码馆
     await JDUserSignPre(stop, 'JDConstell', '京东商城-京鱼', '3BPdJHCESW5cfak79ZRz37wTKbuV'); //京东京鱼座
     await JDUserSignPre(stop, 'JDToyMusic', '京东商城-乐器', '4N6RzwtBZdtdcgodvdsK7ZEzkUbZ'); //京东玩具乐器馆
@@ -1029,7 +1031,7 @@ function JDFlashSale(s) {
           } else {
             const Details = LogDetails ? "response:\n" + data : '';
             const cc = JSON.parse(data)
-            if (cc.result.code == 0) {
+            if (cc.result && cc.result.code == 0) {
               console.log("\n" + "京东商城-闪购签到成功 " + Details)
               merge.JDFSale.bean = cc.result.jdBeanNum || 0
               merge.JDFSale.notify = "京东商城-闪购: 成功, 明细: " + (merge.JDFSale.bean || "无") + "京豆 🐶"
@@ -2385,6 +2387,7 @@ function initial() {
     JDShoes: {},
     JDComputer: {},
     JDConstell: {},
+    JDSuitcase: {},
     JD3C: {},
     JDChild: {},
     JDBaby: {},
