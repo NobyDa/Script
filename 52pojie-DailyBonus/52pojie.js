@@ -1,7 +1,7 @@
 /*
 吾爱破解签到脚本
 
-更新时间: 2020.9.12
+更新时间: 2020.11.11
 脚本兼容: QuantumultX, Surge, Loon, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -81,7 +81,7 @@ function checkin() {
       Cookie: CookieWA || $.getdata("CookieWA"),
     }
   }, function(error, response, data) {
-    if (error) {
+    if (error && !data) {
       $.log(error);
       $.msg("吾爱破解", "签到请求失败 ‼️‼️", error)
     } else {
@@ -91,6 +91,8 @@ function checkin() {
         $.msg("吾爱破解", "", date.getMonth() + 1 + "月" + date.getDate() + "日, 已签过 ⚠️")
       } else if (data.match(/(ÏÈµÇÂ¼|\u9700\u8981\u5148\u767b\u5f55|�Ҫ�ȵ�¼���ܼ�)/)) {
         $.msg("吾爱破解", "", "签到失败, Cookie失效 ‼️‼️")
+      } else if (response.statusCode == 403) {
+        $.msg("吾爱破解", "", "服务器暂停签到 ⚠️")
       } else {
         $.msg("吾爱破解", "", "脚本待更新 ‼️‼️")
       }
