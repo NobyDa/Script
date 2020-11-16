@@ -105,6 +105,9 @@
         "key": "JD3C",
         "label": "京东数码"
       }, {
+        "key": "JDUnderwear",
+        "label": "京东内衣"
+      }, {
         "key": "JDDrug",
         "label": "京东医药"
       }, {
@@ -153,8 +156,8 @@
         "key": "JDSecKill",
         "label": "京东秒杀"
       }, {
-        "key": "ElevenSale",
-        "label": "京东入场"
+        "key": "JTDouble",
+        "label": "金贴双签"
       }, {
         "key": "JDShand",
         "label": "京东二手 (如VPN重启,建议禁用)"
