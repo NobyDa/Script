@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.11.16 18:30 v1.84
+更新时间: 2020.11.17 21:35 v1.85
 有效接口: 48+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -1262,7 +1262,7 @@ function JDMagicCubeSign(s, id) {
 }
 
 function JingDongSpeedUp(s, id) {
-  if (!merge.SpeedUp) merge.SpeedUp = {};
+  if (!merge.SpeedUp) merge.SpeedUp = {}, merge.SpeedUp.bean = 0;
   return new Promise(resolve => {
     if (disable("SpeedUp")) return resolve()
     setTimeout(() => {
