@@ -1,4 +1,4 @@
-#Update 2020.8.23 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2020.10.3 Self-use for testing only, there may be a lot of manslaughter.
 DOMAIN-SUFFIX,admaster.com
 DOMAIN-SUFFIX,0z5jn.cn
 DOMAIN-SUFFIX,114so.cn
@@ -140,7 +140,6 @@ DOMAIN-SUFFIX,cm.e.qq.com
 DOMAIN-SUFFIX,cm.l.qq.com
 DOMAIN-SUFFIX,dir.minigame.qq.com
 DOMAIN-SUFFIX,etg.qq.com
-DOMAIN-SUFFIX,ex.qq.com
 DOMAIN-SUFFIX,fm.qzone.qq.com
 DOMAIN-SUFFIX,fodder.qq.com
 DOMAIN-SUFFIX,fodder.tc.qq.com
