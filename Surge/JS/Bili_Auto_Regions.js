@@ -14,7 +14,7 @@ Author: @NobyDa
 Surge 4.2+ 远程脚本配置 :
 ****************************
 [Script]
-Bili Region = type=http-response,pattern=https:\/\/api\.bilibili\.com\/pgc\/view\/app\/season\?access_key,requires-body=1,max-size=0,control-api=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
+Bili Region = type=http-response,pattern=https:\/\/api\.bilibili\.com\/pgc\/(view\/app\/season\?access_key|review\/user\?),requires-body=1,max-size=0,control-api=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
 [MITM]
 hostname = api.bilibili.com
@@ -26,7 +26,8 @@ const CN = $persistentStore.read('BiliArea_CN') || 'DIRECT'; //Your China sub-po
 const TW = $persistentStore.read('BiliArea_TW') || '🇹🇼 sub-policy'; //Your Taiwan sub-policy name.
 const HK = $persistentStore.read('BiliArea_HK') || '🇭🇰 sub-policy'; //Your HongKong sub-policy name.
 
-const obj = JSON.parse($response.body).result.title;
+var obj = JSON.parse($response.body).result || {};
+obj = obj.title ? obj.title : obj.media && obj.media.title ? obj.media.title : ''
 const current = $surge.selectGroupDetails().decisions[Group] || 'Policy error ⚠️'
 const str = (() => {
 	if (obj.match(/\u50c5[\u4e00-\u9fa5]+\u6e2f/)) {
@@ -36,7 +37,7 @@ const str = (() => {
 	} else if (current != CN) return CN;
 })()
 
-if (str) {
+if (str && obj) {
 	const change = $surge.setSelectGroupPolicy(Group, str);
 	const notify = $persistentStore.read('BiliAreaNotify') === 'true';
 	if (!notify) $notification.post(obj, ``, `${current}  =>  ${str}  =>  ${change?`🟢`:`🔴`}`);
