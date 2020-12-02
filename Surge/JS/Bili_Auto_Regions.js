@@ -1,9 +1,9 @@
 /*
 Bilibli番剧，自动切换地区
 
-此脚本仅适用于Surge4.0+
-此脚本仅适用于Surge4.0+
-此脚本仅适用于Surge4.0+
+此脚本仅适用于Surge4.0+ (iOS)
+此脚本仅适用于Surge4.0+ (iOS)
+此脚本仅适用于Surge4.0+ (iOS)
 
 您需要配置相关规则集（https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/StreamingSE.list）绑定相关select策略组，并且需要具有相关的区域代理服务器纳入您的子策略中。
 最后，您可以通过BoxJs设置策略名和子策略名，或者手动填入脚本。
@@ -14,7 +14,7 @@ Author: @NobyDa
 Surge 4.2+ 远程脚本配置 :
 ****************************
 [Script]
-Bili Region = type=http-response,pattern=https:\/\/api\.bilibili\.com\/pgc\/(view\/app\/season\?access_key|review\/user\?),requires-body=1,max-size=0,control-api=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
+Bili Region = type=http-response,pattern=https:\/\/api\.bilibili\.com\/pgc\/view\/(v\d\/)?app\/season\?access_key,requires-body=1,max-size=0,control-api=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
 [MITM]
 hostname = api.bilibili.com
@@ -26,8 +26,8 @@ const CN = $persistentStore.read('BiliArea_CN') || 'DIRECT'; //Your China sub-po
 const TW = $persistentStore.read('BiliArea_TW') || '🇹🇼 sub-policy'; //Your Taiwan sub-policy name.
 const HK = $persistentStore.read('BiliArea_HK') || '🇭🇰 sub-policy'; //Your HongKong sub-policy name.
 
-var obj = JSON.parse($response.body).result || {};
-obj = obj.title ? obj.title : obj.media && obj.media.title ? obj.media.title : ''
+var obj = JSON.parse($response.body),
+	obj = (obj.result || obj.data || {}).title || '';
 const current = $surge.selectGroupDetails().decisions[Group] || 'Policy error ⚠️'
 const str = (() => {
 	if (obj.match(/\u50c5[\u4e00-\u9fa5]+\u6e2f/)) {
