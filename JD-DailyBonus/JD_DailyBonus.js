@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.11.17 21:35 v1.85
+更新时间: 2020.12.02 09:38 v1.86
 有效接口: 48+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -607,11 +607,11 @@ function JingRongSteel(s) {
     if (disable("JRSteel")) return resolve()
     setTimeout(() => {
       const JRSUrl = {
-        url: 'https://ms.jr.jd.com/gw/generic/gry/h5/m/signIn',
+        url: 'https://ms.jr.jd.com/gw/generic/hy/h5/m/signIn1',
         headers: {
           Cookie: KEY
         },
-        body: "reqData=%7B%22channelSource%22%3A%22JRAPP%22%2C%22riskDeviceParam%22%3A%22%7B%7D%22%7D"
+        body: "reqData=%7B%22channelSource%22%3A%22JRAPP6.0%22%2C%22riskDeviceParam%22%3A%22%7B%7D%22%7D"
       };
       $nobyda.post(JRSUrl, function(error, response, data) {
         try {
