@@ -57,9 +57,6 @@
         "key": "JRBean",
         "label": "金融金贴"
       }, {
-        "key": "JRDoll",
-        "label": "金融签壹"
-      }, {
         "key": "JRTwoDoll",
         "label": "金融签贰"
       }, {
@@ -93,17 +90,8 @@
         "key": "JDComputer",
         "label": "京东电脑"
       }, {
-        "key": "JDConstell",
-        "label": "京东京鱼"
-      }, {
         "key": "JDSuitcase",
         "label": "京东箱包"
-      }, {
-        "key": "JDToyMusic",
-        "label": "京东乐器"
-      }, {
-        "key": "JD3C",
-        "label": "京东数码"
       }, {
         "key": "JDUnderwear",
         "label": "京东内衣"
@@ -141,9 +129,6 @@
         "key": "JDShoes",
         "label": "京东鞋靴"
       }, {
-        "key": "JDEsports",
-        "label": "京东电竞"
-      }, {
         "key": "JDHealth",
         "label": "京东健康"
       }, {
@@ -173,9 +158,6 @@
       }, {
         "key": "JDPet",
         "label": "京东宠物 (如VPN重启,建议禁用)"
-      }, {
-        "key": "JDFood",
-        "label": "京东美食 (如VPN重启,建议禁用)"
       }, {
         "key": "JDClean",
         "label": "京东清洁 (如VPN重启,建议禁用)"
