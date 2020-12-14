@@ -41,10 +41,8 @@ const $nobyda = nobyda();
 
 if ($nobyda.isRequest) {
   GetCookie()
-  $nobyda.end()
 } else {
   checkin()
-  $nobyda.end()
 }
 
 function checkin() {
@@ -57,7 +55,7 @@ function checkin() {
   };
   $nobyda.post(bilibili, function(error, response, data) {
     if (!error) {
-      if (response.status == 200) {
+      if (parseInt(response.status) == 200) {
         console.log("bilibili success response : \n" + data)
         $nobyda.notify("哔哩哔哩漫画 - 签到成功！🎉", "", "")
       } else {
@@ -73,6 +71,7 @@ function checkin() {
     } else {
       $nobyda.notify("哔哩哔哩漫画 - 签到接口请求失败", "", error)
     }
+    $nobyda.end()
   })
 }
 
@@ -107,6 +106,7 @@ function GetCookie() {
   } else {
     $nobyda.notify("写入" + CookieName + "Cookie失败‼️", "", "配置错误, 无法读取请求头,");
   }
+  $nobyda.end()
 }
 
 function nobyda() {
