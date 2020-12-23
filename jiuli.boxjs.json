@@ -1,0 +1,31 @@
+{
+  "id": "ziye.app.sub",
+  "name": "ziye 应用订阅",
+  "author": "@ZIYE",
+  "icon": "",
+  "repo": "https://github.com/ziye12/JavaScript",
+  "apps": [{
+    "id": "qqread",
+    "name": "企鹅读书",
+    "keys": ["qqreadbd", "qqreadtimeurl", "qqreadtimehd",""],
+    "author": "@ziye",
+    "settings": [{
+        "id": "qeSuffix",
+        "name": "当前账号",
+        "val": "1",
+        "type": "number",
+        "desc": "当前抓取ck记录的账号序号，如：1、2、3、"
+      },
+      {
+        "id": "qeCount",
+        "name": "账号个数",
+        "val": "1",
+        "type": "number",
+        "desc": "指定任务最多跑几个账号，根据抓取的账号数据个数来设值"
+      }
+    ],
+    "repo": "https://github.com/ziye12/JavaScript/blob/master/Task/qqreads.js",
+    "icons": ["https://raw.githubusercontent.com/ziye12/JavaScript/master/qqread.jpg", "https://raw.githubusercontent.com/ziye12/JavaScript/master/qqread.jpg"],
+    "script": "https://raw.githubusercontent.com/ziye12/JavaScript/master/Task/qqreads.js"
+  }]
+}
