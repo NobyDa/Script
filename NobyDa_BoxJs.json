@@ -57,6 +57,9 @@
         "key": "JRBean",
         "label": "金融金贴"
       }, {
+        "key": "JRDoll",
+        "label": "金融签壹"
+      }, {
         "key": "JRTwoDoll",
         "label": "金融签贰"
       }, {
@@ -69,8 +72,8 @@
         "key": "JRFiveDoll",
         "label": "金融签伍"
       }, {
-        "key": "JRSixDoll",
-        "label": "金融签陆"
+        "key": "XJDouble",
+        "label": "现金双签"
       }, {
         "key": "JRLottery",
         "label": "金融抽奖"
@@ -89,6 +92,9 @@
       }, {
         "key": "JDComputer",
         "label": "京东电脑"
+      }, {
+        "key": "JDClothing",
+        "label": "京东服饰"
       }, {
         "key": "JDSuitcase",
         "label": "京东箱包"
@@ -174,8 +180,8 @@
         "key": "JDBuyCar",
         "label": "京东汽车"
       }, {
-        "key": "JRDSign",
-        "label": "金融双签"
+        "key": "JDDouble",
+        "label": "京豆双签"
       }, {
         "key": "subsidy",
         "label": "京东金贴"
