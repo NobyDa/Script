@@ -93,6 +93,9 @@
         "key": "JDComputer",
         "label": "京东电脑"
       }, {
+        "key": "JD3C",
+        "label": "京东数码"
+      }, {
         "key": "JDClothing",
         "label": "京东服饰"
       }, {
