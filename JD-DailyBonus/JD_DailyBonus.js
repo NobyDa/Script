@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.12.23 20:00 v1.88
+更新时间: 2020.12.25 17:50 v1.89
 有效接口: 40+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -123,14 +123,14 @@ async function all() {
         JingDongShake(stop), //京东摇一摇
         JDSecKilling(stop), //京东秒杀
         JRLuckyLottery(stop), //金融抽奖顶部签到
-        // JingDongBuyCar(stop), //京东汽车
+        JingDongBuyCar(stop, '5fc3c1f2e91f46f09ab2b722e10d92bf'), //京东汽车
+        JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '4D25A6F482'),
         JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252'),
         JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C'),
         JingRongDoll(stop, 'JRFourDoll', '京东金融-签肆', '30C4F86264'),
         JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F')
       ]);
       await Promise.all([
-        JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '4D25A6F482'),
         JDUserSignPre(stop, 'JDClothing', '京东商城-服饰', '4RBT3H9jmgYg1k2kBnHF8NAHm7m8'), //京东服饰
         JDUserSignPre(stop, 'JDUnderwear', '京东商城-内衣', '4PgpL1xqPSW1sVXCJ3xopDbB1f69'), //京东内衣馆
         JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'), //京东鞋靴
@@ -147,7 +147,6 @@ async function all() {
         JingRongDoll(stop, 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin') //京东金融 现金双签
       ]);
       await Promise.all([
-        JingRongDoll(stop, 'JDDouble', '金融京豆-双签', 'F68B2C3E71', '', '', '', 'jingdou'), //京东金融 京豆双签
         JDUserSignPre(stop, 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'), //京东箱包馆
         JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'), //京东校园
         JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'), //京东健康
@@ -160,6 +159,8 @@ async function all() {
         JDUserSignPre(stop, 'JDMakeup', '京东商城-美妆', '2smCxzLNuam5L14zNJHYu43ovbAP'), //京东美妆馆
         JDUserSignPre(stop, 'JDVege', '京东商城-菜场', 'Wcu2LVCFMkBP3HraRvb7pgSpt64') //京东菜场
       ]);
+      await JingDongSpeedUp(stop); //京东天天加速
+      await JingRongDoll(stop, 'JDDouble', '金融京豆-双签', 'F68B2C3E71', '', '', '', 'jingdou'); //京东金融 京豆双签
       break;
     default:
       await JingDongBean(stop); //京东京豆
@@ -178,12 +179,14 @@ async function all() {
       await JingDongShake(stop); //京东摇一摇
       await JDSecKilling(stop); //京东秒杀
       await JRLuckyLottery(stop); //金融抽奖顶部签到
-      // await JingDongBuyCar(stop); //京东汽车
+      await JingDongBuyCar(stop, '5fc3c1f2e91f46f09ab2b722e10d92bf'); //京东汽车
       await JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
       await JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
       await JingRongDoll(stop, 'JRFourDoll', '京东金融-签肆', '30C4F86264');
       await JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F');
       await JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '4D25A6F482');
+      await JingRongDoll(stop, 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin'); //京东金融 现金双签
+      await JingRongDoll(stop, 'JTDouble', '京东金贴-双签', '1DF13833F7'); //京东金融 金贴双签
       await JDUserSignPre(stop, 'JDUnderwear', '京东商城-内衣', '4PgpL1xqPSW1sVXCJ3xopDbB1f69'); //京东内衣馆
       await JDUserSignPre(stop, 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'); //京东箱包馆
       await JDUserSignPre(stop, 'JDClothing', '京东商城-服饰', '4RBT3H9jmgYg1k2kBnHF8NAHm7m8'); //京东服饰
@@ -208,11 +211,9 @@ async function all() {
       await JDUserSignPre(stop, 'JDCare', '京东商城-个护', 'NJ1kd1PJWhwvhtim73VPsD1HwY3'); //京东个人护理馆
       await JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝', 'zHUHpTHNTaztSRfNBFNVZscyFZU'); //京东珠宝馆
       await JingRongDoll(stop, 'JDDouble', '金融京豆-双签', 'F68B2C3E71', '', '', '', 'jingdou'); //京东金融 京豆双签
-      await JingRongDoll(stop, 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin'); //京东金融 现金双签
-      await JingRongDoll(stop, 'JTDouble', '京东金贴-双签', '1DF13833F7'); //京东金融 金贴双签
+      await JingDongSpeedUp(stop); //京东天天加速
       break;
   }
-  await JingDongSpeedUp(stop); //京东天天加速
   await Promise.all([
     TotalSteel(), //总钢镚查询
     TotalCash(), //总红包查询
@@ -264,10 +265,15 @@ function notify() {
       var three = TCash || TSubsidy || TMoney ? `【其他奖励】:  ${TCash+TSubsidy+TMoney}\n` : ``
       var four = `【账号总计】:  ${beans+Steel}${beans||Steel?`\n`:`获取失败\n`}`
       var five = `【其他总计】:  ${Subsidy+Money+Cash}${Subsidy||Money||Cash?`\n`:`获取失败\n`}`
-      var disa = $nobyda.disable ? "\n检测到上次执行意外崩溃, 已为您自动禁用相关接口. 如需开启请前往BoxJs ‼️‼️\n" : ""
       var DName = merge.TotalBean && merge.TotalBean.nickname ? merge.TotalBean.nickname : "获取失败"
       var Name = add ? DualAccount ? `【签到号一】:  ${DName}\n` : `【签到号二】:  ${DName}\n` : ""
-      console.log("\n" + Name + one + two + three + four + five + disa + notify)
+      const disables = $nobyda.read("JD_DailyBonusDisables")
+      const amount = disables ? disables.split(",").length : 0
+      const disa = !notify || amount ? `【温馨提示】:  检测到${$nobyda.disable?`上次执行意外崩溃, `:``}已禁用${notify?`${amount}个`:`所有`}接口, 如需开启请前往BoxJs或查看脚本内第99行注释.\n` : ``
+      $nobyda.notify("", "", Name + one + two + three + four + five + disa + notify, {
+        'media-url': $nobyda.headUrl || 'https://cdn.jsdelivr.net/gh/Orz-3/task@master/jd.png'
+      });
+      $nobyda.headUrl = null;
       if ($nobyda.isJSBox) {
         if (add && DualAccount) {
           Shortcut = Name + one + two + three + "\n"
@@ -276,12 +282,6 @@ function notify() {
         } else if (typeof Shortcut != "undefined") {
           $intents.finish(Shortcut + Name + one + two + three)
         }
-      }
-      if (!$nobyda.isNode) {
-        $nobyda.notify("", "", Name + one + two + three + four + five + disa + notify, {
-          'media-url': $nobyda.headUrl || 'https://cdn.jsdelivr.net/gh/Orz-3/task@master/jd.png'
-        });
-        $nobyda.headUrl = null;
       }
       if (DualAccount) {
         double();
@@ -1582,16 +1582,16 @@ function JingDongSubsidy(s) {
             throw new Error(error)
           } else {
             const Details = LogDetails ? "response:\n" + data : '';
-            if (data.match(/\"msg\":\"操作成功\"/)) {
+            const cc = JSON.parse(data)
+            if (cc.resultCode == 0 && cc.resultData.data.thisAmount) {
               console.log("\n" + "京东商城-金贴签到成功 " + Details)
-              const qt = data.match(/\"thisAmountStr\":\"(.+?)\"/)
-              merge.subsidy.subsidy = qt ? qt[1] : 0;
-              merge.subsidy.notify = `京东商城-金贴: 成功, 明细: ${qt?qt[1]:`无`}金贴 💰`
+              merge.subsidy.subsidy = cc.resultData.data.thisAmountStr
+              merge.subsidy.notify = `京东商城-金贴: 成功, 明细: ${merge.subsidy.subsidy||`无`}金贴 💰`
               merge.subsidy.success = 1
             } else {
               console.log("\n" + "京东商城-金贴签到失败 " + Details)
               merge.subsidy.fail = 1
-              if (data.match(/已存在/)) {
+              if (data.match(/已存在|"thisAmount":0/)) {
                 merge.subsidy.notify = "京东商城-金贴: 失败, 原因: 已签过 ⚠️"
               } else if (data.match(/请先登录/)) {
                 merge.subsidy.notify = "京东商城-金贴: 失败, 原因: Cookie失效‼️"
@@ -2023,7 +2023,7 @@ function JRLuckyLottery(s) { //https://jdda.jd.com/app/hd/#/turntable
   });
 }
 
-function JingDongBuyCar(s) {
+function JingDongBuyCar(s, ActId) {
   merge.JDBuyCar = {};
   return new Promise((resolve, reject) => {
     if (disable("JDBuyCar")) return reject();
@@ -2032,7 +2032,7 @@ function JingDongBuyCar(s) {
         url: 'https://cgame-stadium.jd.com/api/v1/first/login',
         headers: {
           Cookie: KEY,
-          ActivityId: `f4f998e5b91d48ce957983fe61b0ae90`
+          ActivityId: ActId
         }
       }, (error, response, data) => {
         try {
@@ -2061,7 +2061,7 @@ function JingDongBuyCar(s) {
         url: 'https://cgame-stadium.jd.com/api/v1/sign',
         headers: {
           Cookie: KEY,
-          ActivityId: `f4f998e5b91d48ce957983fe61b0ae90`
+          ActivityId: ActId
         }
       }, (error, response, data) => {
         try {
@@ -2388,9 +2388,9 @@ function nobyda() {
         return undefined
       }
     }
+    console.log(`${title}\n${subtitle}\n${message}`)
     if (isQuanX) $notify(title, subtitle, message, Opts(rawopts))
     if (isSurge) $notification.post(title, subtitle, message, Opts(rawopts))
-    if (isNode) console.log(`${title}\n${subtitle}\n${message}`)
     if (isJSBox) $push.schedule({
       title: title,
       body: subtitle ? subtitle + "\n" + message : message
