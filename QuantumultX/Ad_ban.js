@@ -161,9 +161,7 @@ https://api.live.bilibili.com/xlive/app-room/v1/index/getInfoByRoom\?access_key 
 ^https?://m.client.10010.com/uniAdmsInterface/getHomePageAd url script-response-body https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/china_unicom.js
 
 # IT之家 去新闻列表广告
-^https?:\/\/api\.ithome\.com\/json\/slide\/index url script-response-body https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/ITHome.js
-^https?:\/\/api\.ithome\.com\/json\/(newslist|listpage)\/news url script-response-body https://raw.githubusercontent.com/nzw9314/QuantumultX/master/Script/ITHome.js
-
+https:\/\/api\.ithome\.com\/json\/newslist\/news url script-response-body https://raw.githubusercontent.com/toulanboy/scripts/master/ithome_ad/ithome_ad.js
 
 
 //@花姐DivineEngine
