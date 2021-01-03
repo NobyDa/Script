@@ -42,7 +42,7 @@ obj = {
     "invite" : "0",
     "province" : "",
     "deleted" : "0",
-    "user_id" : "8888888",
+    "user_id" : "",
     "gender" : "0",
     "qq_id" : "0A98B9AAEB71A0467A432066997C3F57",
     "point" : "0",
