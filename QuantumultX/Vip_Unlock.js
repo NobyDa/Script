@@ -23,7 +23,7 @@ hostname = api.interpreter.caiyunai.com, ap*.intsig.net, api1.dobenge.cn, accoun
 ^https:\/\/mb3admin\.com\/admin\/service(\/registration\/validateDevice|\/appstore\/register|\/registration\/validate|\/registration\/getStatus|\/supporter\/retrievekey) url script-echo-response https://subweb.oss-cn-hongkong.aliyuncs.com/Script/embycrack.js
 
 #简讯
-^https:\/\/ios\.tipsoon\.com\/\?a=getUserInfo url script-response-body https://raw.githubusercontent.com/Xirou/Script/master/QuantumultX/File/Jx.js
+^https:\/\/ios\.tipsoon\.com\/\?a=getUserInfo url script-response-body https://raw.githubusercontent.com/Xirou/Script/master/QuantumultX/File/jianxun.js
 
 # > 060 Scanner Pro 解锁会员权限 一次性解锁勿卸载（20201219）
 https://license.pdfexpert.com/api/2.0/scanner/subscription/refresh url script-response-body https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Crack/sp.js
