@@ -44,7 +44,7 @@ obj = {
     "deleted" : "0",
     "user_id" : "",
     "gender" : "0",
-    "qq_id" : "0A98B9AAEB71A0467A432066997C3F57",
+    "qq_id" : "0",
     "point" : "0",
     "password" : "",
     "ip" : "14.219.226.10",
