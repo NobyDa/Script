@@ -190,4 +190,4 @@ https://[a-z]+.ddly666.top/wp-json/wp/v2/posts/* url script-response-body https:
 ^https:\/\/www.i3zh.com/wp-json/wp/v2/posts/* url script-response-body https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Crack/xcx.js
 
 # > 001 最新版keep（20200819）小程序解除隐藏内容
-^https:\/\/api\.gotokeep\.com\/* url script-response-body https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Crack/keep.jsf
+^https:\/\/api\.gotokeep\.com\/* url script-response-body https://raw.githubusercontent.com/ddgksf2013/Cuttlefish/master/Crack/keep.js
