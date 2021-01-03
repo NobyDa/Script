@@ -2,6 +2,7 @@ hostname = api.interpreter.caiyunai.com, ap*.intsig.net, api1.dobenge.cn, accoun
 
 //彩云小译
 ^https:\/\/api\.\.caiyunai\.com\/v1\/user url script-response-body https://raw.githubusercontent.com/Xirou/Script/master/QuantumultX/File/cyxy.js
+
 # 扫描全能王 pro
 ^https:\/\/(api|api-cs)\.intsig\.net\/purchase\/cs\/query_property\? url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js
 
