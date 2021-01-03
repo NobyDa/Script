@@ -388,7 +388,6 @@ https://api.live.bilibili.com/xlive/app-room/v1/index/getInfoByRoom\?access_key 
 
 # J
 # > JD
-ms.jr.jd.com,img*.360buyimg.com
 ^https?:\/\/api\.m\.jd.com\/client\.action\?functionId=start url reject
 ^https?:\/\/api\.m\.jd.com\/client\.action\?functionId=queryMaterialAdverts url reject
 ^https?:\/\/(bdsp-x|dsp-x)\.jd\.com\/adx\/ url reject
