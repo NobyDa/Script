@@ -92,7 +92,7 @@ var LogDetails = false; //是否开启响应日志, true则开启
 
 var stop = 0; //自定义延迟签到,单位毫秒. 默认分批并发无延迟. 延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长), VPN重启或越狱用户建议填写1, Surge用户请注意在SurgeUI界面调整脚本超时
 
-var DeleteCookie = false; //是否清除Cookie, true则开启.
+var DeleteCookie = true; //是否清除Cookie, true则开启.
 
 var boxdis = true; //是否开启自动禁用, false则关闭. 脚本运行崩溃时(如VPN断连), 下次运行时将自动禁用相关崩溃接口(仅部分接口启用), 崩溃时可能会误禁用正常接口. (该选项仅适用于QX,Surge,Loon)
 
