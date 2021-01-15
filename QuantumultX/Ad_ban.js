@@ -425,7 +425,6 @@ https:\/\/api\.ithome\.com\/json\/newslist\/news url script-response-body https:
 
 # M
 # > MI - api.jr.mi.com,api-mifit*.huami.com
-^https?:\/\/api\.m\.mi\.com\/v\d\/app\/start url reject
 ^https?:\/\/api\.jr\.mi\.com\/v\d\/adv\/ url reject
 ^https?:\/\/api\.jr\.mi\.com\/jr\/api\/playScreen url reject
 ^https?:\/\/(api-mifit|api-mifit-\w+)\.huami\.com\/discovery\/mi\/discovery\/\w+_ad\? url reject
