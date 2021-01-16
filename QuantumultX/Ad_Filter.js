@@ -1,3 +1,4 @@
+host, rich.kuwo.cn, reject
 host, pgdt.gtimg.cn, reject
 host, wn.pos.baidu.com, reject
 host, cpro.baidustatic.com, reject
