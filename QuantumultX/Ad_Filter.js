@@ -1,10 +1,14 @@
+host, hmma.baidu.com, reject
+host, mmap-mobile-lbsapp.cdn.bcebos.com, reject
+host, map-mobile-resource.su.bcebos.com, reject
+host, newclient.map.baidu.com
 host, rich.kuwo.cn, reject
 host, pgdt.gtimg.cn, reject
 host, wn.pos.baidu.com, reject
 host, cpro.baidustatic.com, reject
 host, luimg.baidu.com, reject
 host, ad.adsrvr.org, reject
-host, ios-dc.51y5.net, reject
+#host, ios-dc.51y5.net, reject
 host, v6.onewsvod.com, reject
 host, v1.onewsvod.com, reject
 host, open.toutiao.com, reject
