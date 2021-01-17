@@ -1,7 +1,7 @@
 host, hmma.baidu.com, reject
 host, mmap-mobile-lbsapp.cdn.bcebos.com, reject
 host, map-mobile-resource.su.bcebos.com, reject
-host, newclient.map.baidu.com
+host, newclient.map.baidu.com, reject
 host, rich.kuwo.cn, reject
 host, pgdt.gtimg.cn, reject
 host, wn.pos.baidu.com, reject
