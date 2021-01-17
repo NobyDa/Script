@@ -1,3 +1,4 @@
+host, host, ios-dc.51y5.net, reject
 host, hmma.baidu.com, reject
 host, mmap-mobile-lbsapp.cdn.bcebos.com, reject
 host, map-mobile-resource.su.bcebos.com, reject
