@@ -1,4 +1,61 @@
-hostname = weixin110.qq.com, ios.prod.ftl.netflix.com, api.ithome.com, duckduckgo.com, *.baidu.com, *.javbus.com, www.javbus.com, *.zhenbuka.com, www.zhenbuka.com, cluster.awmserve.com, urtirepor.com, ads.bullionyield.com, www.porntrex.com, cloudrls.com, javtsunami.com, *.cloudfront.net, 91porny.com, cdn.jsdelivr.net, s3.amazonaws.com, static.nyahentai.pw, zh.nyahentai.me, m.yhdm.io, k.wudejia.com, www.mfkhm.com, www.cocomanhua.com, fans.91p20.space, www.91porn.com, *.xvideos-cdn.com, www.xvideos.com, *.realsrv.com, *.nyahentai.com, gum.criteo.com, rt.gsspat.jp, *.nyahentai.pw, rt.gsspat.jp, img.gsspat.jp, *.phncdn.com, www.pornhub.com, cn.pornhub.com, *.pornhub.com, *.ddmax20.*, asianclub.tv, *.yabo.*, *.yabo729.com, *.wine-api.net, *.wixsite.com, *.wixstatic.com, *.dilidd.com, *.alicdn.com, *.dililitv.com, *.netflav.*, *.netflav.com, www.avple.video, *.imgur.*, *.pianku.*, *.xn--2qux23c9ziyrq.club, *.naifei.shop, *.nfmovies.com,*.yb463.app, *.yabet.*, *.yabet1477.*, ddrk.me, *.ddrk.me, poweredbyliquidfire.mobi, *.poweredbyliquidfire.mobi, avgle.com, *.avgle.com, *.juicyads.com, *.jads.co, jable.tv, *.jable.tv, *.ackcdn.net, -*.trwl1.*, -*.trwl1.com, *.o333o.com, *.exosrv.com, asewlfjqwlflkew.com, *.asewlfjqwlflkew.com, *.tsyndicate.com, tsyndicate.com, *.uus58.com, asewlfjqwlflkew.com, *.uus58.*, -lark-frontier-hl.snssdk.com,api.21jingji.com,service.4gtv.tv,app.58.com,pic?.ajkimg.com,gw.alicdn.com,heic.alicdn.com,acs.m.taobao.com,m*.amap.com,api-new.app.acfun.cn,api.bjxkhc.com,*.amemv.com,*.snssdk.com,issuecdn.baidupcs.com,pan.baidu.com,newclient.map.baidu.com,mime.baidu.com,act.vip.iqiyi.com,app.bilibili.com,channel.beitaichufang.com,iapi.bishijie.com,app.api.ke.com,www.bodivis.com.cn,yxyapi*.drcuiyutao.com,clientaccess.10086.cn,m.client.10010.com,cloud.189.cn,api.chelaile.net.cn,web.chelaile.net.cn,cap.caocaokeji.cn,api.caijingmobile.com,gw.csdn.net,m.ctrip.com,app.poizon.com,api.douban.com,rtbapi.douyucdn.cn,e.dangdang.com,daoyu.sdo.com,*.daydaycook.com,maicai.api.ddxq.mobi,mobile-api2011.elong.com,123.59.31.1,119.18.193.135,cube.elemecdn.com,i.ys7.com,www.flyertea.com,dsa-mfp.fengshows.cn,api.feng.com,*-release.wuta-cam.com,gateway.shouqiev.com,dl.app.gtja.com,prom.mobile.gome.com.cn,smkmp.96225.com,api.huomao.com,imeclient.openspeech.cn,api.intsig.net,ih2.ireader.com,nnapp.cloudbae.cn,ib-soft.net,www.inoreader.com,list-app-m.i4.cn,api.m.jd.com,ms.jr.jd.com,img*.360buyimg.com,api.jxedt.com,richmanapi.jxedt.com,*.kakamobi.cn,app-api.jinse.com,ios.wps.cn,*.kingsoft-office-service.com,api.gotokeep.com,api.kkmh.com,122.14.246.33,175.102.178.52,api.club.lenovo.cn,api.jr.mi.com,api-mifit*.huami.com,api.mgzf.com,cdn.moji.com,img.meituan.net,p*.meituan.net,s3plus.meituan.net,flowplus.meituan.net,capi.mwee.cn,mapi.mafengwo.cn,app.mixcapp.com,appconf.mail.163.com,c.m.163.com,client.mail.163.com,interface*.music.163.com,59.111.181.*,sp.kaola.com,support.you.163.com,p.du.163.com,app-api.niu.com,slapi.oray.net,pss.txffp.com,api.yangkeduo.com,api.pinduoduo.com,mrobot.pconline.com.cn,mrobot.pcauto.com.cn,open.qyer.com,media.qyer.com,api.qbb6.com,mage.if.qidian.com,msspjh.emarbox.com,api.rr.tv,*.uve.weibo.com,weibointl.api.weibo.cn,tqt.weibo.cn,*.k.sohu.com,*.tv.sohu.com,ap*.smzdm.com,gw-passenger.01zhuanche.com,mpcs.suning.com,ccsp-egmas.sf-express.com,consumer.fcbox.com,g.cdn.pengpengla.com,snailsleep.net,api*.futunn.com,ssl.kohsocialapp.qq.com,4gimg.map.qq.com,r.inews.qq.com,news.ssp.qq.com,mp.weixin.qq.com,m.tuniu.com,mob.mddcloud.com,img*.10101111cdn.com,api.vuevideo.net,app.variflight.com,api.cdmcaac.com,api.vistopia.com.cn,app.wy.guahao.com,thor.weidian.com,api.wallstcn.com,api.xiachufang.com,api.psy-1.com,portal-xunyou.qingcdn.com,api.xueqiu.com,promo.xueqiu.com,182.92.251.113,101.201.175.228,www.xiaohongshu.com,app.yinxiang.com,restapi.iyunmai.com,www.zhihu.com,api.zhihu.com,a.qiumibao.com,*.zhuishushenqi.com,www.zybang.com,api.izuiyou.com,tiku.zhan.com,webboot.zhangyue.com,saad.ms.zhangyue.ne
+hostname = enjoy.abchina.com, api.m.mi.com, dss0.bdstatic.com, map-mobile-lbsapp.cdn.bcebos.com, mobilead.kuwo.cn, www.189.cn, app.10086.cn, weixin110.qq.com, ios.prod.ftl.netflix.com, api.ithome.com, duckduckgo.com, *.baidu.com, *.javbus.com, www.javbus.com, *.zhenbuka.com, www.zhenbuka.com, cluster.awmserve.com, urtirepor.com, ads.bullionyield.com, www.porntrex.com, cloudrls.com, javtsunami.com, *.cloudfront.net, 91porny.com, cdn.jsdelivr.net, s3.amazonaws.com, static.nyahentai.pw, zh.nyahentai.me, m.yhdm.io, k.wudejia.com, www.mfkhm.com, www.cocomanhua.com, fans.91p20.space, www.91porn.com, *.xvideos-cdn.com, www.xvideos.com, *.realsrv.com, *.nyahentai.com, gum.criteo.com, rt.gsspat.jp, *.nyahentai.pw, rt.gsspat.jp, img.gsspat.jp, *.phncdn.com, www.pornhub.com, cn.pornhub.com, *.pornhub.com, *.ddmax20.*, asianclub.tv, *.yabo.*, *.yabo729.com, *.wine-api.net, *.wixsite.com, *.wixstatic.com, *.dilidd.com, *.alicdn.com, *.dililitv.com, *.netflav.*, *.netflav.com, www.avple.video, *.imgur.*, *.pianku.*, *.xn--2qux23c9ziyrq.club, *.naifei.shop, *.nfmovies.com,*.yb463.app, *.yabet.*, *.yabet1477.*, ddrk.me, *.ddrk.me, poweredbyliquidfire.mobi, *.poweredbyliquidfire.mobi, avgle.com, *.avgle.com, *.juicyads.com, *.jads.co, jable.tv, *.jable.tv, *.ackcdn.net, -*.trwl1.*, -*.trwl1.com, *.o333o.com, *.exosrv.com, asewlfjqwlflkew.com, *.asewlfjqwlflkew.com, *.tsyndicate.com, tsyndicate.com, *.uus58.com, asewlfjqwlflkew.com, *.uus58.*, -lark-frontier-hl.snssdk.com,api.21jingji.com,service.4gtv.tv,app.58.com,pic?.ajkimg.com,gw.alicdn.com,heic.alicdn.com,acs.m.taobao.com,m*.amap.com,api-new.app.acfun.cn,api.bjxkhc.com,*.amemv.com,*.snssdk.com,issuecdn.baidupcs.com,pan.baidu.com,newclient.map.baidu.com,mime.baidu.com,act.vip.iqiyi.com,app.bilibili.com,channel.beitaichufang.com,iapi.bishijie.com,app.api.ke.com,www.bodivis.com.cn,yxyapi*.drcuiyutao.com,clientaccess.10086.cn,m.client.10010.com,cloud.189.cn,api.chelaile.net.cn,web.chelaile.net.cn,cap.caocaokeji.cn,api.caijingmobile.com,gw.csdn.net,m.ctrip.com,app.poizon.com,api.douban.com,rtbapi.douyucdn.cn,e.dangdang.com,daoyu.sdo.com,*.daydaycook.com,maicai.api.ddxq.mobi,mobile-api2011.elong.com,123.59.31.1,119.18.193.135,cube.elemecdn.com,i.ys7.com,www.flyertea.com,dsa-mfp.fengshows.cn,api.feng.com,*-release.wuta-cam.com,gateway.shouqiev.com,dl.app.gtja.com,prom.mobile.gome.com.cn,smkmp.96225.com,api.huomao.com,imeclient.openspeech.cn,api.intsig.net,ih2.ireader.com,nnapp.cloudbae.cn,ib-soft.net,www.inoreader.com,list-app-m.i4.cn,api.m.jd.com,ms.jr.jd.com,img*.360buyimg.com,api.jxedt.com,richmanapi.jxedt.com,*.kakamobi.cn,app-api.jinse.com,ios.wps.cn,*.kingsoft-office-service.com,api.gotokeep.com,api.kkmh.com,122.14.246.33,175.102.178.52,api.club.lenovo.cn,api.jr.mi.com,api-mifit*.huami.com,api.mgzf.com,cdn.moji.com,img.meituan.net,p*.meituan.net,s3plus.meituan.net,flowplus.meituan.net,capi.mwee.cn,mapi.mafengwo.cn,app.mixcapp.com,appconf.mail.163.com,c.m.163.com,client.mail.163.com,interface*.music.163.com,59.111.181.*,sp.kaola.com,support.you.163.com,p.du.163.com,app-api.niu.com,slapi.oray.net,pss.txffp.com,api.yangkeduo.com,api.pinduoduo.com,mrobot.pconline.com.cn,mrobot.pcauto.com.cn,open.qyer.com,media.qyer.com,api.qbb6.com,mage.if.qidian.com,msspjh.emarbox.com,api.rr.tv,*.uve.weibo.com,weibointl.api.weibo.cn,tqt.weibo.cn,*.k.sohu.com,*.tv.sohu.com,ap*.smzdm.com,gw-passenger.01zhuanche.com,mpcs.suning.com,ccsp-egmas.sf-express.com,consumer.fcbox.com,g.cdn.pengpengla.com,snailsleep.net,api*.futunn.com,ssl.kohsocialapp.qq.com,4gimg.map.qq.com,r.inews.qq.com,news.ssp.qq.com,mp.weixin.qq.com,m.tuniu.com,mob.mddcloud.com,img*.10101111cdn.com,api.vuevideo.net,app.variflight.com,api.cdmcaac.com,api.vistopia.com.cn,app.wy.guahao.com,thor.weidian.com,api.wallstcn.com,api.xiachufang.com,api.psy-1.com,portal-xunyou.qingcdn.com,api.xueqiu.com,promo.xueqiu.com,182.92.251.113,101.201.175.228,www.xiaohongshu.com,app.yinxiang.com,restapi.iyunmai.com,www.zhihu.com,api.zhihu.com,a.qiumibao.com,*.zhuishushenqi.com,www.zybang.com,api.izuiyou.com,tiku.zhan.com,webboot.zhangyue.com,saad.ms.zhangyue.net
+
+# > Xirou AD 1/17
+
+^https:\/\/app\.10086\.cn\/biz-orange\/DH\/firstPage\/iconBanner$ url reject-img
+^https:\/\/app\.10086\.cn\/biz-orange\/DH\/homeAreaNew\/getAreaList$ url 307 https://raw.githubusercontent.com/Xirou/Script/master/QX_Xirou.jpg
+
+^https:\/\/app\.10086\.cn\/group.*\/M00\/00\/5A url 307 https://raw.githubusercontent.com/Xirou/Script/master/QX_Xirou.jpg
+
+^https:\/\/app\.10086\.cn\/biz-orange\/DN\/homeSale\/getsaleAdver$ - reject
+^https:\/\/www\.189\.cn\/images\/2021 url reject
+
+^http:\/\/mobilead\.kuwo\.cn\/EcomResourceServer\/getIOSIsHideAd url reject
+
+^https:\/\/map-mobile-lbsapp\.cdn\.bcebos\.com\/wuqingfeng\.gif$ url reject-img
+
+^https:\/\/dss0\.bdstatic\.com\/-0U0bnSm1A5BphGlnYG url reject
+^https:\/\/api\.m\.mi\.com\/v1\/app\/start$ url 307 https://github.com/Xirou/Script/raw/master/QX_Xirou.jpg
+
+^http:\/\/iadmusicmat\.music\.126\.net\/.*.jpg url 307 https://github.com/Xirou/Script/raw/master/QX_Xirou.jpg
+
+^http:\/\/p1\.music\.126\.net\/.*.jpg\? url 307 https://github.com/Xirou/Script/raw/master/QX_Xirou.jpg
+
+^https?:\/\/interface(\d)?.music.163.com\/eapi\/ad url 307 https://github.com/Xirou/Script/raw/master/QX_Xirou.jpg
+
+^http:\/\/iadmusicmat\.music\.126\.net\/[A-Za-z0-9].jpg url 307 https://github.com/Xirou/Script/raw/master/QX_Xirou.jpg
+
+^https:\/\/mi\.gdt\.qq\.com\/gdt_mview\.fcg url reject
+^https:\/\/ms\.jr\.jd\.com\/gw\/generic\/aladdin\/na\/m\/getLoadingPicture$ url reject
+
+^https:\/\/enjoy\.abchina\.com\/yx-engine-web\/news\/getMixHomePrd url reject-img
+^https:\/\/mbs\.boc\.cn\/ubas-mgateway-webapp url reject
+
+^https:\/\/phone\.abchina\.com\/nmbap\/user\/exchange url reject
+
+^https:\/\/enjoy\.abchina\.com\/yx-engine-web\/news\/getHomeNewsInfo url reject
+
+^https:\/\/enjoy\.abchina\.com\/yx-engine-web\/engine\/getAdverInfoOpenScr$ url reject-img
+
+^https:\/\/enjoy\.abchina\.com\/yx-engine-web\/engine\/getAdverInfoMuti$ url reject-img
+
+^https:\/\/enjoy\.abchina\.com\/yx-engine-web\/engine\/getAdverInfoCarlImg url reject-img
+
+^https:\/\/img\.gdoil\.cn\/04h5\/policy\.html$ url reject
+
+^https:\/\/img\.gdoil\.cn\/upload\/ad url reject
+
+https:\/\/iyes\.youku\.com\/start\/pre url reject
+
+^https:\/\/raw\.githubusercontent\.com\/dompling\/Scriptable\/master\/JDDou\/jdd\.png$ url 307 https://github.com/Xirou/Script/raw/master/jdd.png
+
+^https:\/\/s1\.zhuanstatic\.com\/common\/adapter\/ url reject
+^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getClinetInitInfo$ url reject
+
+https://www.nfmovies.com/uploads/images/play2.jpg url 307 https://images.unsplash.com/photo-1604419688779-590024170bb4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=katie-mcbroom-2Tt6x87b9Y4-unsplash.jpg
+
+https://www.nfmovies.com/templets/default/images/logos/06.png url reject-img
+
 
 //weixin110
 ^https?:\/\/weixin110\.qq\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi url script-response-body https://raw.githubusercontent.com/HotKids/Rules/master/Script/weixin110.js
