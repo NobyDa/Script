@@ -3,11 +3,13 @@ hostname = enjoy.abchina.com, api.m.mi.com, dss0.bdstatic.com, map-mobile-lbsapp
 # > Xirou AD 1/17
 
 ^https:\/\/app\.10086\.cn\/biz-orange\/DH\/firstPage\/iconBanner$ url reject-img
+
 ^https:\/\/app\.10086\.cn\/biz-orange\/DH\/homeAreaNew\/getAreaList$ url 307 https://raw.githubusercontent.com/Xirou/Script/master/QX_Xirou.jpg
 
 ^https:\/\/app\.10086\.cn\/group.*\/M00\/00\/5A url 307 https://raw.githubusercontent.com/Xirou/Script/master/QX_Xirou.jpg
 
 ^https:\/\/app\.10086\.cn\/biz-orange\/DN\/homeSale\/getsaleAdver$ - reject
+
 ^https:\/\/www\.189\.cn\/images\/2021 url reject
 
 ^http:\/\/mobilead\.kuwo\.cn\/EcomResourceServer\/getIOSIsHideAd url reject
@@ -15,6 +17,7 @@ hostname = enjoy.abchina.com, api.m.mi.com, dss0.bdstatic.com, map-mobile-lbsapp
 ^https:\/\/map-mobile-lbsapp\.cdn\.bcebos\.com\/wuqingfeng\.gif$ url reject-img
 
 ^https:\/\/dss0\.bdstatic\.com\/-0U0bnSm1A5BphGlnYG url reject
+
 ^https:\/\/api\.m\.mi\.com\/v1\/app\/start$ url 307 https://github.com/Xirou/Script/raw/master/QX_Xirou.jpg
 
 ^http:\/\/iadmusicmat\.music\.126\.net\/.*.jpg url 307 https://github.com/Xirou/Script/raw/master/QX_Xirou.jpg
@@ -26,9 +29,11 @@ hostname = enjoy.abchina.com, api.m.mi.com, dss0.bdstatic.com, map-mobile-lbsapp
 ^http:\/\/iadmusicmat\.music\.126\.net\/[A-Za-z0-9].jpg url 307 https://github.com/Xirou/Script/raw/master/QX_Xirou.jpg
 
 ^https:\/\/mi\.gdt\.qq\.com\/gdt_mview\.fcg url reject
+
 ^https:\/\/ms\.jr\.jd\.com\/gw\/generic\/aladdin\/na\/m\/getLoadingPicture$ url reject
 
 ^https:\/\/enjoy\.abchina\.com\/yx-engine-web\/news\/getMixHomePrd url reject-img
+
 ^https:\/\/mbs\.boc\.cn\/ubas-mgateway-webapp url reject
 
 ^https:\/\/phone\.abchina\.com\/nmbap\/user\/exchange url reject
@@ -50,12 +55,12 @@ https:\/\/iyes\.youku\.com\/start\/pre url reject
 ^https:\/\/raw\.githubusercontent\.com\/dompling\/Scriptable\/master\/JDDou\/jdd\.png$ url 307 https://github.com/Xirou/Script/raw/master/jdd.png
 
 ^https:\/\/s1\.zhuanstatic\.com\/common\/adapter\/ url reject
+
 ^https:\/\/app\.zhuanzhuan\.com\/zzx\/transfer\/getClinetInitInfo$ url reject
 
 https://www.nfmovies.com/uploads/images/play2.jpg url 307 https://images.unsplash.com/photo-1604419688779-590024170bb4?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=katie-mcbroom-2Tt6x87b9Y4-unsplash.jpg
 
 https://www.nfmovies.com/templets/default/images/logos/06.png url reject-img
-
 
 //weixin110
 ^https?:\/\/weixin110\.qq\.com\/cgi-bin\/mmspamsupport-bin\/newredirectconfirmcgi url script-response-body https://raw.githubusercontent.com/HotKids/Rules/master/Script/weixin110.js
