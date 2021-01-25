@@ -1,6 +1,7 @@
 {
   "id": "NobyDa.app.sub",
   "name": "NobyDa 脚本订阅",
+  "description": "该订阅兼容BoxJs以及QX Gallery",
   "author": "@NobyDa",
   "icon": "https://avatars2.githubusercontent.com/u/53217160",
   "repo": "https://github.com/NobyDa/Script/tree/master",
@@ -87,9 +88,6 @@
         "key": "JDGStore",
         "label": "京东超市"
       }, {
-        "key": "TakeaLook",
-        "label": "京东看看"
-      }, {
         "key": "JDComputer",
         "label": "京东电脑"
       }, {
@@ -105,17 +103,11 @@
         "key": "JDUnderwear",
         "label": "京东内衣"
       }, {
-        "key": "JDDrug",
-        "label": "京东医药"
-      }, {
         "key": "JDChild",
         "label": "京东童装"
       }, {
         "key": "JDBaby",
         "label": "京东母婴"
-      }, {
-        "key": "JDSubsidy",
-        "label": "京东晚市"
       }, {
         "key": "JDFineWine",
         "label": "京东酒饮"
@@ -125,9 +117,6 @@
       }, {
         "key": "JDFSale",
         "label": "京东闪购"
-      }, {
-        "key": "Overseas",
-        "label": "京东国际"
       }, {
         "key": "JDBook",
         "label": "京东图书"
@@ -153,29 +142,20 @@
         "key": "JTDouble",
         "label": "金贴双签"
       }, {
-        "key": "JDShand",
-        "label": "京东二手 (如VPN重启,建议禁用)"
-      }, {
         "key": "JDMakeup",
-        "label": "京东美妆 (如VPN重启,建议禁用)"
-      }, {
-        "key": "JDClocks",
-        "label": "京东钟表 (如VPN重启,建议禁用)"
+        "label": "京东美妆"
       }, {
         "key": "JDVege",
-        "label": "京东菜场 (如VPN重启,建议禁用)"
-      }, {
-        "key": "JDPet",
-        "label": "京东宠物 (如VPN重启,建议禁用)"
+        "label": "京东菜场"
       }, {
         "key": "JDClean",
-        "label": "京东清洁 (如VPN重启,建议禁用)"
+        "label": "京东清洁"
       }, {
         "key": "JDCare",
-        "label": "京东个护 (如VPN重启,建议禁用)"
+        "label": "京东个护"
       }, {
         "key": "JDJewels",
-        "label": "京东珠宝 (如VPN重启,建议禁用)"
+        "label": "京东珠宝"
       }, {
         "key": "JDCube",
         "label": "京东魔方"
@@ -223,7 +203,7 @@
       "val": "",
       "type": "number",
       "placeholder": "默认并发无延迟 (点击以展开说明)",
-      "desc": "延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长), VPN重启或越狱用户建议填写1, Surge用户请注意在SurgeUI界面调整脚本超时"
+      "desc": "延迟作用于每个签到接口, 该参数接受随机或指定延迟(例: '2000'则表示延迟2秒; '2000-5000'则表示延迟最小2秒,最大5秒内的随机延迟), 如填入延迟则切换顺序签到(耗时较长); VPN重启或越狱用户建议填写1(顺序执行), Surge用户请注意在SurgeUI界面调整脚本超时."
     }],
     "scripts": [{
       "name": "京东签到",
@@ -380,5 +360,24 @@
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js",
     "icons": ["https://raw.githubusercontent.com/Orz-3/mini/master/bilibili.png", "https://raw.githubusercontent.com/Orz-3/task/master/bilibili.png"]
+  }],
+  "task": [{
+    "config": "0 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东签到, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png",
+    "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
+  }, {
+    "config": "5 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js, tag=爱奇艺签到, img-url=https://raw.githubusercontent.com/Orz-3/task/master/iQIYI.png",
+    "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
+  }, {
+    "config": "10 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=哔哩漫画签到, img-url=https://raw.githubusercontent.com/Orz-3/task/master/manga.png",
+    "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
+  }, {
+    "config": "15 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js, tag=百度贴吧签到, img-url=https://raw.githubusercontent.com/Orz-3/task/master/tieba.png",
+    "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
+  }, {
+    "config": "20 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js, tag=吾爱破解签到, img-url=https://raw.githubusercontent.com/Orz-3/task/master/52pj.png",
+    "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
+  }, {
+    "config": "25 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/KuaiKan-DailyBonus/KKMH.js, tag=快看漫画签到, img-url=https://raw.githubusercontent.com/Orz-3/task/master/KuaiKan.png",
+    "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
   }]
 }
