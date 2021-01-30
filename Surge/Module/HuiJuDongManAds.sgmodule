@@ -1,9 +1,12 @@
 #!name=荟聚动漫
 #!desc=去除大多数弹屏以及底栏广告, 由于有广告缓存, 因此可能需要卸载App重装. @NobyDa
 
+# Update at 2021.01.30
+
 [Rule]
 #检测
 DOMAIN,www.umeng.com,DIRECT
+DOMAIN,www.adview.cn,DIRECT
 DOMAIN,adview.cn,DIRECT
 #底栏
 DOMAIN,googleads.g.doubleclick.net,REJECT-TINYGIF
@@ -12,11 +15,13 @@ DOMAIN,www.19831110.com,REJECT-TINYGIF
 AND,((USER-AGENT,%E8%8D%9F%E8%81%9A%E5%8A%A8%E6%BC%AB*), (URL-REGEX,\/ad)),REJECT-TINYGIF
 
 [URL Rewrite]
-#弹屏
+#弹屏, 搜索, 以及底栏白屏广告
+^https?:\/\/os8\.pw\/(adConfigs|appConfiguration\/getAd) - reject
+^http:\/\/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/goad\/ad\/ - reject
 ^https?:\/\/api-access\.pangolin-sdk-toutiao\.com\/api\/ad\/ - reject
 ^https?:\/\/sf\d-ttcdn-tos\.pstatp\.com\/obj\/ad - reject
 ^https?:\/\/www\.51devapp\.com\/adconfigs - reject
 ^https?:\/\/.+?\.snssdk\.com\/ad\/ - reject
 
 [MITM]
-hostname = %APPEND% sf?-ttcdn-tos.pstatp.com, www.51devapp.com, *.snssdk.com, www.19831110.com, api-access.pangolin-sdk-toutiao.com
+hostname = %APPEND% sf?-ttcdn-tos.pstatp.com, www.51devapp.com, *.snssdk.com, www.19831110.com, api-access.pangolin-sdk-toutiao.com, os8.pw
