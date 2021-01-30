@@ -1,4 +1,5 @@
-# Update > 2020.7.27 This rule is based on optimization by lhie1/Rules.
+# Update > 2021.1.30 This rule is based on optimization by lhie1/Rules.
+DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
 DOMAIN-SUFFIX,gemini.yahoo.com,REJECT
