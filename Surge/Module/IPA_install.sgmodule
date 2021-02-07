@@ -1,0 +1,8 @@
+#!name=iOS14 IPA应用安装
+#!desc=该模块可解决iOS14或IPadOS14无法在移动端安装IPA的问题. 注: 需要使用Shu+捷径或Jsbox辅助安装.
+
+[Script]
+IPA应用安装 = type=http-request,pattern=^https:\/\/nobyda/(install|download)(\/jsbox)?$,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/IPA_install.js
+
+[MITM]
+hostname = %APPEND% nobyda
