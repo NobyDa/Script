@@ -55,9 +55,6 @@
         "key": "JDWebcasts",
         "label": "京东直播"
       }, {
-        "key": "JRBean",
-        "label": "金融金贴"
-      }, {
         "key": "JRDoll",
         "label": "金融签壹"
       }, {
@@ -100,17 +97,11 @@
         "key": "JDSuitcase",
         "label": "京东箱包"
       }, {
-        "key": "JDUnderwear",
-        "label": "京东内衣"
-      }, {
         "key": "JDChild",
         "label": "京东童装"
       }, {
         "key": "JDBaby",
         "label": "京东母婴"
-      }, {
-        "key": "JDFineWine",
-        "label": "京东酒饮"
       }, {
         "key": "JDCash",
         "label": "京东红包"
