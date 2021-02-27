@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2021.02.07 20:00 v1.93
+更新时间: 2021.02.27 16:50 v1.94
 有效接口: 35+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -109,7 +109,6 @@ async function all() {
       await Promise.all([
         JingDongBean(stop), //京东京豆
         JingDongStore(stop), //京东超市
-        JingDongWebcasts(stop), //京东直播
         JingRongSteel(stop), //金融钢镚
         JingDongTurn(stop), //京东转盘
         JDFlashSale(stop), //京东闪购
@@ -120,7 +119,7 @@ async function all() {
         JingDongShake(stop), //京东摇一摇
         JDSecKilling(stop), //京东秒杀
         JRLuckyLottery(stop), //金融抽奖顶部签到
-        JingDongBuyCar(stop, '319fd268c5df469192d9420a2de4d8d2'), //京东汽车
+        JingDongBuyCar(stop, '31dd4ebdcad341b79e36cb7c29095de9'), //京东汽车
         JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '4D25A6F482'),
         JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252'),
         JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C'),
@@ -128,6 +127,7 @@ async function all() {
         JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F')
       ]);
       await Promise.all([
+        JDUserSignPre(stop, 'JDCustomized', '京东商城-定制', 'RPordkuhnM4MzR24fLWgc8YRbXJ'), //京东定制
         JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'), //京东鞋靴
         JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'), //京东日历翻牌
         JDUserSignPre(stop, 'JDChild', '京东商城-童装', '3Af6mZNcf5m795T8dtDVfDwWVNhJ'), //京东童装馆
@@ -157,7 +157,6 @@ async function all() {
     default:
       await JingDongBean(0); //京东京豆
       await JingDongStore(Wait(stop)); //京东超市
-      await JingDongWebcasts(Wait(stop)); //京东直播
       await JingRongSteel(Wait(stop)); //金融钢镚
       await JingDongTurn(Wait(stop)); //京东转盘
       await JDFlashSale(Wait(stop)); //京东闪购
@@ -168,7 +167,7 @@ async function all() {
       await JingDongShake(Wait(stop)); //京东摇一摇
       await JDSecKilling(Wait(stop)); //京东秒杀
       await JRLuckyLottery(Wait(stop)); //金融抽奖顶部签到
-      await JingDongBuyCar(Wait(stop), '319fd268c5df469192d9420a2de4d8d2'); //京东汽车
+      await JingDongBuyCar(Wait(stop), '31dd4ebdcad341b79e36cb7c29095de9'); //京东汽车
       await JingRongDoll(Wait(stop), 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
       await JingRongDoll(Wait(stop), 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
       await JingRongDoll(Wait(stop), 'JRFourDoll', '京东金融-签肆', '30C4F86264');
@@ -176,6 +175,7 @@ async function all() {
       await JingRongDoll(Wait(stop), 'JRDoll', '京东金融-签壹', '4D25A6F482');
       await JingRongDoll(Wait(stop), 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin'); //京东金融 现金双签
       await JingRongDoll(Wait(stop), 'JTDouble', '京东金贴-双签', '1DF13833F7'); //京东金融 金贴双签
+      await JDUserSignPre(Wait(stop), 'JDCustomized', '京东商城-定制', 'RPordkuhnM4MzR24fLWgc8YRbXJ'); //京东定制
       await JDUserSignPre(Wait(stop), 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'); //京东箱包馆
       await JDUserSignPre(Wait(stop), 'JDClothing', '京东商城-服饰', '4RBT3H9jmgYg1k2kBnHF8NAHm7m8'); //京东服饰
       await JDUserSignPre(Wait(stop), 'JDSchool', '京东商城-校园', '2QUxWHx5BSCNtnBDjtt5gZTq7zdZ'); //京东校园 
@@ -1633,44 +1633,6 @@ function JingDongGetCash(s) {
           }
         } catch (eor) {
           $nobyda.AnError("京东商城-现金", "JDGetCash", eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JingDongWebcasts(s) {
-  merge.JDWebcasts = {};
-  return new Promise(resolve => {
-    if (disable("JDWebcasts")) return resolve()
-    setTimeout(() => {
-      $nobyda.get({
-        url: `https://api.m.jd.com/api?functionId=getChannelTaskRewardToM&appid=h5-live&body=%7B%22type%22%3A%22signTask%22%2C%22itemId%22%3A%221%22%7D`,
-        headers: {
-          Cookie: KEY,
-          Origin: `https://h.m.jd.com`
-        }
-      }, (error, response, data) => {
-        try {
-          if (error) throw new Error(error)
-          const cc = JSON.parse(data);
-          const Details = LogDetails ? "response:\n" + data : '';
-          if (cc.code == 0 && cc.subCode == 0) {
-            console.log(`\n京东商城-直播签到成功 ${Details}`)
-            merge.JDWebcasts.bean = cc.sum || 0
-            merge.JDWebcasts.success = 1
-            merge.JDWebcasts.notify = `京东商城-直播: 成功, 明细: ${merge.JDWebcasts.bean||`无`}京豆 🐶`
-          } else {
-            console.log(`\n京东商城-直播签到失败 ${Details}`)
-            const tp = data.match(/擦肩而过/) ? `无机会` : cc.code == 3 ? `Cookie失效` : `${cc.msg||`未知`}`
-            merge.JDWebcasts.notify = `京东商城-直播: 失败, 原因: ${tp}${cc.code==3?`‼️`:` ⚠️`}`
-            merge.JDWebcasts.fail = 1
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东商城-直播", "JDWebcasts", eor, response, data)
         } finally {
           resolve()
         }
