@@ -8,7 +8,7 @@
   "apps": [{
     "id": "多合一签到",
     "name": "京东",
-    "keys": ["CookieJD", "CookieJD2"],
+    "keys": ["CookieJD", "CookieJD2", "CookiesJD"],
     "descs_html": [
       "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js\">脚本注释</a></h4>",
       "<br />",
