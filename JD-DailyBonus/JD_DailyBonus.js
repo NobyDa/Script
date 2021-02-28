@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2021.02.28 14:30 v1.95
+更新时间: 2021.02.28 18:30 v1.96
 有效接口: 35+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -252,7 +252,8 @@ function notify() {
       var five = `【其他总计】:  ${Subsidy+Money+Cash}${Subsidy||Money||Cash?`\n`:`获取失败\n`}`
       var DName = merge.TotalBean && merge.TotalBean.nickname ? merge.TotalBean.nickname : "获取失败"
       var cnNum = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
-      var Name = DualKey || OtherKey ? `【签到号${cnNum[DualAccount]||DualAccount}】:  ${DName}\n` : ``
+      const numFix = !Key && !DualKey ? DualAccount - 2 : Key && DualKey ? DualAccount : DualAccount - 1 || DualAccount
+      const Name = DualKey || OtherKey ? `【签到号${cnNum[numFix]||numFix}】:  ${DName}\n` : ``
       const disables = $nobyda.read("JD_DailyBonusDisables")
       const amount = disables ? disables.split(",").length : 0
       const disa = !notify || amount ? `【温馨提示】:  检测到${$nobyda.disable?`上次执行意外崩溃, `:``}已禁用${notify?`${amount}个`:`所有`}接口, 如需开启请前往BoxJs或查看脚本内第100行注释.\n` : ``
@@ -293,10 +294,11 @@ function ReadCookie() {
     GetCookie()
     return
   }
-  KEY = Key = Key || $nobyda.read(EnvInfo)
-  if (KEY) {
-    DualKey = DualKey || $nobyda.read(EnvInfo2)
-    OtherKey = OtherKey || $nobyda.read(EnvInfo3)
+  Key = Key || $nobyda.read(EnvInfo)
+  DualKey = DualKey || $nobyda.read(EnvInfo2)
+  OtherKey = OtherKey || $nobyda.read(EnvInfo3)
+  KEY = Key || DualKey
+  if (KEY || OtherKey) {
     if ($nobyda.isJSBox || $nobyda.isNode) {
       if (Key) $nobyda.write(Key, EnvInfo);
       if (DualKey) $nobyda.write(DualKey, EnvInfo2);
@@ -308,7 +310,11 @@ function ReadCookie() {
     boxdis = $nobyda.read("JD_Crash_disable") === "false" || $nobyda.isNode || $nobyda.isJSBox ? false : boxdis
     LogDetails = $nobyda.read("JD_DailyBonusLog") === "true" || LogDetails
     ReDis = ReDis ? $nobyda.write("", "JD_DailyBonusDisables") : ""
-    all()
+    if (KEY) {
+      all()
+    } else {
+      double()
+    }
   } else {
     $nobyda.notify("京东签到", "", "脚本终止, 未获取Cookie ‼️")
     $nobyda.done()
@@ -319,7 +325,7 @@ function double() {
   KEY = '';
   if (DualAccount == 1) {
     DualAccount++;
-    KEY = DualKey
+    KEY = Key ? DualKey : ''
   }
   if (!KEY && OtherKey) {
     DualAccount++;
@@ -328,6 +334,7 @@ function double() {
       cks = JSON.parse(OtherKey);
     } catch (e) {
       cks = [];
+      console.log(`\n第三及以上账号Cookie读取失败, 请检查Json格式.`)
     }
     if (cks.length + 2 >= DualAccount) {
       KEY = cks[DualAccount - 3].cookie;
