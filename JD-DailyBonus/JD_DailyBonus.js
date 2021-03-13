@@ -101,7 +101,26 @@ var ReDis = false; //是否移除所有禁用列表, true则开启. 适用于触
 
 var out = 0; //接口超时退出, 用于可能发生的网络不稳定, 0则关闭. 如QX日志出现大量"JS Context timeout"后脚本中断时, 建议填写6000
 
+/** Node JS 通过环境变量读取配置，用于支持类似 GitHub Actions 的场景 */
+if (typeof process !== 'undefined' && typeof process.env !== 'undefined') {
+  if (process.env.KEY) {
+    Key = process.env.KEY;
+  }
+  if (process.env.DUAL_KEY) {
+    DualKey = process.env.DUAL_KEY;
+  }
+  if (process.env.OTHER_KEY) {
+    OtherKey = process.env.OTHER_KEY;
+  }
+  if (typeof process.env.STOP !== 'undefined') {
+    // 自定义延迟签到，兼容留空的情况
+    stop = process.env.STOP;
+  }
+}
+
 var $nobyda = nobyda();
+
+var merge = {};
 
 async function all() {
   merge = {};
