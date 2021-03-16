@@ -73,9 +73,6 @@
         "key": "XJDouble",
         "label": "现金双签"
       }, {
-        "key": "JRLottery",
-        "label": "金融抽奖"
-      }, {
         "key": "JRSteel",
         "label": "金融钢镚"
       }, {
@@ -120,9 +117,6 @@
       }, {
         "key": "JDHealth",
         "label": "京东健康"
-      }, {
-        "key": "JDCalendar",
-        "label": "京东日历"
       }, {
         "key": "JDWomen",
         "label": "京东女装"

@@ -2,8 +2,8 @@
 
 京东多合一签到脚本
 
-更新时间: 2021.02.28 18:30 v1.96
-有效接口: 35+
+更新时间: 2021.03.16 22:10 v1.97
+有效接口: 30+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
@@ -119,7 +119,6 @@ async function all() {
         JingDongGetCash(stop), //京东领现金
         JingDongShake(stop), //京东摇一摇
         JDSecKilling(stop), //京东秒杀
-        JRLuckyLottery(stop), //金融抽奖顶部签到
         JingDongBuyCar(stop, '31dd4ebdcad341b79e36cb7c29095de9'), //京东汽车
         JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '4D25A6F482'),
         JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252'),
@@ -128,9 +127,9 @@ async function all() {
         JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F')
       ]);
       await Promise.all([
-        JDUserSignPre(stop, 'JDCustomized', '京东商城-定制', 'RPordkuhnM4MzR24fLWgc8YRbXJ'), //京东定制
+        JDUserSignPre(stop, 'JDCustomized', '京东商城-定制', '2BJK5RBdvc3hdddZDS1Svd5Esj3R'), //京东定制
         JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'), //京东鞋靴
-        JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'), //京东日历翻牌
+        // JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'), //京东日历翻牌
         JDUserSignPre(stop, 'JDChild', '京东商城-童装', '3Af6mZNcf5m795T8dtDVfDwWVNhJ'), //京东童装馆
         JDUserSignPre(stop, 'JDBaby', '京东商城-母婴', '3BbAVGQPDd6vTyHYjmAutXrKAos6'), //京东母婴馆
         JDUserSignPre(stop, 'JD3C', '京东商城-数码', '4SWjnZSCTHPYjE5T7j35rxxuMTb6'), //京东数码电器馆
@@ -148,7 +147,6 @@ async function all() {
         JDUserSignPre(stop, 'JDClean', '京东商城-清洁', '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6'), //京东清洁馆
         JDUserSignPre(stop, 'JDCare', '京东商城-个护', '2tZssTgnQsiUqhmg5ooLSHY9XSeN'), //京东个人护理馆
         JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝', 'zHUHpTHNTaztSRfNBFNVZscyFZU'), //京东珠宝馆
-        // JDUserSignPre(stop, 'JDClocks', '京东商城-钟表', '2BcJPCVVzMEtMUynXkPscCSsx68W'), //京东钟表馆
         JDUserSignPre(stop, 'JDMakeup', '京东商城-美妆', '2smCxzLNuam5L14zNJHYu43ovbAP'), //京东美妆馆
         JDUserSignPre(stop, 'JDVege', '京东商城-菜场', 'Wcu2LVCFMkBP3HraRvb7pgSpt64') //京东菜场
       ]);
@@ -167,7 +165,6 @@ async function all() {
       await JingDongSubsidy(Wait(stop)); //京东金贴
       await JingDongShake(Wait(stop)); //京东摇一摇
       await JDSecKilling(Wait(stop)); //京东秒杀
-      await JRLuckyLottery(Wait(stop)); //金融抽奖顶部签到
       await JingDongBuyCar(Wait(stop), '31dd4ebdcad341b79e36cb7c29095de9'); //京东汽车
       await JingRongDoll(Wait(stop), 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
       await JingRongDoll(Wait(stop), 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
@@ -176,17 +173,16 @@ async function all() {
       await JingRongDoll(Wait(stop), 'JRDoll', '京东金融-签壹', '4D25A6F482');
       await JingRongDoll(Wait(stop), 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin'); //京东金融 现金双签
       await JingRongDoll(Wait(stop), 'JTDouble', '京东金贴-双签', '1DF13833F7'); //京东金融 金贴双签
-      await JDUserSignPre(Wait(stop), 'JDCustomized', '京东商城-定制', 'RPordkuhnM4MzR24fLWgc8YRbXJ'); //京东定制
+      await JDUserSignPre(Wait(stop), 'JDCustomized', '京东商城-定制', '2BJK5RBdvc3hdddZDS1Svd5Esj3R'); //京东定制
       await JDUserSignPre(Wait(stop), 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'); //京东箱包馆
       await JDUserSignPre(Wait(stop), 'JDClothing', '京东商城-服饰', '4RBT3H9jmgYg1k2kBnHF8NAHm7m8'); //京东服饰
       await JDUserSignPre(Wait(stop), 'JDSchool', '京东商城-校园', '2QUxWHx5BSCNtnBDjtt5gZTq7zdZ'); //京东校园 
       await JDUserSignPre(Wait(stop), 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'); //京东健康
       await JDUserSignPre(Wait(stop), 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'); //京东鞋靴
-      await JDUserSignPre(Wait(stop), 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'); //京东日历翻牌
+      // await JDUserSignPre(Wait(stop), 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'); //https://prodev.m.jd.com/mall/active/36V2Qw59VPNsuLxY84vCFtxFzrFs/index.html#/index
       await JDUserSignPre(Wait(stop), 'JDChild', '京东商城-童装', '3Af6mZNcf5m795T8dtDVfDwWVNhJ'); //京东童装馆
       await JDUserSignPre(Wait(stop), 'JDBaby', '京东商城-母婴', '3BbAVGQPDd6vTyHYjmAutXrKAos6'); //京东母婴馆
       await JDUserSignPre(Wait(stop), 'JD3C', '京东商城-数码', '4SWjnZSCTHPYjE5T7j35rxxuMTb6'); //京东数码电器馆
-      // await JDUserSignPre(Wait(stop), 'JDClocks', '京东商城-钟表', '2BcJPCVVzMEtMUynXkPscCSsx68W'); //京东钟表馆
       await JDUserSignPre(Wait(stop), 'JDWomen', '京东商城-女装', 'DpSh7ma8JV7QAxSE2gJNro8Q2h9'); //京东女装馆
       await JDUserSignPre(Wait(stop), 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi'); //京东图书
       await JDUserSignPre(Wait(stop), 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'); //京东拍拍二手
@@ -1771,44 +1767,6 @@ function JDSecKilling(s) {
       })
     })
   }, () => {});
-}
-
-function JRLuckyLottery(s) { //https://jdda.jd.com/app/hd/#/turntable
-  merge.JRLottery = {};
-  return new Promise(resolve => {
-    if (disable("JRLottery")) return resolve()
-    setTimeout(() => {
-      $nobyda.post({
-        url: 'https://ms.jr.jd.com/gw/generic/syh_yxmx/h5/m/handleSign',
-        headers: {
-          Cookie: KEY
-        },
-        body: `reqData=${encodeURIComponent(`{"activityNo":"e2d1b240d5674def8178be6b4faac5b6","signType":"1","encryptSign":""}`)}`
-      }, (error, response, data) => {
-        try {
-          if (error) throw new Error(error);
-          const cc = JSON.parse(data);
-          const Details = LogDetails ? "response:\n" + data : '';
-          if (cc.resultCode == 0 && cc.resultData && cc.resultData.resultCode == 0) {
-            console.log(`\n京东金融-抽奖签到成功 ${Details}`);
-            merge.JRLottery.success = 1;
-            merge.JRLottery.bean = cc.resultData.data.rewardList[0].rewardCount || 0
-            merge.JRLottery.notify = `京东金融-抽奖: 成功, 明细: ${merge.JRLottery.bean||`无`}京豆 🐶`;
-          } else {
-            console.log(`\n京东金融-抽奖签到失败 ${Details}`);
-            const tp = data.match(/重复签到/) ? `已签过` : cc.resultCode == 3 ? `Cookie失效` : `${cc.resultMsg||`未知`}`;
-            merge.JRLottery.notify = `京东金融-抽奖: 失败, 原因: ${tp}${cc.resultCode==3?`‼️`:` ⚠️`}`;
-            merge.JRLottery.fail = 1;
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东金融-抽奖", "JRLottery", eor, response, data);
-        } finally {
-          resolve();
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s);
-  });
 }
 
 function JingDongBuyCar(s, ActId) {
