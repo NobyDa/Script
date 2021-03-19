@@ -85,6 +85,9 @@
         "key": "JDComputer",
         "label": "京东电脑"
       }, {
+        "key": "JDCard",
+        "label": "京东卡包"
+      }, {
         "key": "JD3C",
         "label": "京东数码"
       }, {
