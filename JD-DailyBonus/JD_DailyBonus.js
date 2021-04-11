@@ -119,6 +119,7 @@ async function all() {
         JingDongGetCash(stop), //京东领现金
         JingDongShake(stop), //京东摇一摇
         JDSecKilling(stop), //京东秒杀
+        JingDongJingCai(stop), //京东精彩
         JingDongBuyCar(stop, '82f5ed8addab4008b3ea295f40af32ea'), //京东汽车
         JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '4D25A6F482'),
         JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252'),
@@ -166,6 +167,7 @@ async function all() {
       await JingDongSubsidy(Wait(stop)); //京东金贴
       await JingDongShake(Wait(stop)); //京东摇一摇
       await JDSecKilling(Wait(stop)); //京东秒杀
+      await JingDongJingCai(Wait(stop), //京东精彩
       await JingDongBuyCar(Wait(stop), '82f5ed8addab4008b3ea295f40af32ea'); //京东汽车
       await JingRongDoll(Wait(stop), 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
       await JingRongDoll(Wait(stop), 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
@@ -1834,6 +1836,62 @@ function JingDongBuyCar(s, ActId) {
       })
     })
   }, () => {});
+}
+
+function JingDongJingCai(s) {
+  merge.JDJingCai = {};
+  return new Promise((resolve) => {
+    if (disable("JDJingCai")) return resolve()
+    setTimeout(() => {
+      const JingCaiUrl = {
+        url: "https://lop-proxy.jd.com/jiFenApi/signInAndGetReward",
+        headers: {
+          referrer: "https://jingcai-h5.jd.com/",
+          appparams: '{"appid":158,"ticket_type":"m"}',
+          "lop-dn": "jingcai.jd.com",
+          Cookie: KEY,
+        },
+        body: '[{"userNo":"$cooMrdGatewayUid$"}]',
+      };
+      $nobyda.post(JingCaiUrl, function (error, response, data) {
+        try {
+          if (error) {
+            throw new Error(error);
+          } else {
+            const cc = JSON.parse(data);
+            const Details = LogDetails ? "response:\n" + data : "";
+            if (cc.code == 1) {
+              //data.match(/\"title\":\"(\d+)京豆\"/)[1]
+              console.log("\n" + "京东精彩-京豆签到成功 " + Details);
+              merge.JDJingCai.success = 1;
+              if (data.match(/\"title\":\"\d+京豆\"/)) {
+                merge.JDJingCai.bean = data.match(/\"title\":\"(\d+)京豆\"/)[1];
+              }
+              merge.JDJingCai.notify = `京东精彩-京豆: 成功, 明细: ${
+                merge.JDJingCai.bean || `无`
+              }京豆 🐶`;
+            } else {
+              console.log("\n" + "京东精彩-京豆签到失败 " + Details);
+              merge.JDJingCai.fail = 1;
+              if (cc.code == -1) {
+                merge.JDJingCai.notify = "京东精彩-京豆: 失败, 原因: 已签过 ⚠️";
+              } else if (cc.code == 143) {
+                merge.JDJingCai.notify =
+                  "京东精彩-京豆: 失败, 原因: Cookie失效‼️";
+              } else {
+                merge.JDJingCai.notify = "京东精彩-京豆: 失败, 原因: 未知 ⚠️";
+              }
+            }
+          }
+        } catch (eor) {
+          $nobyda.AnError("京东精彩-京豆", "JDJingCai", eor, response, data);
+        } finally {
+          resolve();
+        }
+      });
+    }, s);
+    if (out) setTimeout(resolve, out + s);
+  });
 }
 
 function TotalSteel() {
