@@ -2,7 +2,7 @@
 
 京东多合一签到脚本
 
-更新时间: 2021.04.11 14:50 v1.99
+更新时间: 2021.04.11 23:00 v2.0.0
 有效接口: 30+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
@@ -128,10 +128,10 @@ async function all() {
         JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F')
       ]);
       await Promise.all([
+        JDUserSignPre(stop, 'JDUndies', '京东商城-内衣', '4PgpL1xqPSW1sVXCJ3xopDbB1f69'), //京东内衣馆
         JDUserSignPre(stop, 'JDCard', '京东商城-卡包', '7e5fRnma6RBATV9wNrGXJwihzcD'), //京东卡包
-        JDUserSignPre(stop, 'JDCustomized', '京东商城-定制', '2BJK5RBdvc3hdddZDS1Svd5Esj3R'), //京东定制
-        JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'), //京东鞋靴
-        // JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'), //京东日历翻牌
+        // JDUserSignPre(stop, 'JDCustomized', '京东商城-定制', '2BJK5RBdvc3hdddZDS1Svd5Esj3R'), //京东定制
+        // JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'), //京东鞋靴
         JDUserSignPre(stop, 'JDChild', '京东商城-童装', '3Af6mZNcf5m795T8dtDVfDwWVNhJ'), //京东童装馆
         JDUserSignPre(stop, 'JDBaby', '京东商城-母婴', '3BbAVGQPDd6vTyHYjmAutXrKAos6'), //京东母婴馆
         JDUserSignPre(stop, 'JD3C', '京东商城-数码', '4SWjnZSCTHPYjE5T7j35rxxuMTb6'), //京东数码电器馆
@@ -141,11 +141,12 @@ async function all() {
         JingRongDoll(stop, 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin') //京东金融 现金双签
       ]);
       await Promise.all([
+        JDUserSignPre(stop, 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'), //京东电竞
         JDUserSignPre(stop, 'JDClothing', '京东商城-服饰', '4RBT3H9jmgYg1k2kBnHF8NAHm7m8'), //京东服饰
         JDUserSignPre(stop, 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'), //京东箱包馆
         JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '2QUxWHx5BSCNtnBDjtt5gZTq7zdZ'), //京东校园
         JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'), //京东健康
-        JDUserSignPre(stop, 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'), //京东拍拍二手
+        // JDUserSignPre(stop, 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'), //京东拍拍二手
         JDUserSignPre(stop, 'JDClean', '京东商城-清洁', '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6'), //京东清洁馆
         JDUserSignPre(stop, 'JDCare', '京东商城-个护', '2tZssTgnQsiUqhmg5ooLSHY9XSeN'), //京东个人护理馆
         JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝', 'zHUHpTHNTaztSRfNBFNVZscyFZU'), //京东珠宝馆
@@ -177,19 +178,20 @@ async function all() {
       await JingRongDoll(Wait(stop), 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin'); //京东金融 现金双签
       await JingRongDoll(Wait(stop), 'JTDouble', '京东金贴-双签', '1DF13833F7'); //京东金融 金贴双签
       await JDUserSignPre(Wait(stop), 'JDCard', '京东商城-卡包', '7e5fRnma6RBATV9wNrGXJwihzcD'); //京东卡包
-      await JDUserSignPre(Wait(stop), 'JDCustomized', '京东商城-定制', '2BJK5RBdvc3hdddZDS1Svd5Esj3R'); //京东定制
+      await JDUserSignPre(Wait(stop), 'JDUndies', '京东商城-内衣', '4PgpL1xqPSW1sVXCJ3xopDbB1f69'); //京东内衣馆
+      await JDUserSignPre(Wait(stop), 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'); //京东电竞
+      // await JDUserSignPre(Wait(stop), 'JDCustomized', '京东商城-定制', '2BJK5RBdvc3hdddZDS1Svd5Esj3R'); //京东定制
       await JDUserSignPre(Wait(stop), 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'); //京东箱包馆
       await JDUserSignPre(Wait(stop), 'JDClothing', '京东商城-服饰', '4RBT3H9jmgYg1k2kBnHF8NAHm7m8'); //京东服饰
       await JDUserSignPre(Wait(stop), 'JDSchool', '京东商城-校园', '2QUxWHx5BSCNtnBDjtt5gZTq7zdZ'); //京东校园 
       await JDUserSignPre(Wait(stop), 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'); //京东健康
-      await JDUserSignPre(Wait(stop), 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'); //京东鞋靴
-      // await JDUserSignPre(Wait(stop), 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'); //https://prodev.m.jd.com/mall/active/36V2Qw59VPNsuLxY84vCFtxFzrFs/index.html#/index
+      // await JDUserSignPre(Wait(stop), 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'); //京东鞋靴
       await JDUserSignPre(Wait(stop), 'JDChild', '京东商城-童装', '3Af6mZNcf5m795T8dtDVfDwWVNhJ'); //京东童装馆
       await JDUserSignPre(Wait(stop), 'JDBaby', '京东商城-母婴', '3BbAVGQPDd6vTyHYjmAutXrKAos6'); //京东母婴馆
       await JDUserSignPre(Wait(stop), 'JD3C', '京东商城-数码', '4SWjnZSCTHPYjE5T7j35rxxuMTb6'); //京东数码电器馆
       await JDUserSignPre(Wait(stop), 'JDWomen', '京东商城-女装', 'DpSh7ma8JV7QAxSE2gJNro8Q2h9'); //京东女装馆
       await JDUserSignPre(Wait(stop), 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi'); //京东图书
-      await JDUserSignPre(Wait(stop), 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'); //京东拍拍二手
+      // await JDUserSignPre(Wait(stop), 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'); //京东拍拍二手
       await JDUserSignPre(Wait(stop), 'JDMakeup', '京东商城-美妆', '2smCxzLNuam5L14zNJHYu43ovbAP'); //京东美妆馆
       await JDUserSignPre(Wait(stop), 'JDVege', '京东商城-菜场', 'Wcu2LVCFMkBP3HraRvb7pgSpt64'); //京东菜场
       await JDUserSignPre(Wait(stop), 'JDClean', '京东商城-清洁', '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6'); //京东清洁馆
@@ -1853,7 +1855,7 @@ function JingDongJingCai(s) {
         },
         body: '[{"userNo":"$cooMrdGatewayUid$"}]',
       };
-      $nobyda.post(JingCaiUrl, function (error, response, data) {
+      $nobyda.post(JingCaiUrl, function(error, response, data) {
         try {
           if (error) {
             throw new Error(error);
@@ -1867,17 +1869,14 @@ function JingDongJingCai(s) {
               if (data.match(/\"title\":\"\d+京豆\"/)) {
                 merge.JDJingCai.bean = data.match(/\"title\":\"(\d+)京豆\"/)[1];
               }
-              merge.JDJingCai.notify = `京东精彩-京豆: 成功, 明细: ${
-                merge.JDJingCai.bean || `无`
-              }京豆 🐶`;
+              merge.JDJingCai.notify = `京东精彩-京豆: 成功, 明细: ${merge.JDJingCai.bean||`无`}京豆 🐶`;
             } else {
               console.log("\n" + "京东精彩-京豆签到失败 " + Details);
               merge.JDJingCai.fail = 1;
-              if (cc.code == -1) {
+              if (cc.code == -1 || data.match(/已经签到/)) {
                 merge.JDJingCai.notify = "京东精彩-京豆: 失败, 原因: 已签过 ⚠️";
-              } else if (cc.code == 143) {
-                merge.JDJingCai.notify =
-                  "京东精彩-京豆: 失败, 原因: Cookie失效‼️";
+              } else if (cc.error_response && cc.error_response.code == 143) {
+                merge.JDJingCai.notify = "京东精彩-京豆: 失败, 原因: Cookie失效‼️";
               } else {
                 merge.JDJingCai.notify = "京东精彩-京豆: 失败, 原因: 未知 ⚠️";
               }
@@ -1928,30 +1927,24 @@ function TotalBean() {
   merge.TotalBean = {};
   return new Promise(resolve => {
     if (disable("Qbear")) return resolve()
-    $nobyda.post({
-      url: 'https://wq.jd.com/user/info/QueryJDUserInfo?sceneval=2',
+    $nobyda.get({
+      url: 'https://me-api.jd.com/user_new/info/GetJDUserInfoUnion',
       headers: {
-        Cookie: KEY,
-        Referer: "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2"
+        Cookie: KEY
       }
     }, (error, response, data) => {
       try {
         if (error) throw new Error(error);
         const Details = LogDetails ? "response:\n" + data : '';
         const cc = JSON.parse(data)
-        $nobyda.headUrl = cc.base.headImageUrl
-        if (cc.base.jdNum != 0) {
-          console.log("\n" + "京东-总京豆查询成功 " + Details)
-          merge.TotalBean.Qbear = cc.base.jdNum
+        if (cc.msg == 'success' && cc.retcode == 0) {
+          merge.TotalBean.nickname = cc.data.userInfo.baseInfo.nickname || ""
+          merge.TotalBean.Qbear = cc.data.assetInfo.beanNum || 0
+          $nobyda.headUrl = cc.data.userInfo.baseInfo.headImageUrl || ""
+          console.log(`\n京东-总京豆查询成功 ${Details}`)
         } else {
-          console.log("\n" + "京东-总京豆查询失败 " + Details)
-        }
-        if (data.match(/\"nickname\" ?: ?\"(.+?)\",/)) {
-          merge.TotalBean.nickname = cc.base.nickname
-        } else if (data.match(/\"no ?login\.?\"/)) {
-          merge.TotalBean.nickname = "Cookie失效 ‼️"
-        } else {
-          merge.TotalBean.nickname = '';
+          merge.TotalBean.nickname = cc.retcode == 1001 ? "Cookie失效 ‼️" : "";
+          console.log(`\n京东-总京豆查询失败 ${Details}`)
         }
       } catch (eor) {
         $nobyda.AnError("账户京豆-查询", "TotalBean", eor, response, data)

@@ -52,8 +52,8 @@
         "key": "JDBean",
         "label": "京东京豆"
       }, {
-        "key": "JDCustomized",
-        "label": "京东定制"
+        "key": "JDEsports",
+        "label": "京东电竞"
       }, {
         "key": "JRDoll",
         "label": "金融签壹"
@@ -115,8 +115,8 @@
         "key": "JDSchool",
         "label": "京东校园"
       }, {
-        "key": "JDShoes",
-        "label": "京东鞋靴"
+        "key": "JDUndies",
+        "label": "京东内衣"
       }, {
         "key": "JDHealth",
         "label": "京东健康"
