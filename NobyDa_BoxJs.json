@@ -159,6 +159,9 @@
       }, {
         "key": "JDGetCash",
         "label": "京东现金"
+      },{
+        "key": "JDJingCai",
+        "label": "京东精彩"
       }, {
         "key": "JDShake",
         "label": "京东摇一摇"
