@@ -118,6 +118,12 @@
         "key": "JDUndies",
         "label": "京东内衣"
       }, {
+        "key": "JDShoes",
+        "label": "京东鞋靴"
+      }, {
+        "key": "JDShand",
+        "label": "京东二手"
+      }, {
         "key": "JDHealth",
         "label": "京东健康"
       }, {
