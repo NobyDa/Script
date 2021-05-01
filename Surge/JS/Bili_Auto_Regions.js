@@ -61,7 +61,7 @@ hostname = ap?.bilibili.com
 
 ***************************/
 
-let body = JSON.parse($response.body.replace(/"\u53d7\u9650"/g, `""`));
+let body = JSON.parse($response.body);
 let $ = nobyda();
 const play = body.data || body.result || {};
 const run = SwitchRegion();
@@ -105,6 +105,9 @@ async function QueryRating() {
 			const exYear = body.data.publish.release_date_show.split(/^(\d{4})/)[1];
 			const filterInfo = [play.title, play.origin_name, play.staff.info + play.actor.info, exYear];
 			const [rating, folk, name, id, other] = ExtractMovieInfo([...t1, ...t2], filterInfo);
+			const limit = JSON.stringify(body.data.modules)
+				.replace(/"\u53d7\u9650"/g, `""`).replace(/("area_limit":)1/g, '$10');
+			body.data.modules = JSON.parse(limit);
 			body.data.detail = body.data.new_ep.desc.replace(/连载中,/, '');
 			body.data.badge_info.text = `⭐️ 豆瓣：${!$.is403?`${rating||'无评'}分 (${folk||'无评价'})`:`查询频繁！`}`;
 			body.data.evaluate = `${body.data.evaluate||''}\n\n豆瓣评分搜索结果: ${JSON.stringify(other,0,1)}`;
