@@ -2,10 +2,10 @@
 
 哔哩哔哩, 港澳台番剧自动切换地区 & 显示豆瓣评分
 
-如需禁用豆瓣评分, 可前往BoxJs设置.
+如需禁用豆瓣评分或策略通知, 可前往BoxJs设置.
 BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
 
-Update: 2021.04.28
+Update: 2021.05.01
 Author: @NobyDa
 Use: Surge, QuanX, Loon
 
@@ -13,17 +13,24 @@ Use: Surge, QuanX, Loon
 港澳台自动切换地区说明 :
 ****************************
 
-地区自动切换功能仅适用于Surge4.7+ (iOS), 低于该版本或其他APP仅显示豆瓣评分.
-地区自动切换功能仅适用于Surge4.7+ (iOS), 低于该版本或其他APP仅显示豆瓣评分.
-地区自动切换功能仅适用于Surge4.7+ (iOS), 低于该版本或其他APP仅显示豆瓣评分.
+地区自动切换功能仅适用于Surge4.7+(iOS)，Loon2.1.10(286)+，QuanX1.0.22(543)+
+低于以上版本仅显示豆瓣评分.
 
-您需要配置相关规则集（https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/StreamingSE.list）绑定相关select策略组，并且需要具有相关的区域代理服务器纳入您的子策略中。
+您需要配置相关规则集:
+Surge、Loon: 
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia/StreamingSE.list
+
+QuanX: 
+https://raw.githubusercontent.com/DivineEngine/Profiles/master/Quantumult/Filter/StreamingMedia/StreamingSE.list
+
+绑定相关select或static策略组，并且需要具有相关的区域代理服务器纳入您的子策略中，子策略可以是服务器也可以是其他区域策略组．
 最后，您可以通过BoxJs设置策略名和子策略名，或者手动填入脚本.
 
-***************************
+QX用户注: 使用切换地区功能请确保您的QX=>其他设置=>温和策略机制处于关闭状态, 以及填写策略名和子策略名时注意大小写.
+
+****************************
 Surge 4.7+ 远程脚本配置 :
 ****************************
-
 [Script]
 Bili Region = type=http-response,pattern=^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/(v\d\/)?app|x(\/v\d)?\/view\/video)\/(season|online)\?access_key,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
@@ -33,7 +40,6 @@ hostname = ap?.bilibili.com
 ****************************
 Quantumult X 远程脚本配置 :
 ****************************
-
 [rewrite_local]
 ^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/(v\d\/)?app|x(\/v\d)?\/view\/video)\/(season|online)\?access_key url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
@@ -44,12 +50,21 @@ hostname = ap?.bilibili.com
 #可选, 由于qx纯tun特性, 不添加规则可能会导致脚本失效.
 ip-cidr, 203.107.1.1/24, reject
 
+****************************
+Loon 远程脚本配置 :
+****************************
+[Script]
+http-response ^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/(v\d\/)?app|x(\/v\d)?\/view\/video)\/(season|online)\?access_key script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区
+
+[Mitm]
+hostname = ap?.bilibili.com
+
 ***************************/
 
-let body = JSON.parse($response.body);
-const $ = nobyda();
+let body = JSON.parse($response.body.replace(/"\u53d7\u9650"/g, `""`));
+let $ = nobyda();
 const play = body.data || body.result || {};
-const run = $.isSurge ? SwitchRegion() : QueryRating();
+const run = SwitchRegion();
 
 async function SwitchRegion() {
 	const Group = $.read('BiliArea_Policy') || '📺 DomesticMedia'; //Your blibli policy group name.
@@ -69,7 +84,7 @@ async function SwitchRegion() {
 		const change = await $.setPolicy(Group, area);
 		const notify = $.read('BiliAreaNotify') === 'true';
 		if (!notify) $.notify(play.title || ``, ``, `${current}  =>  ${area}  =>  ${change?`🟢`:`🔴`}`);
-		if (change) {
+		if (change && !$.isQuanX) {
 			$done(); //Kill the connection. Due to the characteristics of Surge, it will auto reconnect with the new policy.
 		} else {
 			QueryRating();
@@ -129,7 +144,7 @@ function ExtractMovieInfo(ret, fv) {
 			return Boolean(t.accuracy);
 		});
 	let x = {}; //assign most similar
-	const f2 = f1.reduce((p, c, i) => c.accuracy > p ? (x = c, c.accuracy) : p, 0);
+	const f2 = f1.reduce((p, c) => c.accuracy > p ? (x = c, c.accuracy) : p, 0);
 	return [x.rating, x.folk, x.name, x.id, f1];
 }
 
@@ -148,7 +163,7 @@ function GetRawInfo(t) {
 			if (error) {
 				console.log(`Douban rating: \n${t}\nRequest error: ${error}\n`);
 			} else {
-				if (resp.status == 403) $.is403 = true;
+				if (/\u767b\u5f55<\/a>\u540e\u91cd\u8bd5\u3002/.test(data)) $.is403 = true;
 				let s = data.replace(/\n| |&#\d{2}/g, '')
 					.match(/\[\u7535\u5f71\].+?subject-cast\">.+?<\/span>/g) || [];
 				for (let i = 0; i < s.length; i++) {
@@ -194,18 +209,31 @@ function nobyda() {
 		return response;
 	}
 	const getPolicy = (groupName) => {
+		const m = `切换策略失败, 您的版本不支持该功能\n`
 		if (isSurge) {
-			if (typeof($httpAPI) === 'undefined')
-				return `切换策略失败, 请升级您的Surge\n`;
+			if (typeof($httpAPI) === 'undefined') return m;
 			return new Promise((resolve) => {
 				$httpAPI("GET", "v1/policy_groups/select", {
 					group_name: encodeURIComponent(groupName)
-				}, (body) => resolve(body.policy))
+				}, (b) => resolve(b.policy))
 			})
 		}
 		if (isLoon) {
-			const get = JSON.parse($config.getConfig());
-			return get.policy_select[groupName];
+			if (typeof($config.getPolicy) === 'undefined') return m;
+			const getName = $config.getPolicy(groupName);
+			return getName;
+		}
+		if (isQuanX) {
+			if (typeof($configuration) === 'undefined') return m;
+			return new Promise((resolve) => {
+				$configuration.sendMessage({
+					action: "get_policy_state"
+				}).then(b => {
+					if (b.ret && b.ret[groupName]) {
+						resolve(b.ret[groupName][1]);
+					} else resolve();
+				}, () => resolve());
+			})
 		}
 	}
 	const setPolicy = (group, policy) => {
@@ -214,12 +242,22 @@ function nobyda() {
 				$httpAPI("POST", "v1/policy_groups/select", {
 					group_name: group,
 					policy: policy
-				}, (body) => resolve(!body.error))
+				}, (b) => resolve(!b.error))
 			})
 		}
-		if (isLoon) {
+		if (isLoon && typeof($config.getPolicy) !== 'undefined') {
 			const set = $config.setSelectPolicy(group, policy);
-			return getPolicy(group) === policy;
+			return set;
+		}
+		if (isQuanX && typeof($configuration) !== 'undefined') {
+			return new Promise((resolve) => {
+				$configuration.sendMessage({
+					action: "set_policy_state",
+					content: {
+						[group]: policy
+					}
+				}).then((b) => resolve(!b.error), () => resolve());
+			})
 		}
 	}
 	const get = (options, callback) => {
@@ -240,6 +278,7 @@ function nobyda() {
 		getPolicy,
 		setPolicy,
 		isSurge,
+		isQuanX,
 		isLoon,
 		notify,
 		read,
