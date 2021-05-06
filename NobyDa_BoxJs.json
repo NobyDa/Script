@@ -52,8 +52,8 @@
         "key": "JDBean",
         "label": "京东京豆"
       }, {
-        "key": "JDCustomized",
-        "label": "京东定制"
+        "key": "JDEsports",
+        "label": "京东电竞"
       }, {
         "key": "JRDoll",
         "label": "金融签壹"
@@ -73,9 +73,6 @@
         "key": "XJDouble",
         "label": "现金双签"
       }, {
-        "key": "JRLottery",
-        "label": "金融抽奖"
-      }, {
         "key": "JRSteel",
         "label": "金融钢镚"
       }, {
@@ -87,6 +84,9 @@
       }, {
         "key": "JDComputer",
         "label": "京东电脑"
+      }, {
+        "key": "JDCard",
+        "label": "京东卡包"
       }, {
         "key": "JD3C",
         "label": "京东数码"
@@ -115,14 +115,17 @@
         "key": "JDSchool",
         "label": "京东校园"
       }, {
+        "key": "JDUndies",
+        "label": "京东内衣"
+      }, {
         "key": "JDShoes",
         "label": "京东鞋靴"
       }, {
+        "key": "JDShand",
+        "label": "京东二手"
+      }, {
         "key": "JDHealth",
         "label": "京东健康"
-      }, {
-        "key": "JDCalendar",
-        "label": "京东日历"
       }, {
         "key": "JDWomen",
         "label": "京东女装"
@@ -138,6 +141,9 @@
       }, {
         "key": "JDVege",
         "label": "京东菜场"
+      }, {
+        "key": "JDLive",
+        "label": "京东生活"
       }, {
         "key": "JDClean",
         "label": "京东清洁"
@@ -162,6 +168,9 @@
       }, {
         "key": "JDGetCash",
         "label": "京东现金"
+      },{
+        "key": "JDJingCai",
+        "label": "京东精彩"
       }, {
         "key": "JDShake",
         "label": "京东摇一摇"
@@ -318,7 +327,13 @@
       "name": "静默运行",
       "val": false,
       "type": "boolean",
-      "desc": "不再发出切换策略通知"
+      "desc": "开启后将不再发出切换策略通知"
+    }, {
+      "id": "BiliDoubanRating",
+      "name": "豆瓣评分",
+      "val": true,
+      "type": "boolean",
+      "desc": "关闭后将不再查询豆瓣评分, 可显著提高相关页面载入速度"
     }, {
       "id": "BiliArea_Policy",
       "name": "策略组名",
