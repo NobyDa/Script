@@ -55,23 +55,8 @@
         "key": "JDEsports",
         "label": "京东电竞"
       }, {
-        "key": "JRDoll",
-        "label": "金融签壹"
-      }, {
-        "key": "JRTwoDoll",
-        "label": "金融签贰"
-      }, {
-        "key": "JRThreeDoll",
-        "label": "金融签叁"
-      }, {
         "key": "JRFourDoll",
         "label": "金融签肆"
-      }, {
-        "key": "JRFiveDoll",
-        "label": "金融签伍"
-      }, {
-        "key": "XJDouble",
-        "label": "现金双签"
       }, {
         "key": "JRSteel",
         "label": "金融钢镚"
@@ -142,9 +127,6 @@
         "key": "JDVege",
         "label": "京东菜场"
       }, {
-        "key": "JDLive",
-        "label": "京东生活"
-      }, {
         "key": "JDClean",
         "label": "京东清洁"
       }, {
@@ -153,9 +135,6 @@
       }, {
         "key": "JDaccompany",
         "label": "京东陪伴"
-      }, {
-        "key": "JDJewels",
-        "label": "京东珠宝"
       }, {
         "key": "JDCube",
         "label": "京东魔方"
@@ -171,9 +150,6 @@
       }, {
         "key": "JDGetCash",
         "label": "京东现金"
-      },{
-        "key": "JDJingCai",
-        "label": "京东精彩"
       }, {
         "key": "JDShake",
         "label": "京东摇一摇"
