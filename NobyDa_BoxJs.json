@@ -266,17 +266,6 @@
     "repo": "https://github.com/sazs34/TaskConfig/blob/master/task/sign_baidu_tieba_v2.js",
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/tieba.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/tieba.png"]
   }, {
-    "id": "52poje",
-    "name": "吾爱破解",
-    "keys": ["CookieWA"],
-    "descs_html": [
-      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js\">脚本注释</a></h4>"
-    ],
-    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js",
-    "author": "@NobyDa",
-    "repo": "https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js",
-    "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/52pj.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/52pj.png"]
-  }, {
     "id": "KuaiKan",
     "name": "快看漫画",
     "keys": ["@KKMH.COOKIE", "@KKMH.TIME", "@KKMH.UID", "@KKMH.DATE"],
@@ -357,9 +346,6 @@
     "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
   }, {
     "config": "15 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js, tag=百度贴吧签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/tieba.png",
-    "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
-  }, {
-    "config": "20 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/52pojie-DailyBonus/52pojie.js, tag=吾爱破解签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/52pj.png",
     "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
   }, {
     "config": "25 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/KuaiKan-DailyBonus/KKMH.js, tag=快看漫画签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/KuaiKan.png",
