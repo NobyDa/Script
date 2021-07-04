@@ -15,12 +15,11 @@ DOMAIN-SUFFIX,apple-cloudkit.com
 DOMAIN-SUFFIX,apple-dns.net
 DOMAIN-SUFFIX,apple-livephotoskit.com
 DOMAIN-SUFFIX,apple-mapkit.com
-DOMAIN-SUFFIX,push-apple.com.akadns.net
 DOMAIN-SUFFIX,itunes.com.edgekey.net
 DOMAIN-SUFFIX,apple.com.edgekey.net
-DOMAIN-SUFFIX,apple.com.akadns.net
+DOMAIN-SUFFIX,apple-support.akadns.net
+DOMAIN-SUFFIX,apple.com.edgekey.net.globalredir.akadns.net
 DOMAIN-SUFFIX,aaplimg.com
-DOMAIN-SUFFIX,akadns.net
 DOMAIN-SUFFIX,crashlytics.com
 DOMAIN-SUFFIX,digicert.com
 DOMAIN-SUFFIX,itunes.com
@@ -32,6 +31,7 @@ DOMAIN,apple.comscoreresearch.com
 
 DOMAIN-KEYWORD,icloud
 DOMAIN-KEYWORD,testflight
+DOMAIN-KEYWORD,apple.com.akadns.net
 
 IP-CIDR,139.178.128.0/18,no-resolve
 IP-CIDR,144.178.0.0/19,no-resolve

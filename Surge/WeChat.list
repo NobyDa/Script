@@ -84,7 +84,13 @@ IP-CIDR,123.150.76.0/24,no-resolve
 IP-CIDR,113.96.208.0/24,no-resolve
 IP-CIDR,113.96.98.0/24,no-resolve
 IP-CIDR,113.96.154.0/24,no-resolve
+IP-CIDR,129.226.3.0/24,no-resolve
+IP-CIDR,101.32.104.0/24,no-resolve
+IP-CIDR,101.32.133.0/24,no-resolve
 
+IP-CIDR6,::ffff:101.32.104.0/120,no-resolve
+IP-CIDR6,::ffff:101.32.133.0/120,no-resolve
+IP-CIDR6,::ffff:129.226.3.0/120,no-resolve
 IP-CIDR6,::ffff:113.96.98.0/120,no-resolve
 IP-CIDR6,::ffff:113.96.154.0/120,no-resolve
 IP-CIDR6,::ffff:42.187.131.0/120,no-resolve
@@ -180,8 +186,10 @@ DOMAIN-SUFFIX,wx.gtimg.com
 DOMAIN-SUFFIX,qpic.cn
 DOMAIN-SUFFIX,qlogo.cn
 DOMAIN-SUFFIX,wx.qq.com
+DOMAIN-SUFFIX,wxs.qq.com
 DOMAIN-SUFFIX,weixin.qq.com
 DOMAIN-SUFFIX,wechat.com
 DOMAIN-SUFFIX,weixin.com
+DOMAIN-SUFFIX,vweixinthumb.tc.qq.com
 
 USER-AGENT,WeChat*
