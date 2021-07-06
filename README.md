@@ -58,6 +58,7 @@
 |       [NiChi](https://apps.apple.com/app/id1442041390)       | [NiChi.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/NiChi.js) |  Unlock material pack   | ✅(2021.7.3) |      ❌      |
 | [美易Picsart](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js) | [PicsArt.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js) |    Unlock membership    | ✅(2021.7.3) |      ✅      |
 |    [MIX滤镜大师](https://apps.apple.com/app/id913947918)     | [MIX.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/MIX.js) | Unlock in-app purchases | ✅(2021.7.6) |      ❌      |
+|    [Polarr 泼辣](https://apps.apple.com/app/id988173374)     | [Polarr.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Polarr.js) | Unlock in-app purchases | ✅(2021.7.6) |      ❌      |
 |   [小影VivaVideo](https://apps.apple.com/app/id738897668)    | [vivavideo.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/vivavideo.js) |    Unlock membership    | ✅(2021.7.3) |      ❌      |
 |     [CamScanner](https://apps.apple.com/app/id388627783)     | [CamScanner.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js) |  Unlock some benefits   | ✅(2021.7.3) |      ❌      |
 |    [酷我音乐](https://apps.apple.com/cn/app/id588673713)     | [Kuwo.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Kuwo.js) |    Unlock vip listen    | ✅(2021.7.3) |      ❌      |
