@@ -67,6 +67,7 @@
 |   [网易蜗牛读书](https://apps.apple.com/app/id1127249355)    | [wnyd.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/wnyd.js) |  Unlock membership   | ✅(2021.7.3) |      ❌      |
 |    [陆琪讲故事](https://apps.apple.com/app/id1435575842)     | [luqi.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/luqi.js) |     Unlock radio     | ✅(2021.7.3) |      ❌      |
 |    [WPS Office](https://apps.apple.com/app/id1491101673)     | [Wps.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Wps.js) |  Unlock membership   | ✅(2021.7.3) |      ❌      |
+|      [百度网盘](https://apps.apple.com/app/id547166701)      | [BaiduCloud.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/BaiduCloud.js) |  Unlock video speed  | ✅(2021.7.6) |      ❌      |
 |       [WeChat](https://apps.apple.com/app/id414478124)       | [Wechat.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Wechat.js) |      Remove ads      | ✅(2021.7.3) |      ❌      |
 |     [皮皮虾](https://apps.apple.com/cn/app/id1393912676)     | [Super.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Super.js) |      Remove ads      | ✅(2021.7.3) |      ❌      |
 
