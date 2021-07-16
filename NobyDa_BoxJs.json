@@ -231,6 +231,39 @@
     "repo": "https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js",
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/manga.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/manga.png"]
   }, {
+    "id": "BiliMangaPoints",
+    "name": "哔哩漫画抢券",
+    "descs_html": [
+      "<h4 align=\"center\">脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js\">脚本注释</a></h4>"
+    ],
+    "keys": ["BM_ProductName", "BM_ProductNum", "BM_ExchangeNum"],
+    "settings": [{
+      "id": "BM_ProductName",
+      "name": "商品名",
+      "val": "积分兑换",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "要抢购的积分商城商品名"
+    }, {
+      "id": "BM_ProductNum",
+      "name": "兑换数量",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "要兑换的数量, 默认为积分可兑换的最大值"
+    }, {
+      "id": "BM_ExchangeNum",
+      "name": "抢购次数",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "默认暴力抢购100次"
+    }],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/ExchangePoints.js",
+    "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/manga.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/manga.png"]
+  }, {
     "id": "BaiduTB",
     "name": "百度贴吧",
     "keys": ["CookieTB"],
@@ -354,6 +387,9 @@
     "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
   }, {
     "config": "10 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js, tag=哔哩漫画签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/manga.png",
+    "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
+  }, {
+    "config": "10,20,30 0 12 * * * https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js, tag=哔哩漫画抢券, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/manga.png",
     "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
   }, {
     "config": "15 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js, tag=百度贴吧签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/tieba.png",
