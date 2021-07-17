@@ -18,7 +18,7 @@ BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa
 *************************
 
 [Script]
-cron "10,20,30 0 12 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js
+cron "10,20,30 0 12 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js, wake-system=1, timeout=60
 
 *************************
 【 QX 1.0.10+ 脚本配置 】 :
