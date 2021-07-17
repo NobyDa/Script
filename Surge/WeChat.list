@@ -87,7 +87,23 @@ IP-CIDR,113.96.154.0/24,no-resolve
 IP-CIDR,129.226.3.0/24,no-resolve
 IP-CIDR,101.32.104.0/24,no-resolve
 IP-CIDR,101.32.133.0/24,no-resolve
+IP-CIDR,180.111.199.0/24,no-resolve
+IP-CIDR,150.109.90.0/24,no-resolve
+IP-CIDR,101.33.110.0/24,no-resolve
+IP-CIDR,180.163.25.0/24,no-resolve
+IP-CIDR,203.205.232.0/24,no-resolve
+IP-CIDR,203.205.235.0/24,no-resolve
+IP-CIDR,203.205.253.0/24,no-resolve
+IP-CIDR,203.205.254.0/24,no-resolve
 
+IP-CIDR6,::ffff:180.111.199.0/120,no-resolve
+IP-CIDR6,::ffff:150.109.90.0/120,no-resolve
+IP-CIDR6,::ffff:101.33.110.0/120,no-resolve
+IP-CIDR6,::ffff:180.163.25.0/120,no-resolve
+IP-CIDR6,::ffff:203.205.232.0/120,no-resolve
+IP-CIDR6,::ffff:203.205.235.0/120,no-resolve
+IP-CIDR6,::ffff:203.205.253.0/120,no-resolve
+IP-CIDR6,::ffff:203.205.254.0/120,no-resolve
 IP-CIDR6,::ffff:101.32.104.0/120,no-resolve
 IP-CIDR6,::ffff:101.32.133.0/120,no-resolve
 IP-CIDR6,::ffff:129.226.3.0/120,no-resolve
@@ -176,6 +192,7 @@ IP-CIDR6,::ffff:101.226.129.0/120,no-resolve
 IP-CIDR6,::ffff:121.14.98.0/120,no-resolve
 IP-CIDR6,::ffff:113.96.83.0/120,no-resolve
 
+DOMAIN,wup.imtt.qq.com
 DOMAIN,slife.xy-asia.com
 DOMAIN,dldir1.qq.com
 DOMAIN,wx.tenpay.com
