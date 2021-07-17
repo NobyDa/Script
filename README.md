@@ -43,6 +43,7 @@
 | [PolicySwitch.js](https://github.com/NobyDa/Script/blob/master/Shortcuts/PolicySwitch.js) | Switch [QX](https://apps.apple.com/app/id1443988620),[Surge](https://apps.apple.com/app/id1442620678),[Loon](https://apps.apple.com/app/id1373567447) policy groups using ios [shortcut](https://apps.apple.com/app/id1462947752). |      ✅      |
 | [DataQuery.js](https://github.com/NobyDa/Script/blob/master/Sub-store-parser/DataQuery.js) | Server(VPN) traffic query based on [Sub-Store](https://github.com/Peng-YM/Sub-Store). |      ✅      |
 | [Bili_Auto_Regions.js](https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js) | [Bilibili anime](https://apps.apple.com/app/id1426252715) auto switch region & show [douban](https://www.douban.com/) rating. |      ✅      |
+| [ExchangePoints.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/ExchangePoints.js) | [Bilibili manga](https://apps.apple.com/app/id1426252715) points mall auto snap up. |      ✅      |
 
 ---
 
