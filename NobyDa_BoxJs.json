@@ -328,6 +328,44 @@
     "repo": "https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js",
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/KuaiKan.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/KuaiKan.png"]
   }, {
+    "id": "Bahamut",
+    "name": "巴哈姆特",
+    "keys": ["@ND_BAHA.ID", "@ND_BAHA.PW", "@ND_BAHA.GUILD", "@ND_BAHA.ANSWER"],
+    "descs_html": [
+      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutDailyBonus.js\">脚本注释</a></h4>"
+    ],
+    "settings": [{
+      "id": "@ND_BAHA.GUILD",
+      "name": "签到公会",
+      "val": true,
+      "type": "boolean",
+      "desc": "开启后将自动签到公会"
+    }, {
+      "id": "@ND_BAHA.ANSWER",
+      "name": "动画疯答题",
+      "val": true,
+      "type": "boolean",
+      "desc": "开启后将自动答题"
+    }, {
+      "id": "@ND_BAHA.ID",
+      "name": "用户名",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "输入用户名(账号)"
+    }, {
+      "id": "@ND_BAHA.PW",
+      "name": "用户密码",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "输入用户密码"
+    }],
+    "script": "https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutDailyBonus.js",
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/Bahamut/BahamutDailyBonus.js",
+    "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/bahamutGame.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/bahamutGame.png"]
+  }, {
     "id": "BiliRegion",
     "name": "哔哩番剧自动地区",
     "descs_html": [
@@ -400,5 +438,7 @@
   }, {
     "config": "25 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/KuaiKan-DailyBonus/KKMH.js, tag=快看漫画签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/KuaiKan.png",
     "addons": "https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Js_Remote_Cookie.conf, tag=NobyDa Cookie获取"
+  }, {
+    "config": "0 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutDailyBonus.js, tag=巴哈姆特签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/bahamutGame.png"
   }]
 }
