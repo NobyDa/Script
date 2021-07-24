@@ -26,13 +26,14 @@
 
 ### Daily bonus scripts
 
-|                       Application                       |                         Script name                          |  Available  | Maintenance |
-| :-----------------------------------------------------: | :----------------------------------------------------------: | :---------: | :---------: |
-|   [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js) | ✅(2021.7.4) |      ✅      |
-|   [百度贴吧](https://apps.apple.com/app/id477927812)    | [TieBa.js](https://github.com/NobyDa/Script/blob/master/BDTieBa-DailyBonus/TieBa.js) | ✅(2021.7.4) |      ❌      |
-|           [吾爱破解](https://www.52pojie.cn/)           | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js) | ✅(2021.7.4) |      ❌      |
-|   [快看漫画](https://apps.apple.com/app/id906936224)    | [KKMH.js](https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js) | ✅(2021.7.4) |      ✅      |
-| [哔哩哔哩漫画](https://apps.apple.com/app/id1426252715) | [Manga.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js) | ✅(2021.7.4) |      ✅      |
+|                       Application                       |                         Script name                          |  Available   | Maintenance |
+| :-----------------------------------------------------: | :----------------------------------------------------------: | :----------: | :---------: |
+|   [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js) | ✅(2021.7.4)  |      ✅      |
+|   [百度贴吧](https://apps.apple.com/app/id477927812)    | [TieBa.js](https://github.com/NobyDa/Script/blob/master/BDTieBa-DailyBonus/TieBa.js) | ✅(2021.7.4)  |      ❌      |
+|           [吾爱破解](https://www.52pojie.cn/)           | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js) | ✅(2021.7.4)  |      ❌      |
+|   [快看漫画](https://apps.apple.com/app/id906936224)    | [KKMH.js](https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js) | ✅(2021.7.4)  |      ✅      |
+| [哔哩哔哩漫画](https://apps.apple.com/app/id1426252715) | [Manga.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js) | ✅(2021.7.4)  |      ✅      |
+|          [巴哈姆特](https://www.gamer.com.tw/)          | [BahamutDailyBonus.js](https://github.com/NobyDa/Script/blob/master/Bahamut/BahamutDailyBonus.js) | ✅(2021.7.25) |      ✅      |
 
 ------
 
