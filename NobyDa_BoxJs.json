@@ -330,11 +330,17 @@
   }, {
     "id": "Bahamut",
     "name": "巴哈姆特",
-    "keys": ["@ND_BAHA.ID", "@ND_BAHA.PW", "@ND_BAHA.GUILD", "@ND_BAHA.ANSWER"],
+    "keys": ["@ND_BAHA.ID", "@ND_BAHA.PW", "@ND_BAHA.TOTP", "@ND_BAHA.GUILD", "@ND_BAHA.ANSWER", "@ND_BAHA.ADS"],
     "descs_html": [
       "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutDailyBonus.js\">脚本注释</a></h4>"
     ],
     "settings": [{
+      "id": "@ND_BAHA.ADS",
+      "name": "签到广告",
+      "val": false,
+      "type": "boolean",
+      "desc": "开启后将签到双倍巴币奖励, 默认关闭. 请注意, 此功能耗时过长(30秒以上), 如果使用Surge请调整该脚本超时为300秒"
+    }, {
       "id": "@ND_BAHA.GUILD",
       "name": "签到公会",
       "val": true,
@@ -358,8 +364,15 @@
       "name": "用户密码",
       "val": "",
       "type": "text",
-      "placeholder": "(点击以展开说明)",
+      "placeholder": "",
       "desc": "输入用户密码"
+    }, {
+      "id": "@ND_BAHA.TOTP",
+      "name": "两步验证令牌",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "输入网站生成的16位令牌, 如未设置两步验证, 请留空"
     }],
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutDailyBonus.js",
     "author": "@NobyDa",
