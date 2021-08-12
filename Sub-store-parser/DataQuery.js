@@ -14,7 +14,7 @@ Sub-Store订阅管理器: https://github.com/Peng-YM/Sub-Store
 
 ******************************/
 
-async function operator(proxies) {
+function operator(proxies) {
   try {
     if ($request.headers["User-Agent"].match(/Quantumult|Surge|Loon|Decar/) && !$.raw_Name) {
       const rawInfo = $.read('subs');
@@ -23,31 +23,27 @@ async function operator(proxies) {
       if ($request.url.match(/\/collection\//)) { //collection subscription.
         const isOpen = readName[subtag].process.map(o => o.type).indexOf("Script Operator") != -1;
         for (var i = 0; i < readName[subtag].subscriptions.length; i++) {
-          try {
-            $.raw_Name = readName[subtag].subscriptions[i];
-            if (!isOpen) break; //prevent queries in certain cases.
-            const query = await $.http.get(rawInfo[readName[subtag].subscriptions[i]].url);
-            AllSubs(query, $.raw_Name);
-          } catch (er) {
-            $.notify(`🔹 订阅昵称:「 ${$.raw_Name||'未知'} 」`, ``, `🔺 查询失败:「 ${er.message||er} 」`);
-          }
+          $.raw_Name = readName[subtag].subscriptions[i];
+          if (!isOpen) break; //prevent queries in certain cases.
+          AllSubs(rawInfo[$.raw_Name].url, $.raw_Name);
         }
       } else { //single subscription.
         $.raw_Name = rawInfo[subtag].name;
-        const query = await $.http.get(rawInfo[subtag].url);
-        AllSubs(query, $.raw_Name);
+        AllSubs(rawInfo[subtag].url, $.raw_Name);
       }
     }
   } catch (err) {
-    $.notify(`🔹 订阅昵称:「 ${$.raw_Name||'未知'} 」`, ``, `🔺 查询失败:「 ${err.message||err} 」`);
+    $.error(`\n🔹 订阅昵称:「 ${$.raw_Name||'未知'} 」\n🔺 查询失败:「 ${err.message||err} 」`);
   } finally {
     return proxies;
   }
 }
 
-function AllSubs(resp, subsName) { //reference to https://github.com/KOP-XIAO/QuantumultX/blob/master/Scripts/resource-parser.js
-  var sinfo = JSON.stringify(resp.headers || '').replace(/ /g, "").toLowerCase();
-  if (sinfo.indexOf("total=") != -1 && sinfo.indexOf("download=") != -1) {
+async function AllSubs(subsUrl, subsName) {
+  try { //reference to https://github.com/KOP-XIAO/QuantumultX/blob/master/Scripts/resource-parser.js
+    var resp = await $.http.get(subsUrl);
+    var sinfo = JSON.stringify(resp.headers || '').replace(/ /g, "").toLowerCase();
+    if (sinfo.indexOf("total=") == -1 || sinfo.indexOf("download=") == -1) throw new Error('该订阅不包含流量信息');
     var total = (parseFloat(sinfo.split("total=")[1].split(",")[0]) / (1024 ** 3)).toFixed(0);
     var usd = ((parseFloat(sinfo.indexOf("upload") != -1 ? sinfo.split("upload=")[1].split(",")[0] : "0") + parseFloat(sinfo.split("download=")[1].split(",")[0])) / (1024 ** 3)).toFixed(2);
     var left = ((parseFloat(sinfo.split("total=")[1].split(",")[0]) / (1024 ** 3)) - ((parseFloat(sinfo.indexOf("upload") != -1 ? sinfo.split("upload=")[1].split(",")[0] : "0") + parseFloat(sinfo.split("download=")[1].split(",")[0])) / (1024 ** 3))).toFixed(2);
@@ -61,5 +57,7 @@ function AllSubs(resp, subsName) { //reference to https://github.com/KOP-XIAO/Qu
       var epr = "";
     }
     $.notify(`🔹 订阅昵称:「 ${subsName} 」`, epr, `🔸 已用流量:「 ${usd} GB 」\n🔸 剩余流量:「 ${left} GB 」`);
-  } else $.error(`\n🔹 订阅昵称:「 ${subsName} 」\n🔺 查询失败:「 该订阅不包含流量信息 」`);
+  } catch (er) {
+    $.error(`\n🔹 订阅昵称:「 ${subsName} 」\n🔺 查询失败:「 ${er.message||er} 」`);
+  }
 }

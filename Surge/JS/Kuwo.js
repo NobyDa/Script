@@ -1,15 +1,25 @@
 /*
-KuWo music unlock vip
+酷我音乐 解锁会员试听及部分功能
 
-QX1.0.0:
+***************************
+QuantumultX:
+
+[rewrite_local]
 ^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Kuwo.js
 
-Surge4.0:
-http-response ^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Kuwo.js
-http-request ^https?:\/\/musicpay\.kuwo.cn\/music\.pay\?uid=\d+ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/KuWoMusicDownload.js
+[mitm]
+hostname = vip1.kuwo.cn
 
-MITM = vip1.kuwo.cn
-*/
+***************************
+Surge4 or Loon:
+
+[Script]
+http-response ^https?:\/\/vip1\.kuwo\.cn\/(vip\/v2\/user\/vip|vip\/spi/mservice) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Kuwo.js
+
+[MITM]
+hostname = vip1.kuwo.cn
+
+**************************/
 
 var body = $response.body;
 var url = $request.url;
