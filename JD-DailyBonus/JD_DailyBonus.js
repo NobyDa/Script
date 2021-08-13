@@ -1793,9 +1793,11 @@ function nobyda() {
     if (isNode) {
       const request = require('request');
       const fs = require("fs");
+      const path = require("path");
       return ({
         request,
-        fs
+        fs,
+        path
       })
     } else {
       return (null)
@@ -1851,11 +1853,12 @@ function nobyda() {
     if (isSurge) return $persistentStore.write(value, key)
     if (isNode) {
       try {
-        if (!node.fs.existsSync(NodeSet)) node.fs.writeFileSync(NodeSet, JSON.stringify({}));
-        const dataValue = JSON.parse(node.fs.readFileSync(NodeSet));
+        if (!node.fs.existsSync(node.path.resolve(__dirname, NodeSet)))
+          node.fs.writeFileSync(node.path.resolve(__dirname, NodeSet), JSON.stringify({}));
+        const dataValue = JSON.parse(node.fs.readFileSync(node.path.resolve(__dirname, NodeSet)));
         if (value) dataValue[key] = value;
         if (!value) delete dataValue[key];
-        return node.fs.writeFileSync(NodeSet, JSON.stringify(dataValue));
+        return node.fs.writeFileSync(node.path.resolve(__dirname, NodeSet), JSON.stringify(dataValue));
       } catch (er) {
         return AnError('Node.js持久化写入', null, er);
       }
@@ -1875,8 +1878,8 @@ function nobyda() {
     if (isSurge) return $persistentStore.read(key)
     if (isNode) {
       try {
-        if (!node.fs.existsSync(NodeSet)) return null;
-        const dataValue = JSON.parse(node.fs.readFileSync(NodeSet))
+        if (!node.fs.existsSync(node.path.resolve(__dirname, NodeSet))) return null;
+        const dataValue = JSON.parse(node.fs.readFileSync(node.path.resolve(__dirname, NodeSet)))
         return dataValue[key]
       } catch (er) {
         return AnError('Node.js持久化读取', null, er)
