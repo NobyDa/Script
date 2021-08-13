@@ -5,8 +5,8 @@
 更新时间: 2021.06.17 23:20 v2.0.5
 有效接口: 30+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-电报频道: @NobyDa 
-问题反馈: @NobyDa_bot 
+电报频道: @NobyDa
+问题反馈: @NobyDa_bot
 如果转载: 请注明出处
 
 *************************
@@ -34,13 +34,13 @@ var OtherKey = ''; //第三账号或以上的Cookie json串数据, 以下样例�
 
 初次使用时, app配置文件添加脚本配置,并启用Mitm后, Safari浏览器打开登录 https://bean.m.jd.com/bean/signIndex.action ,点击签到并且出现签到日历后, 如果通知获得cookie成功, 则可以使用此签到脚本。 注: 请勿在京东APP内获取!!!
 
-由于cookie的有效性(经测试网页Cookie有效周期最长31天)，如果脚本后续弹出cookie无效的通知，则需要重复上述步骤。 
+由于cookie的有效性(经测试网页Cookie有效周期最长31天)，如果脚本后续弹出cookie无效的通知，则需要重复上述步骤。
 签到脚本将在每天的凌晨0:05执行, 您可以修改执行时间。 因部分接口京豆限量领取, 建议调整为凌晨签到。
 
 BoxJs或QX Gallery订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
 
 *************************
-【 配置多京东账号签到说明 】 : 
+【 配置多京东账号签到说明 】 :
 *************************
 
 正确配置QX、Surge、Loon后, 并使用此脚本获取"账号1"Cookie成功后, 请勿点击退出账号(可能会导致Cookie失效), 需清除浏览器资料或更换浏览器登录"账号2"获取即可; 账号3或以上同理.
@@ -80,7 +80,7 @@ hostname = api.m.jd.com
 5 0 * * * https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东多合一签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/jd.png,enabled=true
 
 [rewrite_local]
-# 获取京东Cookie. 
+# 获取京东Cookie.
 # 注意此为远程路径, 低版本用户请自行调整为本地路径.
 https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
@@ -1793,9 +1793,11 @@ function nobyda() {
     if (isNode) {
       const request = require('request');
       const fs = require("fs");
+      const path = require('path');
       return ({
         request,
-        fs
+        fs,
+        path
       })
     } else {
       return (null)
@@ -1851,11 +1853,12 @@ function nobyda() {
     if (isSurge) return $persistentStore.write(value, key)
     if (isNode) {
       try {
-        if (!node.fs.existsSync(NodeSet)) node.fs.writeFileSync(NodeSet, JSON.stringify({}));
-        const dataValue = JSON.parse(node.fs.readFileSync(NodeSet));
+        if (!node.fs.existsSync(node.path.resolve(__dirname, NodeSet)))
+          node.fs.writeFileSync(node.path.resolve(__dirname, NodeSet), JSON.stringify({}));
+        const dataValue = JSON.parse(node.fs.readFileSync(node.path.resolve(__dirname, NodeSet)));
         if (value) dataValue[key] = value;
         if (!value) delete dataValue[key];
-        return node.fs.writeFileSync(NodeSet, JSON.stringify(dataValue));
+        return node.fs.writeFileSync(node.resolve(__dirname, NodeSet), JSON.stringify(dataValue));
       } catch (er) {
         return AnError('Node.js持久化写入', null, er);
       }
@@ -1875,8 +1878,8 @@ function nobyda() {
     if (isSurge) return $persistentStore.read(key)
     if (isNode) {
       try {
-        if (!node.fs.existsSync(NodeSet)) return null;
-        const dataValue = JSON.parse(node.fs.readFileSync(NodeSet))
+        if (!node.fs.existsSync(node.path.resolve(__dirname, NodeSet))) return null;
+        const dataValue = JSON.parse(node.fs.readFileSync(node.path.resolve(__dirname, NodeSet)))
         return dataValue[key]
       } catch (er) {
         return AnError('Node.js持久化读取', null, er)
