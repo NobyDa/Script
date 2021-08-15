@@ -8,9 +8,11 @@
   "apps": [{
     "id": "多合一签到",
     "name": "京东",
-    "keys": ["CookieJD", "CookieJD2", "CookiesJD"],
+    "keys": ["CookiesJD"],
     "descs_html": [
       "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js\">脚本注释</a></h4>",
+      "<h4 align=\"center\">如需修改Cookie列表请严格按照<a href=\"https://www.bejson.com/json/format\">JSON格式</a>修改</h4>",
+      "<h4 align=\"center\">建议通过脚本获取Cookie</h4>",
       "<br />",
       "<h3 align=\"center\">签到相关教程</h3>",
       "<p align=\"center\"><iframe src=\"https://www.youtube.com/embed/6vMz1LKF1-8\" width=\"100%\" height=\"100%\"></iframe></p>"
@@ -46,17 +48,8 @@
       "type": "checkboxes",
       "desc": "",
       "items": [{
-        "key": "SpeedUp",
-        "label": "天天加速"
-      }, {
         "key": "JDBean",
         "label": "京东京豆"
-      }, {
-        "key": "JDEsports",
-        "label": "京东电竞"
-      }, {
-        "key": "JRFourDoll",
-        "label": "金融签肆"
       }, {
         "key": "JRSteel",
         "label": "金融钢镚"
@@ -67,17 +60,11 @@
         "key": "JDGStore",
         "label": "京东超市"
       }, {
-        "key": "JDComputer",
-        "label": "京东电脑"
-      }, {
         "key": "JDCard",
         "label": "京东卡包"
       }, {
         "key": "JD3C",
         "label": "京东数码"
-      }, {
-        "key": "JDClothing",
-        "label": "京东服饰"
       }, {
         "key": "JDSuitcase",
         "label": "京东箱包"
@@ -121,9 +108,6 @@
         "key": "JTDouble",
         "label": "金贴双签"
       }, {
-        "key": "JDMakeup",
-        "label": "京东美妆"
-      }, {
         "key": "JDVege",
         "label": "京东菜场"
       }, {
@@ -139,8 +123,8 @@
         "key": "JDCube",
         "label": "京东魔方"
       }, {
-        "key": "JDBuyCar",
-        "label": "京东汽车"
+        "key": "JDJiaDian",
+        "label": "京东家电"
       }, {
         "key": "JDDouble",
         "label": "京豆双签"
@@ -183,6 +167,16 @@
       "type": "number",
       "placeholder": "默认并发无延迟 (点击以展开说明)",
       "desc": "延迟作用于每个签到接口, 该参数接受随机或指定延迟(例: '2000'则表示延迟2秒; '2000-5000'则表示延迟最小2秒,最大5秒内的随机延迟), 如填入延迟则切换顺序签到(耗时较长); VPN重启或越狱用户建议填写1(顺序执行), Surge用户请注意在SurgeUI界面调整脚本超时."
+    }, {
+      "id": "CookiesJD",
+      "name": "Cookie列表",
+      "val": "",
+      "type": "textarea",
+      "autoGrow": false,
+      "rows": 9,
+      "val": "[\n  {\n    \"cookie\": \"此处填写账号1 Cookie\"\n  },\n  {\n    \"cookie\": \"此处填写账号2 Cookie\",\n    \"jrBody\": \"此处填写账号2 钢镚Body\"\n  }\n]",
+      "placeholder": "[ {\"cookie\": \"pt_key=xxx;pt_pin=yyy;\", \"jrBody\": \"reqData=zzz\"}  ]",
+      "desc": "Cookie和钢镚签到Body列表, 如需修改请严格按照JSON格式填写; \"cookie\"为必须, 其他为可选."
     }],
     "scripts": [{
       "name": "京东签到",
