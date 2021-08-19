@@ -43,6 +43,11 @@ IP-CIDR,205.180.175.0/24,no-resolve
 IP-CIDR,63.92.224.0/19,no-resolve
 IP-CIDR,65.199.22.0/23,no-resolve
 IP-CIDR,17.0.0.0/8,no-resolve
+IP-CIDR6,2403:300::/32,no-resolve
+IP-CIDR6,2620:149::/32,no-resolve
+IP-CIDR6,2a01:b740::/32,no-resolve
+IP-CIDR6,2a01:b747::/32,no-resolve
+
 
 USER-AGENT,%E5%9C%B0%E5%9B%BE*
 USER-AGENT,%E6%9F%A5%E6%89%BE*
