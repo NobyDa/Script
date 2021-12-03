@@ -23,45 +23,46 @@ var cookie = ''
 var barkKey = ''; //Bark APP 通知推送Key
 
 /*********************
- QuantumultX 远程脚本配置:
- **********************
- [task_local]
- # 爱奇艺会员签到
- 0 9 * * * https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+QuantumultX 远程脚本配置:
+**********************
+[task_local]
+# 爱奇艺会员签到
+0 9 * * * https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
- [rewrite_local]
- # 获取Cookie
- ^https?:\/\/iface(\d)?\.iqiyi\.com\/ url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+[rewrite_local]
+# 获取Cookie
+^https?:\/\/iface(\d)?\.iqiyi\.com\/ url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
- [mitm]
- hostname= ifac*.iqiyi.com
+[mitm]
+hostname= ifac*.iqiyi.com
 
- **********************
- Surge 4.2.0+ 脚本配置:
- **********************
- [Script]
- 爱奇艺签到 = type=cron,cronexp=0 9 * * *,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+**********************
+Surge 4.2.0+ 脚本配置:
+**********************
+[Script]
+爱奇艺签到 = type=cron,cronexp=0 9 * * *,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
- 爱奇艺获取Cookie = type=http-request,pattern=^https?:\/\/iface(\d)?\.iqiyi\.com\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+爱奇艺获取Cookie = type=http-request,pattern=^https?:\/\/iface(\d)?\.iqiyi\.com\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
- [MITM]
- hostname= ifac*.iqiyi.com
+[MITM]
+hostname= ifac*.iqiyi.com
 
- ************************
- Loon 2.1.0+ 脚本配置:
- ************************
+************************
+Loon 2.1.0+ 脚本配置:
+************************
 
- [Script]
- # 爱奇艺签到
- cron "0 9 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+[Script]
+# 爱奇艺签到
+cron "0 9 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
- # 获取Cookie
- http-request ^https?:\/\/iface(\d)?\.iqiyi\.com\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+# 获取Cookie
+http-request ^https?:\/\/iface(\d)?\.iqiyi\.com\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
- [Mitm]
- hostname= ifac*.iqiyi.com
+[Mitm]
+hostname= ifac*.iqiyi.com
 
- */
+*/
+
 var tasks = ['b6e688905d4e7184', 'a7f02e895ccbf416'] //浏览任务号
 
 var LogDetails = false; // 响应日志
@@ -158,9 +159,9 @@ function Checkin() {
 function Lottery(s) {
   return new Promise(resolve => {
     $nobyda.times++
-    const URL = {
-      url: 'https://iface2.iqiyi.com/aggregate/3.0/lottery_activity?app_k=0&app_v=0&platform_id=0&dev_os=0&dev_ua=0&net_sts=0&qyid=0&psp_uid=0&psp_cki=' + cookie + '&psp_status=0&secure_p=0&secure_v=0&req_sn=0'
-    }
+      const URL = {
+        url: 'https://iface2.iqiyi.com/aggregate/3.0/lottery_activity?app_k=0&app_v=0&platform_id=0&dev_os=0&dev_ua=0&net_sts=0&qyid=0&psp_uid=0&psp_cki=' + cookie + '&psp_status=0&secure_p=0&secure_v=0&req_sn=0'
+      }
     setTimeout(() => {
       $nobyda.get(URL, async function(error, response, data) {
         if (error) {
