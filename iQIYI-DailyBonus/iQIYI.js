@@ -234,49 +234,6 @@ function getTaskRewards(task) {
   })
 }
 
-function viewPageTask(task) {
-  return new Promise(resolve => {
-    //Join Task
-    $nobyda.get('https://tc.vip.iqiyi.com/taskCenter/task/joinTask?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + cookie, function (error, response, data) {resolve()})
-    console.log(1)
-    //Notify Task
-    $nobyda.get('https://tc.vip.iqiyi.com/taskCenter/task/notify?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + cookie, function (error, response, data) {resolve()})
-    console.log(2)
-    //Join Task
-    $nobyda.get('https://tc.vip.iqiyi.com/taskCenter/task/getTaskRewards?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + cookie, function (error, response, data) {
-      if (error) {
-        $nobyda.data = "浏览奖励失败: 接口请求出错 ‼️"
-        console.log(`爱奇艺-${$nobyda.data} ${error}`)
-      } else {
-        const obj = JSON.parse(data)
-        const Details = LogDetails ? `response:\n${data}` : ''
-
-        console.log(data)
-        console.log('https://tc.vip.iqiyi.com/taskCenter/task/getTaskRewards?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + cookie)
-        if (obj.msg == "成功") {
-          if (obj.code == "A00000") {
-            $nobyda.data = "浏览奖励成功: " + obj.dataNew.name + obj.dataNew.value + " 🎉"
-            console.log(`爱奇艺-${$nobyda.data} ${Details}`)
-          } else {
-            $nobyda.data = "浏览奖励失败: " + obj.msg + " ⚠️"
-            console.log(`爱奇艺-${$nobyda.data} ${Details}`)
-          }
-        } else {
-          $nobyda.data = "浏览奖励失败: Cookie无效/接口失效 ⚠️"
-          console.log(`爱奇艺-${$nobyda.data} ${Details}`)
-        }
-        resolve()
-      }
-    })
-    console.log(3)
-    if (out) setTimeout(resolve, out)
-  })
-}
-
-function barkNotify(){
-
-}
-
 function GetCookie() {
   var CKA = $request.url.match(/(psp_cki=|P00001=|authcookie=)([A-Za-z0-9]+)/)
   var CKB = JSON.stringify($request.headers).match(/(psp_cki=|P00001=|authcookie=)([A-Za-z0-9]+)/)
