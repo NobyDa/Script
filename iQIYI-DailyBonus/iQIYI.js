@@ -22,6 +22,8 @@ var cookie = ''
 
 var barkKey = ''; //Bark APP 通知推送Key
 
+var P00001 = '';
+var P00003 = '';
 /*********************
 QuantumultX 远程脚本配置:
 **********************
@@ -77,8 +79,8 @@ var $nobyda = nobyda();
     GetCookie()
   } else if (cookie) {
     if (cookie.includes("P00001") && cookie.includes("P00003")) {
-      var P00001 = cookie.match(/P00001=(.*?);/)[1];
-      var P00003 = cookie.match(/P00003=(.*?);/)[1];
+      P00001 = cookie.match(/P00001=(.*?);/)[1];
+      P00003 = cookie.match(/P00003=(.*?);/)[1];
     }
     if (P00001 !== "" && P00003 !== "" && dfp !== ""){
       await login();
