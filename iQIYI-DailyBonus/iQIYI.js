@@ -35,7 +35,7 @@ QuantumultX 远程脚本配置:
 # 获取Cookie
 ^https?:\/\/iface(\d)?\.iqiyi\.com\/ url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
-[mitm] 
+[mitm]
 hostname= ifac*.iqiyi.com
 
 **********************
@@ -46,7 +46,7 @@ Surge 4.2.0+ 脚本配置:
 
 爱奇艺获取Cookie = type=http-request,pattern=^https?:\/\/iface(\d)?\.iqiyi\.com\/,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
-[MITM] 
+[MITM]
 hostname= ifac*.iqiyi.com
 
 ************************
@@ -60,10 +60,12 @@ cron "0 9 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/mas
 # 获取Cookie
 http-request ^https?:\/\/iface(\d)?\.iqiyi\.com\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
 
-[Mitm] 
+[Mitm]
 hostname= ifac*.iqiyi.com
 
 */
+
+var tasks = ['b6e688905d4e7184', 'a7f02e895ccbf416'] //浏览任务号
 
 var LogDetails = false; // 响应日志
 
@@ -82,14 +84,23 @@ var $nobyda = nobyda();
       P00001 = cookie.match(/P00001=(.*?);/)[1];
       P00003 = cookie.match(/P00003=(.*?);/)[1];
     }
-    if (P00001 !== "" && P00003 !== "" && dfp !== ""){
-      await login();
-      await Checkin();
-      await Lottery(500);
-      await $nobyda.time();
-    }else{
-      $nobyda.notify("爱奇艺会员", "", "签到终止, 未获取Cookie");
+    if (P00001 !== "" && P00003 !== ""){
+    await login();
+    await Checkin();
+    await Lottery(500);
+    for (let i = 0; i < tasks.length; i++){
+      await joinTask(tasks[i]);
+      await notifyTask(tasks[i]);
+      await new Promise(r => setTimeout(r, 5000));
+      await getTaskRewards(tasks[i]);
     }
+    const expires = $nobyda.expire ? $nobyda.expire.replace(/\u5230\u671f/, "") : "获取失败 ⚠️"
+    if (!$nobyda.isNode) $nobyda.notify("爱奇艺", "到期时间: " + expires, $nobyda.data);
+    if (barkKey) await BarkNotify($nobyda, barkKey, '爱奇艺', `到期时间: ${expires}\n${$nobyda.data}`);
+    await $nobyda.time();
+     }else{
+      $nobyda.notify("爱奇艺会员", "", "签到终止, 未获取Cookie");
+  }
   }
 })().finally(() => {
   $nobyda.done();
@@ -213,15 +224,52 @@ function Lottery(s) {
         }
         if (!$nobyda.last && $nobyda.times < 3) {
           await Lottery(s)
-        } else {
-          const expires = $nobyda.expire ? $nobyda.expire.replace(/\u5230\u671f/, "") : "获取失败 ⚠️"
-          if (!$nobyda.isNode) $nobyda.notify("爱奇艺", "到期时间: " + expires, $nobyda.data);
-          if (barkKey) await BarkNotify($nobyda, barkKey, '爱奇艺', `到期时间: ${expires}\n${$nobyda.data}`);
         }
         resolve()
       })
     }, s)
     if (out) setTimeout(resolve, out + s)
+  })
+}
+function joinTask(task) {
+  return new Promise(resolve => {
+    $nobyda.get('https://tc.vip.iqiyi.com/taskCenter/task/joinTask?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + cookie, function (error, response, data) {resolve()})
+    if (out) setTimeout(resolve, out)
+  })
+}
+
+function notifyTask(task) {
+  return new Promise(resolve => {
+    $nobyda.get('https://tc.vip.iqiyi.com/taskCenter/task/notify?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + cookie, function (error, response, data) {resolve()})
+    if (out) setTimeout(resolve, out)
+  })
+}
+
+function getTaskRewards(task) {
+  return new Promise(resolve => {
+    $nobyda.get('https://tc.vip.iqiyi.com/taskCenter/task/getTaskRewards?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + cookie, function (error, response, data) {
+      if (error) {
+        $nobyda.data += "\n浏览奖励失败: 接口请求出错 ‼️"
+        console.log(`爱奇艺-抽奖失败: \n${data} (${$nobyda.times})`)
+      } else {
+        const obj = JSON.parse(data)
+        const Details = LogDetails ? `response:\n${data}` : ''
+        if (obj.msg == "成功") {
+          if (obj.code == "A00000") {
+            $nobyda.data += `\n浏览奖励成功: ${obj.dataNew[0].name + obj.dataNew[0].value} 🎉`
+            console.log(`爱奇艺-浏览奖励成功: ${obj.dataNew[0].name + obj.dataNew[0].value} 🎉`)
+          } else {
+            $nobyda.data += `\n浏览奖励失败: ${obj.msg} ⚠️`
+            console.log(`爱奇艺-抽奖失败: ${obj.msg || `未知错误`} ⚠️ (${$nobyda.times}) ${msg ? Details : `response:\n${data}`}`)
+          }
+        } else {
+          $nobyda.data += "\n浏览奖励失败: Cookie无效/接口失效 ⚠️"
+          console.log(`爱奇艺-浏览奖励失败: \n${data}`)
+        }
+        resolve()
+      }
+    })
+    if (out) setTimeout(resolve, out)
   })
 }
 
