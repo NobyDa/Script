@@ -1,4 +1,4 @@
-# Update > 2021.2.27 This rule is based on optimization by lhie1/Rules.
+# Update > 2022.1.26
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
@@ -1295,7 +1295,6 @@ DOMAIN-SUFFIX,alertserver.ushaqi.com,REJECT
 DOMAIN-SUFFIX,alipay.dajiadou6.com,REJECT
 DOMAIN-SUFFIX,aliqqjd.cn,REJECT
 DOMAIN-SUFFIX,alisinak.com,REJECT
-DOMAIN-SUFFIX,alissl.ucdl.pp.uc.cn,REJECT
 DOMAIN-SUFFIX,alistatic.cn,REJECT
 DOMAIN-SUFFIX,alitianxia168.com,REJECT
 DOMAIN-SUFFIX,alitui.weibo.com,REJECT

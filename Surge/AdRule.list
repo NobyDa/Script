@@ -1,4 +1,4 @@
-# Update > 2021.2.27 Go advertising rule Integration lhie1 and ConnersHua
+# Update > 2022.1.26
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com
 DOMAIN-SUFFIX,mcupdate.gstarcad.com
 DOMAIN-SUFFIX,adx.open-adx.com
@@ -1306,7 +1306,6 @@ DOMAIN-SUFFIX,alertserver.ushaqi.com
 DOMAIN-SUFFIX,alipay.dajiadou6.com
 DOMAIN-SUFFIX,aliqqjd.cn
 DOMAIN-SUFFIX,alisinak.com
-DOMAIN-SUFFIX,alissl.ucdl.pp.uc.cn
 DOMAIN-SUFFIX,alistatic.cn
 DOMAIN-SUFFIX,alitianxia168.com
 DOMAIN-SUFFIX,alitui.weibo.com
