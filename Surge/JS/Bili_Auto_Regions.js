@@ -5,7 +5,7 @@
 如需禁用豆瓣评分或策略通知, 可前往BoxJs设置.
 BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
 
-Update: 2021.09.26
+Update: 2022.01.18
 Author: @NobyDa
 Use: Surge, QuanX, Loon
 
@@ -34,7 +34,7 @@ QX用户注: 使用切换地区功能请确保您的QX=>其他设置=>温和策�
 Surge 4.7+ 远程脚本配置 :
 ****************************
 [Script]
-Bili Region = type=http-response,pattern=^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/(v\d\/)?app|x(\/v\d)?\/view\/video)\/(season|online)\?access_key,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
+Bili Region = type=http-response,pattern=^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/v\d\/app\/season|x\/v\d\/search\/defaultwords)\?access_key,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
 #可选, 适用于搜索指定地区的番剧
 Bili Search = type=http-request,pattern=^https:\/\/app\.bilibili\.com\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
@@ -46,7 +46,7 @@ hostname = ap?.bilibili.com
 Quantumult X 远程脚本配置 :
 ****************************
 [rewrite_local]
-^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/(v\d\/)?app|x(\/v\d)?\/view\/video)\/(season|online)\?access_key url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
+^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/v\d\/app\/season|x\/v\d\/search\/defaultwords)\?access_key url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
 #可选, 适用于搜索指定地区的番剧
 ^https:\/\/app\.bilibili\.com\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)& url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
@@ -62,7 +62,7 @@ ip-cidr, 203.107.1.1/24, reject
 Loon 远程脚本配置 :
 ****************************
 [Script]
-http-response ^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/(v\d\/)?app|x(\/v\d)?\/view\/video)\/(season|online)\?access_key script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区
+http-response ^https:\/\/ap(p|i)\.bilibili\.com\/(pgc\/view\/v\d\/app\/season|x\/v\d\/search\/defaultwords)\?access_key script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区
 
 #可选, 适用于搜索指定地区的番剧
 http-request ^https:\/\/app\.bilibili\.com\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)& script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区(搜索)
@@ -80,23 +80,35 @@ async function SwitchRegion(play) {
 	const CN = $.read('BiliArea_CN') || 'DIRECT'; //Your China sub-policy name.
 	const TW = $.read('BiliArea_TW') || '🇹🇼 sub-policy'; //Your Taiwan sub-policy name.
 	const HK = $.read('BiliArea_HK') || '🇭🇰 sub-policy'; //Your HongKong sub-policy name.
+	const DF = $.read('BiliArea_DF') || '🏁 sub-policy'; //Sub-policy name used after region is blocked(e.g. url 404)
+	const off = $.read('BiliArea_disabled') || ''; //WiFi blacklist(disable region change), separated by commas.
 	const current = await $.getPolicy(Group);
 	const area = (() => {
+		let select;
 		if (/\u50c5[\u4e00-\u9fa5]+\u6e2f|%20%E6%B8%AF&/.test(play)) {
-			if (current != HK) return HK;
+			const test = /\u50c5[\u4e00-\u9fa5]+\u53f0/.test(play);
+			if (current != HK && (current == TW && test ? 0 : 1)) select = HK;
 		} else if (/\u50c5[\u4e00-\u9fa5]+\u53f0|%20%E5%8F%B0&/.test(play)) {
-			if (current != TW) return TW;
-		} else if (current != CN) return CN;
+			if (current != TW) select = TW;
+		} else if (play === -404) {
+			if (current != DF) select = DF;
+		} else if (current != CN) {
+			select = CN;
+		}
+		if ($.isQuanX && current === 'direct' && select === 'DIRECT') {
+			select = null; //avoid loops in some cases
+		}
+		return select;
 	})()
 
-	if (area) {
+	if (area && !off.includes($.ssid || undefined)) {
 		const change = await $.setPolicy(Group, area);
 		const notify = $.read('BiliAreaNotify') === 'true';
 		const msg = SwitchStatus(change, current, area);
 		if (!notify) {
-			$.notify(/^http/.test(play) || !play ? `` : play, ``, msg);
+			$.notify((/^(http|-404)/.test(play) || !play) ? `` : play, ``, msg);
 		} else {
-			console.log(`${/^http/.test(play)||!play?``:play}\n${msg}`);
+			console.log(`${(/^(http|-404)/.test(play)||!play)?``:play}\n${msg}`);
 		}
 		if (change) {
 			return true;
@@ -106,7 +118,7 @@ async function SwitchRegion(play) {
 }
 
 function SwitchStatus(status, original, newPolicy) {
-	if (status) {
+	if (status && typeof original !== 'number') {
 		return `${original}  =>  ${newPolicy}  =>  🟢`;
 	} else if (original === 2) {
 		return `切换失败, 策略组名未填写或填写有误 ⚠️`
@@ -123,9 +135,14 @@ function EnvInfo() {
 	if (typeof($response) !== 'undefined') {
 		const raw = JSON.parse($response.body);
 		const data = raw.data || raw.result || {};
-		//if surge or loon, $done() will auto reconnect with the new policy
-		SwitchRegion(data.title)
-			.then(s => s && !$.isQuanX ? $done() : QueryRating(raw, data));
+		SwitchRegion(data.title || (raw.code === -404 ? -404 : null))
+			.then(s => s ? $done({
+				status: $.isQuanX ? "HTTP/1.1 408 Request Timeout" : 408,
+				headers: {
+					Connection: "close"
+				},
+				body: "{}"
+			}) : QueryRating(raw, data));
 	} else {
 		const raw = $request.url;
 		const res = {
@@ -237,6 +254,17 @@ function nobyda() {
 	const isLoon = typeof $loon != "undefined";
 	const isQuanX = typeof $task != "undefined";
 	const isSurge = typeof $network != "undefined" && typeof $script != "undefined";
+	const ssid = (() => {
+		if (isQuanX && typeof($environment) !== 'undefined') {
+			return $environment.ssid;
+		}
+		if (isSurge && $network.wifi) {
+			return $network.wifi.ssid;
+		}
+		if (isLoon) {
+			return JSON.parse($config.getConfig()).ssid;
+		}
+	})();
 	const notify = (title, subtitle, message) => {
 		console.log(`${title}\n${subtitle}\n${message}`);
 		if (isQuanX) $notify(title, subtitle, message);
@@ -328,6 +356,7 @@ function nobyda() {
 		isLoon,
 		notify,
 		read,
+		ssid,
 		get
 	}
 }

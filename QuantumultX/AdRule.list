@@ -1412,7 +1412,6 @@ DOMAIN-SUFFIX,api-flow.flyme.cn,REJECT
 DOMAIN-SUFFIX,api-game.meizu.com,REJECT
 DOMAIN-SUFFIX,apihk.growingio.com,REJECT
 DOMAIN-SUFFIX,api-push.meizu.com,REJECT
-DOMAIN-SUFFIX,api-shoulei-ssl.xunlei.com,REJECT
 DOMAIN-SUFFIX,apisoft.df0535.com,REJECT
 DOMAIN-SUFFIX,apk.idate520.com,REJECT
 DOMAIN-SUFFIX,apk.supfast.net,REJECT
