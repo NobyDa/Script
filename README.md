@@ -30,10 +30,11 @@
 | :-----------------------------------------------------: | :----------------------------------------------------------: | :----------: | :---------: |
 |   [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js) | ✅(2021.7.4)  |      ✅      |
 |   [百度贴吧](https://apps.apple.com/app/id477927812)    | [TieBa.js](https://github.com/NobyDa/Script/blob/master/BDTieBa-DailyBonus/TieBa.js) | ✅(2021.7.4)  |      ❌      |
-|           [吾爱破解](https://www.52pojie.cn/)           | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js) | ✅(2021.7.4)  |      ❌      |
-|   [快看漫画](https://apps.apple.com/app/id906936224)    | [KKMH.js](https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js) | ✅(2021.7.4)  |      ✅      |
-| [哔哩哔哩漫画](https://apps.apple.com/app/id1426252715) | [Manga.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js) | ✅(2021.7.4)  |      ✅      |
-|          [巴哈姆特](https://www.gamer.com.tw/)          | [BahamutDailyBonus.js](https://github.com/NobyDa/Script/blob/master/Bahamut/BahamutDailyBonus.js) | ✅(2021.7.25) |      ✅      |
+|           [吾爱破解](https://www.52pojie.cn/)           | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js) |  ❌(2021.11)  |      ❌      |
+|   [爱奇艺](https://apps.apple.com/cn/app/id393765873)   | [iQIYI.js](https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js) | ✅(2022.1.26) |      ❌      |
+|   [快看漫画](https://apps.apple.com/app/id906936224)    | [KKMH.js](https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js) | ✅(2022.1.26) |      ✅      |
+| [哔哩哔哩漫画](https://apps.apple.com/app/id1426252715) | [Manga.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js) | ✅(2022.1.26) |      ✅      |
+|          [巴哈姆特](https://www.gamer.com.tw/)          | [BahamutDailyBonus.js](https://github.com/NobyDa/Script/blob/master/Bahamut/BahamutDailyBonus.js) | ✅(2022.1.26) |      ✅      |
 
 ------
 
@@ -43,7 +44,7 @@
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :---------: |
 | [PolicySwitch.js](https://github.com/NobyDa/Script/blob/master/Shortcuts/PolicySwitch.js) | Switch [QX](https://apps.apple.com/app/id1443988620),[Surge](https://apps.apple.com/app/id1442620678),[Loon](https://apps.apple.com/app/id1373567447) policy groups using ios [shortcut](https://apps.apple.com/app/id1462947752). |      ✅      |
 | [DataQuery.js](https://github.com/NobyDa/Script/blob/master/Sub-store-parser/DataQuery.js) | Server(VPN) traffic query based on [Sub-Store](https://github.com/Peng-YM/Sub-Store). |      ✅      |
-| [Bili_Auto_Regions.js](https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js) | [Bilibili anime](https://apps.apple.com/app/id1426252715) auto switch region & show [douban](https://www.douban.com/) rating. |      ✅      |
+| [Bili_Auto_Regions.js](https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js) | [Bilibili anime](https://apps.apple.com/cn/app/id736536022) auto switch region & show [douban](https://www.douban.com/) rating. |      ✅      |
 | [ExchangePoints.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/ExchangePoints.js) | [Bilibili manga](https://apps.apple.com/app/id1426252715) points mall auto snap up. |      ✅      |
 
 ---
@@ -62,7 +63,7 @@
 |    [MIX滤镜大师](https://apps.apple.com/app/id913947918)     | [MIX.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/MIX.js) | Unlock in-app purchases | ✅(2021.7.6) |      ❌      |
 |    [Polarr 泼辣](https://apps.apple.com/app/id988173374)     | [Polarr.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Polarr.js) | Unlock in-app purchases | ✅(2021.7.6) |      ❌      |
 |   [小影VivaVideo](https://apps.apple.com/app/id738897668)    | [vivavideo.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/vivavideo.js) |    Unlock membership    | ✅(2021.7.3) |      ❌      |
-|     [CamScanner](https://apps.apple.com/app/id388627783)     | [CamScanner.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js) |  Unlock some benefits   | ✅(2021.7.3) |      ❌      |
+|     [CamScanner](https://apps.apple.com/app/id388627783)     | [CamScanner.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js) |  Unlock some benefits   |      ❌      |      ❌      |
 |    [酷我音乐](https://apps.apple.com/cn/app/id588673713)     | [Kuwo.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Kuwo.js) |    Unlock vip listen    | ✅(2021.7.3) |      ❌      |
 |     [知音漫客](https://apps.apple.com/app/id1012491820)      | [Zymh.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Zymh.js) |   Unlock vip chapters   | ✅(2021.7.3) |      ✅      |
 |           [91短视频](http://download.91porn.love/)           | [91.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/91.js) |    Unlock membership    | ✅(2021.7.3) |      ❌      |
