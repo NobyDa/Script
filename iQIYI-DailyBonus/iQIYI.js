@@ -1,13 +1,13 @@
 /*
 爱奇艺会员签到脚本
 
-更新时间: 2022.1.26
+更新时间: 2022.1.27
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
 
 获取Cookie说明：
-Safari浏览器网页登录 https://m.iqiyi.com/user.html 如通知成功获取cookie则可使用该脚本.
+Safari浏览器打开 https://m.iqiyi.com/user.html 使用密码登录, 如通知成功获取cookie则可使用该脚本.
 获取Cookie后, 请将Cookie脚本禁用并移除主机名，以免产生不必要的MITM.
 脚本将在每天上午9:00执行, 您可以修改执行时间。
 
@@ -247,7 +247,7 @@ function joinTask(task) {
 
 function notifyTask(task) {
   return new Promise(resolve => {
-    $nobyda.get('https://tc.vip.iqiyi.com/taskCenter/task/notify?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + cookie, function (error, response, data) {resolve()})
+    $nobyda.get('https://tc.vip.iqiyi.com/taskCenter/task/notify?taskCode=' + task + '&lang=zh_CN&platform=0000000000000000&P00001=' + P00001, function (error, response, data) {resolve()})
   })
 }
 
