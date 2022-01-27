@@ -73,6 +73,8 @@ var P00001 = '';
 
 var P00003 = '';
 
+var dfp = '';
+
 var $nobyda = nobyda();
 
 (async () => {
@@ -81,11 +83,13 @@ var $nobyda = nobyda();
   if ($nobyda.isRequest) {
     GetCookie()
   } else if (cookie) {
-    if (cookie.includes("P00001") && cookie.includes("P00003")) {
+    if (cookie.includes("P00001") && cookie.includes("P00003") && cookie.includes("__dfp")) {
         P00001 = cookie.match(/P00001=(.*?);/)[1];
         P00003 = cookie.match(/P00003=(.*?);/)[1];
+	dfp = cookie.match(/__dfp=(.*?)@/)[1];
         await login();
         await Checkin();
+	await WebCheckin();
         for (let i = 0; i < 3; i++){
           const run = await Lottery(i);
           if (run) {
@@ -201,6 +205,58 @@ function Checkin() {
       }
       pushMsg.push(CheckinMsg);
       console.log(`爱奇艺-${CheckinMsg} ${Details}`);
+      resolve()
+    })
+  })
+}
+
+function WebCheckin() {
+  return new Promise(resolve => {
+    const web_sign_date = {
+      agenttype: "1",
+      agentversion: "0",
+      appKey: "basic_pca",
+      appver: "0",
+      authCookie: P00001,
+      channelCode: "sign_pcw",
+      dfp: dfp,
+      scoreType: "1",
+      srcplatform: "1",
+      typeCode: "point",
+      userId: P00003,
+      user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
+      verticalCode: "iQIYI"
+    };
+
+    const sign = k("DO58SzN6ip9nbJ4QkM8H", web_sign_date, {
+      split: "|",
+      sort: !0,
+      splitSecretKey: !0
+    });
+    var URL = {
+      url: 'https://community.iqiyi.com/openApi/score/add?' + w(web_sign_date) + "&sign=" + sign
+    }
+    $nobyda.get(URL, function(error, response, data) {
+      let WebCheckinMsg = '';
+      const Details = LogDetails ? `response:\n${data}` : ''
+      if (error) {
+        WebCheckinMsg = '网页端签到失败: 接口请求出错 ‼️'
+      } else {
+        const obj = JSON.parse(data)
+        if (obj.code === "A00000") {
+          if (obj.data[0].code === "A0000") {
+            var quantity = obj.data[0].score;
+            var continued = obj.data[0].continuousValue;
+            WebCheckinMsg = `网页端签到成功: 获得积分${quantity}, 累计签到${continued}天 🎉`;
+          } else {
+            WebCheckinMsg = `网页端签到失败: ${obj.data[0].message} ⚠️`;
+          }
+        } else {
+          WebCheckinMsg = `网页端签到失败: Cookie无效 ⚠️`;
+        }
+      }
+      pushMsg.push(WebCheckinMsg);
+      console.log(`爱奇艺-${WebCheckinMsg} ${Details}`);
       resolve()
     })
   })
