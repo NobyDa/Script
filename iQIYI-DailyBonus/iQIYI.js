@@ -24,7 +24,7 @@ JsBox, Node.js用户获取Cookie说明：
 方法二PC：网页登录 https://www.iqiyi.com 按F12控制台执行 console.log(document.cookie) 复制打印的Cookie填入以下脚本变量或环境变量中即可
 */
 
-var cookie = ''; //单引号内填入手动获取的Cookie
+var cookie = 'QC005=16c3a8065b1fd53811e48c2dc031abdd; QC173=1; QC008=1643342272.1643342272.1643342272.1; QC007=DIRECT; __uuid=7e8ce8e2-de92-7290-43b5-a5ca7a0474a0; QC006=mtm3bh677spkhqqet673y66; nu=0; QC010=119582860; QP0030=1; P00004=.1643342294.9c906e93ac; QC160=%7B%22type%22%3A1%7D; QC170=1; QYABEX={"mergedAbtest":"1707_B,1550_B","PCW-Home-List":{"value":"1","abtest":"1707_B"},"pcw_home_hover":{"value":"1","abtest":"1550_B"}}; arp_scroll_position=0; QP008=120; QC180=; P00001=8aYdI4XLIm2XwN4EqAqJOQXG5X75aYRVXqfKzvDZX30sK0WUt3m1cY7MKWNvm1pqJLPm3C25; P00003=1448378675; P00010=1448378675; P01010=1643385600; P00007=8aYdI4XLIm2XwN4EqAqJOQXG5X75aYRVXqfKzvDZX30sK0WUt3m1cY7MKWNvm1pqJLPm3C25; P00PRU=1448378675; QC179=%7B%22vipTypes%22%3A%221%22%2C%22userIcon%22%3A%22%2F%2Fimg7.iqiyipic.com%2Fpassport%2F20200309%2F39%2F93%2Fpassport_e47056d82eba46748fcf4821e21d3993_130_130.png%3FtaskId%3Dpassport_1448378675_158373829012024%22%2C%22iconPendant%22%3A%22%22%2C%22uid%22%3A1448378675%7D; __dfp=a1f931935bb3754eed9076ed46bb17e2b2cffe9d65b1c1cd0cf3693e89e137db7e@1644638272951@1643342273951; P00002=%7B%22uid%22%3A1448378675%2C%22pru%22%3A1448378675%2C%22user_name%22%3A%22159****7582%22%2C%22nickname%22%3A%22Redto-mato%22%2C%22pnickname%22%3A%22Redto-mato%22%2C%22type%22%3A11%2C%22email%22%3A%22%22%7D; QC175=%7B%22upd%22%3Afalse%2C%22ct%22%3A1643342900842%7D; QC163=1; QP0013=1'; //单引号内填入手动获取的Cookie
 
 var barkKey = ''; //Bark APP 通知推送Key
 
