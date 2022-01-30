@@ -1,4 +1,5 @@
-# Update > 2020.7.27 This rule is based on optimization by lhie1/Rules.
+# Update > 2022.1.26
+DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
 DOMAIN-SUFFIX,gemini.yahoo.com,REJECT
@@ -1294,7 +1295,6 @@ DOMAIN-SUFFIX,alertserver.ushaqi.com,REJECT
 DOMAIN-SUFFIX,alipay.dajiadou6.com,REJECT
 DOMAIN-SUFFIX,aliqqjd.cn,REJECT
 DOMAIN-SUFFIX,alisinak.com,REJECT
-DOMAIN-SUFFIX,alissl.ucdl.pp.uc.cn,REJECT
 DOMAIN-SUFFIX,alistatic.cn,REJECT
 DOMAIN-SUFFIX,alitianxia168.com,REJECT
 DOMAIN-SUFFIX,alitui.weibo.com,REJECT
@@ -1411,7 +1411,6 @@ DOMAIN-SUFFIX,api-flow.flyme.cn,REJECT
 DOMAIN-SUFFIX,api-game.meizu.com,REJECT
 DOMAIN-SUFFIX,apihk.growingio.com,REJECT
 DOMAIN-SUFFIX,api-push.meizu.com,REJECT
-DOMAIN-SUFFIX,api-shoulei-ssl.xunlei.com,REJECT
 DOMAIN-SUFFIX,apisoft.df0535.com,REJECT
 DOMAIN-SUFFIX,apk.idate520.com,REJECT
 DOMAIN-SUFFIX,apk.supfast.net,REJECT
@@ -6369,7 +6368,6 @@ DOMAIN-SUFFIX,searchignited.com,REJECT
 DOMAIN-SUFFIX,searchswapper.com,REJECT
 DOMAIN-SUFFIX,seavideo-ak.espn.go.com,REJECT
 DOMAIN-SUFFIX,sebar.thand.info,REJECT
-DOMAIN-SUFFIX,sec.resource.xiaomi.net,REJECT
 DOMAIN-SUFFIX,secpay.wostore.cn,REJECT
 DOMAIN-SUFFIX,secretmedia.s3.amazonaws.com,REJECT
 DOMAIN-SUFFIX,secure.dsp.com,REJECT

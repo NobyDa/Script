@@ -1,31 +1,32 @@
 /*
-大片 unlock vip
+Bigshot 解锁高级特权(需登录)
 
-QX:
-^https?:\/\/api\.vnision\.com\/v1\/(users\/|banners) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/dapian.js
+***************************
+QuantumultX:
 
-Surge4：
-http-response ^https?:\/\/api\.vnision\.com\/v1\/(users\/|banners) requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/dapian.js
+[rewrite_local]
+^https:\/\/vni\.kwaiying\.com\/api\/v1\/user\/profile url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/dapian.js
 
-Surge & QX MITM = api.vnision.com
-*/
+[mitm]
+hostname = vni.kwaiying.com
 
-var body = $response.body;
-var url = $request.url;
+***************************
+Surge4 or Loon:
 
-const vip = '/v1/users/';
-const ad = '/v1/banners';
+[Script]
+http-response ^https:\/\/vni\.kwaiying\.com\/api\/v1\/user\/profile requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/dapian.js
 
-if (url.indexOf(vip) != -1) {
-    let obj = JSON.parse(body);
-    obj.user.is_member = 1;
-	body = JSON.stringify(obj);  
- }
+[MITM]
+hostname = vni.kwaiying.com
+**************************/
 
-if (url.indexOf(ad) != -1) {
-    let obj = JSON.parse(body);
-	delete obj.banners
-	body = JSON.stringify(obj); 
- }
+var obj = JSON.parse($response.body);
 
-$done({body});
+if (obj.data && obj.data.userInfo) {
+    obj.data.userInfo.isVip = 1;
+    obj.data.userInfo.memberId = 666
+    obj.data.userInfo.vipStartTime = 1591430766000;
+    obj.data.userInfo.vipEndTime = 3043037166000;
+}
+
+$done({ body: JSON.stringify(obj) });

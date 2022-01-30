@@ -1,4 +1,4 @@
-#Update 2020.7.21 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2021.1.30 Self-use for testing only.
 DOMAIN-SUFFIX,admaster.com
 DOMAIN-SUFFIX,0z5jn.cn
 DOMAIN-SUFFIX,114so.cn
@@ -140,7 +140,6 @@ DOMAIN-SUFFIX,cm.e.qq.com
 DOMAIN-SUFFIX,cm.l.qq.com
 DOMAIN-SUFFIX,dir.minigame.qq.com
 DOMAIN-SUFFIX,etg.qq.com
-DOMAIN-SUFFIX,ex.qq.com
 DOMAIN-SUFFIX,fm.qzone.qq.com
 DOMAIN-SUFFIX,fodder.qq.com
 DOMAIN-SUFFIX,fodder.tc.qq.com
@@ -318,7 +317,6 @@ DOMAIN-SUFFIX,cpro.baidustatic.com
 DOMAIN-SUFFIX,cpro.tieba.baidu.com
 DOMAIN-SUFFIX,cpro2.baidustatic.com
 DOMAIN-SUFFIX,dup.baidustatic.com
-DOMAIN-SUFFIX,f10.baidu.com
 DOMAIN-SUFFIX,idm.bce.baidu.com
 DOMAIN-SUFFIX,imageplus.baidu.com
 DOMAIN-SUFFIX,itsdata.map.baidu.com
@@ -1018,7 +1016,6 @@ DOMAIN-SUFFIX,app.adjust.com
 DOMAIN-SUFFIX,dfp.suning.com
 DOMAIN-SUFFIX,huodonghezi.com
 DOMAIN-SUFFIX,miniapp.bilibili.com
-DOMAIN-SUFFIX,mtalk.google.com
 DOMAIN-SUFFIX,pv.sohu.com
 DOMAIN-SUFFIX,e.xroun.com
 DOMAIN-SUFFIX,dflooring.com
@@ -1031,7 +1028,6 @@ DOMAIN-SUFFIX,api.24kidea.com
 DOMAIN-SUFFIX,gss0.bdstatic.com
 DOMAIN-SUFFIX,sss.bxmns.com
 DOMAIN-SUFFIX,extlog.snssdk.com
-DOMAIN-SUFFIX,play.googleapis.com
 DOMAIN-SUFFIX,dcps.nuomi.com
 DOMAIN-SUFFIX,focusbaiduafp.allyes.com
 DOMAIN-SUFFIX,m.simaba.taobao.com

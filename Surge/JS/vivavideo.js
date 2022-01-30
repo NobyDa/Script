@@ -1,15 +1,25 @@
 /*
-Vivavideo unlock vip
-Script data comes from @hiepkimcdtk55
-Descriptions
+小影 解锁高级功能 
 
-Surge4：
-http-response ^https:\/\/viva\.v21xy\.com\/api\/rest\/u\/vip requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/vivavideo.js
-QX：
-^https:\/\/viva\.v21xy\.com\/api\/rest\/u\/vip url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/vivavideo.js
+***************************
+QuantumultX:
 
-Surge & QX MITM = viva.v21xy.com
-*/
+[rewrite_local]
+^https:\/\/xy-viva\.kakalili\.com\/api\/rest\/u\/vipVerifyReceipt url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/vivavideo.js
+
+[mitm]
+hostname = xy-viva.kakalili.com
+
+***************************
+Surge4 or Loon:
+
+[Script]
+http-response ^https:\/\/xy-viva\.kakalili\.com\/api\/rest\/u\/vipVerifyReceipt requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/vivavideo.js
+
+[MITM]
+hostname = xy-viva.kakalili.com
+
+**************************/
 
 var obj = JSON.parse($response.body);
 obj = {
