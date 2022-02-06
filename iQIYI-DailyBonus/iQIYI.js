@@ -1,7 +1,7 @@
 /*
 爱奇艺会员签到脚本
 
-更新时间: 2022.1.28
+更新时间: 2022.2.7
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -202,16 +202,24 @@ function Checkin() {
       body: JSON.stringify(post_date)
     }
     $nobyda.post(URL, function(error, response, data) {
-      let CheckinMsg;
+      let CheckinMsg, rewards = [];
       const Details = LogDetails ? `msg:\n${data||error}` : '';
       try {
       	if (error) throw new Error(`接口请求出错 ‼️`);
         const obj = JSON.parse(data)
         if (obj.code === "A00000") {
           if (obj.data.code === "A0000") {
-            var quantity = obj.data.data.rewards[0].rewardCount;
+          for(let i = 0; i < obj.data.data.rewards.length; i++) {
+          if (obj.data.data.rewards[i].rewardType == 1) {
+          rewards.push(`成长值+${obj.data.data.rewards[i].rewardCount}`)
+          } else if (obj.data.data.rewards[i].rewardType == 2) {
+          rewards.push(`VIP天+${obj.data.data.rewards[i].rewardCount}`)
+          } else if (obj.data.data.rewards[i].rewardType == 3) {
+          rewards.push(`积分+${obj.data.data.rewards[i].rewardCount}`)
+          }
+          }
             var continued = obj.data.data.signDays;
-            CheckinMsg = `应用签到: 获得积分${quantity}, 累计签到${continued}天 🎉`;
+            CheckinMsg = `应用签到: ${rewards.join(", ")}${rewards.length<3?`, 累计签到${continued}天`:``} 🎉`;
           } else {
             CheckinMsg = `应用签到: ${obj.data.msg} ⚠️`;
           }
@@ -264,7 +272,7 @@ function WebCheckin() {
           if (obj.data[0].code === "A0000") {
             var quantity = obj.data[0].score;
             var continued = obj.data[0].continuousValue;
-            WebCheckinMsg = "网页签到: 获得积分" + quantity + ", 累计签到" + continued + "天 🎉"
+            WebCheckinMsg = "网页签到: 积分+" + quantity + ", 累计签到" + continued + "天 🎉"
           } else {
             WebCheckinMsg = "网页签到: " + obj.data[0].message + " ⚠️"
           }
@@ -324,7 +332,7 @@ function getTaskList(task) {
         if (error) throw new Error(`请求失败`);
         const obj = JSON.parse(data);
         if (obj.code == 'A00000' && obj.data && obj.data.tasks) {
-          ['actively', 'daily'].map((group) => {
+            Object.keys(obj.data.tasks).map((group) => {
             (obj.data.tasks[group] || []).map((item) => {
               taskList.push({
                 name: item.taskTitle,
