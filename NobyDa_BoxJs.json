@@ -207,13 +207,6 @@
       "val": false,
       "type": "boolean",
       "desc": ""
-    }, {
-      "id": "iQIYI_TimeOut",
-      "name": "超时退出 (毫秒)",
-      "val": "",
-      "type": "number",
-      "placeholder": "默认无超时 (点击以展开说明)",
-      "desc": "按需填写, 用于由网络不稳定引起的脚本中断, 正常用户建议留空. 如QX日志出现\"JS Context timeout\"后脚本中断时, 建议填写6000"
     }],
     "script": "https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js",
     "author": "@NobyDa",
@@ -384,7 +377,7 @@
     "descs_html": [
       "<h4 align=\"center\">脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js\">脚本注释</a></h4>"
     ],
-    "keys": ["BiliArea_Policy", "BiliArea_CN", "BiliArea_HK", "BiliArea_TW"],
+    "keys": ["BiliArea_Policy", "BiliArea_CN", "BiliArea_HK", "BiliArea_TW", "BiliArea_DF", "BiliArea_disabled"],
     "settings": [{
       "id": "BiliAreaNotify",
       "name": "静默运行",
@@ -425,6 +418,20 @@
       "type": "text",
       "placeholder": "(点击以展开说明)",
       "desc": "哔哩哔哩分流策略组里的台湾子策略名"
+    }, {
+      "id": "BiliArea_DF",
+      "name": "后备-子策略名",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "部分番剧可能会被屏蔽, 使用该策略以避免页面加载失败. 建议填写台湾子策略"
+    }, {
+      "id": "BiliArea_disabled",
+      "name": "WiFi黑名单",
+      "val": "",
+      "type": "text",
+      "placeholder": "(点击以展开说明)",
+      "desc": "WiFi名称以逗号分隔, 名单内将跳过策略切换"
     }],
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js",
