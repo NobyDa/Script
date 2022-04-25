@@ -28,7 +28,7 @@
 
 |                       Application                       |                         Script name                          |  Available   | Maintenance |
 | :-----------------------------------------------------: | :----------------------------------------------------------: | :----------: | :---------: |
-|   [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js) | ✅(2021.7.4)  |      ✅      |
+|   [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js) | ✅(2021.7.4)  |      ⚠️      |
 |   [百度贴吧](https://apps.apple.com/app/id477927812)    | [TieBa.js](https://github.com/NobyDa/Script/blob/master/BDTieBa-DailyBonus/TieBa.js) | ✅(2021.7.4)  |      ❌      |
 |           [吾爱破解](https://www.52pojie.cn/)           | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js) |  ❌(2021.11)  |      ❌      |
 |   [爱奇艺](https://apps.apple.com/cn/app/id393765873)   | [iQIYI.js](https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js) | ✅(2022.1.26) |      ❌      |
@@ -188,7 +188,7 @@ In the following disclaimer :
 
 1. Do not use any scripts of the "Script project" for commercial or illegal purposes, **otherwise you will be responsible for the consequences.**
 
-### Nfringement
+### Infringement
 
 1. If any company or individual believes that a scripts from "Script project" may be infringe on rights, you should promptly notify and provide proof of **identity** and **ownership**, and we will delete the scripts after receiving the relevant documents.
 
