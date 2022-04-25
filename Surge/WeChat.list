@@ -257,6 +257,7 @@ IP-CIDR6,2408:8752:0:10::/60,no-resolve
 IP-CIDR6,2408:8752:0:2:30::/112,no-resolve
 IP-CIDR6,2408:8752:0:30::/64,no-resolve
 IP-CIDR6,2408:8752:0:F::/64,no-resolve
+IP-CIDR6,2408:8756:F50::/48,no-resolve
 IP-CIDR6,2408:8756:2CF2:19::/112,no-resolve
 IP-CIDR6,2408:8756:2CFF:10::/60,no-resolve
 IP-CIDR6,2408:8756:3AF0:10::/112,no-resolve
@@ -293,13 +294,16 @@ IP-CIDR6,2409:8C5C:110:63::/72,no-resolve
 
 # China Telecom IPv6 (WeChat)
 IP-CIDR6,240E:928:1400:10::/112,no-resolve
+IP-CIDR6,240E:965:802:620::/60,no-resolve
 IP-CIDR6,240E:93C:8:10::/60,no-resolve
 IP-CIDR6,240E:95C:2003:20::/60,no-resolve
 IP-CIDR6,240E:95C:3003:14::/60,no-resolve
 IP-CIDR6,240E:96C:6400:700::/60,no-resolve
 IP-CIDR6,240E:97C:18:601::/64,no-resolve
+IP-CIDR6,240E:97C:18:910::/60,no-resolve
 IP-CIDR6,240E:97C:2F::/60,no-resolve
 IP-CIDR6,240E:97D:4:1E00::/60,no-resolve
+IP-CIDR6,240E:97D:2010:100::/60,no-resolve
 IP-CIDR6,240E:97F:3000:1102::/64,no-resolve
 IP-CIDR6,240E:CF:8800::/56,no-resolve
 IP-CIDR6,240E:E1:A800::/46,no-resolve
