@@ -5,7 +5,7 @@
 如需禁用豆瓣评分或策略通知, 可前往BoxJs设置.
 BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
 
-Update: 2022.01.26
+Update: 2022.05.16
 Author: @NobyDa
 Use: Surge, QuanX, Loon
 
@@ -40,7 +40,7 @@ Bili Region = type=http-response,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(co
 Bili Search = type=http-request,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
 [MITM]
-hostname = ap?.bilibili.com, ap?.biliapi.net
+hostname = ap?.bili*i.com, ap?.bili*i.net
 
 ****************************
 Quantumult X 远程脚本配置 :
@@ -52,10 +52,10 @@ Quantumult X 远程脚本配置 :
 ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)& url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
 [mitm]
-hostname = ap?.bilibili.com, ap?.biliapi.net
+hostname = ap?.bili*i.com, ap?.bili*i.net
 
 [filter_local]
-#可选, 由于qx纯tun特性, 不添加规则可能会导致脚本失效.
+#可选, 由于qx纯tun特性, 不添加规则可能会导致脚本失效. https://github.com/NobyDa/Script/issues/382
 ip-cidr, 203.107.1.1/24, reject
 
 ****************************
@@ -68,7 +68,7 @@ http-response ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/ap
 http-request ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)& script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区(搜索)
 
 [Mitm]
-hostname = ap?.bilibili.com, ap?.biliapi.net
+hostname = ap?.bili*i.com, ap?.bili*i.net
 
 ***************************/
 
@@ -229,7 +229,7 @@ function GetRawInfo(t) {
 			} else {
 				if (/\u767b\u5f55<\/a>\u540e\u91cd\u8bd5\u3002/.test(data)) $.is403 = true;
 				let s = data.replace(/\n| |&#\d{2}/g, '')
-					.match(/\[\u7535\u5f71\].+?subject-cast\">.+?<\/span>/g) || [];
+					.match(/\[(\u7535\u5f71|\u7535\u89c6\u5267)\].+?subject-cast\">.+?<\/span>/g) || [];
 				for (let i = 0; i < s.length; i++) {
 					res.push({
 						name: s[i].split(/\}\)">(.+?)<\/a>/)[1],
