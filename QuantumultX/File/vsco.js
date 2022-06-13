@@ -9,6 +9,7 @@
 
 const resp = {};
 const obj = JSON.parse($response.body || null);
+const app = /VSCO|Fileb(ox|all)/.test($request.headers['User-Agent']);
 
 const product = {
 	"membership": "com.circles.fin.premium.yearly", //vsco
@@ -20,7 +21,7 @@ const data = {
 	"purchase_date": "2020-02-11T07:52:54Z"
 };
 
-if (obj && obj.subscriber) {
+if (app && obj && obj.subscriber) {
 	if (!obj.subscriber.subscriptions) {
 		obj.subscriber.subscriptions = {};
 	}
