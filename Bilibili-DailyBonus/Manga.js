@@ -81,7 +81,7 @@ function GetCookie() {
   var CookieKey = "CookieBM";
   var regex = /SESSDATA=.+?;/;
   if ($request.headers) {
-    var header = $request.headers['Cookie'] ? $request.headers['Cookie'] : "";
+    var header = Object.keys($request.headers).reduce((t, i) => (t[i.toLowerCase()] = $request.headers[i], t), {})['cookie'] || '';
     if (header.indexOf("SESSDATA=") != -1) {
       var CookieValue = regex.exec(header)[0];
       if ($.getdata(CookieKey)) {
