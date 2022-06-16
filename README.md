@@ -1,4 +1,5 @@
 ## TOC
+- [TOC](#toc)
 - [Script desc](#script-desc)
   - [Daily bonus scripts](#daily-bonus-scripts)
   - [Functionality-enhancing scripts](#functionality-enhancing-scripts)
@@ -12,7 +13,7 @@
   - [Decrypt](#decrypt)
   - [Privacy](#privacy)
   - [Commercial](#commercial)
-  - [Nfringement](#nfringement)
+  - [Infringement](#infringement)
   - [Liability](#liability)
   - [Change](#change)
 - [Special thanks to](#special-thanks-to)
@@ -154,10 +155,9 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 
 |                          File name                           |              Desc               |         Type         | Maintenance |
 | :----------------------------------------------------------: | :-----------------------------: | :------------------: | :---------: |
-| [Loon_GetCookie.conf](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_GetCookie.conf) |  Please see the desc in file.   | Subscription scripts |      ✅      |
-| [Loon_GetTask.conf](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_GetTask.conf) | Timed script task subscription. | Subscription scripts |      ✅      |
-| [Loon_TF_Download.conf](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_TF_Download.conf) |  Please see the desc in file.   | Subscription scripts |      ✅      |
-
+| [Loon_GetCookie.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_GetCookie.plugin) |  Please see the desc in file.   | Plugin |      ✅      |
+| [Loon_TF_Download.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_TF_Download.plugin) |  Please see the desc in file.   | Plugin |      ✅      |
+| [Loon_Bahamut_ADS.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_Bahamut_ADS.plugin) |  Remove Bahamut anime Ads   | Plugin |      ✅      |
 
 
 ---
