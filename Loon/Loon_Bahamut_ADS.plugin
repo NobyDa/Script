@@ -1,0 +1,11 @@
+#!name= 巴哈姆特动画疯
+#!desc= 该Loon插件用以屏蔽动画疯播放广告 (由于强制验证观看广告时间，故以黑屏25秒的方式屏蔽)
+#!author= NobyDa
+#!homepage= https://github.com/NobyDa/Script/tree/master
+#!icon= https://raw.githubusercontent.com/NobyDa/mini/master/Color/bahamutGame.png
+
+[Script]
+http-response ^https:\/\/api\.gamer\.com\.tw\/mobile_app\/anime\/v\d/(token|m3u8).php\? requires-body=1,timeout=40,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutAnimeAds.js, tag=屏蔽动画疯广告
+
+[MITM]
+hostname = api.gamer.com.tw
