@@ -21,7 +21,7 @@
 
 
 
-> **Please note that the scripts or rewrite rules described below need to open MITM and trust the certificate.**
+> **Please note that the scripts or rewrite rules described below may require MITM to be enabled, and the generated root certificate needs to be manually installed and trusted in the system.**
 
 ## Script desc
 
@@ -29,13 +29,13 @@
 
 |                       Application                       |                         Script name                          |  Available   | Maintenance |
 | :-----------------------------------------------------: | :----------------------------------------------------------: | :----------: | :---------: |
-|   [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js) | ✅(2021.7.4)  |      ⚠️      |
-|   [百度贴吧](https://apps.apple.com/app/id477927812)    | [TieBa.js](https://github.com/NobyDa/Script/blob/master/BDTieBa-DailyBonus/TieBa.js) | ✅(2021.7.4)  |      ❌      |
-|           [吾爱破解](https://www.52pojie.cn/)           | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js) |  ❌(2021.11)  |      ❌      |
-|   [爱奇艺](https://apps.apple.com/cn/app/id393765873)   | [iQIYI.js](https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js) | ✅(2022.1.26) |      ❌      |
-|   [快看漫画](https://apps.apple.com/app/id906936224)    | [KKMH.js](https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js) | ✅(2022.1.26) |      ✅      |
-| [哔哩哔哩漫画](https://apps.apple.com/app/id1426252715) | [Manga.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js) | ✅(2022.1.26) |      ✅      |
-|          [巴哈姆特](https://www.gamer.com.tw/)          | [BahamutDailyBonus.js](https://github.com/NobyDa/Script/blob/master/Bahamut/BahamutDailyBonus.js) | ✅(2022.1.26) |      ✅      |
+|   [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js) | ⚠️(2022.6.18)  |      ⚠️      |
+|   [百度贴吧](https://apps.apple.com/app/id477927812)    | [TieBa.js](https://github.com/NobyDa/Script/blob/master/BDTieBa-DailyBonus/TieBa.js) | ✅(2021.6.18)  |      ❌      |
+|           [吾爱破解](https://www.52pojie.cn/)           | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js) | ✅(2022.6.18) |      ❌      |
+|   [爱奇艺](https://apps.apple.com/cn/app/id393765873)   | [iQIYI.js](https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js) | ✅(2022.6.18) |      ❌      |
+|   [快看漫画](https://apps.apple.com/app/id906936224)    | [KKMH.js](https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js) | ✅(2022.6.18) |      ✅      |
+| [哔哩哔哩漫画](https://apps.apple.com/app/id1426252715) | [Manga.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js) | ✅(2022.6.18) |      ✅      |
+|          [巴哈姆特](https://www.gamer.com.tw/)          | [BahamutDailyBonus.js](https://github.com/NobyDa/Script/blob/master/Bahamut/BahamutDailyBonus.js) | ✅(2022.6.18) |      ✅      |
 
 ------
 
@@ -165,32 +165,32 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 ## Disclaimer
 
 ```
-In the following disclaimer :
+In the following disclaimer:
 
-"Script project" specifically refers to the open source scripts and rules in https://github.com/NobyDa/Script/tree/master
+The "Script project" refers specifically to the open source scripts and rules in https://github.com/NobyDa/Script/tree/master
 
-"NobyDa" specifically refers to the author and owner in https://github.com/NobyDa/Script/tree/master
+The "NobyDa" refers specifically to the author and owner in https://github.com/NobyDa/Script/tree/master
 ```
 
 ### Decrypt
 
-1. Any unlocking and decryption analysis scripts involved in the "Script project" are for resource sharing and study purposes only. 
+1. Any unlocking and decryption analysis scripts involved in "Script project" are for resource sharing and study purposes only.
 
-2. Legality, accuracy, completeness, and validity cannot be guaranteed. **Please judge for yourself based on the actual situation.**
+2. Legality, accuracy, completeness and validity cannot be guaranteed. **Please make your own judgment based on the actual situation.**
 
-3. You must completely delete the scripts involving decryption from your computer or phone within **24 hours** of downloading.
+3. You must completely delete the scripts involved decryption from your computer or phone within **24 hours** of downloading.
 
 ### Privacy
 
-1. Any user who indirectly uses any of the scripts in the "Script project", including but not limited to violating relevant laws and regulations or establishing VPS to spread, **NobyDa is not responsible for any privacy leakage or other consequences caused by this.**
+1. Any user who indirectly uses any of the scripts in "Script project", including but not limited to violating relevant laws and regulations or establishing VPS to spread, **NobyDa is not responsible for any privacy breach or other consequences arising therefrom.**
 
 ### Commercial
 
-1. Do not use any scripts of the "Script project" for commercial or illegal purposes, **otherwise you will be responsible for the consequences.**
+1. Do not use any scripts of "Script project" for commercial or illegal purposes, **otherwise you will be responsible for the consequences.**
 
 ### Infringement
 
-1. If any company or individual believes that a scripts from "Script project" may be infringe on rights, you should promptly notify and provide proof of **identity** and **ownership**, and we will delete the scripts after receiving the relevant documents.
+1. If any company or individual believes that the scripts in "Script project" may be infringe on rights, you should promptly notify and provide proof of **identity** and proof of **ownership**, and we will delete the relevant scripts upon receipt of the relevant documents.
 
 ### Liability
 
@@ -198,9 +198,9 @@ In the following disclaimer :
 
 ### Change
 
-1. Anyone viewing or using the scripts of the "Script project" in any way, directly or indirectly, should read this statement carefully. And NobyDa reserves the right to change or supplement this disclaimer at any time. 
+1. Anyone viewing or using in any way, directly or indirectly, the scripts in "Script project" should read this disclaimer carefully, and NobyDa reserves the right to change or supplement this disclaimer at any time. 
 
-2. **Once you use or copy any related scripts of the "Script project", you will be deemed to have accepted this disclaimer.**
+2. **Once you view, use or copy any of the related scripts in "Script project", you will be deemed to have accepted this disclaimer.**
 
 ## Special thanks to
 
