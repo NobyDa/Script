@@ -1,7 +1,7 @@
 /*
 爱奇艺会员签到脚本
 
-更新时间: 2022.2.7
+更新时间: 2022.06.18
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -416,7 +416,7 @@ function GetCookie() {
     $nobyda.notify(`写入爱奇艺Cookie失败`, "", "请更新脚本配置(URL正则/MITM)");
     return
   }
-  var CKA = $request.headers['Cookie'];
+  var CKA = $request.headers['Cookie'] || $request.headers['cookie'];;
   var iQIYI = CKA && CKA.includes("P00001=") && CKA.includes("P00003=") && CKA;
   var RA = $nobyda.read("CookieQY")
   if (CKA && iQIYI) {
