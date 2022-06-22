@@ -325,7 +325,7 @@
     "name": "巴哈姆特",
     "keys": ["@ND_BAHA.ID", "@ND_BAHA.PW", "@ND_BAHA.TOTP", "@ND_BAHA.GUILD", "@ND_BAHA.ANSWER", "@ND_BAHA.ADS"],
     "descs_html": [
-      "<h4 align=\"center\">获取Cookie以及脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutDailyBonus.js\">脚本注释</a></h4>"
+      "<h4 align=\"center\">脚本配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutDailyBonus.js\">脚本注释</a></h4>"
     ],
     "settings": [{
       "id": "@ND_BAHA.ADS",
@@ -436,6 +436,23 @@
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/Surge/JS/Bili_Auto_Regions.js",
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/bilibili.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/bilibili.png"]
+  }, {
+    "id": "TestFlightAccount",
+    "name": "TestFlight账户管理",
+    "keys": ["TESTFLIGHT-ACCOUNT"],
+    "descs_html": [
+      "<h4 align=\"center\">脚本说明以及配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/TestFlight/TestFlightAccount.js\">脚本注释</a></h4>"
+    ],
+    "settings": [{
+      "id": "@TESTFLIGHT-ACCOUNT.Debug",
+      "name": "开发者模式",
+      "val": false,
+      "type": "boolean",
+      "desc": "用于调试脚本, 一般用户请勿开启."
+    }],
+    "author": "@NobyDa",
+    "repo": "https://github.com/NobyDa/Script/blob/master/TestFlight/TestFlightAccount.js",
+    "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/testflight.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/testflight.png"]
   }],
   "task": [{
     "config": "0 8 * * * https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/jd.png",
