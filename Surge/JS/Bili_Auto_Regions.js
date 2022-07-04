@@ -135,7 +135,7 @@ function EnvInfo() {
 	if (typeof($response) !== 'undefined') {
 		const raw = JSON.parse($response.body);
 		const data = raw.data || raw.result || {};
-		SwitchRegion(data.title || (raw.code === -404 ? -404 : null))
+		SwitchRegion(data.series?.series_title || data.title || (raw.code === -404 ? -404 : null))
 			.then(s => s ? $done({
 				status: $.isQuanX ? "HTTP/1.1 408 Request Timeout" : 408,
 				headers: {
