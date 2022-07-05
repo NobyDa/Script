@@ -65,7 +65,7 @@ Loon 远程脚本配置 :
 http-response ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/offline\/version)\? script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区
 
 #可选, 适用于搜索指定地区的番剧
-http-request ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)& script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区(搜索)
+http-request ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)& script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, tag=bili自动地区(搜索)
 
 [Mitm]
 hostname = ap?.bili*i.com, ap?.bili*i.net
@@ -140,7 +140,7 @@ function EnvInfo() {
 		const t2 = raw.code === -404 ? -404 : null;
 		SwitchRegion(t1 || t2)
 			.then(s => s ? $done({
-				status: $.isQuanX ? "HTTP/1.1 307" : 307,
+				status: $.isQuanX ? "HTTP/1.1 307" :307,
 				headers: {
 					Location: url
 				},
