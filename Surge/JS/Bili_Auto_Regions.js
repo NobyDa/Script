@@ -5,7 +5,7 @@
 如需禁用豆瓣评分或策略通知, 可前往BoxJs设置.
 BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
 
-Update: 2022.05.16
+Update: 2022.07.05
 Author: @NobyDa
 Use: Surge, QuanX, Loon
 
@@ -34,7 +34,7 @@ QX用户注: 使用切换地区功能请确保您的QX=>其他设置=>温和策�
 Surge 4.7+ 远程脚本配置 :
 ****************************
 [Script]
-Bili Region = type=http-response,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/v\d\/search\/defaultwords)\?access_key,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
+Bili Region = type=http-response,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/offline\/version)\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
 #可选, 适用于搜索指定地区的番剧
 Bili Search = type=http-request,pattern=^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
@@ -46,7 +46,7 @@ hostname = ap?.bili*i.com, ap?.bili*i.net
 Quantumult X 远程脚本配置 :
 ****************************
 [rewrite_local]
-^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/v\d\/search\/defaultwords)\?access_key url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
+^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/offline\/version)\? url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
 
 #可选, 适用于搜索指定地区的番剧
 ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)& url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js
@@ -62,7 +62,7 @@ ip-cidr, 203.107.1.1/24, reject
 Loon 远程脚本配置 :
 ****************************
 [Script]
-http-response ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/v\d\/search\/defaultwords)\?access_key script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区
+http-response ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/(pgc\/view\/v\d\/app\/season|x\/offline\/version)\? script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区
 
 #可选, 适用于搜索指定地区的番剧
 http-request ^https:\/\/ap(p|i)\.bili(bili|api)\.(com|net)\/x\/v\d\/search(\/type)?\?.+?%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)& script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Bili_Auto_Regions.js, requires-body=true, tag=bili自动地区(搜索)
@@ -132,23 +132,25 @@ function SwitchStatus(status, original, newPolicy) {
 }
 
 function EnvInfo() {
+	const url = $request.url;
 	if (typeof($response) !== 'undefined') {
-		const raw = JSON.parse($response.body);
+		const raw = JSON.parse($response.body || "{}");
 		const data = raw.data || raw.result || {};
-		SwitchRegion(data.series?.series_title || data.title || (raw.code === -404 ? -404 : null))
+		const t1 = (data.series && data.series.series_title) || data.title;
+		const t2 = raw.code === -404 ? -404 : null;
+		SwitchRegion(t1 || t2)
 			.then(s => s ? $done({
-				status: $.isQuanX ? "HTTP/1.1 408 Request Timeout" : 408,
+				status: $.isQuanX ? "HTTP/1.1 307" : 307,
 				headers: {
-					Connection: "close"
+					Location: url
 				},
 				body: "{}"
 			}) : QueryRating(raw, data));
 	} else {
-		const raw = $request.url;
 		const res = {
-			url: raw.replace(/%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&/g, '&')
+			url: url.replace(/%20(%E6%B8%AF|%E5%8F%B0|%E4%B8%AD)&/g, '&')
 		};
-		SwitchRegion(raw).then(() => $done(res));
+		SwitchRegion(url).then(() => $done(res));
 	}
 }
 
@@ -157,7 +159,7 @@ async function QueryRating(body, play) {
 		const ratingEnabled = $.read('BiliDoubanRating') === 'false';
 		if (!ratingEnabled && play.title && body.data && body.data.badge_info) {
 			const [t1, t2] = await Promise.all([
-				GetRawInfo(play.title),
+				GetRawInfo(play.title.replace(/\uff08\u50c5[\u4e00-\u9fa5]+\u5340\uff09/, '')),
 				GetRawInfo(play.origin_name)
 			]);
 			const exYear = body.data.publish.release_date_show.split(/^(\d{4})/)[1];
