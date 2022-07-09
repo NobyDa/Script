@@ -1,5 +1,5 @@
 /********************************
-Membership unlock for VSCO & Fileball & 1Blocker
+Membership unlock for VSCO & 1Blocker
 Please note that you may need to reinstall app for script to work.
 
 QuantumultX rewrite link:
@@ -23,8 +23,6 @@ const obj = JSON.parse(typeof $response != "undefined" && $response.body || null
 const ua = $request.headers['User-Agent'] || $request.headers['user-agent'];
 const list = {
 	'VSCO': { name: 'membership', id: 'com.circles.fin.premium.yearly' },
-	'Filebox': { name: 'filebox_pro', id: 'com.premium.yearly' },
-	'Fileball': { name: 'filebox_pro', id: 'com.premium.yearly' },
 	'1Blocker': { name: 'premium', id: 'blocker.ios.subscription.yearly' }
 };
 const data = {
