@@ -1,18 +1,16 @@
 #!name=荟聚动漫
 #!desc=去除大多数弹屏以及底栏广告, 由于有广告缓存, 因此可能需要卸载App重装. @NobyDa
 
-# Update at 2021.01.30
+# Update at 2022/07/11
 
 [Rule]
-#检测
-DOMAIN,www.umeng.com,DIRECT
-DOMAIN,www.adview.cn,DIRECT
-DOMAIN,adview.cn,DIRECT
 #底栏
 DOMAIN,googleads.g.doubleclick.net,REJECT-TINYGIF
 DOMAIN,www.19831110.com,REJECT-TINYGIF
 #HTTP
 AND,((USER-AGENT,%E8%8D%9F%E8%81%9A%E5%8A%A8%E6%BC%AB*), (URL-REGEX,\/ad)),REJECT-TINYGIF
+#开屏
+DOMAIN-SUFFIX,admobile.top,REJECT-TINYGIF
 
 [URL Rewrite]
 #弹屏, 搜索, 以及底栏白屏广告
@@ -24,4 +22,4 @@ AND,((USER-AGENT,%E8%8D%9F%E8%81%9A%E5%8A%A8%E6%BC%AB*), (URL-REGEX,\/ad)),REJEC
 ^https?:\/\/.+?\.snssdk\.com\/ad\/ - reject
 
 [MITM]
-hostname = %APPEND% sf?-ttcdn-tos.pstatp.com, www.51devapp.com, *.snssdk.com, www.19831110.com, api-access.pangolin-sdk-toutiao.com, os8.pw
+hostname = %APPEND% sf?-ttcdn-tos.pstatp.com, www.51devapp.com, *.snssdk.com, www.19831110.com, api-access.pangolin-sdk-toutiao.com, os8.pw, www.umeng.com, www.adview.cn, adview.cn
