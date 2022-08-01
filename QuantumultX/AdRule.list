@@ -1,4 +1,4 @@
-# Update > 2022.1.26
+# Update > 2022/08/01
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
@@ -2052,7 +2052,6 @@ DOMAIN-SUFFIX,cdn.mdotm.com,REJECT
 DOMAIN-SUFFIX,cdn.media.innity.net,REJECT
 DOMAIN-SUFFIX,cdn.millennialmedia.com,REJECT
 DOMAIN-SUFFIX,cdn.mingmingtehui.com,REJECT
-DOMAIN-SUFFIX,cdn.moji.com,REJECT
 DOMAIN-SUFFIX,cdn.moji002.com,REJECT
 DOMAIN-SUFFIX,cdn.moogos.com,REJECT
 DOMAIN-SUFFIX,cdn.ndapp.com,REJECT
