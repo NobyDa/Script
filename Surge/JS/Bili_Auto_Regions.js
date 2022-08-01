@@ -5,7 +5,7 @@
 如需禁用豆瓣评分或策略通知, 可前往BoxJs设置.
 BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
 
-Update: 2022.07.29
+Update: 2022.08.01
 Author: @NobyDa
 Use: Surge, QuanX, Loon
 
@@ -85,10 +85,10 @@ async function SwitchRegion(play) {
 	const current = await $.getPolicy(Group);
 	const area = (() => {
 		let select;
-		if (/\u50c5[\u4e00-\u9fa5]+\u6e2f|%20%E6%B8%AF&/.test(play)) {
-			const test = /\u50c5[\u4e00-\u9fa5]+\u53f0/.test(play);
+		if (/\u6e2f[\u4e00-\u9fa5]+\u5340|%20%E6%B8%AF&/.test(play)) {
+			const test = /\u53f0[\u4e00-\u9fa5]+\u5340/.test(play);
 			if (current != HK && (current == TW && test ? 0 : 1)) select = HK;
-		} else if (/\u50c5[\u4e00-\u9fa5]+\u53f0|%20%E5%8F%B0&/.test(play)) {
+		} else if (/\u53f0[\u4e00-\u9fa5]+\u5340|%20%E5%8F%B0&/.test(play)) {
 			if (current != TW) select = TW;
 		} else if (play === -404) {
 			if (current != DF) select = DF;
@@ -137,7 +137,7 @@ function EnvInfo() {
 		const raw = JSON.parse($response.body || "{}");
 		const data = raw.data || raw.result || {};
 		const t1 = [data.title, data.series && data.series.series_title, data.season_title]
-			.filter(c => /\u50c5[\u4e00-\u9fa5]+\u5340/.test(c))[0] || data.title;
+			.filter(c => /\u5340\uff09/.test(c))[0] || data.title;
 		const t2 = raw.code === -404 ? -404 : null;
 		SwitchRegion(t1 || t2)
 			.then(s => s ? $done({
@@ -160,7 +160,7 @@ async function QueryRating(body, play) {
 		const ratingEnabled = $.read('BiliDoubanRating') === 'false';
 		if (!ratingEnabled && play.title && body.data && body.data.badge_info) {
 			const [t1, t2] = await Promise.all([
-				GetRawInfo(play.title.replace(/\uff08\u50c5[\u4e00-\u9fa5]+\u5340\uff09/, '')),
+				GetRawInfo(play.title.replace(/\uff08[\u4e00-\u9fa5]+\u5340\uff09/, '')),
 				GetRawInfo(play.origin_name)
 			]);
 			const exYear = body.data.publish.release_date_show.split(/^(\d{4})/)[1];
