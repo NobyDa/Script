@@ -102,7 +102,6 @@ var $nobyda = nobyda();
 	dfp = cookie.match(/__dfp=(.*?)@/)[1];
         await login();
         await Checkin();
-	await WebCheckin();
         for (let i = 0; i < 3; i++){
           const run = await Lottery(i);
           if (run) {
@@ -231,59 +230,6 @@ function Checkin() {
       }
       pushMsg.push(CheckinMsg);
       console.log(`爱奇艺-${CheckinMsg} ${Details}`);
-      resolve()
-    })
-  })
-}
-
-function WebCheckin() {
-  return new Promise(resolve => {
-    const web_sign_date = {
-      agenttype: "1",
-      agentversion: "0",
-      appKey: "basic_pca",
-      appver: "0",
-      authCookie: P00001,
-      channelCode: "sign_pcw",
-      dfp: dfp,
-      scoreType: "1",
-      srcplatform: "1",
-      typeCode: "point",
-      userId: P00003,
-      // user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36",
-      verticalCode: "iQIYI"
-    };
-
-    const sign = k("DO58SzN6ip9nbJ4QkM8H", web_sign_date, {
-      split: "|",
-      sort: !0,
-      splitSecretKey: !0
-    });
-    var URL = {
-      url: 'https://community.iqiyi.com/openApi/score/add?' + w(web_sign_date) + "&sign=" + sign
-    }
-    $nobyda.get(URL, function(error, response, data) {
-      let WebCheckinMsg = '';
-      const Details = LogDetails ? `msg:\n${data||error}` : ''
-      try {
-      	if (error) throw new Error(`接口请求出错 ‼️`);
-        const obj = JSON.parse(data)
-        if (obj.code === "A00000") {
-          if (obj.data[0].code === "A0000") {
-            var quantity = obj.data[0].score;
-            var continued = obj.data[0].continuousValue;
-            WebCheckinMsg = "网页签到: 积分+" + quantity + ", 累计签到" + continued + "天 🎉"
-          } else {
-            WebCheckinMsg = "网页签到: " + obj.data[0].message + " ⚠️"
-          }
-        } else {
-          WebCheckinMsg = `网页签到: ${obj.message||'未知错误'} ⚠️`
-        }
-    } catch (e) {
-    	WebCheckinMsg = `网页签到: ${e.message || e}`;
-    }
-      pushMsg.push(WebCheckinMsg);
-      console.log(`爱奇艺-${WebCheckinMsg} ${Details}`);
       resolve()
     })
   })
