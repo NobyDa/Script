@@ -4,8 +4,7 @@
 更新时间: 2022.11.08
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
-问题反馈: @NobyDa_bot
-
+问题反馈: 
 获取Cookie说明：
 Safari浏览器打开 https://m.iqiyi.com/user.html 使用密码登录, 如通知成功获取cookie则可使用该脚本.
 获取Cookie后, 请将Cookie脚本禁用并移除主机名，以免产生不必要的MITM.
