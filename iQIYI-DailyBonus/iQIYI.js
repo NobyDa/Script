@@ -1,7 +1,7 @@
 /*
 爱奇艺会员签到脚本
 
-更新时间: 2022.11.08
+更新时间: 2023/02/16
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -246,25 +246,22 @@ function Lottery(s) {
         try {
         	if (error) throw new Error("接口请求出错 ‼️");
           const obj = JSON.parse(data);
-          $nobyda.last = data.match(/(机会|已经)用完/) ? true : false
-          if (obj.awardName && obj.code == 0) {
-            LotteryMsg = `应用抽奖: ${!$nobyda.last ? `${obj.awardName.replace(/《.+》/, "未中奖")} 🎉` : `您的抽奖次数已经用完 ⚠️`}`
-          } else if (data.match(/\"errorReason\"/)) {
-            const msg = data.match(/msg=.+?\)/) ? data.match(/msg=(.+?)\)/)[1].replace(/用户(未登录|不存在)/, "Cookie无效") : ""
-            LotteryMsg = `应用抽奖: ${msg || `未知错误`} ⚠️`
+          if (obj.title) {
+            LotteryMsg = `应用抽奖: ${obj.title!='影片推荐'&&obj.awardName||'未中奖'} 🎉`;
+            LotteryMsg = `应用抽奖: ${obj.kv.code=='Q00702'&&`您的抽奖次数已经用完 ⚠️`||LotteryMsg}`;
+            $nobyda.stop = obj.kv.code == 'Q00702';
+          } else if (obj.kv.code == 'Q00304'){
+            LotteryMsg = `应用抽奖: Cookie无效 ⚠️`;
+            $nobyda.stop = 1;
           } else {
-            LotteryMsg = `应用抽奖: ${data}`
+            LotteryMsg = `应用抽奖: 未知错误 ⚠️`
           }
         } catch (e) {
         	LotteryMsg = `应用抽奖: ${e.message || e}`;
         }
         console.log(`爱奇艺-${LotteryMsg} (${s+1}) ${Details}`)
         pushMsg.push(LotteryMsg)
-        if (!$nobyda.last) {
-          resolve(1)
-        } else {
-          resolve()
-        }
+        resolve(!$nobyda.stop)
       })
   })
 }
