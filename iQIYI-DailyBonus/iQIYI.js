@@ -94,10 +94,9 @@ var $nobyda = nobyda();
   if ($nobyda.isRequest) {
     GetCookie()
   } else if (cookie) {
-    if (cookie.includes("P00001") && cookie.includes("P00003") && cookie.includes("__dfp")) {
+    if (cookie.includes("P00001") && cookie.includes("P00003")) {
       P00001 = cookie.match(/P00001=(.*?);/)[1];
       P00003 = cookie.match(/P00003=(.*?);/)[1];
-      dfp = cookie.match(/__dfp=(.*?)@/)[1];
       await login();
       await Checkin();
       for (let i = 0; i < 3; i++) {
