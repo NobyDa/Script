@@ -1,64 +1,52 @@
-/*
-VSCO 解锁高级特权
+/********************************
+Membership unlock for VSCO & 1Blocker
+Please note that you may need to reinstall app for script to work.
 
-***************************
-QuantumultX:
+QuantumultX rewrite link:
+https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js
 
-[rewrite_local]
-^https:\/\/(api\.revenuecat\.com\/v\d\/subscribers|vsco\.co\/api\/subscriptions\/\d\.\d\/user-subscriptions)\/ url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js
+Please note that the above rewrite link requires open KOP-XIAO's resource parser
 
-[mitm]
-hostname = vsco.co, api.revenuecat.com
-
-***************************
-Surge4 or Loon: 
+*********************************
+Surge4, Loon and Shadowrocket configuration:
 
 [Script]
-http-response ^https:\/\/(api\.revenuecat\.com\/v\d\/subscribers|vsco\.co\/api\/subscriptions\/\d\.\d\/user-subscriptions)\/ requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js
+http-request ^https?:\/\/api\.revenuecat\.com\/v\d\/subscribers\/ script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js
+http-response ^https?:\/\/api\.revenuecat\.com\/v\d\/subscribers\/ requires-body=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js
 
 [MITM]
-hostname = vsco.co, api.revenuecat.com
+hostname = api.revenuecat.com
+********************************/
 
-**************************/
+const resp = {};
+const obj = JSON.parse(typeof $response != "undefined" && $response.body || null);
+const ua = $request.headers['User-Agent'] || $request.headers['user-agent'];
+const list = {
+	'VSCO': { name: 'membership', id: 'com.circles.fin.premium.yearly' },
+	'1Blocker': { name: 'premium', id: 'blocker.ios.subscription.yearly' }
+};
+const data = {
+	"expires_date": "2030-02-18T07:52:54Z",
+	"original_purchase_date": "2020-02-11T07:52:55Z",
+	"purchase_date": "2020-02-11T07:52:54Z"
+};
 
-let obj = JSON.parse($response.body || '{}');
-
-if (obj.user_subscription) {
-	obj.user_subscription["expires_on_sec"] = 1655536094;
-	obj.user_subscription["expired"] = false;
-	obj.user_subscription["payment_type"] = 2;
-	obj.user_subscription["is_trial_period"] = true;
-	obj.user_subscription["starts_on_sec"] = 1560831070;
-	obj.user_subscription["is_active"] = true;
-	obj.user_subscription["auto_renew"] = true;
-	obj.user_subscription["last_verified_sec"] = 1560831070;
-	obj.user_subscription["subscription_code"] = "VSCOANNUAL";
-	obj.user_subscription["user_id"] = 54624336;
-	obj.user_subscription["source"] = 1;
+if (typeof $response == "undefined") {
+	delete $request.headers["x-revenuecat-etag"]; // prevent 304 issues
+	delete $request.headers["X-RevenueCat-ETag"];
+	resp.headers = $request.headers;
+} else if (obj && obj.subscriber) {
+	obj.subscriber.subscriptions = obj.subscriber.subscriptions || {};
+	obj.subscriber.entitlement = obj.subscriber.entitlement || {};
+	for (const i in list) {
+		if (new RegExp(`^${i}`, `i`).test(ua)) {
+			obj.subscriber.subscriptions[list[i].id] = data;
+			obj.subscriber.entitlements[list[i].name] = JSON.parse(JSON.stringify(data));
+			obj.subscriber.entitlements[list[i].name].product_identifier = list[i].id;
+			break;
+		}
+	}
+	resp.body = JSON.stringify(obj);
 }
 
-if (obj.subscriber) {
-	obj.subscriber.subscriptions = {
-		"com.circles.fin.premium.yearly": {
-			"billing_issues_detected_at": null,
-			"expires_date": "2030-02-18T07:52:54Z",
-			"is_sandbox": false,
-			"original_purchase_date": "2020-02-11T07:52:55Z",
-			"period_type": "normal",
-			"purchase_date": "2020-02-11T07:52:54Z",
-			"store": "app_store",
-			"unsubscribe_detected_at": null
-		}
-	};
-	obj.subscriber.entitlements = {
-		"membership": {
-			"expires_date": "2030-02-18T07:52:54Z",
-			"product_identifier": "com.circles.fin.premium.yearly",
-			"purchase_date": "2020-02-11T07:52:54Z"
-		}
-	};
-}
-
-$done({
-	body: JSON.stringify(obj)
-});
+$done(resp);

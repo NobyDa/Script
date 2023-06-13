@@ -1,0 +1,13 @@
+# 该规则集用于配合bilibili自动地区脚本使用。
+host,api.biliapi.com,Bilibili
+host,api.biliapi.net,Bilibili
+host,api.bilibili.com,Bilibili
+host,app.biliapi.com,Bilibili
+host,app.biliapi.net,Bilibili
+host,app.bilibili.com,Bilibili
+host,grpc.biliapi.net,Bilibili
+host,m.bilibili.com,Bilibili
+host,upos-hz-mirrorakam.akamaized.net,Bilibili
+host,www.bilibili.com,Bilibili
+host-keyword,cn-hk-eq-bcache-,Bilibili
+ip-cidr,121.11.192.0/24,Bilibili

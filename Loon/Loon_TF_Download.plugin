@@ -1,5 +1,8 @@
 #!name= TestFlight区域限制解除
-#!desc= ‼️‼️‼️‼️‼️ 该URL已弃用，将在一段时间后删除；请把URL后缀 .conf 更换为 .plugin
+#!desc= 该Loon插件用以解决更新TestFlight App时, 提示"APP不可用"问题.
+#!author= NobyDa
+#!homepage= https://github.com/NobyDa/Script/tree/master
+#!icon= https://cdn.jsdelivr.net/gh/NobyDa/mini@master/Color/testflight.png
 
 [General]
 skip-proxy = iosapps.itunes.apple.com

@@ -1,0 +1,13 @@
+# 该规则集用于配合bilibili自动地区脚本使用。
+DOMAIN,api.biliapi.com
+DOMAIN,api.biliapi.net
+DOMAIN,api.bilibili.com
+DOMAIN,app.biliapi.com
+DOMAIN,app.biliapi.net
+DOMAIN,app.bilibili.com
+DOMAIN,grpc.biliapi.net
+DOMAIN,m.bilibili.com
+DOMAIN,upos-hz-mirrorakam.akamaized.net
+DOMAIN,www.bilibili.com
+DOMAIN-KEYWORD,cn-hk-eq-bcache-
+IP-CIDR,121.11.192.0/24,no-resolve

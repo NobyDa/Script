@@ -1,7 +1,7 @@
 /*
 快看漫画签到脚本
 
-更新时间: 2021.9.22
+更新时间: 2022.06.18
 脚本兼容: QuantumultX, Surge4, Loon, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -174,13 +174,14 @@ function GiftPack(type) {
 function GetCookie() {
   const RA = $.getdata("@KKMH.COOKIE")
   const TM = $.getdata("@KKMH.TIME")
-  if (JSON.stringify($request.headers).match(/session=/)) {
-    if (RA != $request.headers['Cookie']) {
-      if ($.setdata($request.headers['Cookie'], "@KKMH.COOKIE")) {
+  const CK = $request.headers['Cookie'] || $request.headers['cookie'];
+  if (JSON.stringify($request.headers).match(/session=/) && CK) {
+    if (RA != CK) {
+      if ($.setdata(CK, "@KKMH.COOKIE")) {
         $.setdata(JSON.stringify(Date.now()), "@KKMH.TIME")
         if (!TM || TM && (Date.now() - TM) / 1000 >= 21600) {
           $.msg(`${RA?`更新`:`首次写入`}${$.name}Cookie成功 🎉`, "", "", imgUrl)
-        } else if (RA.match(/uid=\d+/)[0] == $request.headers['Cookie'].match(/uid=\d+/)[0]) {
+        } else if (RA.match(/uid=\d+/)[0] == CK.match(/uid=\d+/)[0]) {
           $.log(`\n更新${$.name}Cookie成功! 🎉\n检测到频繁通知, 已转为输出日志`)
         } else {
           $.msg(`更新${$.name}Cookie成功 🎉`, "", "", imgUrl)

@@ -1,4 +1,4 @@
-# Update > 2022.1.26
+# Update > 2023/04/28
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com
 DOMAIN-SUFFIX,mcupdate.gstarcad.com
 DOMAIN-SUFFIX,adx.open-adx.com
@@ -147,7 +147,6 @@ DOMAIN-SUFFIX,m-78.jp
 DOMAIN-SUFFIX,nichibenren.or.jp
 DOMAIN-SUFFIX,nicorette.co.kr
 DOMAIN-SUFFIX,adnet.sohu.com
-DOMAIN-SUFFIX,data.vod.itc.cn
 DOMAIN-SUFFIX,epro.sogou.com
 DOMAIN-SUFFIX,go.sohu.com
 DOMAIN-SUFFIX,golden1.sogou.com
@@ -2023,7 +2022,6 @@ DOMAIN-SUFFIX,cc.yac8.com
 DOMAIN-SUFFIX,cca.mob.com
 DOMAIN-SUFFIX,ccb.uncle-ad.com
 DOMAIN-SUFFIX,ccbaihehq.com
-DOMAIN-SUFFIX,ccclub.cmbchina.com
 DOMAIN-SUFFIX,cccrir.com
 DOMAIN-SUFFIX,ccr.yxdown.com
 DOMAIN-SUFFIX,cctyly.com
@@ -2063,7 +2061,6 @@ DOMAIN-SUFFIX,cdn.mdotm.com
 DOMAIN-SUFFIX,cdn.media.innity.net
 DOMAIN-SUFFIX,cdn.millennialmedia.com
 DOMAIN-SUFFIX,cdn.mingmingtehui.com
-DOMAIN-SUFFIX,cdn.moji.com
 DOMAIN-SUFFIX,cdn.moji002.com
 DOMAIN-SUFFIX,cdn.moogos.com
 DOMAIN-SUFFIX,cdn.ndapp.com
@@ -8356,7 +8353,6 @@ DOMAIN-SUFFIX,zunmi.cn
 DOMAIN-SUFFIX,zzd6.com
 DOMAIN-SUFFIX,mackeeper.com
 DOMAIN-SUFFIX,app-measurement.com
-DOMAIN-SUFFIX,mob.com
 DOMAIN-SUFFIX,api.joybj.com
 DOMAIN-SUFFIX,api.whizzone.com
 DOMAIN-SUFFIX,mmstat.com

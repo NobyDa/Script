@@ -36,7 +36,7 @@ const body = JSON.parse($request.body || '{}');
 })()
 
 function nobyda() {
-	const isLoon = typeof($loon) !== "undefined" && $loon > 289;
+	const isLoon = typeof($loon) !== "undefined";
 	const isQuanX = typeof($configuration) !== 'undefined';
 	const isSurge = typeof($httpAPI) !== 'undefined';
 	const m = `不支持您的APP版本, 请等待APP更新 ⚠️`;
