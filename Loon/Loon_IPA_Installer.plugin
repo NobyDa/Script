@@ -1,0 +1,12 @@
+#!name=IPA应用辅助安装器
+#!desc=该模块可在iOS端辅助安装商店版或已签名IPA(需使用快捷指令 + Shu/Jsbox/pythonista), 查看脚本注释以了解具体方法; 安装演示可查看TG频道 @NobyDa
+#!author=NobyDa
+#!homepage=https://github.com/NobyDa/Script/tree/master
+#!icon=https://cdn.jsdelivr.net/gh/NobyDa/mini@master/Color/Apple.png
+
+
+[Script]
+http-request ^https:\/\/nobyda.app/(install|download) requires-body=true, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/IPA-Installer/IPA-Installer.js, timeout=10, tag=IPA-Installer
+
+[MITM]
+hostname = nobyda.app
