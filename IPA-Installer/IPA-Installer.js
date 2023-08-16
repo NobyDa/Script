@@ -19,7 +19,7 @@
  * 
  * Stash覆写: https://raw.githubusercontent.com/NobyDa/Script/master/Stash/IPA-Installer.stoverride
  * 
- * 快捷指令: https://www.icloud.com/shortcuts/a89979261837465aa3b4cae3527cf5f9
+ * 快捷指令: https://www.icloud.com/shortcuts/d8b2b49ae05141f892e6122c9084c67a
  * 
  * JSBox脚本: https://xteko.com/redir?url=https%3A%2F%2Fraw.githubusercontent.com%2FNobyDa%2FScript%2Fmaster%2FIPA-Installer%2FIPA-Installer-JSBox.js&name=IPA%20Installer%20%28NobyDa%29
  * 
