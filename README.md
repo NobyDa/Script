@@ -1,15 +1,13 @@
 ## TOC
-
 - [TOC](#toc)
 - [Script Overview](#script-overview)
   - [Daily-Bonus Script](#daily-bonus-script)
   - [Functionality-enhancing Script](#functionality-enhancing-script)
   - [Other Script](#other-script)
 - [Surge File Overview](#surge-file-overview)
-  - [Surge Ruleset](#surge-ruleset)
-  - [Surge Module](#surge-module)
 - [QuantumultX File Overview](#quantumultx-file-overview)
 - [Loon File Overview](#loon-file-overview)
+- [Stash File Overview](#stash-file-overview)
 - [Disclaimer](#disclaimer)
   - [Decrypt](#decrypt)
   - [Privacy](#privacy)
@@ -20,21 +18,22 @@
 - [Acknowledgment](#acknowledgment)
 - [License](#license)
 
+
 > **Please note that the scripts or rewrite rules described below may require MITM to be enabled, and the generated root certificate needs to be manually installed and trusted in the system.**
 
 ## Script Overview
 
 ### Daily-Bonus Script
 
-| Application                                       | Script name                                                                                       | Available     | Maintenance |
-|:-------------------------------------------------:|:-------------------------------------------------------------------------------------------------:|:-------------:|:-----------:|
-| [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js)   | ❌             | ⚠️          |
-| [百度贴吧](https://apps.apple.com/app/id477927812)    | [TieBa.js](https://github.com/NobyDa/Script/blob/master/BDTieBa-DailyBonus/TieBa.js)              | ✅(2023/03/14) | ❌           |
-| [吾爱破解](https://www.52pojie.cn/)                   | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js)          | ❌             | ❌           |
-| [爱奇艺](https://apps.apple.com/cn/app/id393765873)  | [iQIYI.js](https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js)                | ✅(2023/03/14) | ✅           |
-| [快看漫画](https://apps.apple.com/app/id906936224)    | [KKMH.js](https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js)                | ✅(2023/03/14) | ✅           |
-| [哔哩哔哩漫画](https://apps.apple.com/app/id1426252715) | [Manga.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js)             | ✅(2023/03/14) | ✅           |
-| [巴哈姆特](https://www.gamer.com.tw/)                 | [BahamutDailyBonus.js](https://github.com/NobyDa/Script/blob/master/Bahamut/BahamutDailyBonus.js) | ✅(2023/03/14) | ✅           |
+|                       Application                       |                         Script name                          |   Available    | Maintenance |
+| :-----------------------------------------------------: | :----------------------------------------------------------: | :------------: | :---------: |
+|   [京东商城](https://apps.apple.com/app/id414245413)    | [JD_DailyBonus.js](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js) |       ❌        |      ⚠️      |
+|   [百度贴吧](https://apps.apple.com/app/id477927812)    | [TieBa.js](https://github.com/NobyDa/Script/blob/master/BDTieBa-DailyBonus/TieBa.js) | ✅ (2023/08/17) |      ❌      |
+|           [吾爱破解](https://www.52pojie.cn/)           | [52pojie.js](https://github.com/NobyDa/Script/blob/master/52pojie-DailyBonus/52pojie.js) |       ❌        |      ❌      |
+|   [爱奇艺](https://apps.apple.com/cn/app/id393765873)   | [iQIYI.js](https://github.com/NobyDa/Script/blob/master/iQIYI-DailyBonus/iQIYI.js) | ✅ (2023/08/17) |      ✅      |
+|   [快看漫画](https://apps.apple.com/app/id906936224)    | [KKMH.js](https://github.com/NobyDa/Script/blob/master/KuaiKan-DailyBonus/KKMH.js) | ✅ (2023/08/17) |      ✅      |
+| [哔哩哔哩漫画](https://apps.apple.com/app/id1426252715) | [Manga.js](https://github.com/NobyDa/Script/blob/master/Bilibili-DailyBonus/Manga.js) | ✅ (2023/08/17) |      ✅      |
+|          [巴哈姆特](https://www.gamer.com.tw/)          | [BahamutDailyBonus.js](https://github.com/NobyDa/Script/blob/master/Bahamut/BahamutDailyBonus.js) | ✅ (2023/08/17) |      ✅      |
 
 ------
 
@@ -53,47 +52,37 @@
 
 ### Other Script
 
-| Application                                                                             | Script name                                                                                             | Description             | Available                |
-|:---------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------:|:-----------------------:|:------------------------:|
-| [VSCO](https://apps.apple.com/app/id588013838)                                          | [vsco.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js)              | Unlock membership       | ✅ (2023/03/14)           |
-| [1Blocker](https://apps.apple.com/app/id1365531024)                                     | [vsco.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js)              | Unlock membership       | ✅ (2023/03/14)           |
-| [JibJab](https://apps.apple.com/app/id875561136)                                        | [jibjab.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/jibjab.js)                  | Unlock membership       | ✅ (2023/03/14)           |
-| [美易Picsart](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js) | [PicsArt.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js)                | Unlock membership       | ❌                        |
-| [MIX滤镜大师](https://apps.apple.com/app/id913947918)                                       | [MIX.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/MIX.js)                        | Unlock in-app purchases | ✅ (2023/03/14)           |
-| [Polarr 泼辣](https://apps.apple.com/app/id988173374)                                     | [Polarr.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Polarr.js)                  | Unlock in-app purchases | ❌                        |
-| [小影VivaVideo](https://apps.apple.com/app/id738897668)                                   | [vivavideo.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/vivavideo.js)            | Unlock membership       | ⚠️ (Not tested recently) |
-| [CamScanner](https://apps.apple.com/app/id388627783)                                    | [CamScanner.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js)          | Unlock some benefits    | ⚠️ (Not tested recently) |
-| [知音漫客](https://apps.apple.com/app/id1012491820)                                         | [Zymh.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Zymh.js)              | Unlock vip chapters     | ⚠️ (Not tested recently) |
-| [香蕉视频](https://www.aa2.app)                                                             | [xjsp.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/xjsp.js)              | Unlock membership       | ⚠️ (Not tested recently) |
-| [网易蜗牛读书](https://apps.apple.com/app/id1127249355)                                       | [wnyd.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/wnyd.js)              | Unlock membership       | ✅ (2023/03/14)           |
-| [陆琪讲故事](https://apps.apple.com/app/id1435575842)                                        | [luqi.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/luqi.js)                      | Unlock radio            | ✅ (2023/03/14)           |
-| [百度网盘](https://apps.apple.com/app/id547166701)                                          | [BaiduCloud.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/BaiduCloud.js)          | Unlock video speed      | ✅ (2023/03/14)           |
-| [WeChat](https://apps.apple.com/app/id414478124)                                        | [Wechat.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Wechat.js)          | Remove Ads              | ✅ (2023/03/14)           |
-| [皮皮虾](https://apps.apple.com/cn/app/id1393912676)                                       | [Super.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Super.js)                    | Remove Ads              | ❌                        |
-| [動畫瘋](https://apps.apple.com/tw/app/id1102650114)                                       | [BahamutAnimeAds.js](https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutAnimeAds.js) | Remove Ads              | ✅ (2023/03/14)           |
+|                         Application                          |                         Script name                          |       Description       |   Available    |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :---------------------: | :------------: |
+|    [HTTPBot](https://apps.apple.com/cn/app/id1232603544)     | [vsco.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js) |    Unlock membership    | ✅ (2023/08/17) |
+|        [VSCO](https://apps.apple.com/app/id588013838)        | [vsco.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js) |    Unlock membership    | ✅ (2023/08/17) |
+|     [1Blocker](https://apps.apple.com/app/id1365531024)      | [vsco.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/vsco.js) |    Unlock membership    | ✅ (2023/08/17) |
+|       [JibJab](https://apps.apple.com/app/id875561136)       | [jibjab.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/jibjab.js) |    Unlock membership    | ✅ (2023/08/17) |
+| [美易Picsart](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js) | [PicsArt.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/PicsArt.js) |    Unlock membership    | ✅ (2023/08/17) |
+|    [MIX滤镜大师](https://apps.apple.com/app/id913947918)     | [MIX.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/MIX.js) | Unlock in-app purchases | ✅ (2023/08/17) |
+|    [Polarr 泼辣](https://apps.apple.com/app/id988173374)     | [Polarr.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Polarr.js) | Unlock in-app purchases | ✅ (2023/08/17) |
+|   [小影VivaVideo](https://apps.apple.com/app/id738897668)    | [vivavideo.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/vivavideo.js) |    Unlock membership    | ✅ (2023/08/17) |
+|     [CamScanner](https://apps.apple.com/app/id388627783)     | [CamScanner.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/CamScanner.js) |  Unlock some benefits   | ✅ (2023/08/17) |
+|     [知音漫客](https://apps.apple.com/app/id1012491820)      | [Zymh.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Zymh.js) |   Unlock vip chapters   | ✅ (2023/08/17) |
+|               [香蕉视频](https://www.aa2.app)                | [xjsp.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/xjsp.js) |    Unlock membership    | ✅ (2023/08/17) |
+|   [网易蜗牛读书](https://apps.apple.com/app/id1127249355)    | [wnyd.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/wnyd.js) |    Unlock membership    | ✅ (2023/08/17) |
+|    [陆琪讲故事](https://apps.apple.com/app/id1435575842)     | [luqi.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/luqi.js) |      Unlock radio       | ✅ (2023/08/17) |
+|      [百度网盘](https://apps.apple.com/app/id547166701)      | [BaiduCloud.js](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/BaiduCloud.js) |   Unlock video speed    | ✅ (2023/08/17) |
+|       [WeChat](https://apps.apple.com/app/id414478124)       | [Wechat.js](https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/File/Wechat.js) |       Remove Ads        | ✅ (2023/08/17) |
+|     [動畫瘋](https://apps.apple.com/tw/app/id1102650114)     | [BahamutAnimeAds.js](https://raw.githubusercontent.com/NobyDa/Script/master/Bahamut/BahamutAnimeAds.js) |       Remove Ads        | ✅ (2023/08/17) |
 
 ---
 
 ## Surge File Overview
 
-### Surge Ruleset
-
-| File name                                                                                   | Number | Description                       |
-|:-------------------------------------------------------------------------------------------:|:------:|:---------------------------------:|
-| [WeChat.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/WeChat.list)     | 180+   | WeChat ruleset (China)            |
-| [Apple.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Apple.list)       | 60+    | Apple ruleset (Most countries)    |
-| [Download.list](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Download.list) | 15+    | Some BT, Thunder, download rules. |
-
-### Surge Module
-
-| Module name                                                                                                                    | Description                                                                     |
-|:------------------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
-| [HuiJuDongManAds.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/HuiJuDongManAds.sgmodule)       | Remove [APP](https://apps.apple.com/app/id1451949669) Ads                       |
-| [IPA_install.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/IPA_install.sgmodule)               | Use Surge to assist in install IPA (signed version)                             |
-| [TestFlightDownload.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/TestFlightDownload.sgmodule) | Remove [TestFlight](https://apps.apple.com/app/id899247664) region restrictions |
-| [TestFlightAccount.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/TestFlightAccount.sgmodule)   | Merge and share [TestFlight](https://apps.apple.com/app/id899247664) accounts   |
-| [GetCookie.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/GetCookie.sgmodule)                   | Daily bonus script related                                                      |
-| [BahamutAnimeAds.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/BahamutAnimeAds.sgmodule)       | Remove [Bahamut anime](https://apps.apple.com/tw/app/id1102650114) Ads          |
+|                          File name                           |                         Description                          | Type   |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | ------ |
+| [HuiJuDongManAds.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/HuiJuDongManAds.sgmodule) |  Remove [APP](https://apps.apple.com/app/id1451949669) Ads   | Module |
+| [IPA_install.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/IPA_install.sgmodule) |     Use Surge to assist in install IPA (signed version)      | Module |
+| [TestFlightDownload.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/TestFlightDownload.sgmodule) | Remove [TestFlight](https://apps.apple.com/app/id899247664) region restrictions | Module |
+| [TestFlightAccount.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/TestFlightAccount.sgmodule) | Merge and share [TestFlight](https://apps.apple.com/app/id899247664) accounts | Module |
+| [GetCookie.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/GetCookie.sgmodule) |                  Daily bonus script related                  | Module |
+| [BahamutAnimeAds.sgmodule](https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/BahamutAnimeAds.sgmodule) | Remove [Bahamut anime](https://apps.apple.com/tw/app/id1102650114) Ads | Module |
 
 ---
 
@@ -150,13 +139,13 @@ The above random generated device ID can be found at the bottom of Quantumult X 
 
 ## Loon File Overview
 
-| File name                                                                                                           | Description                                                                     | Type   |
-|:-------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------:|:------:|
-| [Loon_GetCookie.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_GetCookie.plugin)          | Daily bonus script related                                                      | Plugin |
-| [Loon_TF_Download.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_TF_Download.plugin)      | Remove [TestFlight](https://apps.apple.com/app/id899247664) region restrictions | Plugin |
-| [Loon_TF_Account.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_TF_Account.plugin)        | Merge and share [TestFlight](https://apps.apple.com/app/id899247664) accounts   | Plugin |
-| [Loon_Bahamut_ADS.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_Bahamut_ADS.plugin)      | Remove [Bahamut anime](https://apps.apple.com/tw/app/id1102650114) Ads          | Plugin |
-| [Loon_IPA_Installer.plugin]((https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_IPA_Installer.plugin) | Use Loon to assist in install IPA (signed version)                              | Plugin |
+|                          File name                           |                         Description                          |  Type  |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----: |
+| [Loon_GetCookie.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_GetCookie.plugin) |                  Daily bonus script related                  | Plugin |
+| [Loon_TF_Download.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_TF_Download.plugin) | Remove [TestFlight](https://apps.apple.com/app/id899247664) region restrictions | Plugin |
+| [Loon_TF_Account.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_TF_Account.plugin) | Merge and share [TestFlight](https://apps.apple.com/app/id899247664) accounts | Plugin |
+| [Loon_Bahamut_ADS.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_Bahamut_ADS.plugin) | Remove [Bahamut anime](https://apps.apple.com/tw/app/id1102650114) Ads | Plugin |
+| [Loon_IPA_Installer.plugin](https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_IPA_Installer.plugin) |      Use Loon to assist in install IPA (signed version)      | Plugin |
 
 ---
 
