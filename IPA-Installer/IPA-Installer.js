@@ -8,7 +8,7 @@
  * 导入IPA文件至Shu -> Shu长按IPA文件 -> 导出文件 -> WiFi传输 -> 本机 -> 系统共享 -> 分享至IPA-Installer快捷指令
  * 
  * 快捷指令 + JSBox/Pythonista配合安装:
- * IPA文件长按分享至IPA-Installer快捷指令，完成后再分享至Jsbox/pythonista分享扩展.
+ * IPA文件长按分享至IPA-Installer快捷指令(iOS14跳过)，完成后再分享至Jsbox/pythonista分享扩展. 
  * 
  * 
  * QuanX重写: https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/IPA-Installer.snippet
@@ -19,7 +19,9 @@
  * 
  * Stash覆写: https://raw.githubusercontent.com/NobyDa/Script/master/Stash/IPA-Installer.stoverride
  * 
- * 快捷指令: https://www.icloud.com/shortcuts/d8b2b49ae05141f892e6122c9084c67a
+ * 快捷指令(iOS15+): https://www.icloud.com/shortcuts/4a121aa54cae4619a952baa29e044e30
+ * 
+ * 快捷指令(iOS14): https://www.icloud.com/shortcuts/179dfcd7505e44f89207086d2b1a32ea
  * 
  * JSBox脚本: https://xteko.com/redir?url=https%3A%2F%2Fraw.githubusercontent.com%2FNobyDa%2FScript%2Fmaster%2FIPA-Installer%2FIPA-Installer-JSBox.js&name=IPA%20Installer%20%28NobyDa%29
  * 
