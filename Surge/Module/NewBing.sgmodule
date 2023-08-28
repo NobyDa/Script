@@ -1,0 +1,8 @@
+#!name=New Bing for other browsers
+#!desc=Unlock browser restrictions for new bing AI search.
+
+[Header Rewrite]
+^https:\/\/www\.bing\.com\/(search|new) header-replace-regex User-Agent ^\w+\/[0-9\.\s]+\((\w+);.+ "Mozilla/5.0 ($1; Intel Mac OS X 10_12_6) AppleWebKit/537.36 Chrome/110.0 Safari/537.36 Edg/110.0"
+
+[MITM]
+hostname = %APPEND% www.bing.com
