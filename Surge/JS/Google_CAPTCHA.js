@@ -1,12 +1,12 @@
 /*
 Google搜索内容时并发使用多个策略(组)，以避免可能出现的人机验证
 
-注：该脚本仅兼容Surge(4.9.3+)，使用时需要在脚本配置内的argument参数中填写筛选策略(组)的正则表达式，留空则表示同时使用所有策略(组)
+注：该脚本仅兼容Surge(4.9.3+)，使用时需要在脚本配置内的argument参数中填写筛选策略/组的正则表达式，留空则表示同时使用所有策略/组
 
 Surge脚本配置:
 
 [Script]
-Google CAPTCHA = type=http-response,pattern=^https:\/\/www\.google\.com(\.[a-z]+|)\/search\?q=,requires-body=1,debug=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js,max-size=0,timeout=10,ability=http-client-policy,argument=^(🇸🇬|🇭🇰)\s.*\d+$
+Google CAPTCHA = type=http-response,pattern=^https:\/\/www\.google\.com(\.[a-z]+|)\/search\?(client=[a-z-]+&|)q=,requires-body=1,debug=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js,max-size=0,timeout=10,ability=http-client-policy,argument=^(🇸🇬|🇭🇰)\s.*\d+$
 
 [MITM]
 hostname = www.google.com*
@@ -26,6 +26,8 @@ let ret = {};
             return n && new RegExp(typeof $argument == 'string' ? $argument : "").test(n)
         });
         console.log(`[INFO]: Use policy ${JSON.stringify(selected, null, 2)}`);
+        delete $request.headers.cookie;
+        delete $request.headers.Cookie;
         const http = [
             new Promise((r, e) => setTimeout(() => e('Timeout'), 5000)),
             ...selected.map(
