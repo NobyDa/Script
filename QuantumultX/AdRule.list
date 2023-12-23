@@ -1,4 +1,4 @@
-# Update > 2023/04/28
+# Update > 2023/12/23
 DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
@@ -166,7 +166,6 @@ DOMAIN-SUFFIX,ad.video.51togic.com,REJECT
 DOMAIN-SUFFIX,biz5.kankan.com,REJECT
 DOMAIN-SUFFIX,c.algovid.com,REJECT
 DOMAIN-SUFFIX,cms.laifeng.com,REJECT
-DOMAIN-SUFFIX,da.mmarket.com,REJECT
 DOMAIN-SUFFIX,dotcounter.douyutv.com,REJECT
 DOMAIN-SUFFIX,g.uusee.com,REJECT
 DOMAIN-SUFFIX,gcdn.2mdn.net,REJECT
