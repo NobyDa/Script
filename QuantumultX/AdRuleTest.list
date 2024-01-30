@@ -1,4 +1,4 @@
-#Update 2020.10.3 Self-use for testing only, there may be a lot of manslaughter.
+#Update 2021.1.30 Self-use for testing only
 DOMAIN-SUFFIX,admaster.com,REJECT
 DOMAIN-SUFFIX,0z5jn.cn,REJECT
 DOMAIN-SUFFIX,114so.cn,REJECT
@@ -357,7 +357,6 @@ DOMAIN-SUFFIX,cpro.baidustatic.com,REJECT
 DOMAIN-SUFFIX,cpro.tieba.baidu.com,REJECT
 DOMAIN-SUFFIX,cpro2.baidustatic.com,REJECT
 DOMAIN-SUFFIX,dup.baidustatic.com,REJECT
-DOMAIN-SUFFIX,f10.baidu.com,REJECT
 DOMAIN-SUFFIX,hm.baidu.com,REJECT
 DOMAIN-SUFFIX,hmma.baidu.com,REJECT
 DOMAIN-SUFFIX,idm.bce.baidu.com,REJECT
@@ -1191,7 +1190,6 @@ DOMAIN-SUFFIX,video.c-ctrip.com,REJECT
 DOMAIN-SUFFIX,agn.aty.sohu.com,REJECT
 DOMAIN-SUFFIX,map-mobile-opnimg.cdn.bcebos.com,REJECT
 DOMAIN-SUFFIX,app.adjust.com,REJECT
-DOMAIN-SUFFIX,mob.com,REJECT
 DOMAIN-SUFFIX,adthor.com,REJECT
 DOMAIN-SUFFIX,pubnative.net,REJECT
 DOMAIN-SUFFIX,flurry.com,REJECT

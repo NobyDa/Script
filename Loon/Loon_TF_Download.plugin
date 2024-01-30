@@ -1,0 +1,14 @@
+#!name= TestFlight区域限制解除
+#!desc= 该Loon插件用以解决更新TestFlight App时, 提示"APP不可用"问题.
+#!author= NobyDa
+#!homepage= https://github.com/NobyDa/Script/tree/master
+#!icon= https://cdn.jsdelivr.net/gh/NobyDa/mini@master/Color/testflight.png
+
+[General]
+skip-proxy = iosapps.itunes.apple.com
+
+[Script]
+http-request ^https?:\/\/testflight\.apple\.com\/v\d\/accounts\/.+?\/install$ requires-body=1,max-size=0,script-path=https://gist.githubusercontent.com/NobyDa/9be418b93afc5e9c8a8f4d28ae403cf2/raw/TF_Download.js, tag=TF区域限制解除
+
+[MITM]
+hostname = testflight.apple.com

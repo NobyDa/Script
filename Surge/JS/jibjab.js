@@ -1,14 +1,25 @@
 /*
-JibJab unlock
+JibJab 解锁高级功能
 
-Surge4:
-http-response https:\/\/origin-prod-phoenix\.jibjab\.com\/v1\/user requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/jibjab.js
+***************************
+QuantumultX:
 
-QX：
+[rewrite_local]
 https:\/\/origin-prod-phoenix\.jibjab\.com\/v1\/user url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/jibjab.js
 
-Surge & QX MITM = origin-prod-phoenix.jibjab.com
-*/
+[mitm]
+hostname = origin-prod-phoenix.jibjab.com
+
+***************************
+Surge4 or Loon:
+
+[Script]
+http-response https:\/\/origin-prod-phoenix\.jibjab\.com\/v1\/user requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/jibjab.js
+
+[MITM]
+hostname = origin-prod-phoenix.jibjab.com
+
+**************************/
 
 let obj = JSON.parse($response.body);
 obj.data.attributes["is-paid"] = true;

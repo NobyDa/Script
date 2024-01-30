@@ -2,60 +2,78 @@
 
 京东多合一签到脚本
 
-更新时间: 2020.11.17 21:35 v1.85
-有效接口: 48+
+更新时间: 2021.09.09 20:20 v2.1.3
+有效接口: 20+
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 电报频道: @NobyDa 
 问题反馈: @NobyDa_bot 
 如果转载: 请注明出处
 
 *************************
-【 JSbox, Node.js 说明 】 :
-*************************
-
-开启抓包app后, Safari浏览器登录 https://bean.m.jd.com 点击签到并且出现签到日历后, 返回抓包app搜索关键字 functionId=signBean 复制请求头Cookie填入以下Key处的单引号内即可 */
-
-var Key = ''; //单引号内自行填写您抓取的Cookie
-
-var DualKey = ''; //如需双账号签到,此处单引号内填写抓取的"账号2"Cookie, 否则请勿填写
-
-/* 注1: 以上选项仅针对于JsBox或Node.js, 如果使用QX,Surge,Loon, 请使用脚本获取Cookie.
-   注2: 双账号用户抓取"账号1"Cookie后, 请勿点击退出账号(可能会导致Cookie失效), 需清除浏览器资料或更换浏览器登录"账号2"抓取.
-   注3: 如果复制的Cookie开头为"Cookie: "请把它删除后填入.
-   注4: 如果使用QX,Surge,Loon并获取Cookie后, 再重复填写以上选项, 则签到优先读取以上Cookie.
-   注5: 如果使用Node.js, 需自行安装'request'模块. 例: npm install request -g
-   注6: Node.js或JSbox环境下已配置数据持久化, 填写Cookie运行一次后, 后续更新脚本无需再次填写, 待Cookie失效后重新抓取填写即可.
-
-*************************
 【 QX, Surge, Loon 说明 】 :
 *************************
 
-初次使用时, app配置文件添加脚本配置,并启用Mitm后, Safari浏览器打开登录 https://bean.m.jd.com ,点击签到并且出现签到日历后, 如果通知获得cookie成功, 则可以使用此签到脚本。 注: 请勿在京东APP内获取!!!
+初次使用时, app配置文件添加脚本配置, 并启用Mitm后:
+
+Safari浏览器打开登录 https://home.m.jd.com/myJd/newhome.action 点击"我的"页面
+或者使用旧版网址 https://bean.m.jd.com/bean/signIndex.action 点击签到并且出现签到日历
+如果通知获取Cookie成功, 则可以使用此签到脚本. 注: 请勿在京东APP内获取!!!
+
+获取京东金融签到Body说明: 正确添加脚本配置后, 进入"京东金融"APP, 在"首页"点击"签到"并签到一次, 待通知提示成功即可.
 
 由于cookie的有效性(经测试网页Cookie有效周期最长31天)，如果脚本后续弹出cookie无效的通知，则需要重复上述步骤。 
 签到脚本将在每天的凌晨0:05执行, 您可以修改执行时间。 因部分接口京豆限量领取, 建议调整为凌晨签到。
 
-BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
+BoxJs或QX Gallery订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
 
 *************************
-【 配置双京东账号签到说明 】 : 
+【 配置多京东账号签到说明 】 : 
 *************************
 
-正确配置QX、Surge、Loon后, 并使用此脚本获取"账号1"Cookie成功后, 请勿点击退出账号(可能会导致Cookie失效), 需清除浏览器资料或更换浏览器登录"账号2"获取即可.
+正确配置QX、Surge、Loon后, 并使用此脚本获取"账号1"Cookie成功后, 请勿点击退出账号(可能会导致Cookie失效), 需清除浏览器资料或更换浏览器登录"账号2"获取即可; 账号3或以上同理.
+注: 如需清除所有Cookie, 您可开启脚本内"DeleteCookie"选项 (第114行)
 
-注: 获取"账号1"或"账号2"的Cookie后, 后续仅可更新该"账号1"或"账号2"的Cookie.
-如需写入其他账号,您可开启脚本内"DeleteCookie"选项以清除Cookie
+*************************
+【 JSbox, Node.js 说明 】 :
+*************************
+
+开启抓包app后, Safari浏览器登录 https://home.m.jd.com/myJd/newhome.action 点击个人中心页面后, 返回抓包app搜索关键字 info/GetJDUserInfoUnion 复制请求头Cookie字段填入json串数据内即可
+
+如需获取京东金融签到Body, 可进入"京东金融"APP (iOS), 在"首页"点击"签到"并签到一次, 返回抓包app搜索关键字 h5/m/appSign 复制请求体填入json串数据内即可
+*/
+
+var Key = ''; //该参数已废弃; 仅用于下游脚本的兼容, 请使用json串数据 ↓
+
+var DualKey = ''; //该参数已废弃; 仅用于下游脚本的兼容, 请使用json串数据  ↓
+
+var OtherKey = ``; //无限账号Cookie json串数据, 请严格按照json格式填写, 具体格式请看以下样例:
+
+/*以下样例为双账号("cookie"为必须,其他可选), 第一个账号仅包含Cookie, 第二个账号包含Cookie和金融签到Body: 
+
+var OtherKey = `[{
+  "cookie": "pt_key=xxx;pt_pin=yyy;"
+}, {
+  "cookie": "pt_key=yyy;pt_pin=xxx;",
+  "jrBody": "reqData=xxx"
+}]`
+
+   注1: 以上选项仅针对于JsBox或Node.js, 如果使用QX,Surge,Loon, 请使用脚本获取Cookie.
+   注2: 多账号用户抓取"账号1"Cookie后, 请勿点击退出账号(可能会导致Cookie失效), 需清除浏览器资料或更换浏览器登录"账号2"抓取.
+   注3: 如果使用Node.js, 需自行安装'request'模块. 例: npm install request -g
+   注4: Node.js或JSbox环境下已配置数据持久化, 填写Cookie运行一次后, 后续更新脚本无需再次填写, 待Cookie失效后重新抓取填写即可.
+   注5: 脚本将自动处理"持久化数据"和"手动填写cookie"之间的重复关系, 例如填写多个账号Cookie后, 后续其中一个失效, 仅需填写该失效账号的新Cookie即可, 其他账号不会被清除.
+
 *************************
 【Surge 4.2+ 脚本配置】:
 *************************
 
 [Script]
-京东多合一签到 = type=cron,cronexp=5 0 * * *,wake-system=1,timeout=20,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+京东多合一签到 = type=cron,cronexp=5 0 * * *,wake-system=1,timeout=60,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
-获取京东Cookie = type=http-request,pattern=https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+获取京东Cookie = type=http-request,requires-body=1,pattern=^https:\/\/(api\.m|me-api|ms\.jr)\.jd\.com\/(client\.action\?functionId=signBean|user_new\/info\/GetJDUserInfoUnion\?|gw\/generic\/hy\/h5\/m\/appSign\?),script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
 [MITM]
-hostname = api.m.jd.com
+hostname = ms.jr.jd.com, me-api.jd.com, api.m.jd.com
 
 *************************
 【Loon 2.1+ 脚本配置】:
@@ -64,10 +82,10 @@ hostname = api.m.jd.com
 [Script]
 cron "5 0 * * *" tag=京东多合一签到, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
-http-request https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean tag=获取京东Cookie, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+http-request ^https:\/\/(api\.m|me-api|ms\.jr)\.jd\.com\/(client\.action\?functionId=signBean|user_new\/info\/GetJDUserInfoUnion\?|gw\/generic\/hy\/h5\/m\/appSign\?) tag=获取京东Cookie, requires-body=true, script-path=https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
 [MITM]
-hostname = api.m.jd.com
+hostname = ms.jr.jd.com, me-api.jd.com, api.m.jd.com
 
 *************************
 【 QX 1.0.10+ 脚本配置 】 :
@@ -75,24 +93,25 @@ hostname = api.m.jd.com
 
 [task_local]
 # 京东多合一签到
-# 注意此为远程路径, 低版本用户请自行调整为本地路径.
-5 0 * * * https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东多合一签到, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png,enabled=true
+5 0 * * * https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东多合一签到, img-url=https://raw.githubusercontent.com/NobyDa/mini/master/Color/jd.png,enabled=true
 
 [rewrite_local]
 # 获取京东Cookie. 
-# 注意此为远程路径, 低版本用户请自行调整为本地路径.
-https:\/\/api\.m\.jd\.com\/client\.action.*functionId=signBean url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+^https:\/\/(api\.m|me-api)\.jd\.com\/(client\.action\?functionId=signBean|user_new\/info\/GetJDUserInfoUnion\?) url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
+
+# 获取钢镚签到body. 
+^https:\/\/ms\.jr\.jd\.com\/gw\/generic\/hy\/h5\/m\/appSign\? url script-request-body https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js
 
 [mitm]
-hostname = api.m.jd.com
+hostname = ms.jr.jd.com, me-api.jd.com, api.m.jd.com
 
 *************************/
 
 var LogDetails = false; //是否开启响应日志, true则开启
 
-var stop = 0; //自定义延迟签到,单位毫秒. 默认分批并发无延迟. 延迟作用于每个签到接口, 如填入延迟则切换顺序签到(耗时较长), VPN重启或越狱用户建议填写1, Surge用户请注意在SurgeUI界面调整脚本超时
+var stop = '0'; //自定义延迟签到, 单位毫秒. 默认分批并发无延迟; 该参数接受随机或指定延迟(例: '2000'则表示延迟2秒; '2000-5000'则表示延迟最小2秒,最大5秒内的随机延迟), 如填入延迟则切换顺序签到(耗时较长), Surge用户请注意在SurgeUI界面调整脚本超时; 注: 该参数Node.js或JSbox环境下已配置数据持久化, 留空(var stop = '')即可清除.
 
-var DeleteCookie = false; //是否清除Cookie, true则开启.
+var DeleteCookie = false; //是否清除所有Cookie, true则开启.
 
 var boxdis = true; //是否开启自动禁用, false则关闭. 脚本运行崩溃时(如VPN断连), 下次运行时将自动禁用相关崩溃接口(仅部分接口启用), 崩溃时可能会误禁用正常接口. (该选项仅适用于QX,Surge,Loon)
 
@@ -102,133 +121,121 @@ var out = 0; //接口超时退出, 用于可能发生的网络不稳定, 0则关
 
 var $nobyda = nobyda();
 
-async function all() {
+var merge = {};
+
+var KEY = '';
+
+async function all(cookie, jrBody) {
+  KEY = cookie;
   merge = {};
+  $nobyda.num++;
   switch (stop) {
     case 0:
       await Promise.all([
-        JingDongSpeedUp(stop), //京东天天加速
         JingDongBean(stop), //京东京豆
-        JDTakeaLook(stop), //京东发现-看一看
         JingDongStore(stop), //京东超市
-        JingDongWebcasts(stop), //京东直播
-        JingRongBean(stop), //金融简单赚钱
-        JingRongSteel(stop), //金融钢镚
+        JingRongSteel(stop, jrBody), //金融钢镚
         JingDongTurn(stop), //京东转盘
         JDFlashSale(stop), //京东闪购
-        JDOverseas(stop), //京东国际
         JingDongCash(stop), //京东现金红包
         JDMagicCube(stop, 2), //京东小魔方
         JingDongSubsidy(stop), //京东金贴
         JingDongGetCash(stop), //京东领现金
         JingDongShake(stop), //京东摇一摇
         JDSecKilling(stop), //京东秒杀
-        JRLuckyLottery(stop), //金融抽奖顶部签到
-        JingDongBuyCar(stop), //京东汽车
-        JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '890418F764'),
-        JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252'),
-        JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C'),
-        JingRongDoll(stop, 'JRFourDoll', '京东金融-签肆', '30C4F86264'),
-        JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F'),
-        JingRongDoll(stop, 'JRSixDoll', '京东金融-签陆', 'F1455B50EF')
+        // JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '4D25A6F482'),
+        // JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C'),
+        // JingRongDoll(stop, 'JRFourDoll', '京东金融-签肆', '30C4F86264'),
+        // JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F')
       ]);
       await Promise.all([
-        JDUserSignPre(stop, 'JDComputer', '京东电脑-数码', '31HbNBjr6YLyZfJtR5biFFc9ZYXN'), //京东电脑数码馆
-        JDUserSignPre(stop, 'JDUnderwear', '京东商城-内衣', '4PgpL1xqPSW1sVXCJ3xopDbB1f69'), //京东内衣馆
-        JDUserSignPre(stop, 'JDToyMusic', '京东商城-乐器', '4N6RzwtBZdtdcgodvdsK7ZEzkUbZ'), //京东玩具乐器馆
+        JDUserSignPre(stop, 'JDUndies', '京东商城-内衣', '4PgpL1xqPSW1sVXCJ3xopDbB1f69'), //京东内衣馆
+        JDUserSignPre(stop, 'JDCard', '京东商城-卡包', '7e5fRnma6RBATV9wNrGXJwihzcD'), //京东卡包
+        // JDUserSignPre(stop, 'JDCustomized', '京东商城-定制', '2BJK5RBdvc3hdddZDS1Svd5Esj3R'), //京东定制
+        JDUserSignPre(stop, 'JDaccompany', '京东商城-陪伴', 'kPM3Xedz1PBiGQjY4ZYGmeVvrts'), //京东陪伴
         JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'), //京东鞋靴
-        JDUserSignPre(stop, 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'), //京东电竞
-        JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'), //京东日历翻牌
         JDUserSignPre(stop, 'JDChild', '京东商城-童装', '3Af6mZNcf5m795T8dtDVfDwWVNhJ'), //京东童装馆
         JDUserSignPre(stop, 'JDBaby', '京东商城-母婴', '3BbAVGQPDd6vTyHYjmAutXrKAos6'), //京东母婴馆
         JDUserSignPre(stop, 'JD3C', '京东商城-数码', '4SWjnZSCTHPYjE5T7j35rxxuMTb6'), //京东数码电器馆
-        JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴', 'xK148m4kWj5hBcTPuJUNNXH3AkJ'), //京东晚市补贴金
-        JDUserSignPre(stop, 'JDDrug', '京东商城-医药', '3tqTG5sF1xCUyC6vgEF5CLCxGn7w'), //京东医药馆
         JDUserSignPre(stop, 'JDWomen', '京东商城-女装', 'DpSh7ma8JV7QAxSE2gJNro8Q2h9'), //京东女装馆
-        JDUserSignPre(stop, 'JDFineWine', '京东商城-酒饮', 'zGwAUzL3pVGjptBBGeYfpKjYdtX'), //京东酒饮馆
-        JDUserSignPre(stop, 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi') //京东图书
+        JDUserSignPre(stop, 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi'), //京东图书
+        // JDUserSignPre(stop, 'ReceiveJD', '京东商城-领豆', 'Ni5PUSK7fzZc4EKangHhqPuprn2'), //京东-领京豆
+        JingRongDoll(stop, 'JTDouble', '京东金贴-双签', '1DF13833F7'), //京东金融 金贴双签
+        // JingRongDoll(stop, 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin') //京东金融 现金双签
       ]);
       await Promise.all([
+        JDUserSignPre(stop, 'JDStory', '京东失眠-补贴', 'UcyW9Znv3xeyixW1gofhW2DAoz4'), //失眠补贴
+        JDUserSignPre(stop, 'JDPhone', '京东手机-小时', '4Vh5ybVr98nfJgros5GwvXbmTUpg'), //手机小时达
+        JDUserSignPre(stop, 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'), //京东电竞
+        JDUserSignPre(stop, 'JDClothing', '京东商城-服饰', '4RBT3H9jmgYg1k2kBnHF8NAHm7m8'), //京东服饰
         JDUserSignPre(stop, 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'), //京东箱包馆
-        JDUserSignPre(stop, 'JDConstell', '京东商城-京鱼', '3BPdJHCESW5cfak79ZRz37wTKbuV'), //京东京鱼座
-        JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'), //京东校园
+        JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '2QUxWHx5BSCNtnBDjtt5gZTq7zdZ'), //京东校园
         JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'), //京东健康
-        JDUserSignPre(stop, 'JDPet', '京东商城-宠物', '37ta5sh5ocrMZF3Fz5UMJbTsL42'), //京东宠物馆
         JDUserSignPre(stop, 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'), //京东拍拍二手
         JDUserSignPre(stop, 'JDClean', '京东商城-清洁', '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6'), //京东清洁馆
-        JDUserSignPre(stop, 'JDCare', '京东商城-个护', 'NJ1kd1PJWhwvhtim73VPsD1HwY3'), //京东个人护理馆
-        JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝', 'zHUHpTHNTaztSRfNBFNVZscyFZU'), //京东珠宝馆
-        JDUserSignPre(stop, 'JDClocks', '京东商城-钟表', '2BcJPCVVzMEtMUynXkPscCSsx68W'), //京东钟表馆
-        JDUserSignPre(stop, 'JDMakeup', '京东商城-美妆', '2smCxzLNuam5L14zNJHYu43ovbAP'), //京东美妆馆
+        JDUserSignPre(stop, 'JDCare', '京东商城-个护', '2tZssTgnQsiUqhmg5ooLSHY9XSeN'), //京东个人护理馆
+        JDUserSignPre(stop, 'JDJiaDian', '京东商城-家电', '3uvPyw1pwHARGgndatCXddLNUxHw'), // 京东小家电
+        // JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝', 'zHUHpTHNTaztSRfNBFNVZscyFZU'), //京东珠宝馆
+        // JDUserSignPre(stop, 'JDMakeup', '京东商城-美妆', '2smCxzLNuam5L14zNJHYu43ovbAP'), //京东美妆馆
         JDUserSignPre(stop, 'JDVege', '京东商城-菜场', 'Wcu2LVCFMkBP3HraRvb7pgSpt64'), //京东菜场
-        JDUserSignPre(stop, 'JDFood', '京东商城-美食', '4PzvVmLSBq5K63oq4oxKcDtFtzJo') //京东美食馆
+        // JDUserSignPre(stop, 'JDLive', '京东智能-生活', 'KcfFqWvhb5hHtaQkS4SD1UU6RcQ') //京东智能生活
       ]);
+      await JingRongDoll(stop, 'JDDouble', '金融京豆-双签', 'F68B2C3E71', '', '', '', 'jingdou'); //京东金融 京豆双签
       break;
     default:
-      await JingDongSpeedUp(stop); //京东天天加速
-      await JingDongBean(stop); //京东京豆
-      await JDTakeaLook(stop); //京东发现-看一看
-      await JingDongStore(stop); //京东超市
-      await JingDongWebcasts(stop); //京东直播
-      await JingRongBean(stop); //金融简单赚钱
-      await JingRongSteel(stop); //金融钢镚
-      await JingDongTurn(stop); //京东转盘
-      await JDFlashSale(stop); //京东闪购
-      await JDOverseas(stop); //京东国际
-      await JingDongCash(stop); //京东现金红包
-      await JDMagicCube(stop, 2); //京东小魔方
-      await JingDongGetCash(stop); //京东领现金
-      await JingDongSubsidy(stop); //京东金贴
-      await JingDongShake(stop); //京东摇一摇
-      await JDSecKilling(stop); //京东秒杀
-      await JRLuckyLottery(stop); //金融抽奖顶部签到
-      await JingDongBuyCar(stop); //京东汽车
-      await JingRongDoll(stop, 'JRDoll', '京东金融-签壹', '890418F764');
-      await JingRongDoll(stop, 'JRTwoDoll', '京东金融-签贰', '3A3E839252');
-      await JingRongDoll(stop, 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
-      await JingRongDoll(stop, 'JRFourDoll', '京东金融-签肆', '30C4F86264');
-      await JingRongDoll(stop, 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F');
-      await JingRongDoll(stop, 'JRSixDoll', '京东金融-签陆', 'F1455B50EF');
-      await JDUserSignPre(stop, 'JDUnderwear', '京东商城-内衣', '4PgpL1xqPSW1sVXCJ3xopDbB1f69'); //京东内衣馆
-      await JDUserSignPre(stop, 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'); //京东箱包馆
-      await JDUserSignPre(stop, 'JDComputer', '京东电脑-数码', '31HbNBjr6YLyZfJtR5biFFc9ZYXN'); //京东电脑数码馆
-      await JDUserSignPre(stop, 'JDConstell', '京东商城-京鱼', '3BPdJHCESW5cfak79ZRz37wTKbuV'); //京东京鱼座
-      await JDUserSignPre(stop, 'JDToyMusic', '京东商城-乐器', '4N6RzwtBZdtdcgodvdsK7ZEzkUbZ'); //京东玩具乐器馆
-      await JDUserSignPre(stop, 'JDSchool', '京东商城-校园', '4812pn2PAcUyfNdWr7Cvpww5MCyW'); //京东校园
-      await JDUserSignPre(stop, 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'); //京东健康
-      await JDUserSignPre(stop, 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'); //京东鞋靴
-      await JDUserSignPre(stop, 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'); //京东电竞
-      await JDUserSignPre(stop, 'JDCalendar', '京东日历-翻牌', '36V2Qw59VPNsuLxY84vCFtxFzrFs'); //京东日历翻牌
-      await JDUserSignPre(stop, 'JDChild', '京东商城-童装', '3Af6mZNcf5m795T8dtDVfDwWVNhJ'); //京东童装馆
-      await JDUserSignPre(stop, 'JDBaby', '京东商城-母婴', '3BbAVGQPDd6vTyHYjmAutXrKAos6'); //京东母婴馆
-      await JDUserSignPre(stop, 'JD3C', '京东商城-数码', '4SWjnZSCTHPYjE5T7j35rxxuMTb6'); //京东数码电器馆
-      await JDUserSignPre(stop, 'JDSubsidy', '京东晚市-补贴', 'xK148m4kWj5hBcTPuJUNNXH3AkJ'); //京东晚市补贴金
-      await JDUserSignPre(stop, 'JDClocks', '京东商城-钟表', '2BcJPCVVzMEtMUynXkPscCSsx68W'); //京东钟表馆
-      await JDUserSignPre(stop, 'JDDrug', '京东商城-医药', '3tqTG5sF1xCUyC6vgEF5CLCxGn7w'); //京东医药馆
-      await JDUserSignPre(stop, 'JDWomen', '京东商城-女装', 'DpSh7ma8JV7QAxSE2gJNro8Q2h9'); //京东女装馆
-      await JDUserSignPre(stop, 'JDPet', '京东商城-宠物', '37ta5sh5ocrMZF3Fz5UMJbTsL42'); //京东宠物馆
-      await JDUserSignPre(stop, 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi'); //京东图书
-      await JDUserSignPre(stop, 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'); //京东拍拍二手
-      await JDUserSignPre(stop, 'JDMakeup', '京东商城-美妆', '2smCxzLNuam5L14zNJHYu43ovbAP'); //京东美妆馆
-      await JDUserSignPre(stop, 'JDFineWine', '京东商城-酒饮', 'zGwAUzL3pVGjptBBGeYfpKjYdtX'); //京东酒饮馆
-      await JDUserSignPre(stop, 'JDVege', '京东商城-菜场', 'Wcu2LVCFMkBP3HraRvb7pgSpt64'); //京东菜场
-      await JDUserSignPre(stop, 'JDFood', '京东商城-美食', '4PzvVmLSBq5K63oq4oxKcDtFtzJo'); //京东美食馆
-      await JDUserSignPre(stop, 'JDClean', '京东商城-清洁', '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6'); //京东清洁馆
-      await JDUserSignPre(stop, 'JDCare', '京东商城-个护', 'NJ1kd1PJWhwvhtim73VPsD1HwY3'); //京东个人护理馆
-      await JDUserSignPre(stop, 'JDJewels', '京东商城-珠宝', 'zHUHpTHNTaztSRfNBFNVZscyFZU'); //京东珠宝馆
+      await JingDongBean(0); //京东京豆
+      await JingDongStore(Wait(stop)); //京东超市
+      await JingRongSteel(Wait(stop), jrBody); //金融钢镚
+      await JingDongTurn(Wait(stop)); //京东转盘
+      await JDFlashSale(Wait(stop)); //京东闪购
+      await JingDongCash(Wait(stop)); //京东现金红包
+      await JDMagicCube(Wait(stop), 2); //京东小魔方
+      await JingDongGetCash(Wait(stop)); //京东领现金
+      await JingDongSubsidy(Wait(stop)); //京东金贴
+      await JingDongShake(Wait(stop)); //京东摇一摇
+      await JDSecKilling(Wait(stop)); //京东秒杀
+      // await JingRongDoll(Wait(stop), 'JRThreeDoll', '京东金融-签叁', '69F5EC743C');
+      // await JingRongDoll(Wait(stop), 'JRFourDoll', '京东金融-签肆', '30C4F86264');
+      // await JingRongDoll(Wait(stop), 'JRFiveDoll', '京东金融-签伍', '1D06AA3B0F');
+      // await JingRongDoll(Wait(stop), 'JRDoll', '京东金融-签壹', '4D25A6F482');
+      // await JingRongDoll(Wait(stop), 'XJDouble', '金融现金-双签', 'F68B2C3E71', '', '', '', 'xianjin'); //京东金融 现金双签
+      await JingRongDoll(Wait(stop), 'JTDouble', '京东金贴-双签', '1DF13833F7'); //京东金融 金贴双签
+      await JDUserSignPre(Wait(stop), 'JDStory', '京东失眠-补贴', 'UcyW9Znv3xeyixW1gofhW2DAoz4'); //失眠补贴
+      await JDUserSignPre(Wait(stop), 'JDPhone', '京东手机-小时', '4Vh5ybVr98nfJgros5GwvXbmTUpg'); //手机小时达
+      await JDUserSignPre(Wait(stop), 'JDCard', '京东商城-卡包', '7e5fRnma6RBATV9wNrGXJwihzcD'); //京东卡包
+      await JDUserSignPre(Wait(stop), 'JDUndies', '京东商城-内衣', '4PgpL1xqPSW1sVXCJ3xopDbB1f69'); //京东内衣馆
+      await JDUserSignPre(Wait(stop), 'JDEsports', '京东商城-电竞', 'CHdHQhA5AYDXXQN9FLt3QUAPRsB'); //京东电竞
+      // await JDUserSignPre(Wait(stop), 'JDCustomized', '京东商城-定制', '2BJK5RBdvc3hdddZDS1Svd5Esj3R'); //京东定制
+      await JDUserSignPre(Wait(stop), 'JDSuitcase', '京东商城-箱包', 'ZrH7gGAcEkY2gH8wXqyAPoQgk6t'); //京东箱包馆
+      await JDUserSignPre(Wait(stop), 'JDClothing', '京东商城-服饰', '4RBT3H9jmgYg1k2kBnHF8NAHm7m8'); //京东服饰
+      await JDUserSignPre(Wait(stop), 'JDSchool', '京东商城-校园', '2QUxWHx5BSCNtnBDjtt5gZTq7zdZ'); //京东校园 
+      await JDUserSignPre(Wait(stop), 'JDHealth', '京东商城-健康', 'w2oeK5yLdHqHvwef7SMMy4PL8LF'); //京东健康
+      await JDUserSignPre(Wait(stop), 'JDShoes', '京东商城-鞋靴', '4RXyb1W4Y986LJW8ToqMK14BdTD'); //京东鞋靴
+      await JDUserSignPre(Wait(stop), 'JDChild', '京东商城-童装', '3Af6mZNcf5m795T8dtDVfDwWVNhJ'); //京东童装馆
+      await JDUserSignPre(Wait(stop), 'JDBaby', '京东商城-母婴', '3BbAVGQPDd6vTyHYjmAutXrKAos6'); //京东母婴馆
+      await JDUserSignPre(Wait(stop), 'JD3C', '京东商城-数码', '4SWjnZSCTHPYjE5T7j35rxxuMTb6'); //京东数码电器馆
+      await JDUserSignPre(Wait(stop), 'JDWomen', '京东商城-女装', 'DpSh7ma8JV7QAxSE2gJNro8Q2h9'); //京东女装馆
+      await JDUserSignPre(Wait(stop), 'JDBook', '京东商城-图书', '3SC6rw5iBg66qrXPGmZMqFDwcyXi'); //京东图书
+      await JDUserSignPre(Wait(stop), 'JDShand', '京东拍拍-二手', '3S28janPLYmtFxypu37AYAGgivfp'); //京东拍拍二手
+      // await JDUserSignPre(Wait(stop), 'JDMakeup', '京东商城-美妆', '2smCxzLNuam5L14zNJHYu43ovbAP'); //京东美妆馆
+      await JDUserSignPre(Wait(stop), 'JDVege', '京东商城-菜场', 'Wcu2LVCFMkBP3HraRvb7pgSpt64'); //京东菜场
+      await JDUserSignPre(Wait(stop), 'JDaccompany', '京东商城-陪伴', 'kPM3Xedz1PBiGQjY4ZYGmeVvrts'); //京东陪伴
+      // await JDUserSignPre(Wait(stop), 'JDLive', '京东智能-生活', 'KcfFqWvhb5hHtaQkS4SD1UU6RcQ'); //京东智能生活
+      await JDUserSignPre(Wait(stop), 'JDClean', '京东商城-清洁', '2Tjm6ay1ZbZ3v7UbriTj6kHy9dn6'); //京东清洁馆
+      await JDUserSignPre(Wait(stop), 'JDCare', '京东商城-个护', '2tZssTgnQsiUqhmg5ooLSHY9XSeN'); //京东个人护理馆
+      await JDUserSignPre(Wait(stop), 'JDJiaDian', '京东商城-家电', '3uvPyw1pwHARGgndatCXddLNUxHw'); // 京东小家电馆
+      // await JDUserSignPre(Wait(stop), 'ReceiveJD', '京东商城-领豆', 'Ni5PUSK7fzZc4EKangHhqPuprn2'); //京东-领京豆
+      // await JDUserSignPre(Wait(stop), 'JDJewels', '京东商城-珠宝', 'zHUHpTHNTaztSRfNBFNVZscyFZU'); //京东珠宝馆
+      await JingRongDoll(Wait(stop), 'JDDouble', '金融京豆-双签', 'F68B2C3E71', '', '', '', 'jingdou'); //京东金融 京豆双签
       break;
   }
-  await Promise.all([
-    JDJTDoubleSign(stop), //京东金融金贴双签
-    JRDoubleSign(stop) //金融双签
-  ])
   await Promise.all([
     TotalSteel(), //总钢镚查询
     TotalCash(), //总红包查询
     TotalBean(), //总京豆查询
     TotalSubsidy(), //总金贴查询
     TotalMoney() //总现金查询
-  ])
+  ]);
   await notify(); //通知模块
 }
 
@@ -238,6 +245,7 @@ function notify() {
       var bean = 0;
       var steel = 0;
       var cash = 0;
+      var money = 0;
       var subsidy = 0;
       var success = 0;
       var fail = 0;
@@ -247,6 +255,7 @@ function notify() {
         bean += merge[i].bean ? Number(merge[i].bean) : 0
         steel += merge[i].steel ? Number(merge[i].steel) : 0
         cash += merge[i].Cash ? Number(merge[i].Cash) : 0
+        money += merge[i].Money ? Number(merge[i].Money) : 0
         subsidy += merge[i].subsidy ? Number(merge[i].subsidy) : 0
         success += merge[i].success ? Number(merge[i].success) : 0
         fail += merge[i].fail ? Number(merge[i].fail) : 0
@@ -254,41 +263,35 @@ function notify() {
         notify += merge[i].notify ? "\n" + merge[i].notify : ""
       }
       var Cash = merge.TotalCash && merge.TotalCash.TCash ? `${merge.TotalCash.TCash}红包` : ""
-      var Steel = merge.TotalSteel && merge.TotalSteel.TSteel ? `${merge.TotalSteel.TSteel}钢镚${Cash?`, `:``}` : ``
-      var beans = merge.TotalBean && merge.TotalBean.Qbear ? `${merge.TotalBean.Qbear}京豆${Steel||Cash?`, `:``}` : ""
-      var Money = merge.TotalMoney && merge.TotalMoney.TMoney ? `${merge.TotalMoney.TMoney}现金` : ""
-      var Subsidy = merge.TotalSubsidy && merge.TotalSubsidy.TSubsidy ? `${merge.TotalSubsidy.TSubsidy}金贴${Money?", ":""}` : ""
+      var Steel = merge.TotalSteel && merge.TotalSteel.TSteel ? `${merge.TotalSteel.TSteel}钢镚` : ``
+      var beans = merge.TotalBean && merge.TotalBean.Qbear ? `${merge.TotalBean.Qbear}京豆${Steel?`, `:``}` : ""
+      var Money = merge.TotalMoney && merge.TotalMoney.TMoney ? `${merge.TotalMoney.TMoney}现金${Cash?`, `:``}` : ""
+      var Subsidy = merge.TotalSubsidy && merge.TotalSubsidy.TSubsidy ? `${merge.TotalSubsidy.TSubsidy}金贴${Money||Cash?", ":""}` : ""
       var Tbean = bean ? `${bean.toFixed(0)}京豆${steel?", ":""}` : ""
       var TSteel = steel ? `${steel.toFixed(2)}钢镚` : ""
-      var TCash = cash ? `${cash.toFixed(2)}红包${subsidy?", ":""}` : ""
-      var TSubsidy = subsidy ? `${subsidy.toFixed(2)}金贴` : ""
+      var TCash = cash ? `${cash.toFixed(2)}红包${subsidy||money?", ":""}` : ""
+      var TSubsidy = subsidy ? `${subsidy.toFixed(2)}金贴${money?", ":""}` : ""
+      var TMoney = money ? `${money.toFixed(2)}现金` : ""
       var Ts = success ? `成功${success}个${fail||err?`, `:``}` : ``
       var Tf = fail ? `失败${fail}个${err?`, `:``}` : ``
       var Te = err ? `错误${err}个` : ``
       var one = `【签到概览】:  ${Ts+Tf+Te}${Ts||Tf||Te?`\n`:`获取失败\n`}`
       var two = Tbean || TSteel ? `【签到奖励】:  ${Tbean+TSteel}\n` : ``
-      var three = TCash || TSubsidy ? `【其他奖励】:  ${TCash+TSubsidy}\n` : ``
-      var four = `【账号总计】:  ${beans+Steel+Cash}${beans||Steel||Cash?`\n`:`获取失败\n`}`
-      var five = `【其他总计】:  ${Subsidy+Money}${Subsidy||Money?`\n`:`获取失败\n`}`
-      var disa = $nobyda.disable ? "\n检测到上次执行意外崩溃, 已为您自动禁用相关接口. 如需开启请前往BoxJs ‼️‼️\n" : ""
+      var three = TCash || TSubsidy || TMoney ? `【其他奖励】:  ${TCash+TSubsidy+TMoney}\n` : ``
+      var four = `【账号总计】:  ${beans+Steel}${beans||Steel?`\n`:`获取失败\n`}`
+      var five = `【其他总计】:  ${Subsidy+Money+Cash}${Subsidy||Money||Cash?`\n`:`获取失败\n`}`
       var DName = merge.TotalBean && merge.TotalBean.nickname ? merge.TotalBean.nickname : "获取失败"
-      var Name = add ? DualAccount ? `【签到号一】:  ${DName}\n` : `【签到号二】:  ${DName}\n` : ""
-      console.log("\n" + Name + one + two + three + four + five + disa + notify)
+      var cnNum = ["零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"];
+      const Name = DualKey || OtherKey.length > 1 ? `【签到号${cnNum[$nobyda.num]||$nobyda.num}】:  ${DName}\n` : ``
+      const disables = $nobyda.read("JD_DailyBonusDisables")
+      const amount = disables ? disables.split(",").length : 0
+      const disa = !notify || amount ? `【温馨提示】:  检测到${$nobyda.disable?`上次执行意外崩溃, `:``}已禁用${notify?`${amount}个`:`所有`}接口, 如需开启请前往BoxJs或查看脚本内第118行注释.\n` : ``
+      $nobyda.notify("", "", Name + one + two + three + four + five + disa + notify, {
+        'media-url': $nobyda.headUrl || 'https://cdn.jsdelivr.net/gh/NobyDa/mini@master/Color/jd.png'
+      });
+      $nobyda.headUrl = null;
       if ($nobyda.isJSBox) {
-        if (add && DualAccount) {
-          Shortcut = Name + one + two + three + "\n"
-        } else if (!add && DualAccount) {
-          $intents.finish(Name + one + two + three + four + five + notify)
-        } else if (typeof Shortcut != "undefined") {
-          $intents.finish(Shortcut + Name + one + two + three)
-        }
-      }
-      if (!$nobyda.isNode) $nobyda.notify("", "", Name + one + two + three + four + five + disa + notify);
-      if (DualAccount) {
-        double();
-      } else {
-        $nobyda.time();
-        $nobyda.done();
+        $nobyda.st = (typeof($nobyda.st) == 'undefined' ? '' : $nobyda.st) + Name + one + two + three + four + five + "\n"
       }
     } catch (eor) {
       $nobyda.notify("通知模块 " + eor.name + "‼️", JSON.stringify(eor), eor.message)
@@ -298,55 +301,52 @@ function notify() {
   });
 }
 
-function ReadCookie() {
-  DualAccount = true;
-  const EnvInfo = $nobyda.isJSBox ? "JD_Cookie" : "CookieJD"
-  const EnvInfo2 = $nobyda.isJSBox ? "JD_Cookie2" : "CookieJD2"
+(async function ReadCookie() {
+  const EnvInfo = $nobyda.isJSBox ? "JD_Cookie" : "CookieJD";
+  const EnvInfo2 = $nobyda.isJSBox ? "JD_Cookie2" : "CookieJD2";
+  const EnvInfo3 = $nobyda.isJSBox ? "JD_Cookies" : "CookiesJD";
+  const move = CookieMove($nobyda.read(EnvInfo) || Key, $nobyda.read(EnvInfo2) || DualKey, EnvInfo, EnvInfo2, EnvInfo3);
+  const cookieSet = $nobyda.read(EnvInfo3);
   if (DeleteCookie) {
-    if ($nobyda.read(EnvInfo) || $nobyda.read(EnvInfo2)) {
-      $nobyda.write("", EnvInfo)
-      $nobyda.write("", EnvInfo2)
-      $nobyda.notify("京东Cookie清除成功 !", "", '请手动关闭脚本内"DeleteCookie"选项')
-      $nobyda.done()
-      return
-    }
-    $nobyda.notify("脚本终止", "", '未关闭脚本内"DeleteCookie"选项 ‼️')
-    $nobyda.done()
-    return
+    const write = $nobyda.write("", EnvInfo3);
+    throw new Error(`Cookie清除${write?`成功`:`失败`}, 请手动关闭脚本内"DeleteCookie"选项`);
   } else if ($nobyda.isRequest) {
     GetCookie()
-    return
-  }
-  if (Key || $nobyda.read(EnvInfo)) {
-    if ($nobyda.isJSBox || $nobyda.isNode) {
-      if (Key) $nobyda.write(Key, EnvInfo);
-      if (DualKey) $nobyda.write(DualKey, EnvInfo2);
+  } else if (Key || DualKey || (OtherKey || cookieSet || '[]') != '[]') {
+    if (($nobyda.isJSBox || $nobyda.isNode) && stop !== '0') $nobyda.write(stop, "JD_DailyBonusDelay");
+    out = parseInt($nobyda.read("JD_DailyBonusTimeOut")) || out;
+    stop = Wait($nobyda.read("JD_DailyBonusDelay"), true) || Wait(stop, true);
+    boxdis = $nobyda.read("JD_Crash_disable") === "false" || $nobyda.isNode || $nobyda.isJSBox ? false : boxdis;
+    LogDetails = $nobyda.read("JD_DailyBonusLog") === "true" || LogDetails;
+    ReDis = ReDis ? $nobyda.write("", "JD_DailyBonusDisables") : "";
+    $nobyda.num = 0;
+    if (Key) await all(Key);
+    if (DualKey && DualKey !== Key) await all(DualKey);
+    if ((OtherKey || cookieSet || '[]') != '[]') {
+      try {
+        OtherKey = checkFormat([...JSON.parse(OtherKey || '[]'), ...JSON.parse(cookieSet || '[]')]);
+        const updateSet = OtherKey.length ? $nobyda.write(JSON.stringify(OtherKey, null, 2), EnvInfo3) : '';
+        for (let i = 0; i < OtherKey.length; i++) {
+          const ck = OtherKey[i].cookie;
+          const jr = OtherKey[i].jrBody;
+          if (ck != Key && ck != DualKey) {
+            await all(ck, jr)
+          }
+        }
+      } catch (e) {
+        throw new Error(`账号Cookie读取失败, 请检查Json格式. \n${e.message}`)
+      }
     }
-    add = DualKey || $nobyda.read(EnvInfo2) ? true : false
-    KEY = Key ? Key : $nobyda.read(EnvInfo)
-    out = parseInt($nobyda.read("JD_DailyBonusTimeOut")) || out
-    stop = parseInt($nobyda.read("JD_DailyBonusDelay")) || stop
-    boxdis = $nobyda.read("JD_Crash_disable") === "false" || $nobyda.isNode || $nobyda.isJSBox ? false : boxdis
-    LogDetails = $nobyda.read("JD_DailyBonusLog") === "true" || LogDetails
-    ReDis = ReDis ? $nobyda.write("", "JD_DailyBonusDisables") : ""
-    all()
-  } else {
-    $nobyda.notify("京东签到", "", "脚本终止, 未获取Cookie ‼️")
-    $nobyda.done()
-  }
-}
-
-function double() {
-  add = true
-  DualAccount = false
-  if (DualKey || $nobyda.read($nobyda.isJSBox ? "JD_Cookie2" : "CookieJD2")) {
-    KEY = DualKey ? DualKey : $nobyda.read($nobyda.isJSBox ? "JD_Cookie2" : "CookieJD2")
-    all()
-  } else {
     $nobyda.time();
-    $nobyda.done();
+  } else {
+    throw new Error('脚本终止, 未获取Cookie ‼️')
   }
-}
+})().catch(e => {
+  $nobyda.notify("京东签到", "", e.message || JSON.stringify(e))
+}).finally(() => {
+  if ($nobyda.isJSBox) $intents.finish($nobyda.st);
+  $nobyda.done();
+})
 
 function JingDongBean(s) {
   merge.JDBean = {};
@@ -413,54 +413,57 @@ function JingDongBean(s) {
   });
 }
 
-function JingDongTurn(s) {
-  merge.JDTurn = {}, merge.JDTurn.notify = "", merge.JDTurn.success = 0, merge.JDTurn.bean = 0;
-  return new Promise((resolve, reject) => {
-    if (disable("JDTurn")) return reject()
-    const JDTUrl = {
-      url: 'https://api.m.jd.com/client.action?functionId=wheelSurfIndex&body=%7B%22actId%22%3A%22jgpqtzjhvaoym%22%2C%22appSource%22%3A%22jdhome%22%7D&appid=ld',
-      headers: {
-        Cookie: KEY,
-      }
-    };
-    $nobyda.get(JDTUrl, async function(error, response, data) {
-      try {
-        if (error) {
-          throw new Error(error)
-        } else {
-          const cc = JSON.parse(data).data.lotteryCode
-          const Details = LogDetails ? "response:\n" + data : '';
-          if (cc) {
-            console.log("\n" + "京东商城-转盘查询成功 " + Details)
-            return resolve(cc)
-          } else {
-            merge.JDTurn.notify = "京东商城-转盘: 失败, 原因: 查询错误 ⚠️"
-            merge.JDTurn.fail = 1
-            console.log("\n" + "京东商城-转盘查询失败 " + Details)
-          }
-        }
-      } catch (eor) {
-        $nobyda.AnError("京东转盘-查询", "JDTurn", eor, response, data)
-      } finally {
-        reject()
-      }
-    })
-    if (out) setTimeout(reject, out + s)
-  }).then(data => {
-    return JingDongTurnSign(s, data);
-  }, () => {});
-}
+// function JingDongTurn(s) {
+//   merge.JDTurn = {}, merge.JDTurn.notify = "", merge.JDTurn.success = 0, merge.JDTurn.bean = 0;
+//   return new Promise((resolve, reject) => {
+//     if (disable("JDTurn")) return reject()
+//     const JDTUrl = {
+//       url: 'https://api.m.jd.com/client.action?functionId=wheelSurfIndex&body=%7B%22actId%22%3A%22jgpqtzjhvaoym%22%2C%22appSource%22%3A%22jdhome%22%7D&appid=ld',
+//       headers: {
+//         Cookie: KEY,
+//       }
+//     };
+//     $nobyda.get(JDTUrl, async function(error, response, data) {
+//       try {
+//         if (error) {
+//           throw new Error(error)
+//         } else {
+//           const cc = JSON.parse(data)
+//           const Details = LogDetails ? "response:\n" + data : '';
+//           if (cc.data && cc.data.lotteryCode) {
+//             console.log("\n" + "京东商城-转盘查询成功 " + Details)
+//             return resolve(cc.data.lotteryCode)
+//           } else {
+//             merge.JDTurn.notify = "京东商城-转盘: 失败, 原因: 查询错误 ⚠️"
+//             merge.JDTurn.fail = 1
+//             console.log("\n" + "京东商城-转盘查询失败 " + Details)
+//           }
+//         }
+//       } catch (eor) {
+//         $nobyda.AnError("京东转盘-查询", "JDTurn", eor, response, data)
+//       } finally {
+//         reject()
+//       }
+//     })
+//     if (out) setTimeout(reject, out + s)
+//   }).then(data => {
+//     return JingDongTurnSign(s, data);
+//   }, () => {});
+// }
 
-function JingDongTurnSign(s, code) {
+function JingDongTurn(s) {
+  if (!merge.JDTurn) merge.JDTurn = {}, merge.JDTurn.notify = "", merge.JDTurn.success = 0, merge.JDTurn.bean = 0;
   return new Promise(resolve => {
+    if (disable("JDTurn")) return resolve();
     setTimeout(() => {
       const JDTUrl = {
-        url: `https://api.m.jd.com/client.action?functionId=lotteryDraw&body=%7B%22actId%22%3A%22jgpqtzjhvaoym%22%2C%22appSource%22%3A%22jdhome%22%2C%22lotteryCode%22%3A%22${code}%22%7D&appid=ld`,
+        url: `https://api.m.jd.com/client.action?functionId=babelGetLottery`,
         headers: {
-          Cookie: KEY,
-        }
+          Cookie: KEY
+        },
+        body: 'body=%7B%22enAwardK%22%3A%2295d235f2a09578c6613a1a029b26d12d%22%2C%22riskParam%22%3A%7B%7D%7D&client=wh5'
       };
-      $nobyda.get(JDTUrl, async function(error, response, data) {
+      $nobyda.post(JDTUrl, async function(error, response, data) {
         try {
           if (error) {
             throw new Error(error)
@@ -475,24 +478,24 @@ function JingDongTurnSign(s, code) {
             } else if (data.match(/(\"T216\"|活动结束)/)) {
               merge.JDTurn.notify = "京东商城-转盘: 失败, 原因: 活动结束 ⚠️"
               merge.JDTurn.fail = 1
-            } else if (data.match(/(京豆|\"910582\")/)) {
+            } else if (data.match(/\d+京豆/)) {
               console.log("\n" + "京东商城-转盘签到成功 " + Details)
-              merge.JDTurn.bean += Number(cc.data.prizeSendNumber) || 0
-              merge.JDTurn.notify += `${also?`\n`:``}京东商城-转盘: ${also?`多次`:`成功`}, 明细: ${cc.data.prizeSendNumber||`无`}京豆 🐶`
+              merge.JDTurn.bean += (cc.prizeName && cc.prizeName.split(/(\d+)/)[1]) || 0
+              merge.JDTurn.notify += `${also?`\n`:``}京东商城-转盘: ${also?`多次`:`成功`}, 明细: ${merge.JDTurn.bean||`无`}京豆 🐶`
               merge.JDTurn.success += 1
-              if (cc.data.chances != "0") {
-                await JingDongTurnSign(2000, code)
+              if (cc.chances > 0) {
+                await JingDongTurnSign(2000)
               }
-            } else if (data.match(/未中奖/)) {
+            } else if (data.match(/未中奖|擦肩而过/)) {
               merge.JDTurn.notify += `${also?`\n`:``}京东商城-转盘: ${also?`多次`:`成功`}, 状态: 未中奖 🐶`
               merge.JDTurn.success += 1
-              if (cc.data.chances != "0") {
-                await JingDongTurnSign(2000, code)
+              if (cc.chances > 0) {
+                await JingDongTurnSign(2000)
               }
             } else {
               console.log("\n" + "京东商城-转盘签到失败 " + Details)
               merge.JDTurn.fail = 1
-              if (data.match(/(T215|次数为0)/)) {
+              if (data.match(/(机会已用完|次数为0)/)) {
                 merge.JDTurn.notify = "京东商城-转盘: 失败, 原因: 已转过 ⚠️"
               } else if (data.match(/(T210|密码)/)) {
                 merge.JDTurn.notify = "京东商城-转盘: 失败, 原因: 无支付密码 ⚠️"
@@ -512,189 +515,48 @@ function JingDongTurnSign(s, code) {
   });
 }
 
-function JingRongBean(s) {
-  merge.JRBean = {};
-  return new Promise(resolve => {
-    if (disable("JRBean")) return resolve()
-    setTimeout(() => {
-      const login = {
-        url: 'https://ms.jr.jd.com/gw/generic/zc/h5/m/queryOpenScreenReward',
-        headers: {
-          Cookie: KEY
-        },
-        body: "reqData=%7B%22channelCode%22%3A%22ZHUANQIAN%22%2C%22clientType%22%3A%22sms%22%2C%22clientVersion%22%3A%2211.0%22%7D"
-      };
-      $nobyda.post(login, async function(error, response, data) {
-        try {
-          if (error) {
-            throw new Error(error)
-          } else {
-            const Details = LogDetails ? "response:\n" + data : '';
-            if (data.match(/\"login\":true/)) {
-              console.log("\n" + "京东金融-金贴查询成功 " + Details)
-              const cc = JSON.parse(data)
-              if (cc.resultData.data.reward === false) {
-                await JRBeanCheckin(s, cc.resultData.data.rewardAmount);
-              } else {
-                const tp = cc.resultData.data.reward === true
-                merge.JRBean.notify = `京东金融-金贴: 失败, 原因: ${tp?`已签过`:`未知`} ⚠️`
-                merge.JRBean.fail = 1
-              }
-            } else {
-              console.log("\n" + "京东金融-金贴查询失败 " + Details)
-              const lt = data.match(/\"login\":false/)
-              merge.JRBean.fail = 1
-              merge.JRBean.notify = `京东金融-金贴: 失败, 原因: ${lt?`Cookie失效‼️`:`未知 ⚠️`}`
-            }
-          }
-        } catch (eor) {
-          $nobyda.AnError("金融金贴-查询", "JRBean", eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JRBeanCheckin(s, amount) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      const JRBUrl = {
-        url: 'https://ms.jr.jd.com/gw/generic/zc/h5/m/openScreenReward',
-        headers: {
-          Cookie: KEY
-        },
-        body: "reqData=%7B%22channelCode%22%3A%22ZHUANQIAN%22%2C%22clientType%22%3A%22sms%22%2C%22clientVersion%22%3A%2211.0%22%7D"
-      };
-      $nobyda.post(JRBUrl, function(error, response, data) {
-        try {
-          if (error) {
-            throw new Error(error)
-          } else {
-            const Details = LogDetails ? "response:\n" + data : '';
-            if (data.match(/\"rewardCode\":\"00000\"/)) {
-              console.log("\n" + "京东金融-金贴签到成功 " + Details)
-              merge.JRBean.subsidy = amount || 0
-              merge.JRBean.notify = `京东金融-金贴: 成功, 明细: ${amount || `无`}金贴 💰`
-              merge.JRBean.success = 1
-            } else {
-              console.log("\n" + "京东金融-金贴签到失败 " + Details)
-              merge.JRBean.fail = 1
-              if (data.match(/发放失败|70111|10000|60203/)) {
-                merge.JRBean.notify = "京东金融-金贴: 失败, 原因: 已签过 ⚠️"
-              } else {
-                const UnType = data.match(/\"resultCode\":3|请先登录/)
-                merge.JRBean.notify = `京东金融-金贴: 失败, 原因: ${UnType?`Cookie失效‼️`:`未知 ⚠️`}`
-              }
-            }
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东金融-金贴", "JRBean", eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JingRongSteel(s) {
+function JingRongSteel(s, body) {
   merge.JRSteel = {};
   return new Promise(resolve => {
-    if (disable("JRSteel")) return resolve()
+    if (disable("JRSteel")) return resolve();
+    if (!body) {
+      merge.JRSteel.fail = 1;
+      merge.JRSteel.notify = "京东金融-钢镚: 失败, 未获取签到Body ⚠️";
+      return resolve();
+    }
     setTimeout(() => {
       const JRSUrl = {
-        url: 'https://ms.jr.jd.com/gw/generic/gry/h5/m/signIn',
+        url: 'https://ms.jr.jd.com/gw/generic/hy/h5/m/appSign',
         headers: {
           Cookie: KEY
         },
-        body: "reqData=%7B%22channelSource%22%3A%22JRAPP%22%2C%22riskDeviceParam%22%3A%22%7B%7D%22%7D"
+        body: body || ''
       };
       $nobyda.post(JRSUrl, function(error, response, data) {
         try {
           if (error) throw new Error(error)
           const cc = JSON.parse(data)
           const Details = LogDetails ? "response:\n" + data : '';
-          if (data.match(/\"resBusiCode\":0/)) {
+          if (cc.resultCode == 0 && cc.resultData && cc.resultData.resBusiCode == 0) {
             console.log("\n" + "京东金融-钢镚签到成功 " + Details)
-            const leng = cc.resultData.resBusiData.actualTotalRewardsValue
-            merge.JRSteel.steel = leng ? leng > 9 ? `0.${leng}` : `0.0${leng}` : 0
-            merge.JRSteel.notify = `京东金融-钢镚: 成功, 明细: ${merge.JRSteel.steel || `无`}钢镚 💰`
+            merge.JRSteel.notify = `京东金融-钢镚: 成功, 获得钢镚奖励 💰`
             merge.JRSteel.success = 1
           } else {
             console.log("\n" + "京东金融-钢镚签到失败 " + Details)
             merge.JRSteel.fail = 1
-            if (data.match(/已经领取|\"resBusiCode\":15/)) {
+            if (cc.resultCode == 0 && cc.resultData && cc.resultData.resBusiCode == 15) {
               merge.JRSteel.notify = "京东金融-钢镚: 失败, 原因: 已签过 ⚠️"
             } else if (data.match(/未实名/)) {
               merge.JRSteel.notify = "京东金融-钢镚: 失败, 账号未实名 ⚠️"
-            } else if (data.match(/(\"resultCode\":3|请先登录)/)) {
+            } else if (cc.resultCode == 3) {
               merge.JRSteel.notify = "京东金融-钢镚: 失败, 原因: Cookie失效‼️"
             } else {
-              merge.JRSteel.notify = "京东金融-钢镚: 失败, 原因: 未知 ⚠️"
+              const ng = (cc.resultData && cc.resultData.resBusiMsg) || cc.resultMsg
+              merge.JRSteel.notify = `京东金融-钢镚: 失败, ${`原因: ${ng||`未知`}`} ⚠️`
             }
           }
         } catch (eor) {
           $nobyda.AnError("京东金融-钢镚", "JRSteel", eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JRDoubleSign(s) {
-  merge.JRDSign = {};
-  return new Promise(resolve => {
-    if (disable("JRDSign")) return resolve()
-    setTimeout(() => {
-      const JRDSUrl = {
-        url: 'https://nu.jr.jd.com/gw/generic/jrm/h5/m/process?',
-        headers: {
-          Cookie: KEY
-        },
-        body: "reqData=%7B%22actCode%22%3A%22FBBFEC496C%22%2C%22type%22%3A3%2C%22riskDeviceParam%22%3A%22%22%7D"
-      };
-      $nobyda.post(JRDSUrl, function(error, response, data) {
-        try {
-          if (error) {
-            throw new Error(error)
-          } else {
-            const Details = LogDetails ? "response:\n" + data : '';
-            if (data.match(/\"resultCode\":0/)) {
-              if (data.match(/\"count\":\d+/)) {
-                console.log("\n" + "京东金融-双签签到成功 " + Details)
-                merge.JRDSign.bean = data.match(/\"count\":(\d+)/)[1]
-                merge.JRDSign.notify = "京东金融-双签: 成功, 明细: " + merge.JRDSign.bean + "京豆 🐶"
-                merge.JRDSign.success = 1
-              } else {
-                console.log("\n" + "京东金融-双签签到失败 " + Details)
-                merge.JRDSign.fail = 1
-                if (data.match(/已领取/)) {
-                  merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 已签过 ⚠️"
-                } else if (data.match(/未在/)) {
-                  merge.JRDSign.notify = "京东金融-双签: 失败, 未在京东签到 ⚠️"
-                } else {
-                  merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 无奖励 ⚠️"
-                }
-              }
-            } else {
-              console.log("\n" + "京东金融-双签签到失败 " + Details)
-              merge.JRDSign.fail = 1
-              if (data.match(/(\"resultCode\":3|请先登录)/)) {
-                merge.JRDSign.notify = "京东金融-双签: 失败, 原因: Cookie失效‼️"
-              } else {
-                merge.JRDSign.notify = "京东金融-双签: 失败, 原因: 未知 ⚠️"
-              }
-            }
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东金融-双签", "JRDSign", eor, response, data)
         } finally {
           resolve()
         }
@@ -967,9 +829,10 @@ function JDUserSign1(s, key, title, body) {
 }
 
 async function JDUserSign2(s, key, title, tid) {
+  return console.log(`\n${title} >> 可能需要拼图验证, 跳过签到 ⚠️`);
   await new Promise(resolve => {
     $nobyda.get({
-      url: `https://jdjoy.jd.com/api/turncard/channel/detail?turnTableId=${tid}`,
+      url: `https://jdjoy.jd.com/api/turncard/channel/detail?turnTableId=${tid}&invokeKey=ztmFUCxcPMNyUq0P`,
       headers: {
         Cookie: KEY
       }
@@ -981,8 +844,10 @@ async function JDUserSign2(s, key, title, tid) {
   return new Promise(resolve => {
     setTimeout(() => {
       const JDUrl = {
-        url: 'https://jdjoy.jd.com/api/turncard/channel/sign',
+        url: 'https://jdjoy.jd.com/api/turncard/channel/sign?invokeKey=ztmFUCxcPMNyUq0P',
         headers: {
+          lkt: '1629984131120',
+          lks: 'd7db92cf40ad5a8d54b9da2b561c5f84',
           Cookie: KEY
         },
         body: `turnTableId=${tid}`
@@ -1001,18 +866,19 @@ async function JDUserSign2(s, key, title, tid) {
               merge[key].notify = `${title}: 成功, 明细: ${merge[key].bean || '无'}京豆 🐶`
               merge[key].success = 1
             } else {
-              console.log(`\n${title}签到失败(2)${Details}`)
+              const captcha = /请进行验证/.test(data);
               if (data.match(/(已经签到|已经领取)/)) {
                 merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`
               } else if (data.match(/(不存在|已结束|未开始)/)) {
                 merge[key].notify = `${title}: 失败, 原因: 活动已结束 ⚠️`
               } else if (data.match(/(没有登录|B0001)/)) {
                 merge[key].notify = `${title}: 失败, 原因: Cookie失效‼️`
-              } else {
+              } else if (!captcha) {
                 const ng = data.match(/\"(errorMessage|subCodeMsg)\":\"(.+?)\"/)
                 merge[key].notify = `${title}: 失败, ${ng?ng[2]:`原因: 未知`} ⚠️`
               }
-              merge[key].fail = 1
+              if (!captcha) merge[key].fail = 1;
+              console.log(`\n${title}签到失败(2)${captcha?`\n需要拼图验证, 跳过通知记录 ⚠️`:``}${Details}`)
             }
           }
         } catch (eor) {
@@ -1159,7 +1025,8 @@ function JingDongCash(s) {
               } else if (data.match(/(\"busiCode\":\"3\"|未登录)/)) {
                 merge.JDCash.notify = "京东现金-红包: 失败, 原因: Cookie失效‼️"
               } else {
-                merge.JDCash.notify = "京东现金-红包: 失败, 原因: 未知 ⚠️"
+                const msg = data.split(/\"msg\":\"([\u4e00-\u9fa5].+?)\"/)[1];
+                merge.JDCash.notify = `京东现金-红包: 失败, ${msg||`原因: 未知`} ⚠️`
               }
             }
           }
@@ -1261,367 +1128,6 @@ function JDMagicCubeSign(s, id) {
   });
 }
 
-function JingDongSpeedUp(s, id) {
-  if (!merge.SpeedUp) merge.SpeedUp = {}, merge.SpeedUp.bean = 0;
-  return new Promise(resolve => {
-    if (disable("SpeedUp")) return resolve()
-    setTimeout(() => {
-      const GameUrl = {
-        url: `https://api.m.jd.com/?appid=memberTaskCenter&functionId=flyTask_${id?`start&body=%7B%22source%22%3A%22game%22%2C%22source_id%22%3A${id}%7D`:`state&body=%7B%22source%22%3A%22game%22%7D`}`,
-        headers: {
-          Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
-          Cookie: KEY
-        }
-      };
-      $nobyda.get(GameUrl, async function(error, response, data) {
-        try {
-          if (error) {
-            throw new Error(error)
-          } else {
-            const Details = LogDetails ? "response:\n" + data : '';
-            var cc = JSON.parse(data)
-            if (!id) {
-              var status = $nobyda.ItemIsUsed ? "再次检查" : merge.SpeedUp.notify ? "查询本次" : "查询上次"
-              console.log(`\n天天加速-${status}任务 ${Details}`)
-            } else {
-              console.log(`\n天天加速-开始${$nobyda.ItemIsUsed?`下轮`:`本次`}任务 ${Details}`)
-            }
-            if (cc.message == "not login") {
-              merge.SpeedUp.fail = 1
-              merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: Cookie失效‼️"
-              console.log("\n天天加速-Cookie失效")
-            } else if (cc.message == "success") {
-              if (cc.data.task_status == 0 && cc.data.source_id) {
-                if ($nobyda.ItemIsUsed) { //如果使用道具后再次开始任务, 则收到奖励
-                  console.log("\n天天加速-领取本次奖励成功")
-                  merge.SpeedUp.bean += cc.data.beans_num || 0
-                  merge.SpeedUp.success = 1
-                  merge.SpeedUp.notify = `京东天天-加速: 成功, 明细: ${merge.SpeedUp.bean || `无`}京豆 🐶`
-                }
-                await JingDongSpeedUp(s, cc.data.source_id)
-              } else if (cc.data.task_status == 1) {
-                const percent = Math.round((cc.data.done_distance / cc.data.distance) * 100)
-                console.log(`\n天天加速-目前结束时间: \n${cc.data.end_time} [${percent}%]`)
-                $nobyda.ItemIsUsed = false
-                if (!$nobyda.isAllEvents) await JDSpaceEvent(s); //处理太空事件
-                if (!$nobyda.isAlltasks) await JDQueryTask(s); //处理太空任务
-                var step3 = await JDQueryTaskID(s); //查询道具ID
-                var step4 = await JDUseProps(s, step3); //使用道具
-                if (step4 && $nobyda.ItemIsUsed) { //如果使用了道具, 则再次检查任务
-                  await JingDongSpeedUp(s)
-                } else {
-                  $nobyda.isAllEvents = false; //避免多账号问题
-                  $nobyda.isAlltasks = false;
-                  $nobyda.tryAgain = false;
-                  if (!merge.SpeedUp.notify) {
-                    merge.SpeedUp.fail = 1
-                    merge.SpeedUp.notify = `京东天天-加速: 失败, 加速中${percent<10?`  `:``}[${percent}%] ⚠️`
-                  }
-                }
-              } else if (cc.data.task_status == 2) {
-                merge.SpeedUp.bean = cc.data.beans_num || 0
-                merge.SpeedUp.notify = `京东天天-加速: 成功, 明细: ${merge.SpeedUp.bean || `无`}京豆 🐶`
-                merge.SpeedUp.success = 1
-                console.log("\n天天加速-领取上次奖励成功")
-                await JingDongSpeedUp(s, null)
-              } else {
-                merge.SpeedUp.fail = 1
-                merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 未知 ⚠️"
-                console.log("\n" + "天天加速-判断状态码失败")
-              }
-            } else {
-              if (data.match(/领过此任务/)) { //处理任务频繁问题
-                if (!$nobyda.tryAgain || $nobyda.tryAgain < 3) { //避免死循环
-                  $nobyda.tryAgain ? $nobyda.tryAgain += 1 : $nobyda.tryAgain = 1
-                  console.log(`\n天天加速-延迟一秒查询 (${$nobyda.tryAgain})`);
-                  await JingDongSpeedUp(1000);
-                } else {
-                  $nobyda.tryAgain = false;
-                  console.log(`\n天天加速-放弃查询任务`);
-                }
-                return
-              }
-              if (!merge.SpeedUp.notify) {
-                merge.SpeedUp.fail = 1
-                merge.SpeedUp.notify = "京东天天-加速: 失败, 原因: 无任务 ⚠️"
-              }
-              console.log("\n天天加速-判断状态失败")
-            }
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东天天-加速", "SpeedUp", eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JDSpaceEvent(s) {
-  return new Promise(resolve => {
-    var spaceEvents = [];
-    $nobyda.get({
-      url: `https://api.m.jd.com/?appid=memberTaskCenter&functionId=spaceEvent_list&body=%7B%22source%22%3A%22game%22%7D`,
-      headers: {
-        Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
-        Cookie: KEY
-      }
-    }, (error, response, data) => {
-      try {
-        if (error) throw new Error(error)
-        const cc = JSON.parse(data);
-        const Details = LogDetails ? "response:\n" + data : '';
-        if (cc.message === "success" && cc.data.length > 0) {
-          for (var item of cc.data) {
-            if (item.status === 1) {
-              for (var j of item.options) {
-                if (j.type === 1) {
-                  spaceEvents.push({
-                    "id": item.id,
-                    "value": j.value
-                  })
-                }
-              }
-            }
-          }
-          if (spaceEvents && spaceEvents.length > 0) {
-            console.log(`\n天天加速-查询到${spaceEvents.length}个有效事件 ${Details}`)
-          } else {
-            console.log(`\n天天加速-暂无太空事件 ${Details}`)
-          }
-        } else {
-          console.log(`\n天天加速-太空事件为空 ${Details}`)
-        }
-      } catch (eor) {
-        $nobyda.AnError("太空事件-查询", "SpeedUp", eor, response, data)
-      } finally {
-        resolve(spaceEvents)
-      }
-    })
-    if (out) setTimeout(resolve, out + s)
-  }).then(async (list) => {
-    await new Promise(resolve => {
-      if (list && list.length > 0) {
-        var spaceEventCount = 0;
-        var spaceNumTask = 0;
-        for (var item of list) {
-          $nobyda.get({
-            url: `https://api.m.jd.com/?appid=memberTaskCenter&functionId=spaceEvent_handleEvent&body=%7B%22source%22%3A%22game%22%2C%22eventId%22%3A${item.id}%2C%22option%22%3A%22${item.value}%22%7D`,
-            headers: {
-              Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
-              Cookie: KEY
-            }
-          }, (error, response, data) => {
-            try {
-              spaceEventCount++
-              if (error) throw new Error(error)
-              const cc = JSON.parse(data);
-              const Details = LogDetails ? "response:\n" + data : '';
-              console.log(`\n天天加速-尝试领取第${spaceEventCount}个事件 ${Details}`)
-              if (cc.message == "success" && cc.success) {
-                spaceNumTask += 1;
-              }
-            } catch (eor) {
-              $nobyda.AnError("太空事件-领取", "SpeedUp", eor, response, data)
-            } finally {
-              if (list.length == spaceEventCount) {
-                if (list.length == spaceNumTask) $nobyda.isAllEvents = true; //避免重复查询
-                console.log(`\n天天加速-已成功领取${spaceNumTask}个事件`)
-                resolve()
-              }
-            }
-          })
-        }
-        if (out) setTimeout(resolve, out + s)
-      } else {
-        $nobyda.isAllEvents = true; //避免重复查询
-        resolve()
-      }
-    })
-  })
-}
-
-function JDQueryTask(s) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      var TaskID = "";
-      const QueryUrl = {
-        url: 'https://api.m.jd.com/?appid=memberTaskCenter&functionId=energyProp_list&body=%7B%22source%22%3A%22game%22%7D',
-        headers: {
-          Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
-          Cookie: KEY
-        }
-      };
-      $nobyda.get(QueryUrl, async function(error, response, data) {
-        try {
-          if (error) {
-            throw new Error(error)
-          } else {
-            const cc = JSON.parse(data)
-            const Details = LogDetails ? "response:\n" + data : '';
-            if (cc.message == "success" && cc.data.length > 0) {
-              for (var i = 0; i < cc.data.length; i++) {
-                if (cc.data[i].thaw_time == 0) {
-                  TaskID += cc.data[i].id + ",";
-                }
-              }
-              if (TaskID.length > 0) {
-                TaskID = TaskID.substr(0, TaskID.length - 1).split(",")
-                console.log("\n天天加速-查询到" + TaskID.length + "个有效道具 " + Details)
-              } else {
-                console.log("\n天天加速-暂无有效道具 " + Details)
-              }
-            } else {
-              console.log("\n天天加速-查询无道具 " + Details)
-            }
-          }
-        } catch (eor) {
-          $nobyda.AnError("查询道具-加速", "SpeedUp", eor, response, data)
-        } finally {
-          resolve(TaskID)
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  }).then(async (CID) => {
-    await new Promise(resolve => {
-      var NumTask = 0
-      if (CID) {
-        var count = 0
-        for (var i = 0; i < CID.length; i++) {
-          const TUrl = {
-            url: 'https://api.m.jd.com/?appid=memberTaskCenter&functionId=energyProp_gain&body=%7B%22source%22%3A%22game%22%2C%22energy_id%22%3A' + CID[i] + '%7D',
-            headers: {
-              Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
-              Cookie: KEY
-            }
-          };
-          $nobyda.get(TUrl, function(error, response, data) {
-            try {
-              count++
-              if (error) {
-                throw new Error(error)
-              } else {
-                const cc = JSON.parse(data)
-                const Details = LogDetails ? "response:\n" + data : '';
-                console.log("\n天天加速-尝试领取第" + count + "个道具 " + Details)
-                if (cc.message == 'success') {
-                  NumTask += 1
-                }
-              }
-            } catch (eor) {
-              $nobyda.AnError("领取道具-加速", "SpeedUp", eor, response, data)
-            } finally {
-              if (CID.length == count) {
-                if (CID.length == NumTask) $nobyda.isAlltasks = true; //避免重复查询
-                console.log("\n天天加速-已成功领取" + NumTask + "个道具")
-                resolve(NumTask)
-              }
-            }
-          })
-        }
-        if (out) setTimeout(resolve, out + s)
-      } else {
-        $nobyda.isAlltasks = true; //避免重复查询
-        resolve(NumTask)
-      }
-    })
-  })
-}
-
-function JDQueryTaskID(s) {
-  return new Promise(resolve => {
-    var TaskCID = ""
-    setTimeout(() => {
-      const EUrl = {
-        url: 'https://api.m.jd.com/?appid=memberTaskCenter&functionId=energyProp_usalbeList&body=%7B%22source%22%3A%22game%22%7D',
-        headers: {
-          Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
-          Cookie: KEY
-        }
-      };
-      $nobyda.get(EUrl, function(error, response, data) {
-        try {
-          if (error) {
-            throw new Error(error)
-          } else {
-            const cc = JSON.parse(data)
-            const Details = LogDetails ? "response:\n" + data : '';
-            if (cc.data.length > 0) {
-              for (var i = 0; i < cc.data.length; i++) {
-                if (cc.data[i].id) {
-                  TaskCID += cc.data[i].id + ",";
-                }
-              }
-              if (TaskCID.length > 0) {
-                TaskCID = TaskCID.substr(0, TaskCID.length - 1).split(",")
-                console.log(`\n天天加速-查询成功${TaskCID.length}个道具ID ${Details}`)
-              } else {
-                console.log(`\n天天加速-暂无有效道具ID ${Details}`)
-              }
-            } else {
-              console.log(`\n天天加速-查询无道具ID ${Details}`)
-            }
-          }
-        } catch (eor) {
-          $nobyda.AnError("查询号码-加速", "SpeedUp", eor, response, data)
-        } finally {
-          resolve(TaskCID)
-        }
-      })
-    }, s + 200)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JDUseProps(s, PropID) {
-  return new Promise(resolve => {
-    if (PropID) {
-      setTimeout(() => {
-        var PropCount = 0
-        var PropNumTask = 0
-        for (var i = 0; i < PropID.length; i++) {
-          const PropUrl = {
-            url: 'https://api.m.jd.com/?appid=memberTaskCenter&functionId=energyProp_use&body=%7B%22source%22%3A%22game%22%2C%22energy_id%22%3A%22' + PropID[i] + '%22%7D',
-            headers: {
-              Referer: 'https://h5.m.jd.com/babelDiy/Zeus/6yCQo2eDJPbyPXrC3eMCtMWZ9ey/index.html',
-              Cookie: KEY
-            }
-          };
-          $nobyda.get(PropUrl, function(error, response, data) {
-            try {
-              PropCount++
-              if (error) {
-                throw new Error(error)
-              } else {
-                const cc = JSON.parse(data)
-                const Details = LogDetails ? "response:\n" + data : '';
-                console.log("\n天天加速-尝试使用第" + PropCount + "个道具 " + Details)
-                if (cc.message == 'success' && cc.success == true) {
-                  PropNumTask += 1
-                }
-              }
-            } catch (eor) {
-              $nobyda.AnError("使用道具-加速", "SpeedUp", eor, response, data)
-            } finally {
-              if (PropID.length == PropCount) {
-                console.log("\n天天加速-已成功使用" + PropNumTask + "个道具")
-                if (PropNumTask) $nobyda.ItemIsUsed = true;
-                resolve(PropNumTask)
-              }
-            }
-          })
-        }
-      }, s)
-      if (out) setTimeout(resolve, out + s)
-    } else {
-      resolve()
-    }
-  });
-}
-
 function JingDongSubsidy(s) {
   merge.subsidy = {};
   return new Promise(resolve => {
@@ -1640,21 +1146,22 @@ function JingDongSubsidy(s) {
             throw new Error(error)
           } else {
             const Details = LogDetails ? "response:\n" + data : '';
-            if (data.match(/\"msg\":\"操作成功\"/)) {
+            const cc = JSON.parse(data)
+            if (cc.resultCode == 0 && cc.resultData.data && cc.resultData.data.thisAmount) {
               console.log("\n" + "京东商城-金贴签到成功 " + Details)
-              const qt = data.match(/\"thisAmountStr\":\"(.+?)\"/)
-              merge.subsidy.subsidy = qt ? qt[1] : 0;
-              merge.subsidy.notify = `京东商城-金贴: 成功, 明细: ${qt?qt[1]:`无`}金贴 💰`
+              merge.subsidy.subsidy = cc.resultData.data.thisAmountStr
+              merge.subsidy.notify = `京东商城-金贴: 成功, 明细: ${merge.subsidy.subsidy||`无`}金贴 💰`
               merge.subsidy.success = 1
             } else {
               console.log("\n" + "京东商城-金贴签到失败 " + Details)
               merge.subsidy.fail = 1
-              if (data.match(/已存在/)) {
-                merge.subsidy.notify = "京东商城-金贴: 失败, 原因: 已签过 ⚠️"
+              if (data.match(/已存在|"thisAmount":0/)) {
+                merge.subsidy.notify = "京东商城-金贴: 失败, 原因: 无金贴 ⚠️"
               } else if (data.match(/请先登录/)) {
                 merge.subsidy.notify = "京东商城-金贴: 失败, 原因: Cookie失效‼️"
               } else {
-                merge.subsidy.notify = "京东商城-金贴: 失败, 原因: 未知 ⚠️"
+                const msg = data.split(/\"msg\":\"([\u4e00-\u9fa5].+?)\"/)[1];
+                merge.subsidy.notify = `京东商城-金贴: 失败, ${msg||`原因: 未知`} ⚠️`
               }
             }
           }
@@ -1669,7 +1176,7 @@ function JingDongSubsidy(s) {
   });
 }
 
-function JingRongDoll(s, key, title, code, type, num, award) {
+function JingRongDoll(s, key, title, code, type, num, award, belong) {
   merge[key] = {};
   return new Promise(resolve => {
     if (disable(key)) return resolve()
@@ -1679,7 +1186,7 @@ function JingRongDoll(s, key, title, code, type, num, award) {
         headers: {
           Cookie: KEY
         },
-        body: `reqData=%7B%22actCode%22%3A%22${code}%22%2C%22type%22%3A${type?type:`3`}%7D`
+        body: `reqData=${encodeURIComponent(`{"actCode":"${code}","type":${type?type:`3`}${code=='F68B2C3E71'?`,"frontParam":{"belong":"${belong}"}`:code==`1DF13833F7`?`,"frontParam":{"channel":"JR","belong":4}`:``}}`)}`
       };
       $nobyda.post(DollUrl, async function(error, response, data) {
         try {
@@ -1690,8 +1197,8 @@ function JingRongDoll(s, key, title, code, type, num, award) {
             const Details = LogDetails ? "response:\n" + data : '';
             if (cc.resultCode == 0) {
               if (cc.resultData.data.businessData != null) {
+                console.log(`\n${title}查询成功 ${Details}`)
                 if (cc.resultData.data.businessData.pickStatus == 2) {
-                  console.log(`\n${title}查询成功 ${Details}`)
                   if (data.match(/\"rewardPrice\":\"\d.*?\"/)) {
                     const JRDoll_bean = data.match(/\"rewardPrice\":\"(\d.*?)\"/)[1]
                     const JRDoll_type = data.match(/\"rewardName\":\"金贴奖励\"/) ? true : false
@@ -1700,8 +1207,28 @@ function JingRongDoll(s, key, title, code, type, num, award) {
                     merge[key].success = 1
                     merge[key].notify = `${title}: 成功, 明细: 无奖励 🐶`
                   }
+                } else if (code == 'F68B2C3E71' || code == '1DF13833F7') {
+                  if (!data.match(/"businessCode":"30\dss?q"/)) {
+                    merge[key].success = 1
+                    const ct = data.match(/\"count\":\"?(\d.*?)\"?,/)
+                    if (code == 'F68B2C3E71' && belong == 'xianjin') {
+                      merge[key].Money = ct ? ct[1] > 9 ? `0.${ct[1]}` : `0.0${ct[1]}` : 0
+                      merge[key].notify = `${title}: 成功, 明细: ${merge[key].Money||`无`}现金 💰`
+                    } else if (code == 'F68B2C3E71' && belong == 'jingdou') {
+                      merge[key].bean = ct ? ct[1] : 0;
+                      merge[key].notify = `${title}: 成功, 明细: ${merge[key].bean||`无`}京豆 🐶`
+                    } else if (code == '1DF13833F7') {
+                      merge[key].subsidy = ct ? ct[1] : 0;
+                      merge[key].notify = `${title}: 成功, 明细: ${merge[key].subsidy||`无`}金贴 💰`
+                    }
+                  } else {
+                    const es = cc.resultData.data.businessMsg
+                    const ep = cc.resultData.data.businessData.businessMsg
+                    const tp = data.match(/已领取|300ss?q/) ? `已签过` : `${ep||es||cc.resultMsg||`未知`}`
+                    merge[key].notify = `${title}: 失败, 原因: ${tp} ⚠️`
+                    merge[key].fail = 1
+                  }
                 } else {
-                  console.log(`\n${title}重复签到 ${Details}`)
                   merge[key].notify = `${title}: 失败, 原因: 已签过 ⚠️`;
                   merge[key].fail = 1
                 }
@@ -1715,7 +1242,8 @@ function JingRongDoll(s, key, title, code, type, num, award) {
                 merge[key].success = 1
                 merge[key].notify = `${title}: 成功, 明细: ${(award?num:merge[key].bean)||`无`}${award?`金贴 💰`:`京豆 🐶`}`
               } else {
-                if (num) console.log(`\n${title}领取异常 ${Details}\n请尝试手动领取, 预计可得${num}${award?`金贴`:`京豆`}: \nhttps://uf1.jr.jd.com/up/redEnvelopes/index.html?actCode=${code}\n`);
+                console.log(`\n${title}领取异常 ${Details}`)
+                if (num) console.log(`\n${title} 请尝试手动领取, 预计可得${num}${award?`金贴`:`京豆`}: \nhttps://uf1.jr.jd.com/up/redEnvelopes/index.html?actCode=${code}\n`);
                 merge[key].fail = 1;
                 merge[key].notify = `${title}: 失败, 原因: 领取异常 ⚠️`;
               }
@@ -1728,56 +1256,6 @@ function JingRongDoll(s, key, title, code, type, num, award) {
           }
         } catch (eor) {
           $nobyda.AnError(title, key, eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JDOverseas(s) {
-  merge.Overseas = {};
-  return new Promise(resolve => {
-    if (disable("Overseas")) return resolve()
-    setTimeout(() => {
-      const OverseasUrl = {
-        url: 'https://api.m.jd.com/client.action?functionId=checkin',
-        headers: {
-          Cookie: KEY
-        },
-        body: "body=%7B%7D&build=167237&client=apple&clientVersion=9.0.0&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&partner=apple&scope=11&sign=e27f8b904040a0e3c99b87fc27e09c87&st=1591730990449&sv=101"
-      };
-      $nobyda.post(OverseasUrl, function(error, response, data) {
-        try {
-          if (error) {
-            throw new Error(error)
-          } else {
-            const Details = LogDetails ? "response:\n" + data : '';
-            if (data.match(/\"type\":\d+?,/)) {
-              console.log("\n" + "京东商城-国际签到成功 " + Details)
-              merge.Overseas.success = 1
-              if (data.match(/\"jdBeanAmount\":[1-9]+/)) {
-                merge.Overseas.bean = data.match(/\"jdBeanAmount\":(\d+)/)[1]
-                merge.Overseas.notify = "京东商城-国际: 成功, 明细: " + merge.Overseas.bean + "京豆 🐶"
-              } else {
-                merge.Overseas.notify = "京东商城-国际: 成功, 明细: 无京豆 🐶"
-              }
-            } else {
-              console.log("\n" + "京东商城-国际签到失败 " + Details)
-              merge.Overseas.fail = 1
-              if (data.match(/(\"code\":\"13\"|重复签到)/)) {
-                merge.Overseas.notify = "京东商城-国际: 失败, 原因: 已签过 ⚠️"
-              } else if (data.match(/\"code\":\"(-1|3)\"/)) {
-                merge.Overseas.notify = "京东商城-国际: 失败, 原因: Cookie失效‼️"
-              } else {
-                merge.Overseas.notify = "京东商城-国际: 失败, 原因: 未知 ⚠️"
-              }
-            }
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东商城-国际", "Overseas", eor, response, data)
         } finally {
           resolve()
         }
@@ -1808,6 +1286,7 @@ function JingDongGetCash(s) {
             if (cc.data.success && cc.data.result) {
               console.log("\n" + "京东商城-现金签到成功 " + Details)
               merge.JDGetCash.success = 1
+              merge.JDGetCash.Money = cc.data.result.signCash || 0
               merge.JDGetCash.notify = `京东商城-现金: 成功, 明细: ${cc.data.result.signCash||`无`}现金 💰`
             } else {
               console.log("\n" + "京东商城-现金签到失败 " + Details)
@@ -1823,83 +1302,6 @@ function JingDongGetCash(s) {
           }
         } catch (eor) {
           $nobyda.AnError("京东商城-现金", "JDGetCash", eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JingDongWebcasts(s) {
-  merge.JDWebcasts = {};
-  return new Promise(resolve => {
-    if (disable("JDWebcasts")) return resolve()
-    setTimeout(() => {
-      $nobyda.get({
-        url: `https://api.m.jd.com/api?functionId=getChannelTaskRewardToM&appid=h5-live&body=%7B%22type%22%3A%22signTask%22%2C%22itemId%22%3A%221%22%7D`,
-        headers: {
-          Cookie: KEY,
-          Origin: `https://h.m.jd.com`
-        }
-      }, (error, response, data) => {
-        try {
-          if (error) throw new Error(error)
-          const cc = JSON.parse(data);
-          const Details = LogDetails ? "response:\n" + data : '';
-          if (cc.code == 0 && cc.subCode == 0) {
-            console.log(`\n京东商城-直播签到成功 ${Details}`)
-            merge.JDWebcasts.bean = cc.sum || 0
-            merge.JDWebcasts.success = 1
-            merge.JDWebcasts.notify = `京东商城-直播: 成功, 明细: ${merge.JDWebcasts.bean||`无`}京豆 🐶`
-          } else {
-            console.log(`\n京东商城-直播签到失败 ${Details}`)
-            const tp = data.match(/擦肩而过/) ? `无机会` : cc.code == 3 ? `Cookie失效` : `${cc.msg||`未知`}`
-            merge.JDWebcasts.notify = `京东商城-直播: 失败, 原因: ${tp}${cc.code==3?`‼️`:` ⚠️`}`
-            merge.JDWebcasts.fail = 1
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东商城-直播", "JDWebcasts", eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JDTakeaLook(s) {
-  merge.TakeaLook = {};
-  return new Promise(resolve => {
-    if (disable("TakeaLook")) return resolve()
-    setTimeout(() => {
-      $nobyda.get({
-        url: 'https://api.m.jd.com/client.action?functionId=discTaskList&body=%7B%22bizType%22%3A1%2C%22referPageId%22%3A%22discRecommend%22%7D&client=apple&clientVersion=9.1.6&openudid=1fce88cd05c42fe2b054e846f11bdf33f016d676&sign=17061147fe8e0eb10edfe8d9968b6d66&st=1601138337675&sv=102',
-        headers: {
-          Cookie: KEY
-        }
-      }, (error, response, data) => {
-        try {
-          if (error) throw new Error(error);
-          const cc = JSON.parse(data);
-          const Details = LogDetails ? "response:\n" + data : '';
-          const tm = parseInt((Date.now() + 28800000) / 86400000) * 86400000 - 28800000
-          if (data.match(/签到成功/) && !data.match(tm)) {
-            console.log(`\n京东发现-看看签到成功 ${Details}`)
-            const aw = data.match(/\"签到成功，获得(\d+)京豆\"/)
-            merge.TakeaLook.success = 1
-            merge.TakeaLook.bean = aw ? aw[1] : 0
-            merge.TakeaLook.notify = `京东发现-看看: 成功, 明细: ${merge.TakeaLook.bean||`无`}京豆 🐶`
-          } else {
-            console.log(`\n京东发现-看看签到失败 ${Details}`)
-            const tp = data.match(tm) ? `已签过` : cc.busiCode == 2001 ? `Cookie失效` : `${cc.message||`未知`}`
-            merge.TakeaLook.notify = `京东发现-看看: 失败, 原因: ${tp}${cc.busiCode==2001?`‼️`:` ⚠️`}`
-            merge.TakeaLook.fail = 1
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东发现-看看", "TakeaLook", eor, response, data)
         } finally {
           resolve()
         }
@@ -1948,7 +1350,7 @@ function JingDongStore(s) {
   });
 }
 
-function JDSecKilling(s) {
+function JDSecKilling(s) { //领券中心
   merge.JDSecKill = {};
   return new Promise((resolve, reject) => {
     if (disable("JDSecKill")) return reject();
@@ -1959,7 +1361,7 @@ function JDSecKilling(s) {
           Cookie: KEY,
           Origin: 'https://h5.m.jd.com'
         },
-        body: 'functionId=freshManHomePage&body=%7B%7D&client=wh5&appid=SecKill2020'
+        body: 'functionId=homePageV2&appid=SecKill2020'
       }, (error, response, data) => {
         try {
           if (error) throw new Error(error);
@@ -2000,7 +1402,7 @@ function JDSecKilling(s) {
           if (error) throw new Error(error);
           const Details = LogDetails ? "response:\n" + data : '';
           const cc = JSON.parse(data);
-          if (cc.msg == 'success' && cc.subCode == 0) {
+          if (cc.code == 0 && cc.subCode == 0) {
             console.log(`\n京东秒杀-红包签到成功 ${Details}`);
             const qt = data.match(/"discount":(\d.*?),/);
             merge.JDSecKill.success = 1;
@@ -2013,149 +1415,6 @@ function JDSecKilling(s) {
           }
         } catch (eor) {
           $nobyda.AnError("京东秒杀-领取", "JDSecKill", eor, response, data);
-        } finally {
-          resolve();
-        }
-      })
-    })
-  }, () => {});
-}
-
-function JDJTDoubleSign(s) {
-  merge.JTDouble = {};
-  return new Promise(resolve => {
-    if (disable("JTDouble")) return resolve();
-    setTimeout(() => {
-      $nobyda.post({
-        url: 'https://nu.jr.jd.com/gw/generic/jrm/h5/m/process',
-        headers: {
-          Cookie: KEY
-        },
-        body: `reqData=${encodeURIComponent('{"type":3,"frontParam":{"channel":"JR","belong":4},"actCode":"1DF13833F7"}')}`
-      }, (error, response, data) => {
-        try {
-          if (error) throw new Error(error);
-          const cc = JSON.parse(data);
-          const Details = LogDetails ? "response:\n" + data : '';
-          if (cc.resultCode == 0 && cc.resultData.data.businessCode == '000ssq') {
-            console.log(`\n京东金贴-双签签到成功 ${Details}`)
-            const qt = data.match(/\"count\":\"?(\d.*?)\"?,/);
-            merge.JTDouble.success = 1;
-            merge.JTDouble.subsidy = qt ? qt[1] : 0;
-            merge.JTDouble.notify = `京东金贴-双签: 成功, 明细: ${merge.JTDouble.subsidy||`无`}金贴 💰`;
-          } else {
-            console.log(`\n京东金贴-双签签到失败 ${Details}`)
-            const es = cc.resultData && cc.resultData.data ? cc.resultData.data.businessMsg : null
-            const tp = data.match(/已领取|300ssq/) ? `已签过` : cc.resultCode == 3 ? `Cookie失效` : `${es||cc.resultMsg||`未知`}`
-            merge.JTDouble.notify = `京东金贴-双签: 失败, 原因: ${tp}${cc.resultCode==3?`‼️`:` ⚠️`}`
-            merge.JTDouble.fail = 1
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东金贴-双签", "JTDouble", eor, response, data)
-        } finally {
-          resolve()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  });
-}
-
-function JRLuckyLottery(s) { //https://jdda.jd.com/app/hd/#/turntable
-  merge.JRLottery = {};
-  return new Promise(resolve => {
-    if (disable("JRLottery")) return resolve()
-    setTimeout(() => {
-      $nobyda.post({
-        url: 'https://ms.jr.jd.com/gw/generic/syh_yxmx/h5/m/handleSign',
-        headers: {
-          Cookie: KEY
-        },
-        body: `reqData=${encodeURIComponent(`{"activityNo":"e2d1b240d5674def8178be6b4faac5b6","signType":"1","encryptSign":""}`)}`
-      }, (error, response, data) => {
-        try {
-          if (error) throw new Error(error);
-          const cc = JSON.parse(data);
-          const Details = LogDetails ? "response:\n" + data : '';
-          if (cc.resultCode == 0 && cc.resultData && cc.resultData.resultCode == 0) {
-            console.log(`\n京东金融-抽奖签到成功 ${Details}`);
-            merge.JRLottery.success = 1;
-            merge.JRLottery.bean = cc.resultData.data.rewardList[0].rewardCount || 0
-            merge.JRLottery.notify = `京东金融-抽奖: 成功, 明细: ${merge.JRLottery.bean||`无`}京豆 🐶`;
-          } else {
-            console.log(`\n京东金融-抽奖签到失败 ${Details}`);
-            const tp = data.match(/重复签到/) ? `已签过` : cc.resultCode == 3 ? `Cookie失效` : `${cc.resultMsg||`未知`}`;
-            merge.JRLottery.notify = `京东金融-抽奖: 失败, 原因: ${tp}${cc.resultCode==3?`‼️`:` ⚠️`}`;
-            merge.JRLottery.fail = 1;
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东金融-抽奖", "JRLottery", eor, response, data);
-        } finally {
-          resolve();
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s);
-  });
-}
-
-function JingDongBuyCar(s) {
-  merge.JDBuyCar = {};
-  return new Promise((resolve, reject) => {
-    if (disable("JDBuyCar")) return reject();
-    setTimeout(() => {
-      $nobyda.get({
-        url: 'https://cgame-stadium.jd.com/api/v1/first/login',
-        headers: {
-          Cookie: KEY,
-          ActivityId: `65e044f5db394968badde5ab620079f7`
-        }
-      }, (error, response, data) => {
-        try {
-          if (error) throw new Error(error);
-          const Details = LogDetails ? "response:\n" + data : '';
-          console.log(`\n京东汽车-检查签到状态 ${Details}`)
-          const cc = JSON.parse(data);
-          if (cc.status && cc.data && cc.data.firstLoginStatus) {
-            resolve()
-          } else {
-            const qt = cc.status && cc.data && cc.data.firstLoginStatus === false ? `已签过` : cc.error && cc.error.code == 2000 ? `Cookie失效` : cc.error && cc.error.msg ? cc.error.msg : `未知`
-            merge.JDBuyCar.notify = `京东商城-汽车: 失败, 原因: ${qt}${cc.error&&cc.error.code==2000?`‼️`:` ⚠️`}`
-            merge.JDBuyCar.fail = 1;
-            reject()
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东汽车-状态", "JDBuyCar", eor, response, data)
-          reject()
-        }
-      })
-    }, s)
-    if (out) setTimeout(resolve, out + s)
-  }).then(async () => {
-    await new Promise(resolve => {
-      $nobyda.post({
-        url: 'https://cgame-stadium.jd.com/api/v1/sign',
-        headers: {
-          Cookie: KEY,
-          ActivityId: `65e044f5db394968badde5ab620079f7`
-        }
-      }, (error, response, data) => {
-        try {
-          if (error) throw new Error(error);
-          const Details = LogDetails ? "response:\n" + data : '';
-          const cc = JSON.parse(data);
-          if (cc.status === true) {
-            console.log(`\n京东商城-汽车签到成功 ${Details}`);
-            merge.JDBuyCar.success = 1;
-            merge.JDBuyCar.bean = cc.data && cc.data.beanNum ? cc.data.beanNum : 0
-            merge.JDBuyCar.notify = `京东商城-汽车: 成功, 明细: ${merge.JDBuyCar.bean||`无`}京豆 🐶`;
-          } else {
-            console.log(`\n京东商城-汽车签到失败 ${Details}`);
-            merge.JDBuyCar.fail = 1;
-            merge.JDBuyCar.notify = `京东商城-汽车: 失败, ${cc.error&&cc.error.msg?cc.error.msg:`原因: 未知`} ⚠️`;
-          }
-        } catch (eor) {
-          $nobyda.AnError("京东汽车-签到", "JDBuyCar", eor, response, data);
         } finally {
           resolve();
         }
@@ -2198,29 +1457,25 @@ function TotalBean() {
   merge.TotalBean = {};
   return new Promise(resolve => {
     if (disable("Qbear")) return resolve()
-    $nobyda.post({
-      url: 'https://wq.jd.com/user/info/QueryJDUserInfo?sceneval=2',
+    $nobyda.get({
+      url: 'https://me-api.jd.com/user_new/info/GetJDUserInfoUnion',
       headers: {
-        Cookie: KEY,
-        Referer: "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2"
+        Cookie: KEY
       }
     }, (error, response, data) => {
       try {
         if (error) throw new Error(error);
         const Details = LogDetails ? "response:\n" + data : '';
         const cc = JSON.parse(data)
-        if (cc.base.jdNum != 0) {
-          console.log("\n" + "京东-总京豆查询成功 " + Details)
-          merge.TotalBean.Qbear = cc.base.jdNum
+        if (cc.msg == 'success' && cc.retcode == 0) {
+          merge.TotalBean.nickname = cc.data.userInfo.baseInfo.nickname || ""
+          merge.TotalBean.Qbear = cc.data.assetInfo.beanNum || 0
+          $nobyda.headUrl = cc.data.userInfo.baseInfo.headImageUrl || ""
+          console.log(`\n京东-总京豆查询成功 ${Details}`)
         } else {
-          console.log("\n" + "京东-总京豆查询失败 " + Details)
-        }
-        if (data.match(/\"nickname\" ?: ?\"(.+?)\",/)) {
-          merge.TotalBean.nickname = cc.base.nickname
-        } else if (data.match(/\"no ?login\.?\"/)) {
-          merge.TotalBean.nickname = "Cookie失效 ‼️"
-        } else {
-          merge.TotalBean.nickname = '';
+          const name = decodeURIComponent(KEY.split(/pt_pin=(.+?);/)[1] || '');
+          merge.TotalBean.nickname = cc.retcode == 1001 ? `${name} (CK失效‼️)` : "";
+          console.log(`\n京东-总京豆查询失败 ${Details}`)
         }
       } catch (eor) {
         $nobyda.AnError("账户京豆-查询", "TotalBean", eor, response, data)
@@ -2357,53 +1612,126 @@ function disable(Val, name, way) {
   }
 }
 
-function GetCookie() {
-  try {
-    if ($request.headers && $request.url.match(/api\.m\.jd\.com.*=signBean/)) {
-      var CV = $request.headers['Cookie']
-      if (CV.match(/pt_key=.+?;/) && CV.match(/pt_pin=.+?;/)) {
-        var CookieValue = CV.match(/pt_key=.+?;/)[0] + CV.match(/pt_pin=.+?;/)[0]
-        var CK1 = $nobyda.read("CookieJD")
-        var CK2 = $nobyda.read("CookieJD2")
-        var AccountOne = CK1 ? CK1.match(/pt_pin=.+?;/) ? CK1.match(/pt_pin=(.+?);/)[1] : null : null
-        var AccountTwo = CK2 ? CK2.match(/pt_pin=.+?;/) ? CK2.match(/pt_pin=(.+?);/)[1] : null : null
-        var UserName = CookieValue.match(/pt_pin=(.+?);/)[1]
-        var DecodeName = decodeURIComponent(UserName)
-        if (!AccountOne || UserName == AccountOne) {
-          var CookieName = " [账号一] ";
-          var CookieKey = "CookieJD";
-        } else if (!AccountTwo || UserName == AccountTwo) {
-          var CookieName = " [账号二] ";
-          var CookieKey = "CookieJD2";
-        } else {
-          $nobyda.notify("更新京东Cookie失败", "非历史写入账号 ‼️", '请开启脚本内"DeleteCookie"以清空Cookie ‼️')
-          return
-        }
-      } else {
-        $nobyda.notify("写入京东Cookie失败", "", "请查看脚本内说明, 登录网页获取 ‼️")
-        return
-      }
-      const RA = $nobyda.read(CookieKey);
-      if (RA == CookieValue) {
-        console.log(`\n用户名: ${DecodeName}\n与历史京东${CookieName}Cookie相同, 跳过写入 ⚠️`)
-      } else {
-        const WT = $nobyda.write(CookieValue, CookieKey);
-        $nobyda.notify(`用户名: ${DecodeName}`, ``, `${RA?`更新`:`写入`}京东${CookieName}Cookie${WT?`成功 🎉`:`失败 ‼️`}`)
-      }
-    } else if ($request.url === 'http://www.apple.com/') {
-      $nobyda.notify("京东签到", "", "类型错误, 手动运行请选择上下文环境为Cron ⚠️");
-    } else {
-      $nobyda.notify("京东签到", "写入Cookie失败", "请检查匹配URL或配置内脚本类型 ⚠️");
-    }
-  } catch (eor) {
-    $nobyda.write("", "CookieJD")
-    $nobyda.write("", "CookieJD2")
-    $nobyda.notify("写入京东Cookie失败", "", '已尝试清空历史Cookie, 请重试 ⚠️')
-    console.log(`\n写入京东Cookie出现错误 ‼️\n${JSON.stringify(eor)}\n\n${eor}\n\n${JSON.stringify($request.headers)}\n`)
-  } finally {
-    $nobyda.done()
+function Wait(readDelay, ini) {
+  if (!readDelay || readDelay === '0') return 0
+  if (typeof(readDelay) == 'string') {
+    var readDelay = readDelay.replace(/"|＂|'|＇/g, ''); //prevent novice
+    if (readDelay.indexOf('-') == -1) return parseInt(readDelay) || 0;
+    const raw = readDelay.split("-").map(Number);
+    const plan = parseInt(Math.random() * (raw[1] - raw[0] + 1) + raw[0], 10);
+    if (ini) console.log(`\n初始化随机延迟: 最小${raw[0]/1000}秒, 最大${raw[1]/1000}秒`);
+    // else console.log(`\n预计等待: ${(plan / 1000).toFixed(2)}秒`);
+    return ini ? readDelay : plan
+  } else if (typeof(readDelay) == 'number') {
+    return readDelay > 0 ? readDelay : 0
+  } else return 0
+}
+
+function CookieMove(oldCk1, oldCk2, oldKey1, oldKey2, newKey) {
+  let update;
+  const move = (ck, del) => {
+    console.log(`京东${del}开始迁移!`);
+    update = CookieUpdate(null, ck).total;
+    update = $nobyda.write(JSON.stringify(update, null, 2), newKey);
+    update = $nobyda.write("", del);
+  }
+  if (oldCk1) {
+    const write = move(oldCk1, oldKey1);
+  }
+  if (oldCk2) {
+    const write = move(oldCk2, oldKey2);
   }
 }
+
+function checkFormat(value) { //check format and delete duplicates
+  let n, k, c = {};
+  return value.reduce((t, i) => {
+    k = ((i.cookie || '').match(/(pt_key|pt_pin)=.+?;/g) || []).sort();
+    if (k.length == 2) {
+      if ((n = k[1]) && !c[n]) {
+        i.userName = i.userName ? i.userName : decodeURIComponent(n.split(/pt_pin=(.+?);/)[1]);
+        i.cookie = k.join('')
+        if (i.jrBody && !i.jrBody.includes('reqData=')) {
+          console.log(`异常钢镚Body已过滤: ${i.jrBody}`)
+          delete i.jrBody;
+        }
+        c[n] = t.push(i);
+      }
+    } else {
+      console.log(`异常京东Cookie已过滤: ${i.cookie}`)
+    }
+    return t;
+  }, [])
+}
+
+function CookieUpdate(oldValue, newValue, path = 'cookie') {
+  let item, type, name = (oldValue || newValue || '').split(/pt_pin=(.+?);/)[1];
+  let total = $nobyda.read('CookiesJD');
+  try {
+    total = checkFormat(JSON.parse(total || '[]'));
+  } catch (e) {
+    $nobyda.notify("京东签到", "", "Cookie JSON格式不正确, 即将清空\n可前往日志查看该数据内容!");
+    console.log(`京东签到Cookie JSON格式异常: ${e.message||e}\n旧数据内容: ${total}`);
+    total = [];
+  }
+  for (let i = 0; i < total.length; i++) {
+    if (total[i].cookie && new RegExp(`pt_pin=${name};`).test(total[i].cookie)) {
+      item = i;
+      break;
+    }
+  }
+  if (newValue && item !== undefined) {
+    type = total[item][path] === newValue ? -1 : 2;
+    total[item][path] = newValue;
+    item = item + 1;
+  } else if (newValue && path === 'cookie') {
+    total.push({
+      cookie: newValue
+    });
+    type = 1;
+    item = total.length;
+  }
+  return {
+    total: checkFormat(total),
+    type, //-1: same, 1: add, 2:update
+    item,
+    name: decodeURIComponent(name)
+  };
+}
+
+function GetCookie() {
+  const req = $request;
+  if (req.method != 'OPTIONS' && req.headers) {
+    const CV = (req.headers['Cookie'] || req.headers['cookie'] || '');
+    const ckItems = CV.match(/(pt_key|pt_pin)=.+?;/g);
+    if (/^https:\/\/(me-|)api(\.m|)\.jd\.com\/(client\.|user_new)/.test(req.url)) {
+      if (ckItems && ckItems.length == 2) {
+        const value = CookieUpdate(null, ckItems.join(''))
+        if (value.type !== -1) {
+          const write = $nobyda.write(JSON.stringify(value.total, null, 2), "CookiesJD")
+          $nobyda.notify(`用户名: ${value.name}`, ``, `${value.type==2?`更新`:`写入`}京东 [账号${value.item}] Cookie${write?`成功 🎉`:`失败 ‼️`}`)
+        } else {
+          console.log(`\n用户名: ${value.name}\n与历史京东 [账号${value.item}] Cookie相同, 跳过写入 ⚠️`)
+        }
+      } else {
+        throw new Error("写入Cookie失败, 关键值缺失\n可能原因: 非网页获取 ‼️");
+      }
+    } else if (/^https:\/\/ms\.jr\.jd\.com\/gw\/generic\/hy\/h5\/m\/appSign\?/.test(req.url) && req.body) {
+      const value = CookieUpdate(CV, req.body, 'jrBody');
+      if (value.type) {
+        const write = $nobyda.write(JSON.stringify(value.total, null, 2), "CookiesJD")
+        $nobyda.notify(`用户名: ${value.name}`, ``, `获取京东 [账号${value.item}] 钢镚Body${write?`成功 🎉`:`失败 ‼️`}`)
+      } else {
+        throw new Error("写入钢镚Body失败\n未获取该账号Cookie或关键值缺失‼️");
+      }
+    } else if (req.url === 'http://www.apple.com/') {
+      throw new Error("类型错误, 手动运行请选择上下文环境为Cron ⚠️");
+    }
+  } else if (!req.headers) {
+    throw new Error("写入Cookie失败, 请检查匹配URL或配置内脚本类型 ⚠️");
+  }
+}
+
 // Modified from yichahucha
 function nobyda() {
   const start = Date.now()
@@ -2418,18 +1746,56 @@ function nobyda() {
     if (isNode) {
       const request = require('request');
       const fs = require("fs");
+      const path = require("path");
       return ({
         request,
-        fs
+        fs,
+        path
       })
     } else {
       return (null)
     }
   })()
-  const notify = (title, subtitle, message) => {
-    if (isQuanX) $notify(title, subtitle, message)
-    if (isSurge) $notification.post(title, subtitle, message)
-    if (isNode) console.log(`${title}\n${subtitle}\n${message}`)
+  const notify = (title, subtitle, message, rawopts) => {
+    const Opts = (rawopts) => { //Modified from https://github.com/chavyleung/scripts/blob/master/Env.js
+      if (!rawopts) return rawopts
+      if (typeof rawopts === 'string') {
+        if (isLoon) return rawopts
+        else if (isQuanX) return {
+          'open-url': rawopts
+        }
+        else if (isSurge) return {
+          url: rawopts
+        }
+        else return undefined
+      } else if (typeof rawopts === 'object') {
+        if (isLoon) {
+          let openUrl = rawopts.openUrl || rawopts.url || rawopts['open-url']
+          let mediaUrl = rawopts.mediaUrl || rawopts['media-url']
+          return {
+            openUrl,
+            mediaUrl
+          }
+        } else if (isQuanX) {
+          let openUrl = rawopts['open-url'] || rawopts.url || rawopts.openUrl
+          let mediaUrl = rawopts['media-url'] || rawopts.mediaUrl
+          return {
+            'open-url': openUrl,
+            'media-url': mediaUrl
+          }
+        } else if (isSurge) {
+          let openUrl = rawopts.url || rawopts.openUrl || rawopts['open-url']
+          return {
+            url: openUrl
+          }
+        }
+      } else {
+        return undefined
+      }
+    }
+    console.log(`${title}\n${subtitle}\n${message}`)
+    if (isQuanX) $notify(title, subtitle, message, Opts(rawopts))
+    if (isSurge) $notification.post(title, subtitle, message, Opts(rawopts))
     if (isJSBox) $push.schedule({
       title: title,
       body: subtitle ? subtitle + "\n" + message : message
@@ -2440,11 +1806,12 @@ function nobyda() {
     if (isSurge) return $persistentStore.write(value, key)
     if (isNode) {
       try {
-        if (!node.fs.existsSync(NodeSet)) node.fs.writeFileSync(NodeSet, JSON.stringify({}));
-        const dataValue = JSON.parse(node.fs.readFileSync(NodeSet));
+        if (!node.fs.existsSync(node.path.resolve(__dirname, NodeSet)))
+          node.fs.writeFileSync(node.path.resolve(__dirname, NodeSet), JSON.stringify({}));
+        const dataValue = JSON.parse(node.fs.readFileSync(node.path.resolve(__dirname, NodeSet)));
         if (value) dataValue[key] = value;
         if (!value) delete dataValue[key];
-        return node.fs.writeFileSync(NodeSet, JSON.stringify(dataValue));
+        return node.fs.writeFileSync(node.path.resolve(__dirname, NodeSet), JSON.stringify(dataValue));
       } catch (er) {
         return AnError('Node.js持久化写入', null, er);
       }
@@ -2464,8 +1831,8 @@ function nobyda() {
     if (isSurge) return $persistentStore.read(key)
     if (isNode) {
       try {
-        if (!node.fs.existsSync(NodeSet)) return null;
-        const dataValue = JSON.parse(node.fs.readFileSync(NodeSet))
+        if (!node.fs.existsSync(node.path.resolve(__dirname, NodeSet))) return null;
+        const dataValue = JSON.parse(node.fs.readFileSync(node.path.resolve(__dirname, NodeSet)))
         return dataValue[key]
       } catch (er) {
         return AnError('Node.js持久化读取', null, er)
@@ -2576,7 +1943,7 @@ function nobyda() {
       }
       merge[keyname].error = 1
     }
-    return console.log(`\n‼️${name}发生错误\n‼️名称: ${er.name}\n‼️描述: ${er.message}${JSON.stringify(er).match(/\"line\"/)?`\n‼️行列: ${JSON.stringify(er)}`:``}${resp&&resp.status?`\n‼️状态: ${resp.status}`:``}${body?`\n‼️响应: ${body}`:``}`)
+    return console.log(`\n‼️${name}发生错误\n‼️名称: ${er.name}\n‼️描述: ${er.message}${JSON.stringify(er).match(/\"line\"/)?`\n‼️行列: ${JSON.stringify(er)}`:``}${resp&&resp.status?`\n‼️状态: ${resp.status}`:``}${body?`\n‼️响应: ${resp&&resp.status!=503?body:`Omit.`}`:``}`)
   }
   const time = () => {
     const end = ((Date.now() - start) / 1000).toFixed(2)
@@ -2603,4 +1970,3 @@ function nobyda() {
     done
   }
 };
-ReadCookie();

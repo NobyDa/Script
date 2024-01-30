@@ -1,4 +1,5 @@
-# Update > 2020.7.27 This rule is based on optimization by lhie1/Rules.
+# Update > 2023/12/23
+DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com,REJECT
 DOMAIN-SUFFIX,apoll.m.taobao.com,REJECT
 DOMAIN-SUFFIX,comet.yahoo.com,REJECT
 DOMAIN-SUFFIX,gemini.yahoo.com,REJECT
@@ -134,7 +135,6 @@ DOMAIN-SUFFIX,m-78.jp,REJECT
 DOMAIN-SUFFIX,nichibenren.or.jp,REJECT
 DOMAIN-SUFFIX,nicorette.co.kr,REJECT
 DOMAIN-SUFFIX,adnet.sohu.com,REJECT
-DOMAIN-SUFFIX,data.vod.itc.cn,REJECT
 DOMAIN-SUFFIX,epro.sogou.com,REJECT
 DOMAIN-SUFFIX,go.sohu.com,REJECT
 DOMAIN-SUFFIX,golden1.sogou.com,REJECT
@@ -166,7 +166,6 @@ DOMAIN-SUFFIX,ad.video.51togic.com,REJECT
 DOMAIN-SUFFIX,biz5.kankan.com,REJECT
 DOMAIN-SUFFIX,c.algovid.com,REJECT
 DOMAIN-SUFFIX,cms.laifeng.com,REJECT
-DOMAIN-SUFFIX,da.mmarket.com,REJECT
 DOMAIN-SUFFIX,dotcounter.douyutv.com,REJECT
 DOMAIN-SUFFIX,g.uusee.com,REJECT
 DOMAIN-SUFFIX,gcdn.2mdn.net,REJECT
@@ -1294,7 +1293,6 @@ DOMAIN-SUFFIX,alertserver.ushaqi.com,REJECT
 DOMAIN-SUFFIX,alipay.dajiadou6.com,REJECT
 DOMAIN-SUFFIX,aliqqjd.cn,REJECT
 DOMAIN-SUFFIX,alisinak.com,REJECT
-DOMAIN-SUFFIX,alissl.ucdl.pp.uc.cn,REJECT
 DOMAIN-SUFFIX,alistatic.cn,REJECT
 DOMAIN-SUFFIX,alitianxia168.com,REJECT
 DOMAIN-SUFFIX,alitui.weibo.com,REJECT
@@ -1411,7 +1409,6 @@ DOMAIN-SUFFIX,api-flow.flyme.cn,REJECT
 DOMAIN-SUFFIX,api-game.meizu.com,REJECT
 DOMAIN-SUFFIX,apihk.growingio.com,REJECT
 DOMAIN-SUFFIX,api-push.meizu.com,REJECT
-DOMAIN-SUFFIX,api-shoulei-ssl.xunlei.com,REJECT
 DOMAIN-SUFFIX,apisoft.df0535.com,REJECT
 DOMAIN-SUFFIX,apk.idate520.com,REJECT
 DOMAIN-SUFFIX,apk.supfast.net,REJECT
@@ -2013,7 +2010,6 @@ DOMAIN-SUFFIX,cc.yac8.com,REJECT
 DOMAIN-SUFFIX,cca.mob.com,REJECT
 DOMAIN-SUFFIX,ccb.uncle-ad.com,REJECT
 DOMAIN-SUFFIX,ccbaihehq.com,REJECT
-DOMAIN-SUFFIX,ccclub.cmbchina.com,REJECT
 DOMAIN-SUFFIX,cccrir.com,REJECT
 DOMAIN-SUFFIX,ccr.yxdown.com,REJECT
 DOMAIN-SUFFIX,cctyly.com,REJECT
@@ -2053,7 +2049,6 @@ DOMAIN-SUFFIX,cdn.mdotm.com,REJECT
 DOMAIN-SUFFIX,cdn.media.innity.net,REJECT
 DOMAIN-SUFFIX,cdn.millennialmedia.com,REJECT
 DOMAIN-SUFFIX,cdn.mingmingtehui.com,REJECT
-DOMAIN-SUFFIX,cdn.moji.com,REJECT
 DOMAIN-SUFFIX,cdn.moji002.com,REJECT
 DOMAIN-SUFFIX,cdn.moogos.com,REJECT
 DOMAIN-SUFFIX,cdn.ndapp.com,REJECT
@@ -3758,7 +3753,6 @@ DOMAIN-SUFFIX,huimee.net,REJECT
 DOMAIN-SUFFIX,huishenghuiying.com,REJECT
 DOMAIN-SUFFIX,humanding.com,REJECT
 DOMAIN-SUFFIX,hunpingou.com,REJECT
-DOMAIN-SUFFIX,huoying666.com,REJECT
 DOMAIN-SUFFIX,hv.code.tanwanyx.com,REJECT
 DOMAIN-SUFFIX,hw6.com,REJECT
 DOMAIN-SUFFIX,hwt.player888.cn,REJECT
@@ -6369,7 +6363,6 @@ DOMAIN-SUFFIX,searchignited.com,REJECT
 DOMAIN-SUFFIX,searchswapper.com,REJECT
 DOMAIN-SUFFIX,seavideo-ak.espn.go.com,REJECT
 DOMAIN-SUFFIX,sebar.thand.info,REJECT
-DOMAIN-SUFFIX,sec.resource.xiaomi.net,REJECT
 DOMAIN-SUFFIX,secpay.wostore.cn,REJECT
 DOMAIN-SUFFIX,secretmedia.s3.amazonaws.com,REJECT
 DOMAIN-SUFFIX,secure.dsp.com,REJECT

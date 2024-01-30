@@ -1,4 +1,5 @@
-# Update > 2020.7.27 Go advertising rule Integration lhie1 and ConnersHua
+# Update > 2023/12/23
+DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-b.com
 DOMAIN-SUFFIX,mcupdate.gstarcad.com
 DOMAIN-SUFFIX,adx.open-adx.com
 DOMAIN-SUFFIX,adservice.sigmob.cn
@@ -146,7 +147,6 @@ DOMAIN-SUFFIX,m-78.jp
 DOMAIN-SUFFIX,nichibenren.or.jp
 DOMAIN-SUFFIX,nicorette.co.kr
 DOMAIN-SUFFIX,adnet.sohu.com
-DOMAIN-SUFFIX,data.vod.itc.cn
 DOMAIN-SUFFIX,epro.sogou.com
 DOMAIN-SUFFIX,go.sohu.com
 DOMAIN-SUFFIX,golden1.sogou.com
@@ -178,7 +178,6 @@ DOMAIN-SUFFIX,ad.video.51togic.com
 DOMAIN-SUFFIX,biz5.kankan.com
 DOMAIN-SUFFIX,c.algovid.com
 DOMAIN-SUFFIX,cms.laifeng.com
-DOMAIN-SUFFIX,da.mmarket.com
 DOMAIN-SUFFIX,dotcounter.douyutv.com
 DOMAIN-SUFFIX,g.uusee.com
 DOMAIN-SUFFIX,gcdn.2mdn.net
@@ -1305,7 +1304,6 @@ DOMAIN-SUFFIX,alertserver.ushaqi.com
 DOMAIN-SUFFIX,alipay.dajiadou6.com
 DOMAIN-SUFFIX,aliqqjd.cn
 DOMAIN-SUFFIX,alisinak.com
-DOMAIN-SUFFIX,alissl.ucdl.pp.uc.cn
 DOMAIN-SUFFIX,alistatic.cn
 DOMAIN-SUFFIX,alitianxia168.com
 DOMAIN-SUFFIX,alitui.weibo.com
@@ -1422,7 +1420,6 @@ DOMAIN-SUFFIX,api-flow.flyme.cn
 DOMAIN-SUFFIX,api-game.meizu.com
 DOMAIN-SUFFIX,apihk.growingio.com
 DOMAIN-SUFFIX,api-push.meizu.com
-DOMAIN-SUFFIX,api-shoulei-ssl.xunlei.com
 DOMAIN-SUFFIX,apisoft.df0535.com
 DOMAIN-SUFFIX,apk.idate520.com
 DOMAIN-SUFFIX,apk.supfast.net
@@ -2024,7 +2021,6 @@ DOMAIN-SUFFIX,cc.yac8.com
 DOMAIN-SUFFIX,cca.mob.com
 DOMAIN-SUFFIX,ccb.uncle-ad.com
 DOMAIN-SUFFIX,ccbaihehq.com
-DOMAIN-SUFFIX,ccclub.cmbchina.com
 DOMAIN-SUFFIX,cccrir.com
 DOMAIN-SUFFIX,ccr.yxdown.com
 DOMAIN-SUFFIX,cctyly.com
@@ -2064,7 +2060,6 @@ DOMAIN-SUFFIX,cdn.mdotm.com
 DOMAIN-SUFFIX,cdn.media.innity.net
 DOMAIN-SUFFIX,cdn.millennialmedia.com
 DOMAIN-SUFFIX,cdn.mingmingtehui.com
-DOMAIN-SUFFIX,cdn.moji.com
 DOMAIN-SUFFIX,cdn.moji002.com
 DOMAIN-SUFFIX,cdn.moogos.com
 DOMAIN-SUFFIX,cdn.ndapp.com
@@ -3769,7 +3764,6 @@ DOMAIN-SUFFIX,huimee.net
 DOMAIN-SUFFIX,huishenghuiying.com
 DOMAIN-SUFFIX,humanding.com
 DOMAIN-SUFFIX,hunpingou.com
-DOMAIN-SUFFIX,huoying666.com
 DOMAIN-SUFFIX,hv.code.tanwanyx.com
 DOMAIN-SUFFIX,hw6.com
 DOMAIN-SUFFIX,hwt.player888.cn
@@ -6379,7 +6373,6 @@ DOMAIN-SUFFIX,searchignited.com
 DOMAIN-SUFFIX,searchswapper.com
 DOMAIN-SUFFIX,seavideo-ak.espn.go.com
 DOMAIN-SUFFIX,sebar.thand.info
-DOMAIN-SUFFIX,sec.resource.xiaomi.net
 DOMAIN-SUFFIX,secpay.wostore.cn
 DOMAIN-SUFFIX,secretmedia.s3.amazonaws.com
 DOMAIN-SUFFIX,secure.dsp.com
@@ -8359,7 +8352,6 @@ DOMAIN-SUFFIX,zunmi.cn
 DOMAIN-SUFFIX,zzd6.com
 DOMAIN-SUFFIX,mackeeper.com
 DOMAIN-SUFFIX,app-measurement.com
-DOMAIN-SUFFIX,mob.com
 DOMAIN-SUFFIX,api.joybj.com
 DOMAIN-SUFFIX,api.whizzone.com
 DOMAIN-SUFFIX,mmstat.com

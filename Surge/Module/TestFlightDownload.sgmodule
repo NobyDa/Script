@@ -1,0 +1,11 @@
+#!name=TestFlight区域限制解除
+#!desc=该模块适用于更新TestFlight App时, 提示"APP不可用"问题.
+
+[General]
+skip-proxy = %APPEND% iosapps.itunes.apple.com
+
+[Script]
+TF下载修正 = type=http-request,pattern=^https?:\/\/testflight\.apple\.com\/v\d\/accounts\/.+?\/install$,requires-body=1,script-update-interval=-1,max-size=0,script-path=https://gist.githubusercontent.com/NobyDa/9be418b93afc5e9c8a8f4d28ae403cf2/raw/TF_Download.js
+
+[MITM]
+hostname = %APPEND% testflight.apple.com
