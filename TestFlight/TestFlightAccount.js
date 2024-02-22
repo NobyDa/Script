@@ -60,7 +60,8 @@ runs()
                 status: 200,
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                body: '{}'
             },
             ...rsp
         };
@@ -133,6 +134,7 @@ function formatHeaders(h) {
 
 function ChangeHeaders(id) {
     const re = JSON.parse(JSON.stringify(req)); //easy deep copy
+    re.timeout = $.env.isLoon ? 30 * 1000 : 30;
     if (id) {
         $.log(`Request header replaced, using "${id}"`);
         re.headers[k1] = list[id][k1];
