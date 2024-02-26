@@ -61,11 +61,11 @@ runs()
                 status: 200,
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: '{}'
+                }
             },
             ...rsp
         };
+        ret.body = ret.body || '{}';
         ret.headers = formatHeaders(ret.headers); //compatible with HTTP/2
         ret.status = $.env.isQX ? `HTTP/1.1 ${ret.status}` : ret.status;
         delete ret.headers['content-length'];
@@ -136,6 +136,7 @@ function formatHeaders(h) {
 function ChangeHeaders(id) {
     const re = JSON.parse(JSON.stringify(req)); //easy deep copy
     re.timeout = 30;
+    re.insecure = true;
     if (id) {
         $.log(`Request header replaced, using "${id}"`);
         re.headers[k1] = list[id][k1];
