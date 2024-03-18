@@ -1,10 +1,10 @@
 /*
 哔哩哔哩漫画签到
 
-脚本兼容: QuantumultX, Surge, Loon
+脚本兼容：QuantumultX, Surge, Loon
 电报频道：@NobyDa
 问题反馈：@NobyDa_bot
-更新日期：04/04/2023
+更新日期：2024/03/18
 如果转载，请注明出处
 
 说明：
@@ -64,11 +64,11 @@ function checkin() {
   $.post(bilibili, async function (error, response, data) {
     if (error && !data) {
       $.msgBody = `请求失败!\n${error}`;
-    } else if (parseInt(response.status) == 200) {
+    } else if (data.includes(`"code":0`)) {
       $.msgBody = "签到成功！🎉";
-    } else if (/duplicate/.test(data)) {
+    } else if (data.includes(`"code":1`)) {
       $.msgBody = "签到失败，今日已签过 ⚠️";
-    } else if (/uid must/.test(data)) {
+    } else if (data.includes(`"invalid_argument"`)) {
       $.msgBody = "签到失败，Cookie失效（已清除） ⚠️";
       $.setdata("", "CookieBM");
     } else {
