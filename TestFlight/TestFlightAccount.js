@@ -189,7 +189,7 @@ function QueryAppList(o) {
             if ($.EnableCache && r.body.startsWith('{')) {
                 const cacheList = JSON.parse($.read('#TESTFLIGHT-ACCOUNT-CACHE') || '{}');
                 cacheList[o] = r.body;
-                $.write(cacheList, '#TESTFLIGHT-ACCOUNT-CACHE');
+                $.write($.stringify(cacheList), '#TESTFLIGHT-ACCOUNT-CACHE');
                 $.log(`Account "${o}" write app list to cache`)
             }
         }).catch(e => {
