@@ -463,6 +463,10 @@
       "placeholder": "30",
       "desc": "默认为30, 单位: 秒"
     }],
+    "scripts": [{
+      "name": "清除缓存",
+      "script": "https://gist.githubusercontent.com/NobyDa/d025c53d3922657f921b983ce129fc1d/raw/TestFlightAccountRemoveCache.js"
+    }],
     "author": "@NobyDa",
     "repo": "https://github.com/NobyDa/Script/blob/master/TestFlight/TestFlightAccount.js",
     "icons": ["https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/testflight.png", "https://raw.githubusercontent.com/NobyDa/mini/master/Color/testflight.png"]
