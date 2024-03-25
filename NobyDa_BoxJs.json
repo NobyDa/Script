@@ -462,6 +462,12 @@
       "type": "number",
       "placeholder": "30",
       "desc": "默认为30, 单位: 秒"
+    }, {
+      "id": "@TESTFLIGHT-ACCOUNT.ForceIOSlist",
+      "name": "使用iOS应用列表",
+      "val": false,
+      "type": "boolean",
+      "desc": "强制使用iOS应用列表, 用于改善 macOS TestFlight 加载过慢, iOS用户无需开启"
     }],
     "scripts": [{
       "name": "清除缓存",

@@ -3,12 +3,12 @@ TestFlight账户管理脚本
 
 脚本作者: @NobyDa 
 脚本兼容: Surge4、QuantumultX、Loon(2.1.20 413+)
-更新时间: 2024/03/23
+更新时间: 2024/03/25
 主要功能：
 1. 自动存储多个TestFlight账户，并自动合并APP列表，避免切换账户。
 
 2. 账户内单个测试版APP允许多方共享：
- - 导出：点击测试版APP -> 底部开发者许可协议 -> 复制密钥并分享给对方
+ - 导出：点击测试版APP -> App详情 -> 描述 -> 复制底部密钥并分享给对方
  - 导入：TestFlight 右上角"兑换" -> 粘贴密钥 -> 弹出保存成功通知后刷新APP列表
  - 多方共享为实验性功能，双方都需要使用该脚本； 该功能主要解决某些APP的TF名额稀缺的问题
 
@@ -20,7 +20,6 @@ Surge4 添加脚本：
 
 Surge模块地址：
 https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/TestFlightAccount.sgmodule
-
 
 *********************************
 QuantumultX 添加脚本：
@@ -49,65 +48,42 @@ https://raw.githubusercontent.com/NobyDa/Script/master/Loon/Loon_TF_Account.plug
 const $ = API("TESTFLIGHT-ACCOUNT");
 const args = formatArgument(typeof $argument == "string" && $argument || '');
 $.env.isNode ? $request = $.read('Request') : null;
-const [arr, obj, req, rsp] = [[], new Map(), $request, {}];
+const [obj, req, rsp] = [new Map(), $request, {}];
 const [k1, k2, k3] = ['x-session-id', 'x-request-id', 'x-session-digest'];
 const [list, appList] = [$.read('AccountList') || {}, $.read('AppList') || {}];
-$.debug = $.read('Debug') === 'true';
+$.debug = Number(args.debug) || ($.read('Debug') === 'true');
 $.EnableCache = Number(args.enableCache) || ($.read('EnableCache') === 'true');
+$.ForceIOSlist = Number(args.forceIOSlist) || ($.read('ForceIOSlist') === 'true');
 
 runs()
+    .then((resp) => {
+        resp = ChangeBody(resp);
+        rsp.body = resp.body || '{}';
+        rsp.headers = formatHeaders(resp.headers || { 'Content-Type': 'application/json' });
+        rsp.status = $.env.isQX ? `HTTP/1.1 ${resp.status || 200}` : resp.status || 200;
+        delete rsp.headers['content-length'];
+        delete rsp.headers['transfer-encoding']; //prevent issues in qx
+        $.log(`Return to client: ${$.stringify(rsp)}`);
+    })
     .catch(e => $.error(e.error || e.message || e))
-    .finally(() => {
-        const ret = {
-            ...{
-                status: 200,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            },
-            ...rsp
-        };
-        ret.body = ret.body || '{}';
-        ret.headers = formatHeaders(ret.headers); //compatible with HTTP/2
-        ret.status = $.env.isQX ? `HTTP/1.1 ${ret.status}` : ret.status;
-        delete ret.headers['content-length'];
-        delete ret.headers['transfer-encoding']; //prevent issues in qx
-        $.log(`Return to client: ${$.stringify(ret)}`);
-        $.done($.env.isQX ? ret : {
-            response: ret
-        })
-    });
+    .finally(() => $.done($.env.isQX ? rsp : { response: rsp }));
 
 async function runs() {
     // Object.keys(list).map(a => delete list[a].only)
     req.headers = formatHeaders(req.headers); //compatible with HTTP/2
     const appID = req.url.split(/\/apps\/(\d+)/)[1];
-    const build = req.url.split(/\/builds\/(\d+)/)[1];
     const other = /\/(accept|withdraw|devices|session|notifications|status)/.test(req.url);
     if (/accounts\/[a-z0-9-]{36}\/apps$/.test(req.url)) {
         const acc = SaveAccount(req.url.split(/\/([a-z0-9-]{36})\//)[1]);
-        const all = await Promise.all(Object.keys(acc).map(QueryAppList));
-        const out = arr.filter(r => !r.previouslyTested && !obj.has(r.appAdamId) && obj.set(r.appAdamId, 1));
-        $.log(`Final app: ${$.stringify(out.map(i => i.name))}`);
-        if (out.length) {
-            rsp.body = $.stringify({
-                data: out,
-                error: null
-            });
-            $.write(out.reduce((l, v) => (l[v.appAdamId] = v.aid, l), {}), 'AppList');
-        }
+        return await Promise.all(Object.keys(acc).map(QueryRequest));
     } else if (/\/install$/.test(req.url) && req.body) {
         req.body = JSON.parse(req.body);
         req.body.storefrontId = '143441-19,29'; //prevent regional restrictions
         req.body = $.stringify(req.body);
-    } else if (/\d+\/eula$/.test(req.url)) {
-        rsp.body = $.stringify(ShareAccount(appID, build));
     } else if (/\/[A-Z]{200,}\/redeem$/.test(req.url)) {
-        rsp.body = ExternalAccount(req.url.split(/\/([A-Z]+)\/redeem$/)[1]);
+        return { body: ExternalAccount(req.url.split(/\/([A-Z]+)\/redeem$/)[1]) };
     }
-    if (!rsp.body) {
-        await QueryFallback(!other && appList[appID]);
-    }
+    return await QueryRequest(!other && appList[appID]);
 }
 
 function SaveAccount(id, part, o) {
@@ -141,8 +117,11 @@ function formatArgument(s) {
 
 function ChangeHeaders(id) {
     const re = JSON.parse(JSON.stringify(req)); //easy deep copy
-    re.timeout = Number(args.timeout || $.read('Timeout')) || 30;
+    re.timeout = (Number(args.timeout || $.read('Timeout')) || 30) * 1000;
     re.insecure = true;
+    if ($.ForceIOSlist && req.url.endsWith('/apps') && re.headers['user-agent'].includes('Mac')) {
+        re.headers['user-agent'] = 'Oasis/3.5.1 OasisBuild/425.2 iOS/17.4 model/iPhone16,2 hwp/t8130 build/21E219 (6; dt:311) AMS/1 TSE/0';
+    }
     if (id) {
         $.log(`Request header replaced, using "${id}"`);
         re.headers[k1] = list[id][k1];
@@ -159,63 +138,78 @@ function ChangeHeaders(id) {
     return re;
 }
 
-function QueryFallback(o) {
-    return $.http[req.method.toLowerCase()](ChangeHeaders(o))
-        .then(r => {
-            $.log(`Received response: status=${r.statusCode}, body=${Boolean(r.body)}`);
-            [rsp.status, rsp.headers, rsp.body] = [r.statusCode, r.headers, r.body];
-            if (/\/apps\/\d+\/builds\/\d+$/.test(req.url) && r.body) { //beta app page
-                r.body = JSON.parse(r.body);
-                r.body.data.builds.map(e => e.eula = `https://testflight.apple.com/v1/apps/${e.appAdamId}/builds/${e.id}/eula`);
-                rsp.body = $.stringify(r.body);
-            }
-        })
-        .catch(e => $.error(`Response failed: ${e.error || e.message || e}`))
-}
-
-function QueryAppList(o) {
-    const resp = {};
-    return $.http[req.method.toLowerCase()](ChangeHeaders(o))
-        .then(r => {
-            resp.data = r.body;
-            resp.main = req.url.includes(o);
-            $.log(`Received response: status=${r.statusCode}, body=${Boolean(r.body)}, account=${o}, main=${resp.main}`);
-            if (resp.main) {
-                [rsp.status, rsp.headers, rsp.body] = [r.statusCode, r.headers, r.body];
-            }
-            if (r.statusCode == 401) {
-                throw new Error('Key expires');
-            }
-            if ($.EnableCache && r.body.startsWith('{')) {
-                const cacheList = JSON.parse($.read('#TESTFLIGHT-ACCOUNT-CACHE') || '{}');
-                cacheList[o] = r.body;
-                $.write($.stringify(cacheList), '#TESTFLIGHT-ACCOUNT-CACHE');
-                $.log(`Account "${o}" write app list to cache`)
-            }
-        }).catch(e => {
-            if ((e.error || e.message || e).includes('Key expires')) {
-                if (list[o].InvalidKey >= 2) { //prevent misjudgment
-                    delete list[o];
+function ChangeBody(resp) {
+    if (req.url.endsWith('/apps')) {
+        const cache = $.EnableCache && JSON.parse($.read('#TESTFLIGHT-ACCOUNT-CACHE') || '{}');
+        resp = resp.map((v) => {
+            v.body = JSON.parse(v.body || '{}');
+            if (v.status == 401) {
+                if (list[v.account].InvalidKey >= 2) { //prevent misjudgment
+                    delete list[v.account];
                 } else {
-                    list[o].InvalidKey = (list[o].InvalidKey || 0) + 1;
+                    list[v.account].InvalidKey = (list[v.account].InvalidKey || 0) + 1;
                 }
                 $.write(list, 'AccountList');
-                e = `key expired ⚠️`;
-                $.notify('TestFlight Account', '', `Account ID "${o}" ${e}`);
-            };
+                $.error(`Account "${v.account}" key expired ⚠️`);
+                $.notify('TestFlight Account', '', `Account ID "${v.account}" key expired ⚠️`);
+            }
+            if ($.EnableCache && v.body.data) {
+                $.log(`Account "${v.account}" write app list to cache`);
+                cache[v.account] = $.stringify(v.body);
+                $.write($.stringify(cache), '#TESTFLIGHT-ACCOUNT-CACHE');
+            }
+            if ($.EnableCache && !v.body.data) {
+                v.body = JSON.parse(cache[v.account] || '{}');
+                $.log(`Account "${v.account}" Try using cache app list`);
+            }
+            $.log(`Account "${v.account}" app list: ${$.stringify((v.body.data || []).map(i => i.name))}`);
+            return v
+        }).reduce((t, d) => {
+            d.body.data = (d.body.data || []).map(i => {
+                if ($.ForceIOSlist) {
+                    i.platforms = i.platforms.map(j => {
+                        if (j.name == 'osx') {
+                            $.log(`Account "${d.account}" app [${i.name}] force mac compatible`);
+                            j.build.compatible = true;
+                            j.build.platformCompatible = true;
+                            j.build.osCompatible = true;
+                            j.build.hardwareCompatible = true;
+                        }
+                        return j
+                    })
+                }
+                i.aid = d.account;
+                const only = !list[d.account].only || list[d.account].only.includes(String(i.appAdamId));
+                return only && t.body.data[req.url.includes(d.account) ? 'unshift' : 'push'](i), i;
+            });
+            if (req.url.includes(d.account)) {
+                [t.status, t.headers] = [d.statusCode, d.headers];
+            }
+            return t
+        }, { body: { data: [], error: null } });
+        resp.body.data = resp.body.data.filter(r => !r.previouslyTested && !obj.has(r.appAdamId) && obj.set(r.appAdamId, 1));
+        $.write(resp.body.data.reduce((l, v) => (l[v.appAdamId] = v.aid, l), {}), 'AppList');
+        $.log(`Final app: ${$.stringify(resp.body.data.map(i => i.name))}`);
+        resp.body = JSON.stringify(resp.body);
+    }
+    if (/\/apps\/\d+\/builds\/\d+$/.test(req.url) && resp.body) { //beta app page
+        const share = ShareAccount(req.url.split(/\/apps\/(\d+)/)[1]);
+        resp.body = JSON.parse(resp.body);
+        resp.body.data.builds.map(e => e.description = `${e.description || '-'}${share}`);
+        resp.body = JSON.stringify(resp.body);
+    }
+    return resp;
+}
+
+function QueryRequest(o) {
+    return $.http[req.method.toLowerCase()](ChangeHeaders(o))
+        .then(r => {
+            $.log(`Account "${o}" response: status=${r.statusCode}, body=${Boolean(r.body)}`);
+            return { status: r.statusCode, headers: r.headers, body: r.body, account: o }
+        })
+        .catch(e => {
             $.error(`Account "${o}" response failed: ${e.error || e.message || e}`);
-            if ($.EnableCache && !(e.error || e.message || e).includes('Key expires')) {
-                resp.data = JSON.parse($.read('#TESTFLIGHT-ACCOUNT-CACHE') || '{}')[o];
-                $.error(`Account "${o}" Try using cache app list. Status: ${Boolean(resp.data)}`);
-            }
-        }).finally(() => {
-            if (resp.data) {
-                const res = JSON.parse(resp.data);
-                $.log(`Account "${o}" app list: ${$.stringify((res.data || []).map(i => i.name))}`);
-                return (res.data || [])
-                    .filter(i => (i.aid = o, !list[o].only || list[o].only.includes(String(i.appAdamId))))
-                    .map(p => arr[resp.main ? 'unshift' : 'push'](p))
-            }
+            return { error: e, account: o }
         })
 }
 
@@ -238,19 +232,21 @@ function ExternalAccount(key) {
     return '{}'
 }
 
-function ShareAccount(appID, bid) {
+function ShareAccount(appID) {
     const raw = $.stringify({
         appID: appID,
         accID: appList[appID],
         key: list[appList[appID]]
     });
     const key = letterEncode(raw);
-    const disclaimer = `
-请注意，使用"共享"功能时，请务必仔细阅读以下声明 ‼️
-请注意，使用"共享"功能时，请务必仔细阅读以下声明 ‼️
-请注意，使用"共享"功能时，请务必仔细阅读以下声明 ‼️
+    const disclaimer = `\n\n\n
+================================
+TestFlight 账户管理脚本：
 
-======================================
+请注意，使用"共享"功能时，请务必仔细阅读以下声明 ‼️
+请注意，使用"共享"功能时，请务必仔细阅读以下声明 ‼️
+请注意，使用"共享"功能时，请务必仔细阅读以下声明 ‼️
+================================
 
 权限：
 您即将共享的密钥理论上具有以下权限，包括但不限于：
@@ -265,19 +261,13 @@ function ShareAccount(appID, bid) {
 免责：
 任何用户使用"共享"功能时都应该仔细阅读权限声明，一旦您开始使用该功能，即视为您已知晓并理解密钥所具有的权限，密钥泄漏可能会导致不可预知的损失或损害，脚本作者(NobyDa)不对由此产生的任何后果负责。
 
-======================================
+================================
 
 该脚本在"默认"情况下，对方仅可查看/下载您共享的单个APP，但仍建议仅与您信任的人共享：
 
 `;
     $.log(`Raw data: ${raw}\nEncode data: ${key}`);
-    return {
-        data: {
-            buildId: bid,
-            eula: disclaimer + key
-        },
-        messages: null
-    }
+    return disclaimer + key;
 }
 
 // private encode method, based on variant in RFC4648
@@ -312,4 +302,4 @@ function letterDecode(e) {
 }
 
 // https://github.com/Peng-YM/QuanX/tree/master/Tools/OpenAPI
-function ENV() { const e = "function" == typeof require && "undefined" != typeof $jsbox; return { isQX: "undefined" != typeof $task, isLoon: "undefined" != typeof $loon, isSurge: "undefined" != typeof $httpClient && "undefined" == typeof $loon, isShadowrocket: "undefined" != typeof $Shadowrocket, isBrowser: "undefined" != typeof document, isNode: "function" == typeof require && !e, isJSBox: e, isRequest: "undefined" != typeof $request, isScriptable: "undefined" != typeof importModule, } } function HTTP(e = { baseURL: "" }) { const { isQX: t, isLoon: s, isSurge: o, isScriptable: n, isNode: i, isBrowser: r, } = ENV(), u = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/; const a = {}; return (["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"].forEach((h) => (a[h.toLowerCase()] = (a) => (function (a, h) { h = "string" == typeof h ? { url: h } : h; const d = e.baseURL; d && !u.test(h.url || "") && (h.url = d ? d + h.url : h.url), h.body && h.headers; h.timeout && s && (h.timeout = h.timeout * 1000); const l = (h = { ...e, ...h }).timeout, c = { onRequest: () => { }, onResponse: (e) => e, onTimeout: () => { }, ...h.events, }; let f, p; if ((c.onRequest(a, h), t)) f = $task.fetch({ method: a, ...h }); else if (s || o || i) f = new Promise((e, t) => { (i ? require("request") : $httpClient)[a.toLowerCase()](h, (s, o, n) => { s ? t(s) : e({ statusCode: o.status || o.statusCode, headers: o.headers, body: n, }) },) }); else if (n) { const e = new Request(h.url); (e.method = a), (e.headers = h.headers), (e.body = h.body), (f = new Promise((t, s) => { e.loadString().then((s) => { t({ statusCode: e.response.statusCode, headers: e.response.headers, body: s, }) }).catch((e) => s(e)) })) } else r && (f = new Promise((e, t) => { fetch(h.url, { method: a, headers: h.headers, body: h.body }).then((e) => e.json()).then((t) => e({ statusCode: t.status, headers: t.headers, body: t.data, }),).catch(t) })); const y = l ? new Promise((e, t) => { p = setTimeout(() => (c.onTimeout(), t(`timeout`)), !s ? l * 1000 : l,) }) : null; return (y ? Promise.race([y, f]).then((e) => ((typeof clearTimeout !== 'undefined') && clearTimeout(p), e)) : f).then((e) => c.onResponse(e)) })(h, a)),), a) } function API(e = "untitled", t = !1) { const { isQX: s, isLoon: o, isSurge: n, isNode: i, isJSBox: r, isScriptable: u, } = ENV(); return new (class { constructor(e, t) { (this.name = e), (this.debug = t), (this.http = HTTP()), (this.env = ENV()), (this.node = (() => { if (i) { return { fs: require("fs") } } return null })()), this.initCache(); Promise.prototype.delay = function (e) { return this.then(function (t) { return ((e, t) => new Promise(function (s) { setTimeout(s.bind(null, t), e) }))(e, t) }) } } initCache() { if ((s && (this.cache = JSON.parse($prefs.valueForKey(this.name) || "{}")), (o || n) && (this.cache = JSON.parse($persistentStore.read(this.name) || "{}")), i)) { let e = "root.json"; this.node.fs.existsSync(e) || this.node.fs.writeFileSync(e, JSON.stringify({}), { flag: "wx" }, (e) => console.log(e),), (this.root = {}), (e = `${this.name}.json`), this.node.fs.existsSync(e) ? (this.cache = JSON.parse(this.node.fs.readFileSync(`${this.name}.json`),)) : (this.node.fs.writeFileSync(e, JSON.stringify({}), { flag: "wx" }, (e) => console.log(e),), (this.cache = {})) } } persistCache() { const e = JSON.stringify(this.cache, null, 2); s && $prefs.setValueForKey(e, this.name), (o || n) && $persistentStore.write(e, this.name), i && (this.node.fs.writeFileSync(`${this.name}.json`, e, { flag: "w" }, (e) => console.log(e),), this.node.fs.writeFileSync("root.json", JSON.stringify(this.root, null, 2), { flag: "w" }, (e) => console.log(e),)) } write(e, t) { if ((this.log(`SET ${t}`), -1 !== t.indexOf("#"))) { if (((t = t.substr(1)), n || o)) return $persistentStore.write(e, t); if (s) return $prefs.setValueForKey(e, t); i && (this.root[t] = e) } else this.cache[t] = e; this.persistCache() } read(e) { return (this.log(`READ ${e}`), -1 === e.indexOf("#") ? this.cache[e] : ((e = e.substr(1)), n || o ? $persistentStore.read(e) : s ? $prefs.valueForKey(e) : i ? this.root[e] : void 0)) } delete(e) { if ((this.log(`DELETE ${e}`), -1 !== e.indexOf("#"))) { if (((e = e.substr(1)), n || o)) return $persistentStore.write(null, e); if (s) return $prefs.removeValueForKey(e); i && delete this.root[e] } else delete this.cache[e]; this.persistCache() } notify(e, t = "", a = "", h = {}) { const d = h["open-url"], l = h["media-url"]; if ((s && $notify(e, t, a, h), n && $notification.post(e, t, a + `${l ? "\n多媒体:" + l : ""}`, { url: d, }), o)) { let s = {}; d && (s.openUrl = d), l && (s.mediaUrl = l), "{}" === JSON.stringify(s) ? $notification.post(e, t, a) : $notification.post(e, t, a, s) } if (i || u) { const s = a + (d ? `\n点击跳转:${d}` : "") + (l ? `\n多媒体:${l}` : ""); if (r) { require("push").schedule({ title: e, body: (t ? t + "\n" : "") + s }) } else console.log(`${e}\n${t}\n${s}\n\n`) } } log(e) { this.debug && console.log(`[${this.name}]LOG:${this.stringify(e)}`) } info(e) { console.log(`[${this.name}]INFO:${this.stringify(e)}`) } error(e) { console.log(`[${this.name}]ERROR:${this.stringify(e)}`) } wait(e) { return new Promise((t) => setTimeout(t, e)) } done(e = {}) { s || o || n ? $done(e) : i && !r && "undefined" != typeof $context && (($context.headers = e.headers), ($context.statusCode = e.statusCode), ($context.body = e.body)) } stringify(e) { if ("string" == typeof e || e instanceof String) return e; try { return JSON.stringify(e, null, 2) } catch (e) { return "[object Object]" } } })(e, t) }
+function ENV() { const a = "function" == typeof require && "undefined" != typeof $jsbox; return { isQX: "undefined" != typeof $task, isLoon: "undefined" != typeof $loon, isSurge: "undefined" != typeof $httpClient && "undefined" == typeof $loon, isShadowrocket: "undefined" != typeof $Shadowrocket, isBrowser: "undefined" != typeof document, isNode: "function" == typeof require && !a, isJSBox: a, isRequest: "undefined" != typeof $request, isScriptable: "undefined" != typeof importModule } } function HTTP(a = { baseURL: "" }) { function b(b, j) { j = "string" == typeof j ? { url: j } : j; const k = a.baseURL; k && !i.test(j.url || "") && (j.url = k ? k + j.url : j.url), j = { ...a, ...j }; const l = j.timeout, m = { ...{ onRequest: () => { }, onResponse: a => a, onTimeout: () => { } }, ...j.events }; m.onRequest(b, j); let n; if (c) n = $task.fetch({ method: b, ...j }); else if (d || e || g) n = new Promise((a, c) => { var e = Math.ceil; const f = g ? require("request") : $httpClient; !j.timeout || g || d || (j.timeout = e(j.timeout / 1e3)), f[b.toLowerCase()](j, (b, d, e) => { b ? c(b) : a({ statusCode: d.status || d.statusCode, headers: d.headers, body: e }) }) }); else if (f) { const a = new Request(j.url); a.method = b, a.headers = j.headers, a.body = j.body, n = new Promise((b, c) => { a.loadString().then(c => { b({ statusCode: a.response.statusCode, headers: a.response.headers, body: c }) }).catch(a => c(a)) }) } else h && (n = new Promise((a, c) => { fetch(j.url, { method: b, headers: j.headers, body: j.body }).then(a => a.json()).then(b => a({ statusCode: b.status, headers: b.headers, body: b.data })).catch(c) })); let o; const p = l ? new Promise((a, b) => { o = setTimeout(() => (m.onTimeout(), b(`timeout`)), l) }) : null; return (p ? Promise.race([p, n]).then(a => ("undefined" != typeof clearTimeout && clearTimeout(o), a)) : n).then(a => m.onResponse(a)) } const { isQX: c, isLoon: d, isSurge: e, isScriptable: f, isNode: g, isBrowser: h } = ENV(), i = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, j = {}; return ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"].forEach(a => j[a.toLowerCase()] = c => b(a, c)), j } function API(a = "untitled", b = !1) { const { isQX: c, isLoon: d, isSurge: e, isNode: f, isJSBox: g, isScriptable: h } = ENV(); return new class { constructor(a, b) { this.name = a, this.debug = b, this.http = HTTP(), this.env = ENV(), this.node = (() => { if (f) { const a = require("fs"); return { fs: a } } return null })(), this.initCache(); const c = (a, b) => new Promise(function (c) { setTimeout(c.bind(null, b), a) }); Promise.prototype.delay = function (a) { return this.then(function (b) { return c(a, b) }) } } initCache() { if (c && (this.cache = JSON.parse($prefs.valueForKey(this.name) || "{}")), (d || e) && (this.cache = JSON.parse($persistentStore.read(this.name) || "{}")), f) { let a = "root.json"; this.node.fs.existsSync(a) || this.node.fs.writeFileSync(a, JSON.stringify({}), { flag: "wx" }, a => console.log(a)), this.root = {}, a = `${this.name}.json`, this.node.fs.existsSync(a) ? this.cache = JSON.parse(this.node.fs.readFileSync(`${this.name}.json`)) : (this.node.fs.writeFileSync(a, JSON.stringify({}), { flag: "wx" }, a => console.log(a)), this.cache = {}) } } persistCache() { const a = JSON.stringify(this.cache, null, 2); c && $prefs.setValueForKey(a, this.name), (d || e) && $persistentStore.write(a, this.name), f && (this.node.fs.writeFileSync(`${this.name}.json`, a, { flag: "w" }, a => console.log(a)), this.node.fs.writeFileSync("root.json", JSON.stringify(this.root, null, 2), { flag: "w" }, a => console.log(a))) } write(a, b) { if (this.log(`SET ${b}`), -1 !== b.indexOf("#")) { if (b = b.substr(1), e || d) return $persistentStore.write(a, b); if (c) return $prefs.setValueForKey(a, b); f && (this.root[b] = a) } else this.cache[b] = a; this.persistCache() } read(a) { if (this.log(`READ ${a}`), -1 !== a.indexOf("#")) { if (a = a.substr(1), e || d) return $persistentStore.read(a); if (c) return $prefs.valueForKey(a); if (f) return this.root[a] } else return this.cache[a] } delete(a) { if (this.log(`DELETE ${a}`), -1 !== a.indexOf("#")) { if (a = a.substr(1), e || d) return $persistentStore.write(null, a); if (c) return $prefs.removeValueForKey(a); f && delete this.root[a] } else delete this.cache[a]; this.persistCache() } notify(a, b = "", i = "", j = {}) { const k = j["open-url"], l = j["media-url"]; if (c && $notify(a, b, i, j), e && $notification.post(a, b, i + `${l ? "\n\u591A\u5A92\u4F53:" + l : ""}`, { url: k }), d) { let c = {}; k && (c.openUrl = k), l && (c.mediaUrl = l), "{}" === JSON.stringify(c) ? $notification.post(a, b, i) : $notification.post(a, b, i, c) } if (f || h) { const c = i + (k ? `\n点击跳转: ${k}` : "") + (l ? `\n多媒体: ${l}` : ""); if (g) { const d = require("push"); d.schedule({ title: a, body: (b ? b + "\n" : "") + c }) } else console.log(`${a}\n${b}\n${c}\n\n`) } } log(a) { this.debug && console.log(`[${this.name}] LOG: ${this.stringify(a)}`) } info(a) { console.log(`[${this.name}] INFO: ${this.stringify(a)}`) } error(a) { console.log(`[${this.name}] ERROR: ${this.stringify(a)}`) } wait(a) { return new Promise(b => setTimeout(b, a)) } done(a = {}) { c || d || e ? $done(a) : f && !g && "undefined" != typeof $context && ($context.headers = a.headers, $context.statusCode = a.statusCode, $context.body = a.body) } stringify(a) { if ("string" == typeof a || a instanceof String) return a; try { return JSON.stringify(a, null, 2) } catch (a) { return "[object Object]" } } }(a, b) }
