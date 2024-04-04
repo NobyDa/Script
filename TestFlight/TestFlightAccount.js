@@ -3,7 +3,7 @@ TestFlight账户管理脚本
 
 脚本作者: @NobyDa 
 脚本兼容: Surge4、QuantumultX、Loon(2.1.20 413+)
-更新时间: 2024/03/25
+更新时间: 2024/04/04
 主要功能：
 1. 自动存储多个TestFlight账户，并自动合并APP列表，避免切换账户。
 
@@ -54,6 +54,7 @@ const [list, appList] = [$.read('AccountList') || {}, $.read('AppList') || {}];
 $.debug = Number(args.debug) || ($.read('Debug') === 'true');
 $.EnableCache = Number(args.enableCache) || ($.read('EnableCache') === 'true');
 $.ForceIOSlist = Number(args.forceIOSlist) || ($.read('ForceIOSlist') === 'true');
+const cache = $.EnableCache && JSON.parse($.read('#TESTFLIGHT-ACCOUNT-CACHE') || '{}');
 
 runs()
     .then((resp) => {
@@ -83,7 +84,7 @@ async function runs() {
     } else if (/\/[A-Z]{200,}\/redeem$/.test(req.url)) {
         return { body: ExternalAccount(req.url.split(/\/([A-Z]+)\/redeem$/)[1]) };
     }
-    return await QueryRequest(!other && appList[appID]);
+    return await QueryRequest(!other && appList[appID] || null);
 }
 
 function SaveAccount(id, part, o) {
@@ -140,31 +141,9 @@ function ChangeHeaders(id) {
 
 function ChangeBody(resp) {
     if (req.url.endsWith('/apps')) {
-        const cache = $.EnableCache && JSON.parse($.read('#TESTFLIGHT-ACCOUNT-CACHE') || '{}');
-        resp = resp.map((v) => {
-            v.body = JSON.parse(v.body || '{}');
-            if (v.status == 401) {
-                if (list[v.account].InvalidKey >= 2) { //prevent misjudgment
-                    delete list[v.account];
-                } else {
-                    list[v.account].InvalidKey = (list[v.account].InvalidKey || 0) + 1;
-                }
-                $.write(list, 'AccountList');
-                $.error(`Account "${v.account}" key expired ⚠️`);
-                $.notify('TestFlight Account', '', `Account ID "${v.account}" key expired ⚠️`);
-            }
-            if ($.EnableCache && v.body.data) {
-                $.log(`Account "${v.account}" write app list to cache`);
-                cache[v.account] = $.stringify(v.body);
-                $.write($.stringify(cache), '#TESTFLIGHT-ACCOUNT-CACHE');
-            }
-            if ($.EnableCache && !v.body.data) {
-                v.body = JSON.parse(cache[v.account] || '{}');
-                $.log(`Account "${v.account}" Try using cache app list`);
-            }
-            $.log(`Account "${v.account}" app list: ${$.stringify((v.body.data || []).map(i => i.name))}`);
-            return v
-        }).reduce((t, d) => {
+        resp = resp.reduce((t, d) => {
+            d.body = JSON.parse(d.status == 200 && d.body || '{}');
+            $.log(`Account "${d.account}" app list: ${$.stringify((d.body.data || []).map(i => i.name))}`);
             d.body.data = (d.body.data || []).map(i => {
                 if ($.ForceIOSlist) {
                     i.platforms = i.platforms.map(j => {
@@ -183,7 +162,7 @@ function ChangeBody(resp) {
                 return only && t.body.data[req.url.includes(d.account) ? 'unshift' : 'push'](i), i;
             });
             if (req.url.includes(d.account)) {
-                [t.status, t.headers] = [d.statusCode, d.headers];
+                [t.status, t.headers] = [d.status, d.headers];
             }
             return t
         }, { body: { data: [], error: null } });
@@ -192,7 +171,7 @@ function ChangeBody(resp) {
         $.log(`Final app: ${$.stringify(resp.body.data.map(i => i.name))}`);
         resp.body = JSON.stringify(resp.body);
     }
-    if (/\/apps\/\d+\/builds\/\d+$/.test(req.url) && resp.body) { //beta app page
+    if (/\/apps\/\d+\/builds\/\d+$/.test(req.url) && resp.status == 200 && resp.body) { //beta app page
         const share = ShareAccount(req.url.split(/\/apps\/(\d+)/)[1]);
         resp.body = JSON.parse(resp.body);
         resp.body.data.builds.map(e => e.description = `${e.description || '-'}${share}`);
@@ -202,14 +181,37 @@ function ChangeBody(resp) {
 }
 
 function QueryRequest(o) {
-    return $.http[req.method.toLowerCase()](ChangeHeaders(o))
+    const option = ChangeHeaders(o);
+    return $.http[req.method.toLowerCase()](option)
         .then(r => {
-            $.log(`Account "${o}" response: status=${r.statusCode}, body=${Boolean(r.body)}`);
-            return { status: r.statusCode, headers: r.headers, body: r.body, account: o }
+            $.log(`Account "${o}" response: status=${r.status}, body=${Boolean(r.body)}`);
+            if (r.status == 401) {
+                if (list[o].InvalidKey >= 2) { //prevent misjudgment
+                    delete list[o];
+                } else {
+                    list[o].InvalidKey = (list[o].InvalidKey || 0) + 1;
+                }
+                $.write(list, 'AccountList');
+                $.notify('TestFlight Account', '', `Account ID "${o}" key expired ⚠️`);
+                throw new Error('key expired ⚠️');
+            }
+            if ($.EnableCache && r.body && r.body.startsWith('{')) {
+                $.log(`Account "${o}" URL "${option.url}" Write data to cache`);
+                cache[option.url] = { response: r, lastUsed: Date.now() };
+                Object.keys(cache).forEach((i) => (Date.now() - (cache[i].lastUsed || 0) > 864e5 * 7) && delete cache[i]);
+                $.write($.stringify(cache), '#TESTFLIGHT-ACCOUNT-CACHE');
+            }
+            return { ...r, account: o }
         })
         .catch(e => {
             $.error(`Account "${o}" response failed: ${e.error || e.message || e}`);
-            return { error: e, account: o }
+            if ($.EnableCache && cache[option.url] && !(e.error || e.message || e).includes('key expired')) {
+                cache[option.url].lastUsed = Date.now();
+                $.log(`Account "${o}" URL "${option.url}" Using cached data`);
+                $.write($.stringify(cache), '#TESTFLIGHT-ACCOUNT-CACHE');
+                return { ...cache[option.url].response, account: o }
+            }
+            return { account: o }
         })
 }
 
@@ -302,4 +304,4 @@ function letterDecode(e) {
 }
 
 // https://github.com/Peng-YM/QuanX/tree/master/Tools/OpenAPI
-function ENV() { const a = "function" == typeof require && "undefined" != typeof $jsbox; return { isQX: "undefined" != typeof $task, isLoon: "undefined" != typeof $loon, isSurge: "undefined" != typeof $httpClient && "undefined" == typeof $loon, isShadowrocket: "undefined" != typeof $Shadowrocket, isBrowser: "undefined" != typeof document, isNode: "function" == typeof require && !a, isJSBox: a, isRequest: "undefined" != typeof $request, isScriptable: "undefined" != typeof importModule } } function HTTP(a = { baseURL: "" }) { function b(b, j) { j = "string" == typeof j ? { url: j } : j; const k = a.baseURL; k && !i.test(j.url || "") && (j.url = k ? k + j.url : j.url), j = { ...a, ...j }; const l = j.timeout, m = { ...{ onRequest: () => { }, onResponse: a => a, onTimeout: () => { } }, ...j.events }; m.onRequest(b, j); let n; if (c) n = $task.fetch({ method: b, ...j }); else if (d || e || g) n = new Promise((a, c) => { var e = Math.ceil; const f = g ? require("request") : $httpClient; !j.timeout || g || d || (j.timeout = e(j.timeout / 1e3)), f[b.toLowerCase()](j, (b, d, e) => { b ? c(b) : a({ statusCode: d.status || d.statusCode, headers: d.headers, body: e }) }) }); else if (f) { const a = new Request(j.url); a.method = b, a.headers = j.headers, a.body = j.body, n = new Promise((b, c) => { a.loadString().then(c => { b({ statusCode: a.response.statusCode, headers: a.response.headers, body: c }) }).catch(a => c(a)) }) } else h && (n = new Promise((a, c) => { fetch(j.url, { method: b, headers: j.headers, body: j.body }).then(a => a.json()).then(b => a({ statusCode: b.status, headers: b.headers, body: b.data })).catch(c) })); let o; const p = l ? new Promise((a, b) => { o = setTimeout(() => (m.onTimeout(), b(`timeout`)), l) }) : null; return (p ? Promise.race([p, n]).then(a => ("undefined" != typeof clearTimeout && clearTimeout(o), a)) : n).then(a => m.onResponse(a)) } const { isQX: c, isLoon: d, isSurge: e, isScriptable: f, isNode: g, isBrowser: h } = ENV(), i = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, j = {}; return ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"].forEach(a => j[a.toLowerCase()] = c => b(a, c)), j } function API(a = "untitled", b = !1) { const { isQX: c, isLoon: d, isSurge: e, isNode: f, isJSBox: g, isScriptable: h } = ENV(); return new class { constructor(a, b) { this.name = a, this.debug = b, this.http = HTTP(), this.env = ENV(), this.node = (() => { if (f) { const a = require("fs"); return { fs: a } } return null })(), this.initCache(); const c = (a, b) => new Promise(function (c) { setTimeout(c.bind(null, b), a) }); Promise.prototype.delay = function (a) { return this.then(function (b) { return c(a, b) }) } } initCache() { if (c && (this.cache = JSON.parse($prefs.valueForKey(this.name) || "{}")), (d || e) && (this.cache = JSON.parse($persistentStore.read(this.name) || "{}")), f) { let a = "root.json"; this.node.fs.existsSync(a) || this.node.fs.writeFileSync(a, JSON.stringify({}), { flag: "wx" }, a => console.log(a)), this.root = {}, a = `${this.name}.json`, this.node.fs.existsSync(a) ? this.cache = JSON.parse(this.node.fs.readFileSync(`${this.name}.json`)) : (this.node.fs.writeFileSync(a, JSON.stringify({}), { flag: "wx" }, a => console.log(a)), this.cache = {}) } } persistCache() { const a = JSON.stringify(this.cache, null, 2); c && $prefs.setValueForKey(a, this.name), (d || e) && $persistentStore.write(a, this.name), f && (this.node.fs.writeFileSync(`${this.name}.json`, a, { flag: "w" }, a => console.log(a)), this.node.fs.writeFileSync("root.json", JSON.stringify(this.root, null, 2), { flag: "w" }, a => console.log(a))) } write(a, b) { if (this.log(`SET ${b}`), -1 !== b.indexOf("#")) { if (b = b.substr(1), e || d) return $persistentStore.write(a, b); if (c) return $prefs.setValueForKey(a, b); f && (this.root[b] = a) } else this.cache[b] = a; this.persistCache() } read(a) { if (this.log(`READ ${a}`), -1 !== a.indexOf("#")) { if (a = a.substr(1), e || d) return $persistentStore.read(a); if (c) return $prefs.valueForKey(a); if (f) return this.root[a] } else return this.cache[a] } delete(a) { if (this.log(`DELETE ${a}`), -1 !== a.indexOf("#")) { if (a = a.substr(1), e || d) return $persistentStore.write(null, a); if (c) return $prefs.removeValueForKey(a); f && delete this.root[a] } else delete this.cache[a]; this.persistCache() } notify(a, b = "", i = "", j = {}) { const k = j["open-url"], l = j["media-url"]; if (c && $notify(a, b, i, j), e && $notification.post(a, b, i + `${l ? "\n\u591A\u5A92\u4F53:" + l : ""}`, { url: k }), d) { let c = {}; k && (c.openUrl = k), l && (c.mediaUrl = l), "{}" === JSON.stringify(c) ? $notification.post(a, b, i) : $notification.post(a, b, i, c) } if (f || h) { const c = i + (k ? `\n点击跳转: ${k}` : "") + (l ? `\n多媒体: ${l}` : ""); if (g) { const d = require("push"); d.schedule({ title: a, body: (b ? b + "\n" : "") + c }) } else console.log(`${a}\n${b}\n${c}\n\n`) } } log(a) { this.debug && console.log(`[${this.name}] LOG: ${this.stringify(a)}`) } info(a) { console.log(`[${this.name}] INFO: ${this.stringify(a)}`) } error(a) { console.log(`[${this.name}] ERROR: ${this.stringify(a)}`) } wait(a) { return new Promise(b => setTimeout(b, a)) } done(a = {}) { c || d || e ? $done(a) : f && !g && "undefined" != typeof $context && ($context.headers = a.headers, $context.statusCode = a.statusCode, $context.body = a.body) } stringify(a) { if ("string" == typeof a || a instanceof String) return a; try { return JSON.stringify(a, null, 2) } catch (a) { return "[object Object]" } } }(a, b) }
+function ENV() { const a = "function" == typeof require && "undefined" != typeof $jsbox; return { isQX: "undefined" != typeof $task, isLoon: "undefined" != typeof $loon, isSurge: "undefined" != typeof $httpClient && "undefined" == typeof $loon, isShadowrocket: "undefined" != typeof $Shadowrocket, isBrowser: "undefined" != typeof document, isNode: "function" == typeof require && !a, isJSBox: a, isRequest: "undefined" != typeof $request, isScriptable: "undefined" != typeof importModule } } function HTTP(a = { baseURL: "" }) { function b(b, j) { j = "string" == typeof j ? { url: j } : j; const k = a.baseURL; k && !i.test(j.url || "") && (j.url = k ? k + j.url : j.url), j = { ...a, ...j }; const l = j.timeout, m = { ...{ onRequest: () => { }, onResponse: a => a, onTimeout: () => { } }, ...j.events }; m.onRequest(b, j); let n; if (c) n = $task.fetch({ method: b, ...j }); else if (d || e || g) n = new Promise((a, c) => { var e = Math.ceil; const f = g ? require("request") : $httpClient; !j.timeout || g || d || (j.timeout = e(j.timeout / 1e3)), f[b.toLowerCase()](j, (b, d, e) => { b ? c(b) : a({ status: d.status || d.statusCode, headers: d.headers, body: e }) }) }); else if (f) { const a = new Request(j.url); a.method = b, a.headers = j.headers, a.body = j.body, n = new Promise((b, c) => { a.loadString().then(c => { b({ status: a.response.statusCode, headers: a.response.headers, body: c }) }).catch(a => c(a)) }) } else h && (n = new Promise((a, c) => { fetch(j.url, { method: b, headers: j.headers, body: j.body }).then(a => a.json()).then(b => a({ status: b.status, headers: b.headers, body: b.data })).catch(c) })); let o; const p = l ? new Promise((a, b) => { o = setTimeout(() => (m.onTimeout(), b(`timeout`)), l) }) : null; return (p ? Promise.race([p, n]).then(a => ("undefined" != typeof clearTimeout && clearTimeout(o), a)) : n).then(a => m.onResponse(a)) } const { isQX: c, isLoon: d, isSurge: e, isScriptable: f, isNode: g, isBrowser: h } = ENV(), i = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/, j = {}; return ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"].forEach(a => j[a.toLowerCase()] = c => b(a, c)), j } function API(a = "untitled", b = !1) { const { isQX: c, isLoon: d, isSurge: e, isNode: f, isJSBox: g, isScriptable: h } = ENV(); return new class { constructor(a, b) { this.name = a, this.debug = b, this.http = HTTP(), this.env = ENV(), this.node = (() => { if (f) { const a = require("fs"); return { fs: a } } return null })(), this.initCache(); const c = (a, b) => new Promise(function (c) { setTimeout(c.bind(null, b), a) }); Promise.prototype.delay = function (a) { return this.then(function (b) { return c(a, b) }) } } initCache() { if (c && (this.cache = JSON.parse($prefs.valueForKey(this.name) || "{}")), (d || e) && (this.cache = JSON.parse($persistentStore.read(this.name) || "{}")), f) { let a = "root.json"; this.node.fs.existsSync(a) || this.node.fs.writeFileSync(a, JSON.stringify({}), { flag: "wx" }, a => console.log(a)), this.root = {}, a = `${this.name}.json`, this.node.fs.existsSync(a) ? this.cache = JSON.parse(this.node.fs.readFileSync(`${this.name}.json`)) : (this.node.fs.writeFileSync(a, JSON.stringify({}), { flag: "wx" }, a => console.log(a)), this.cache = {}) } } persistCache() { const a = JSON.stringify(this.cache, null, 2); c && $prefs.setValueForKey(a, this.name), (d || e) && $persistentStore.write(a, this.name), f && (this.node.fs.writeFileSync(`${this.name}.json`, a, { flag: "w" }, a => console.log(a)), this.node.fs.writeFileSync("root.json", JSON.stringify(this.root, null, 2), { flag: "w" }, a => console.log(a))) } write(a, b) { if (this.log(`SET ${b}`), -1 !== b.indexOf("#")) { if (b = b.substr(1), e || d) return $persistentStore.write(a, b); if (c) return $prefs.setValueForKey(a, b); f && (this.root[b] = a) } else this.cache[b] = a; this.persistCache() } read(a) { if (this.log(`READ ${a}`), -1 !== a.indexOf("#")) { if (a = a.substr(1), e || d) return $persistentStore.read(a); if (c) return $prefs.valueForKey(a); if (f) return this.root[a] } else return this.cache[a] } delete(a) { if (this.log(`DELETE ${a}`), -1 !== a.indexOf("#")) { if (a = a.substr(1), e || d) return $persistentStore.write(null, a); if (c) return $prefs.removeValueForKey(a); f && delete this.root[a] } else delete this.cache[a]; this.persistCache() } notify(a, b = "", i = "", j = {}) { const k = j["open-url"], l = j["media-url"]; if (c && $notify(a, b, i, j), e && $notification.post(a, b, i + `${l ? "\n\u591A\u5A92\u4F53:" + l : ""}`, { url: k }), d) { let c = {}; k && (c.openUrl = k), l && (c.mediaUrl = l), "{}" === JSON.stringify(c) ? $notification.post(a, b, i) : $notification.post(a, b, i, c) } if (f || h) { const c = i + (k ? `\n点击跳转: ${k}` : "") + (l ? `\n多媒体: ${l}` : ""); if (g) { const d = require("push"); d.schedule({ title: a, body: (b ? b + "\n" : "") + c }) } else console.log(`${a}\n${b}\n${c}\n\n`) } } log(a) { this.debug && console.log(`[${this.name}] LOG: ${this.stringify(a)}`) } info(a) { console.log(`[${this.name}] INFO: ${this.stringify(a)}`) } error(a) { console.log(`[${this.name}] ERROR: ${this.stringify(a)}`) } wait(a) { return new Promise(b => setTimeout(b, a)) } done(a = {}) { c || d || e ? $done(a) : f && !g && "undefined" != typeof $context && ($context.headers = a.headers, $context.statusCode = a.statusCode, $context.body = a.body) } stringify(a) { if ("string" == typeof a || a instanceof String) return a; try { return JSON.stringify(a, null, 2) } catch (a) { return "[object Object]" } } }(a, b) }
