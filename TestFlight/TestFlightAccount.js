@@ -3,7 +3,7 @@ TestFlight账户管理脚本
 
 脚本作者: @NobyDa 
 脚本兼容: Surge4、QuantumultX、Loon(2.1.20 413+)
-更新时间: 2024/04/05
+更新时间: 2024/04/06
 主要功能：
 1. 自动存储多个TestFlight账户，并自动合并APP列表，避免切换账户。
 
@@ -52,7 +52,7 @@ const [obj, req, rsp] = [new Map(), $request, {}];
 const [k1, k2, k3] = ['x-session-id', 'x-request-id', 'x-session-digest'];
 const [list, appList] = [$.read('AccountList') || {}, $.read('AppList') || {}];
 $.debug = Number(args.debug) || ($.read('Debug') === 'true');
-$.EnableCache = Number(args.enableCache) || ($.read('EnableCache') === 'true');
+$.EnableCache = !(Number(args.enableCache) === 0) || !($.read('EnableCache') === 'false');
 $.ForceIOSlist = Number(args.forceIOSlist) || ($.read('ForceIOSlist') === 'true');
 const cache = $.EnableCache && JSON.parse($.read('#TESTFLIGHT-ACCOUNT-CACHE') || '{}');
 
@@ -207,7 +207,7 @@ function QueryRequest(o) {
             if ($.EnableCache && cache[option.url] && !(e).includes('key expired')) {
                 cache[option.url].lastUsed = Date.now();
                 $.log(`Account "${o}" URL "${option.url}" Using cached data`);
-                $.write($.stringify(cache), '#TESTFLIGHT-ACCOUNT-CACHE');
+                $.write(JSON.stringify(cache), '#TESTFLIGHT-ACCOUNT-CACHE');
                 return { ...cache[option.url].response, account: o }
             }
             $.error(`Account "${o}" response failed: ${e}`);

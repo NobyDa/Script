@@ -452,7 +452,7 @@
     }, {
       "id": "@TESTFLIGHT-ACCOUNT.EnableCache",
       "name": "启用缓存",
-      "val": false,
+      "val": true,
       "type": "boolean",
       "desc": "用于缓存APP列表, 改善列表页面加载过慢，需与\"请求超时\"配合使用。开启缓存并刷新列表后，可适当调小超时"
     }, {
