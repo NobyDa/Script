@@ -3,7 +3,7 @@ TestFlight账户管理脚本
 
 脚本作者: @NobyDa 
 脚本兼容: Surge4、QuantumultX、Loon(2.1.20 413+)
-更新时间: 2024/04/13
+更新时间: 2024/04/15
 主要功能：
 1. 自动存储多个TestFlight账户，并自动合并APP列表，避免切换账户。
 
@@ -50,11 +50,11 @@ const args = formatArgument(typeof $argument == "string" && $argument || '');
 $.env.isNode ? $request = $.read('Request') : null;
 const [obj, req, rsp] = [new Map(), $request, {}];
 const [k1, k2, k3] = ['x-session-id', 'x-request-id', 'x-session-digest'];
-const [list, appList] = [$.read('AccountList') || {}, $.read('AppList') || {}];
+const [list, appList, cacheInfo] = [$.read('AccountList') || {}, $.read('AppList') || {}, $.read('CachedInfo') || {}];
 $.debug = Number(args.debug) || ($.read('Debug') === 'true');
 $.EnableCache = !(Number(args.enableCache) === 0) || !($.read('EnableCache') === 'false');
 $.ForceIOSlist = Number(args.forceIOSlist) || ($.read('ForceIOSlist') === 'true');
-const cache = $.EnableCache && JSON.parse($.read('#TESTFLIGHT-ACCOUNT-CACHE') || '{}');
+$.RequestTimeout = Number(args.timeout || $.read('Timeout')) || 30;
 
 runs()
     .then((resp) => {
@@ -118,8 +118,10 @@ function formatArgument(s) {
 
 function ChangeHeaders(id) {
     const re = JSON.parse(JSON.stringify(req)); //easy deep copy
-    re.timeout = (Number(args.timeout || $.read('Timeout')) || 30) * 1000;
-    re.insecure = true;
+    re.url = re.url.replace(/:\/\/.+?\//, '://testflight.apple.com/'); //prevent cdn issues
+    re.timeout = $.RequestTimeout * 1000;
+    re.insecure = true; //skip ssl
+    re['X-Surge-Skip-Scripting'] = true; //prevent shadowrocket loopback issues
     if ($.ForceIOSlist && req.url.endsWith('/apps') && re.headers['user-agent'].includes('Mac')) {
         re.headers['user-agent'] = 'Oasis/3.5.1 OasisBuild/425.2 iOS/17.4 model/iPhone16,2 hwp/t8130 build/21E219 (6; dt:311) AMS/1 TSE/0';
     }
@@ -129,9 +131,6 @@ function ChangeHeaders(id) {
         re.headers[k2] = list[id][k2];
         re.headers[k3] = list[id][k3];
         re.url = re.url.replace(/\/[a-z0-9-]{36}\//, `/${id}/`);
-    }
-    if ($.env.isShadowrocket) {
-        re.proxy = false; //prevent shadowrocket infinite loop
     }
     delete re.headers['if-none-match']; //prevent 304
     delete re.headers['content-length'];
@@ -182,9 +181,10 @@ function ChangeBody(resp) {
 
 function QueryRequest(o) {
     const option = ChangeHeaders(o);
+    const needCache = $.EnableCache && (option.url.endsWith('/apps') || /\/apps\/\d+\/builds\/\d+$/.test(req.url));
     return $.http[req.method.toLowerCase()](option)
         .then(r => {
-            $.log(`Account "${o}" response: status=${r.status}, body=${Boolean(r.body)}`);
+            $.log(`URL "${option.url}" response: status=${r.status}, body=${Boolean(r.body)}`);
             if (r.status == 401 && o) {
                 if (list[o].InvalidKey >= 2) { //prevent misjudgment
                     delete list[o];
@@ -195,22 +195,26 @@ function QueryRequest(o) {
                 $.notify('TestFlight Account', '', `Account ID "${o}" key expired ⚠️`);
                 throw 'key expired ⚠️';
             }
-            if ($.EnableCache && r.body && r.body.startsWith('{')) {
-                $.log(`Account "${o}" URL "${option.url}" Write data to cache`);
-                cache[option.url] = { response: r, lastUsed: Date.now() };
-                Object.keys(cache).forEach((i) => (Date.now() - (cache[i].lastUsed || 0) > 864e5 * 3) && delete cache[i]);
-                $.write(JSON.stringify(cache), '#TESTFLIGHT-ACCOUNT-CACHE');
+            if (needCache && r.status == 200 && r.body && r.body.startsWith('{')) {
+                const cacheKey = (cacheInfo[option.url] && cacheInfo[option.url].key) || `TESTFLIGHT-ACCOUNT-${letterEncode(option.url.split(/\/\/.+?\/(.+)/)[1])}`;
+                $.log(`Write to cache, URL "${option.url}", READ KEY "${cacheKey}"`);
+                cacheInfo[option.url] = { key: cacheKey, lastUsed: Date.now() };
+                Object.keys(cacheInfo).forEach((i) => (Date.now() - (cacheInfo[i].lastUsed || 0) > 864e5 * 7) && delete cacheInfo[i] && $.delete(`#${cacheKey}`));
+                $.write(cacheInfo, 'CachedInfo');
+                $.write(JSON.stringify(r), `#${cacheKey}`);
             }
             return { ...r, account: o }
         })
         .catch(e => {
-            if ($.EnableCache && cache[option.url] && !(e).includes('key expired')) {
-                cache[option.url].lastUsed = Date.now();
-                $.log(`Account "${o}" URL "${option.url}" Using cached data`);
-                $.write(JSON.stringify(cache), '#TESTFLIGHT-ACCOUNT-CACHE');
-                return { ...cache[option.url].response, account: o }
+            if (needCache && cacheInfo[option.url] && !(e).includes('key expired')) {
+                $.log(`URL "${option.url}" Try using cached data`);
+                const cachedData = $.read(`#${cacheInfo[option.url].key}`);
+                cacheInfo[option.url].lastUsed = Date.now();
+                !cachedData ? delete cacheInfo[option.url] : null;
+                $.write(cacheInfo, 'CachedInfo');
+                return { ...JSON.parse(cachedData || '{}'), account: o }
             }
-            $.error(`Account "${o}" response failed: ${e}`);
+            $.error(`URL "${option.url}" response failed: ${e}`);
             return { account: o }
         })
 }
