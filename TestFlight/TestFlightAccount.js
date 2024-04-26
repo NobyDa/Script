@@ -3,7 +3,7 @@ TestFlight账户管理脚本
 
 脚本作者: @NobyDa 
 脚本兼容: Surge4、QuantumultX、Loon(2.1.20 413+)
-更新时间: 2024/04/15
+更新时间: 2024/04/26
 主要功能：
 1. 自动存储多个TestFlight账户，并自动合并APP列表，避免切换账户。
 
@@ -199,7 +199,7 @@ function QueryRequest(o) {
                 const cacheKey = (cacheInfo[option.url] && cacheInfo[option.url].key) || `TESTFLIGHT-ACCOUNT-${letterEncode(option.url.split(/\/\/.+?\/(.+)/)[1])}`;
                 $.log(`Write to cache, URL "${option.url}", READ KEY "${cacheKey}"`);
                 cacheInfo[option.url] = { key: cacheKey, lastUsed: Date.now() };
-                Object.keys(cacheInfo).forEach((i) => (Date.now() - (cacheInfo[i].lastUsed || 0) > 864e5 * 7) && delete cacheInfo[i] && $.delete(`#${cacheKey}`));
+                Object.keys(cacheInfo).forEach((i) => (Date.now() - (cacheInfo[i].lastUsed || 0) > 864e5 * 3) && $.delete(`#${cacheInfo[i].key}`) && delete cacheInfo[i]); //clear unused cache for 3 days
                 $.write(cacheInfo, 'CachedInfo');
                 $.write(JSON.stringify(r), `#${cacheKey}`);
             }
