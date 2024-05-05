@@ -6,7 +6,7 @@ Google搜索内容时并发使用多个策略(组)，以避免可能出现的人
 Surge脚本配置:
 
 [Script]
-Google CAPTCHA = type=http-response,pattern=^https:\/\/www\.google\.com(\.[a-z]+|)\/search\?(client=[a-z-]+&|)q=,requires-body=1,debug=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js,max-size=0,timeout=10,ability=http-client-policy,argument=^(🇸🇬|🇭🇰)\s.*\d+$
+Google CAPTCHA = type=http-response,pattern=^https:\/\/www\.google\.com(?:\.[a-z]+|)\/(?:search\?(?:|.+?&)q=|$),requires-body=1,debug=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js,max-size=0,timeout=10,ability=http-client-policy,argument=^(🇸🇬|🇭🇰)\s.*\d+$
 
 [MITM]
 hostname = www.google.com*
