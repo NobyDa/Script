@@ -1,6 +1,6 @@
 /*
 Surge规则自动生成脚本
-更新时间：2024/02/24
+更新时间：2024/05/07
 
 需按照博客内教程配合使用：
 https://nobyda.github.io/2024/02/24/Surge_Rule_Storage
@@ -19,12 +19,13 @@ args.key = args.key || 'Rule-Storage';
 
 (async () => {
     const host = $request.hostname.toLowerCase();
-    if (['127.0.0.1', '0.0.0.0'].filter((v) => [...$request.dnsResult.v4Addresses].includes(v)).length) {
+    const inHost = $request.listenPort == 6152 && !$request.sourcePort && !$request.processPath && /^[a-z0-9]{10}\.[a-z]+$/.test(host); //Prevent benchmark
+    if (['127.0.0.1', '0.0.0.0'].filter((v) => [...($request.dnsResult || {}).v4Addresses || []].includes(v)).length) {
         // DNS poisoning
         args.matched = false;
         args.region = 'global';
     }
-    if (!/\d$|:/.test(host) && host.includes('.')) {
+    if (!/\d$|:/.test(host) && host.includes('.') && !inHost) {
         const data = JSON.parse($persistentStore.read(args.key) || '{}');
         const saved_rules = $persistentStore.read(`${args.key}-${args.region}`);
         if (!evalRules(host, saved_rules)) {
@@ -38,14 +39,14 @@ args.key = args.key || 'Rule-Storage';
                 $persistentStore.write(text, `${args.key}-${args.region}`)
             }
         }
-        return $persistentStore.write(JSON.stringify(data, null, 2), args.key)
+        return $persistentStore.write(JSON.stringify(data), args.key)
     }
 })().catch((e) => $notification.post(args.key, ``, e.message || e))
     .finally(() => $done({ matched: Boolean(args.matched) }));
 
 function saveDecision(host_name, content = {}) {
     for (const i in content) {
-        if (Date.now() - content[i].update_time > 86400000 * 30) {
+        if (Date.now() - content[i].update_time > 86400000 * (args.cacheDays || 30)) {
             delete content[i];
         }
     }
