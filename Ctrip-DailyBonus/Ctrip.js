@@ -86,7 +86,7 @@ function Checkin(key) {
             } else if (resp.body.code == 404001) {
                 return '登陆失效, 尝试移除账号...'
             } else {
-                return `签到失败`
+                return `签到失败(${resp.body.message})`
             }
         })
         .catch((err) => {
