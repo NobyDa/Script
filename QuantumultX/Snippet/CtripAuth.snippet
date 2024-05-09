@@ -1,0 +1,8 @@
+# 该 QuantumultX 远程重写配置片段用于获取"携程签到"账号授权
+# 配置脚本后登陆"携程旅行"微信小程序可完成获取
+# https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Snippet/CtripAuth.snippet
+
+
+^https:\/\/m\.ctrip\.com\/restapi\/soa2\/\d+\/[a-zA-Z]+Login(?:$|\?) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Ctrip-DailyBonus/Ctrip.js
+
+hostname = m.ctrip.com

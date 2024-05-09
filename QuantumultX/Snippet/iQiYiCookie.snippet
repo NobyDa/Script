@@ -1,0 +1,8 @@
+# 该 QuantumultX 远程重写配置片段用于获取"爱奇艺签到"账号Cookie
+# 配置脚本后 Safari 浏览器打开 https://m.iqiyi.com/user.html 使用密码登录可完成获取
+# https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Snippet/iQiYiCookie.snippet
+
+
+^https:\/\/passport\.iqiyi\.com\/apis\/user\/ url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/iQIYI-DailyBonus/iQIYI.js
+
+hostname = passport.iqiyi.com

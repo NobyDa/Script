@@ -1,0 +1,8 @@
+# 该 QuantumultX 远程重写配置片段用于获取"百度贴吧签到"账号Cookie
+# 配置脚本后打开百度贴吧App(AppStore中国区, 非内部版)，点击"我的"可完成获取
+# https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Snippet/TieBaCookie.snippet
+
+
+https?:\/\/(c\.tieba\.baidu\.com|180\.97\.\d+\.\d+)\/c\/s\/login url script-request-header https://raw.githubusercontent.com/NobyDa/Script/master/BDTieBa-DailyBonus/TieBa.js
+
+hostname = c.tieba.baidu.com
