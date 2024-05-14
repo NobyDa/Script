@@ -1,7 +1,7 @@
 /*
 爱奇艺会员签到脚本
 
-更新时间: 2023/02/26
+更新时间: 2024/05/15
 脚本兼容: QuantumultX, Surge4, Loon, JsBox, Node.js
 电报频道: @NobyDa
 问题反馈: @NobyDa_bot
@@ -76,9 +76,7 @@ var LogDetails = false; // 响应日志
 
 var pushMsg = [];
 
-var P00001 = '';
-
-var P00003 = '';
+let P00001, P00003, DFP
 
 var $nobyda = nobyda();
 
@@ -94,9 +92,10 @@ var $nobyda = nobyda();
   if ($nobyda.isRequest) {
     GetCookie()
   } else if (cookie) {
-    if (cookie.includes("P00001") && cookie.includes("P00003")) {
+    if (cookie.includes("P00001") && cookie.includes("P00003") && cookie.includes("__dfp=")) {
       P00001 = cookie.match(/P00001=(.*?);/)[1];
       P00003 = cookie.match(/P00003=(.*?);/)[1];
+      DFP = cookie.match(/__dfp=(\w+)/)[1];
       await login();
       await Checkin();
       for (let i = 0; i < 3; i++) {
@@ -165,27 +164,31 @@ function Checkin() {
   };
   return new Promise(resolve => {
     const sign_date = {
-      agentType: "1",
-      agentversion: "1.0",
-      appKey: "basic_pcw",
-      authCookie: P00001,
-      qyid: md5(stringRandom(16)),
-      task_code: "natural_month_sign",
+      task_code: 'natural_month_sign',
       timestamp: timestamp,
-      typeCode: "point",
+      appKey: 'lequ_rn',
       userId: P00003,
+      authCookie: P00001,
+      agenttype: 20,
+      agentversion: '15.4.6',
+      srcplatform: 20,
+      appver: '15.4.6',
+      qyid: md5(stringRandom(16))
     };
+
     const post_date = {
       "natural_month_sign": {
-        "agentType": "1",
-        "agentversion": "1",
+        "verticalCode": "iQIYI",
+        "agentVersion": "15.4.6",
         "authCookie": P00001,
-        "qyid": md5(stringRandom(16)),
         "taskCode": "iQIYI_mofhr",
-        "verticalCode": "iQIYI"
+        "dfp": DFP,
+        "qyid": md5(stringRandom(16)),
+        "agentType": 20,
+        "signFrom": 1
       }
     };
-    const sign = k("UKobMjDMsDoScuWOfp6F", sign_date, {
+    const sign = k("cRcFakm9KSPSjFEufg3W", sign_date, {
       split: "|",
       sort: !0,
       splitSecretKey: !0
@@ -357,7 +360,7 @@ function GetCookie() {
     return
   }
   var CKA = $request.headers['Cookie'] || $request.headers['cookie'];;
-  var iQIYI = CKA && CKA.includes("P00001=") && CKA.includes("P00003=") && CKA;
+  var iQIYI = CKA && CKA.includes("P00001=") && CKA.includes("P00003=") && CKA.includes("__dfp=") && CKA;
   var RA = $nobyda.read("CookieQY")
   if (CKA && iQIYI) {
     if (RA != iQIYI) {
