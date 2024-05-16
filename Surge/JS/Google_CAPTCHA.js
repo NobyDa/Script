@@ -1,65 +1,126 @@
-/*
-Google搜索内容时并发使用多个策略(组)，以避免可能出现的人机验证
+/********************************
+Google搜索人机验证解决方案
+搜索内容时遇到人机验证立即并发使用多个代理策略、策略组尝试搜索内容，并返回最优结果。
 
-注：该脚本仅兼容Surge(4.9.3+)，使用时需要在脚本配置内的argument参数中填写筛选策略/组的正则表达式，留空则表示同时使用所有策略/组
+脚本作者：@NobyDa
+更新时间：2024/05/16
+平台兼容：Surge(iOS4.9.3+/macOS4.2.3+) / QuantumultX(1.0.26+)
 
-Surge脚本配置:
+可在BoxJs或Surge脚本配置参数(argument)填写筛选的代理策略、策略组的正则表达式。
+所有代理策略、策略组至多筛选、使用20个，不筛选则表示随机使用。
 
-[Script]
-Google CAPTCHA = type=http-response,pattern=^https:\/\/www\.google\.com(?:\.[a-z]+|)\/(?:search\?(?:|.+?&)q=|$),requires-body=1,debug=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js,max-size=0,timeout=10,ability=http-client-policy,argument=^(🇸🇬|🇭🇰)\s.*\d+$
+注意：Surge由于策略架构问题，正则表达式筛选的"代理策略"不包含"外部代理策略"；
+QuantumultX无此限制，正则表达式可筛选所有"策略组"内的"代理策略"。
 
-[MITM]
-hostname = www.google.com*
+*********************************
+Surge(iOS 5.9.0+/macOS 5.5.0+) 模块：
+https://raw.githubusercontent.com/NobyDa/Script/master/Surge/Module/GoogleCAPTCHA.sgmodule
 
-*/
+*********************************
+QuantumultX(1.0.26+) 重写资源引用：
+https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Snippet/GoogleCAPTCHA.snippet
 
-let ret = {};
+*********************************/
 
-(async () => {
-    if ($response.status !== 200) {
-        const allPolicy = await new Promise((r) => {
-            $httpAPI("GET", "v1/policies", null, (v) => r(
-                [...v.proxies, ...v['policy-groups']]
-            ))
-        });
-        const selected = allPolicy.filter((n) => {
-            return n && new RegExp(typeof $argument == 'string' ? $argument : "").test(n)
-        });
-        console.log(`[INFO]: Use policy ${JSON.stringify(selected, null, 2)}`);
-        delete $request.headers.cookie;
-        delete $request.headers.Cookie;
-        const http = [
-            new Promise((r, e) => setTimeout(() => e('Timeout'), 5000)),
-            ...selected.map(
-                (v) => new Promise((r, e) => {
-                    $httpClient[$request.method.toLowerCase()]({
-                        url: $request.url,
-                        headers: $request.headers,
-                        policy: v
-                    }, (error, response, body) => {
-                        if (response && response.status == 200) {
-                            r({
-                                policy: v,
-                                body: {
-                                    headers: response.headers,
-                                    status: response.status,
-                                    body: body
-                                }
-                            })
-                        } else if (response && response.status == 429) {
-                            console.log(`[ERROR]: Policy "${v}" need to CAPTCHA`);
-                        } else if (error) {
-                            console.log(`[ERROR]: Policy "${v}" ${error}`);
-                        }
-                    })
-                })
-            )
-        ];
-        await Promise.race(http).then((data) => {
-            ret = data.body;
-            console.log(`[INFO]: Use data from "${data.policy}"`);
-        });
-    }
+const $ = new NobyDa_Tools();
+$.ret = {};
+
+!(async () => {
+    if (($response.status || $response.statusCode) == 200) return;
+    const req = JSON.parse(JSON.stringify($request));
+    const policy = await $.policy();
+    const regexText = (typeof $argument == 'string' && $argument) ||
+        JSON.parse($.data.read('GOOGLE_CAPTCHA') || '{}').Regex || ''; // empty = all
+    const selected = [...policy.group, ...policy.proxy]
+        .filter((n) => n && new RegExp(regexText).test(n))
+        .sort(() => Math.random() - 0.5).slice(0, 20); // prevent too many TCP, filtered to random select up to 20
+    console.log(`[INFO]: Use policy ${JSON.stringify(selected, null, 2)}`);
+    await Promise.any([
+        ...selected.map(
+            (i) => new Promise((r, e) => {
+                if (req.headers['User-Agent']) req.headers.Cookie = `${Math.random()}`; // prevent set-cookie
+                if (req.headers['user-agent']) req.headers.cookie = `${Math.random()}`; // h2
+                $.http[req.method.toLowerCase()]({
+                    policy: i, node: i, opts: { policy: i }, // policy:surge, node:loon, opts:qx
+                    ...req
+                }).then((v) => {
+                    if (v.status == 200) {
+                        r({ policy: i, body: { ...v, status: $.isQuanX ? 'HTTP/1.1 200' : 200 } })
+                    } else if (v.status == 429) {
+                        e(console.log(`[INFO]: Policy "${i}" need to CAPTCHA`))
+                    } else {
+                        e(console.log(`[INFO]: Policy "${i}" unknown resp status "${v.status}"`))
+                    }
+                }).catch((err) => e(console.log(`[ERROR]: ${err}`)))
+            })
+        )
+    ]).then((data) => {
+        $.ret = data.body;
+        console.log(`[INFO]: Use data from "${data.policy}"`);
+    })
 })()
     .catch((err) => console.log(`[ERROR]: ${(err && err.message) || err}`))
-    .finally(() => $done(ret));
+    .finally(() => $done($.ret));
+
+
+function NobyDa_Tools() {
+    this.isLoon = typeof $loon !== "undefined";
+    this.isQuanX = typeof $configuration !== 'undefined';
+    this.isSurge = typeof $environment !== 'undefined' && $environment['surge-version'];
+    this.isNode = typeof module !== 'undefined'&& !!module.exports;
+    this.http = Object.fromEntries(
+        ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"].map(
+            (m) => [m.toLowerCase(), (opts) => {
+                if (this.isQuanX) return new Promise((resolve, reject) => {
+                    $task.fetch({ method: m, ...opts })
+                        .then((r) => resolve({
+                            status: r.statusCode, headers: r.headers, body: r.body,
+                        }), e => reject(e.error))
+                });
+                if (this.isSurge || this.isLoon || this.isNode) return new Promise((resolve, reject) => {
+                    const request = this.isNode ? require("request") : $httpClient;
+                    request[m.toLowerCase()](opts, (e, r, b) => {
+                        if (e) reject(e);
+                        else resolve({ status: r.status || r.statusCode, headers: r.headers, body: b })
+                    })
+                });
+            }]
+        )
+    );
+    this.policy = () => {
+        if (this.isSurge) return new Promise((r) => {
+            $httpAPI("GET", "v1/policies", null, (v) => r({
+                proxy: v.proxies,
+                group: v['policy-groups']
+            }))
+        });
+        if (this.isQuanX) return new Promise((r) => {
+            $configuration.sendMessage({
+                action: "get_customized_policy"
+            }).then(b => r({
+                proxy: Object.keys(b.ret)
+                    .reduce((t, i) => [...new Set([...t, ...b.ret[i].candidates || []])], [])
+                    .filter((v) => !b.ret[v] && !['direct', 'proxy', 'reject'].includes(v)),
+                group: Object.keys(b.ret)
+            }), () => r({}));
+        });
+        // if (this.isLoon) {
+        //     const config = JSON.parse($config.getConfig());
+        //     const proxy = config['all_policy_groups']
+        //         .reduce((t, i) => [...new Set([...t, ...JSON.parse($config.getSubPolicies(i) || '[]').map(n => n.name)])], [])
+        //         .filter((v) => ![...config['all_policy_groups'], ...config['all_buildin_nodes']].includes(v));
+        //     return { proxy, group: config['all_policy_groups'] }
+        // };
+    };
+    this.data = Object.fromEntries(['read', 'write'].map(
+        (i) => [i, (v1, v2) => {
+            if (i === 'write') {
+                if (this.isSurge || this.isLoon) return $persistentStore.write(v1, v2);
+                if (this.isQuanX) return $prefs.setValueForKey(v1, v2);
+            } else if (i === 'read') {
+                if (this.isSurge || this.isLoon) return $persistentStore.read(v1);
+                if (this.isQuanX) return $prefs.valueForKey(v1);
+            }
+        }]
+    ));
+}

@@ -1,0 +1,12 @@
+# QuantumultX 远程重写配置片段
+
+# Google搜索人机验证解决方案
+# Google搜索内容时并发使用多个代理策略、策略组尝试搜索内容，并返回最优结果。具体细节可查看脚本注释。
+
+# 脚本：https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js
+# 片段：https://raw.githubusercontent.com/NobyDa/Script/master/QuantumultX/Snippet/GoogleCAPTCHA.snippet
+
+
+^https:\/\/www\.google\.com(?:\.[a-z]+|)\/(?:search\?(?:|.+?&)q=|$) url script-response-body https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js
+
+hostname = www.google.com*

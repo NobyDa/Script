@@ -664,6 +664,32 @@
                 "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/ctrip.png",
                 "https://raw.githubusercontent.com/NobyDa/mini/master/Color/ctrip.png"
             ]
+        },
+        {
+            "id": "GoogleCAPTCHA",
+            "name": "Google搜索人机验证",
+            "keys": [
+                "GOOGLE_CAPTCHA"
+            ],
+            "descs_html": [
+                "<h4 align=\"center\">脚本说明以及配置请查看<a href=\"https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js\">脚本注释</a></h4>"
+            ],
+            "settings": [
+                {
+                    "id": "@GOOGLE_CAPTCHA.Regex",
+                    "name": "代理策略/策略组正则表达式",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "^(🇸🇬|🇭🇰)\\s.*\\d+$",
+                    "desc": "筛选的代理策略/策略组, 限制20个, 留空则表示随机使用。"
+                }
+            ],
+            "author": "@NobyDa",
+            "repo": "https://github.com/NobyDa/Script/blob/master/Surge/JS/Google_CAPTCHA.js",
+            "icons": [
+                "https://raw.githubusercontent.com/NobyDa/mini/master/Alpha/Google.png",
+                "https://raw.githubusercontent.com/NobyDa/mini/master/Color/Google.png"
+            ]
         }
     ],
     "task": [
