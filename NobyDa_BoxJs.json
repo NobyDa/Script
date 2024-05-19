@@ -682,6 +682,20 @@
                     "type": "text",
                     "placeholder": "^(🇸🇬|🇭🇰)\\s.*\\d+$",
                     "desc": "筛选的代理策略/策略组, 限制20个, 留空则表示随机使用。"
+                },
+                {
+                    "id": "@GOOGLE_CAPTCHA.RegexTest",
+                    "name": "正则表达式测试",
+                    "val": "",
+                    "type": "text",
+                    "placeholder": "(🇸🇬|🇭🇰)",
+                    "desc": "填写并保存后可在右上角测试匹配的策略/策略组。"
+                }
+            ],
+            "scripts": [
+                {
+                    "name": "测试匹配的策略/策略组",
+                    "script": "https://gist.githubusercontent.com/NobyDa/830932e4526c9c84169020a56c3ef199/raw/GOOGLE_CAPTCHA_TEST_POLICY.js"
                 }
             ],
             "author": "@NobyDa",

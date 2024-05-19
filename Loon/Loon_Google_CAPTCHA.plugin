@@ -1,0 +1,14 @@
+#!name = Google人机验证
+#!desc = Google搜索内容时并发使用多个策略/策略组，以避免可能出现的人机验证。注意：需要在插件参数填写策略/策略组名的正则表达式。
+#!author = NobyDa
+#!input = GOOGLE_CAPTCHA_REGEX
+#!homepage = https://github.com/NobyDa/Script/tree/master
+#!icon = https://cdn.jsdelivr.net/gh/NobyDa/mini@master/Color/Google.png
+#!date = 2024-05-19 12:00:00
+
+
+[Script]
+http-response ^https:\/\/www\.google\.com(?:\.[a-z]+|)\/(?:search\?(?:|.+?&)q=|$) requires-body=1,timeout=30,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Surge/JS/Google_CAPTCHA.js,tag=Google人机验证
+
+[MITM]
+hostname = www.google.com*
