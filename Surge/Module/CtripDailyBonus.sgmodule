@@ -1,11 +1,11 @@
-#!name=携程签到
+#!name=🐻 携程旅行 [签到]
 #!desc=每日定时签到，支持多账号。\n登陆"携程旅行"微信小程序或"携程网页版"(https://m.ctrip.com/)可获取账号授权，填写模块参数可禁用脚本。
-#!arguments=定时签到:30 8 * * *,禁用脚本:携程旅行(获取),禁用MITM:hostname
+#!arguments=定时签到:30 8 * * *,禁用脚本:携程旅行[授权],禁用MITM:hostname
 #!arguments-desc=定时签到：Cron表达式，默认每日 8:30 执行。\n\n禁用脚本：禁用获取授权脚本，输入 # 表示禁用。\n\n禁用MITM：禁用MITM主机名，输入 # 表示禁用。
 #!category=🐻 NobyDa
 
 [Script]
-携程旅行(签到) = type=cron,cronexp="{{{定时签到}}}",wake-system=1,script-update-interval=0,timeout=60,wake-system=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Ctrip-DailyBonus/Ctrip.js
+携程旅行[签到] = type=cron,cronexp="{{{定时签到}}}",wake-system=1,script-update-interval=0,timeout=300,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Ctrip-DailyBonus/Ctrip.js
 
 {{{禁用脚本}}} = type=http-response,pattern=^https:\/\/m\.ctrip\.com\/restapi\/soa2\/\d+\/[a-zA-Z]+Login(?:$|\?),requires-body=1,max-size=0,debug=0,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Ctrip-DailyBonus/Ctrip.js
 

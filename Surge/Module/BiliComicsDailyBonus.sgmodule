@@ -1,0 +1,13 @@
+#!name=🐻 哔哩哔哩漫画 [签到]
+#!desc=每日定时签到，模块参数可调整签到时间。\n打开哔哩哔哩漫画APP点击"我的"即可获取cookie.
+#!arguments=定时签到:0 9 * * *,禁用脚本:哔哩漫画[Cookie],禁用MITM:hostname
+#!arguments-desc=定时签到：Cron表达式，默认每天早上 09:00 执行。\n\n禁用脚本：禁用获取Cookie脚本，输入 # 表示禁用。\n\n禁用MITM：禁用MITM主机名，输入 # 表示禁用。
+#!category=🐻 NobyDa
+
+[Script]
+哔哩漫画[签到] = type=cron,cronexp="{{{定时签到}}}",wake-system=1,script-update-interval=0,timeout=60,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
+
+{{{禁用脚本}}} = type=http-request,pattern=^https:\/\/app\.bilibili\.com\/x\/v\d\/account\/myinfo,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/Manga.js
+
+[MITM]
+{{{禁用MITM}}} = %APPEND% app.bilibili.com

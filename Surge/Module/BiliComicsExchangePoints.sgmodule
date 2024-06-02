@@ -1,0 +1,8 @@
+#!name=🐻 哔哩哔哩漫画 [积分抢购]
+#!desc=定时抢购积分商城物品，模块参数可调整抢购设置，该模块需使用"哔哩哔哩漫画签到模块"获取Cookie。
+#!arguments=定时抢购:0-59 0 0 * * 0-1,商品名称:【超特惠】限量-0点秒杀,抢购数量:0,抢购次数:100
+#!arguments-desc=定时抢购：Cron表达式，默认每周日、每周一的凌晨 0:00:00 - 0:01:59 之间每秒执行一次。\n\n商品名称：默认抢购商品名"【超特惠】限量-0点秒杀"\n\n抢购数量：默认为用户积分可抢购的最大值（以0表示）\n\n抢购次数：抢购失败时重试次数，默认100次
+#!category=🐻 NobyDa
+
+[Script]
+哔哩漫画[积分抢购] = type=cron,cronexp="{{{定时抢购}}}",script-update-interval=0,timeout=60,wake-system=1,script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js,argument="ProductName={{{商品名称}}}&ProductNum={{{抢购数量}}}&ExchangeNum={{{抢购次数}}}
