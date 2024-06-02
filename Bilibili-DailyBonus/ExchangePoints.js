@@ -1,15 +1,17 @@
 /*
 哔哩哔哩漫画, 积分商城自动抢购脚本
 
-脚本兼容: Surge, QuantumultX, Loon
+脚本作者：@NobyDa
+更新时间：2024/06/01
+平台兼容：Surge, QuantumultX, Loon
 
 *************************
 【 抢购脚本注意事项 】:
 *************************
 
 该脚本需要使用签到脚本获取Cookie后方可使用.
-默认兑换积分商城中的"积分兑换", 兑换数量为用户积分可兑换的最大值 (可于BoxJs内修改)
-默认执行时间为中午12:00:10、12:00:20、12:00:30
+默认兑换积分商城中的"【超特惠】限量-0点秒杀", 兑换数量为用户积分可兑换的最大值 (可于BoxJs内修改)
+默认执行时间为：每周日、每周一的凌晨 0:00:00 - 0:01:59 之间每秒执行一次
 
 BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa_BoxJs.json
 
@@ -18,28 +20,31 @@ BoxJs订阅地址: https://raw.githubusercontent.com/NobyDa/Script/master/NobyDa
 *************************
 
 [Script]
-cron "10,20,30 0 12 * * *" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js, wake-system=1, timeout=60
+cron "0-59 0 0 * * 0-1" script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js, wake-system=1, timeout=60
 
 *************************
 【 QX 1.0.10+ 脚本配置 】 :
 *************************
 
 [task_local]
-10,20,30 0 12 * * * https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js, tag=哔哩哔哩漫画抢券, enabled=true
+0-59 0 0 * * 0-1 * * * https://raw.githubusercontent.com/NobyDa/Script/master/Bilibili-DailyBonus/ExchangePoints.js, tag=哔哩哔哩漫画抢券, enabled=true
 
 */
 
 // 新建一个实例对象, 把兼容函数定义到$中, 以便统一调用
 let $ = new nobyda();
 
-// 读取兑换商品名, 默认兑换积分商城中的"积分兑换"; 该接口为BoxJs预留, 以便修改
-let productName = $.read('BM_ProductName') || '积分兑换';
+// 读取Surge脚本参数并转成对象
+let args = argsList(typeof $argument == "string" && $argument || '');
 
-// 读取兑换数量, 默认兑换最大值; 该接口为BoxJs预留, 以便修改
-let productNum = $.read('BM_ProductNum');
+// 读取兑换商品名, 默认兑换积分商城中的"【超特惠】限量-0点秒杀"
+let productName = args.ProductName || $.read('BM_ProductName') || '【超特惠】限量-0点秒杀';
 
-// 读取循环抢购次数, 默认100次; 该接口为BoxJs预留, 以便修改
-let exchangeNum = $.read('BM_ExchangeNum') || '100';
+// 读取兑换数量, 默认兑换最大值
+let productNum = parseInt(args.ProductNum) || $.read('BM_ProductNum');
+
+// 读取循环抢购次数, 默认100次
+let exchangeNum = args.ExchangeNum || $.read('BM_ExchangeNum') || '100';
 
 // 读取哔哩哔哩漫画签到脚本所使用的Cookie
 let cookie = $.read('CookieBM');
@@ -174,6 +179,15 @@ function startExchange(url, item, amount) {
 			}
 		})
 	})
+}
+
+function argsList(data) {
+    return Array.from(
+        data.split("&")
+            .map((i) => i.split("="))
+            .map(([k, v]) => [k, decodeURIComponent(v)])
+    )
+        .reduce((a, [k, v]) => Object.assign(a, { [k]: v }), {})
 }
 
 function nobyda() {
