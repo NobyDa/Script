@@ -39,9 +39,9 @@ hostname = app.bilibili.com
 
 const $ = new Env(`哔哩哔哩漫画`);
 
-const cookie = $.getdata("CookieBM") || ''; // 哔哩哔哩漫画Cookie
+const cookie = $.getdata("CookieBM") || ($.isNode() && process.env['CookieBM']) || ''; // 哔哩哔哩漫画Cookie
 
-const barkKey = ''; //Bark APP 通知推送Key
+const barkKey = $.isNode() && process.env['BM_BARK_KEY'] || ''; // bark key
 
 if (typeof $request !== 'undefined') {
   GetCookie(cookie)
