@@ -1,6 +1,6 @@
 /*
 Surge规则自动生成脚本
-更新时间：2024/05/07
+更新时间：2024/08/11
 
 需按照博客内教程配合使用：
 https://nobyda.github.io/2024/02/24/Surge_Rule_Storage
@@ -31,8 +31,12 @@ args.key = args.key || 'Rule-Storage';
         if (!evalRules(host, saved_rules)) {
             data[args.region] = saveDecision(host, data[args.region]);
             if (data[args.region][host].quantity >= (args.quantity || 10)) {
-                data.eTLD = await eTLD(data.eTLD);
-                const suffix = shortenDomain(host, data.eTLD.public_suffix);
+                const eTLDs = await eTLD(data.eTLD || JSON.parse($persistentStore.read(`${args.key}-eTLD`) || '{}'));
+                if (data.eTLD) { // legacy
+                    $persistentStore.write(JSON.stringify(data.eTLD), `${args.key}-eTLD`);
+                    delete data.eTLD;
+                }
+                const suffix = shortenDomain(host, eTLDs.public_suffix);
                 const domain = evalRules(host, JSON.parse(args.whitelist)) ? host : suffix;
                 const text = [...formatRules(saved_rules), ...formatRules(domain)].join('\n');
                 delete data[args.region][host];
@@ -45,9 +49,23 @@ args.key = args.key || 'Rule-Storage';
     .finally(() => $done({ matched: Boolean(args.matched) }));
 
 function saveDecision(host_name, content = {}) {
+    const count = [];
     for (const i in content) {
         if (Date.now() - content[i].update_time > 86400000 * (args.cacheDays || 30)) {
             delete content[i];
+            continue
+        }
+        count.push(content[i].update_time);
+    }
+    if (count.length > (args.cacheNumber || 1000)) { // limit amount to prevent NE memory issues.
+        const spill = count.sort((x, y) => x - y).slice(0, count.length - (args.cacheNumber || 1000));
+        for (const is of spill) {
+            for (const ic in content) {
+                if (content[ic].update_time === is) {
+                    delete content[ic];
+                    break
+                }
+            }
         }
     }
     if (content[host_name]) {
@@ -99,6 +117,7 @@ async function eTLD(content = {}) {
                 if (resp.status == 200 && !error && body) {
                     content.update_time = Date.now();
                     content.public_suffix = body.replace(/\r|.*(\/\/|#|;).*|\n(\!|\*\.)/g, '\n').split('\n').filter((t) => t);
+                    $persistentStore.write(JSON.stringify(content), `${args.key}-eTLD`);
                     resolve()
                 } else if (content.update_time) {
                     console.log(`Update eTLD list failed: ${error}`);
