@@ -19,7 +19,7 @@
 - [License](#license)
 
 
-> **Please note that the scripts or rewrite rules described below may require MITM to be enabled, and the generated root certificate needs to be manually installed and trusted in the system.**
+> **The scripts or rewrite rules described below may require enabling MITM. Additionally, the generated root certificate must be installed and trusted manually in the system.**
 
 ## Script Overview
 
@@ -99,27 +99,27 @@ Rules of type "Rule" include only ad hosts. Please select the REJECT policy.
 
 <details><summary>Difference between QuantumultX versions (Click to view)</summary>
 
-* AppStore version QX1.0.0 (120) This version is the initial version, JS function is unlimited.
+* AppStore version QX1.0.0 (120): This is the initial version, and JS functionality is unrestricted.
 
-* AppStore version QX1.0.1 (130) This version adds support V2Ray(protocols), but restricts the keywords of the script VIP type.
+* AppStore version QX1.0.1 (130): This version adds support for V2Ray protocols but restricts certain keywords for VIP-type scripts.
 
-* AppStore version QX1.0.2 (136) This version adds support HTTP(protocols) and relaxes certain script keyword restrictions, but restricts script remote subscriptions
+* AppStore version QX1.0.2 (136): This version adds support for HTTP protocols and relaxes certain script keyword restrictions but restricts remote script subscriptions.
 
-* AppStore version QX1.0.3 (155) This version removes the keyword restriction and restores the script remote subscription, however, the remote script needs to comment the device ID before execution.
+* AppStore version QX1.0.3 (155): This version removes keyword restrictions and restores the script remote subscription functionality. However, the device ID must be commented out in the remote script before execution.
 
-* AppStore version QX1.0.4 (164) This version completely restricts remote script subscriptions, meaning that all scripts can only use local paths.
+* AppStore version QX1.0.4 (164): This version completely restricts remote script subscriptions, requiring all scripts to use local paths.
 
-* AppStore version QX1.0.5 (192) This version adds a timed script task function.
+* AppStore version QX1.0.5 (192): This version introduces a scheduled script task feature.
 
-* AppStore version QX1.0.6 (212) This version supports modifying HTTP request body, and replaying HTTP request.
+* AppStore version QX1.0.6 (212): This version supports modifying HTTP request body and replaying HTTP requests.
 
-* AppStore version QX1.0.7 (240) This version supports TLS 1.3 (TLS-based proxy protocol), and Trojan(protocols).
+* AppStore version QX1.0.7 (240): This version supports TLS 1.3 (TLS-based proxy protocol) and Trojan protocols.
 
 * ...
 
-* AppStore version QX1.0.10 (313) In this version, script remote subscription has been restored.
+* AppStore version QX1.0.10 (313): This version restores remote script subscriptions.
 
-QX1.0.3 add device ID, a simple example:
+In QX1.0.3, the device ID feature was added. Here’s a simple example:
 
 ```javascript
 /**
@@ -131,7 +131,7 @@ obj["example"] = 0;
 $done({body:JSON.stringify(obj)})
 ```
 
-The above random generated device ID can be found at the bottom of Quantumult X additional menu, and it may change after system restore.
+The randomly generated device ID above is located at the bottom of the Quantumult X additional menu and may change after a system restore.
 
 </details>
 
@@ -163,17 +163,17 @@ Please note that in the following disclaimer, the term "Script-project"  specifi
 
 ### Decrypt
 
-- Any scripts involved in unlocking and decrypting in the Script-project are intended for resource sharing and study purposes only. The  legality, accuracy, completeness, and validity of these scripts cannot  be guaranteed. **Therefore, please use your own judgment based on the  actual situation.**
+- Any scripts within the Script-project that involve unlocking and decrypting are intended for resource sharing and study purposes only. The  legality, accuracy, completeness, and validity of these scripts cannot  be guaranteed. **Therefore, please use your own judgment based on the  actual situation.**
 
 - You are required to delete the decryption scripts from your computer or phone completely within **24 hours** of downloading them.
 
 ### Privacy
 
-- NobyDa is not responsible for any privacy breaches or other consequences arising from the direct or indirect use of any of the scripts in the  Script-project, including but not limited to violating relevant laws  and regulations or establishing VPS for spreading purposes.
+- NobyDa is not responsible for any privacy breaches or other consequences arising from the direct or indirect use of any of the scripts in the Script-project, including but not limited to violating relevant laws  and regulations or establishing a VPS for distribution purposes.
 
 ### Commercial
 
-- Do not use any scripts from the Script-project for commercial or  illegal purposes, **otherwise, you will be responsible for the  consequences that may arise**.
+- Do not use any scripts from the Script-project for commercial or  illegal purposes, **or you will bear full responsibility for the  consequences that may arise**.
 
 ### Infringement
 
@@ -181,7 +181,7 @@ Please note that in the following disclaimer, the term "Script-project"  specifi
 
 ### Liability
 
-- NobyDa is not responsible for any scripts problems, **including but not limited to any loss or damage caused by any scripting errors.**
+- NobyDa is not responsible for any problems with the Script-project, **including but not limited to any loss or damage caused by any scripting errors.**
 
 ### Change
 
