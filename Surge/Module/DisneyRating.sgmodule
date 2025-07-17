@@ -5,7 +5,7 @@
 #!category=🐻 NobyDa
 
 [Script]
-DisneyRating = type=http-response,pattern=^https:\/\/disney\.api\.edge\.bamgrid\.com\/explore\/v\d\.\d\/page\/entity-,requires-body=1,max-size=0,binary-body-mode=0,debug={{{调试模式}}},script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Disney/DisneyRating.js,engine={{{脚本引擎}}}
+DisneyRating = type=http-response,pattern=^https:\/\/disney\.api\.edge\.bamgrid\.com\/explore\/v\d\.\d+\/page\/entity-,requires-body=1,max-size=0,binary-body-mode=0,debug={{{调试模式}}},script-path=https://raw.githubusercontent.com/NobyDa/Script/master/Disney/DisneyRating.js,engine={{{脚本引擎}}}
 
 [MITM]
 hostname = %APPEND% disney.api.edge.bamgrid.com
