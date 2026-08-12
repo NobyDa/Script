@@ -29,7 +29,7 @@ async function runs() {
       rsp.data.ad.major = [];
     }  
   }
-  if (req.url.includes('m3u8.php') && (rsp.message || rsp.error)) {
+  if (/(m3u8|video_src)\.php/.test(req.url) && (rsp.message || rsp.error)) {
     await adURL('');
     await new Promise(r => setTimeout(r, 25000));
     await adURL('end');
